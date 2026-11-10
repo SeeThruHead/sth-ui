@@ -1,0 +1,43 @@
+---
+title: ResourcesWeekView
+description: "A week as a timeline per resource: each row holds every day side by side, with multi-day bookings as bars across them."
+status: built
+ticket: su-oqmy
+files:
+  - schedule/ResourcesWeekView/ResourcesWeekView.ts
+  - schedule/Timeline/Timeline.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`schedule.ResourcesWeekView(h, { date, resources, events })` shows the week containing `date` with a row per resource
+and the days running left to right, each split into its time slots. Timed events sit in their day; all-day and
+multi-day events run as bars across the days they cover, stacked when they overlap. It shares its options with the
+[ResourcesDayView](/schedule/resources-day-view) (`groups`, `slotWidth`, `rowHeight`, `maxEventsPerTimeSlot`,
+`renderResourceLabel` and the rest) and adds the week's: `firstDayOfWeek`, `weekendDays`, `withWeekendDays`,
+`weekdayFormat` (`ddd D`) for the day headings, `highlightToday`, and `weekLabelFormat` (`MMM DD`) or
+`renderWeekLabel` for the header.
+
+With the view's `model`, bookings can be dragged to another day, time or resource, resized and selected, and the
+out messages carry the resource the pointer ended on. `startScrollDateTime` scrolls to a time when the view first shows.
+
+<Example
+  height={520}
+  story="schedule-resourcesweekview--usage"
+  caption="A working week of rooms: drag a booking to another day or room"
+/>
+
+<Example
+  height={460}
+  story="schedule-resourcesweekview--options"
+  caption="A static week from Sunday with custom labels; then one room with the defaults"
+/>
+
+## Differences from Mantine
+
+- Today is marked with a dot after its heading rather than a filled circle.
+- The current time is drawn as a line in today's day of each row, without a time bubble.
+- `now` is a prop rather than read from the clock, and the control props and `renderEvent` work with attribute lists.

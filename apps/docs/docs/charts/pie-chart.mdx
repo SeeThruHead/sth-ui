@@ -1,0 +1,41 @@
+---
+title: PieChart
+description: "Pie chart component."
+status: built
+ticket: su-6o71
+files:
+  - charts/PieChart/PieChart.ts
+  - charts/pie/pie.ts
+  - charts/pie/pieView.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+`data` is a list of `{ name, value, color }`, one per segment. PieChart takes the same props as
+[DonutChart](/charts/donut-chart) except `thickness` and `chartLabel`, and its tooltip is off unless
+`withTooltip`.
+
+<Configurator story="charts-piechart--configurator" />
+
+## Labels, tooltip and angles
+
+- `withLabels` writes each segment's value outside the pie, with a line to it.
+- `labelsPosition: "inside"` writes them in the middle of each segment instead, and `labelsType` chooses value,
+  `percent` or `name`.
+- `withTooltip` shows a tooltip on hover (`tooltipDataSource: "segment"` for the hovered segment only).
+- `paddingAngle`, `strokeWidth`, `startAngle`, `endAngle` and `withLegend` work as in DonutChart.
+
+<Example
+  height={760}
+  story="charts-piechart--options"
+  caption="Labels outside and inside, tooltip, padding angle, half pie with legend"
+/>
+
+## Differences from Mantine
+
+- It draws its own SVG rather than recharts, so `pieProps`, `pieChartProps`, `tooltipProps`, `legendProps`, `cellProps`
+  and children are not supported.

@@ -1,0 +1,64 @@
+import { Schema } from "effect"
+import * as Command from "foldkit/command"
+import type { Html, HtmlBuilder } from "foldkit/html"
+import { defineMessageUnion } from "foldkit/message"
+import * as Scroller from "../Scroller.ts"
+import type { Ui } from "../../../Ui.ts"
+
+export const Model = Schema.Struct({ scroller: Scroller.Model, clicks: Schema.Int })
+export type Model = typeof Model.Type
+
+export const Message = defineMessageUnion({ GotScroller: { message: Scroller.Message }, ClickedBadge: {} })
+export type Message = typeof Message.Type
+
+export const init = (): Model => ({ scroller: Scroller.init({ id: "states" }), clicks: 0 })
+
+export const update = (
+  model: Model,
+  message: Message
+): { readonly model: Model; readonly commands: ReadonlyArray<Command.Command<Message>> } =>
+  Message.match(message, {
+    GotScroller: ({ message: inner }) => {
+      const result = Scroller.update(model.scroller, inner, { draggable: false })
+
+      return {
+        model: { ...model, scroller: result.model },
+        commands: result.commands.map((command) =>
+          Command.mapMessage(command, (lifted) => Message.GotScroller({ message: lifted }))
+        )
+      }
+    },
+    ClickedBadge: () => ({ model: { ...model, clicks: model.clicks + 1 }, commands: [] })
+  })
+
+export const view = (model: Model, h: HtmlBuilder<Message>, ui: Ui): Html =>
+  ui.Stack(h, {
+    children: [
+      ui.Text(h, { children: [`Clicked ${model.clicks} times`] }),
+      ui.Scroller(h, {
+        model: model.scroller,
+        toParentMessage: (message) => Message.GotScroller({ message }),
+        draggable: false,
+        showStartControl: true,
+        showEndControl: true,
+        edgeGradientColor: "grape",
+        controlSize: "3rem",
+        startControlLabel: "Back",
+        endControlLabel: "Forward",
+        children: [
+          ui.Group(h, {
+            gap: "xs",
+            wrap: "nowrap",
+            children: Array.from({ length: 12 }, (_, index) =>
+              ui.Button(h, {
+                variant: "light",
+                size: "compact-sm",
+                onClick: Message.ClickedBadge(),
+                children: [`Badge ${index + 1}`]
+              })
+            )
+          })
+        ]
+      })
+    ]
+  })

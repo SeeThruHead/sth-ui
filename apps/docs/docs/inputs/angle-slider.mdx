@@ -1,0 +1,68 @@
+---
+title: AngleSlider
+description: "Pick angle value between 0 and 360."
+status: built
+ticket: su-puz4
+files:
+  - components/AngleSlider/AngleSlider.ts
+  - components/AngleSlider/model.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+AngleSlider picks an angle from 0 to 359 by dragging around a circle or with the keyboard. Keep
+`AngleSlider.Model` (from `AngleSlider.init({ id })`) and the value in your model, pass its messages through
+`AngleSlider.update(model, message, AngleSlider.angleSliderContext(props))` and lift `AngleSlider.subscriptions` so
+dragging follows the pointer. `size` (60px) and `thumbSize` set the circle and the thumb, `withLabel` shows the
+value in the middle and `step` (1) rounds it.
+
+<Configurator story="inputs-angleslider--configurator" />
+
+## Controlled
+
+The `Changed` out message carries the value while it changes; send the value back in the next render.
+
+## Uncontrolled forms
+
+`name` sets the hidden input that carries the value, so it goes into a form's `FormData`.
+
+## formatLabel
+
+`formatLabel` formats the value in the middle:
+
+<Example height={120} story="inputs-angleslider--format-label" caption="Degrees" />
+
+## Marks
+
+`marks` adds ticks around the circle, with an optional `label` each. `restrictToMarks` snaps the value to the closest
+mark, and the arrow keys then go from mark to mark.
+
+<Example height={220} story="inputs-angleslider--marks" caption="Restricted, and labelled marks" />
+
+## onChangeEnd
+
+`ChangeEnded` is sent when a drag ends or a key is pressed:
+
+<Example height={160} story="inputs-angleslider--change-end" caption="Current and end values" />
+
+## disabled
+
+<Example height={120} story="inputs-angleslider--disabled" caption="Disabled" />
+
+## Accessibility
+
+The thumb is a slider named by `ariaLabel`. When it has focus, Arrow Down and Arrow Left decrease the value by `step`,
+Arrow Up and Arrow Right increase it (wrapping between 359 and 0), Home sets 0 and End sets 359.
+
+## Styles API
+
+Its parts are `root`, `label`, `marks`, `mark` and `thumb`. The root carries `data-disabled`, and labelled marks
+`data-label`.
+
+## Differences from Mantine
+
+- The value lives in your model, and dragging needs the subscriptions lifted into yours.

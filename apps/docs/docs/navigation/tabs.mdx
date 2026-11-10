@@ -1,0 +1,112 @@
+---
+title: Tabs
+description: "Switch between different views."
+status: built
+ticket: su-khje
+files:
+  - components/Tabs/Tabs.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+`Tabs` takes `tabsList` (holding `tabsTab`s) and `tabsPanel`s as children, in any order, among any other
+content. Each tab and panel shares a `value`; the selected tab's panel shows. `variant` is `default`,
+`outline` or `pills`.
+
+<Configurator story="navigation-tabs--configurator" />
+
+<Example story="navigation-tabs--variants" caption="outline and pills" />
+
+## Controlled Tabs
+
+Tabs are always controlled: keep the selected `value` in your model (`null` for none) and update it from
+`onChange`. Give each Tabs an `id`; it links every tab to its panel (`<id>-tab-<value>` and
+`<id>-panel-<value>`), as Mantine does with its generated id.
+
+```ts
+ui.Tabs(h, {
+  id: "account",
+  value: model.tab,
+  onChange: (tab) => ChangedTab({ tab }),
+  children: [
+    tabsList({
+      children: [
+        tabsTab({ value: "first", children: ["First tab"] }),
+        tabsTab({ value: "second", children: ["Second tab"] })
+      ]
+    }),
+    tabsPanel({ value: "first", children: ["First panel"] }),
+    tabsPanel({ value: "second", children: ["Second panel"] })
+  ]
+})
+```
+
+## Change colors
+
+`color` on Tabs sets the colour of every tab (`default` and `pills` variants); `color` on a tab wins over it.
+With `autoContrast`, an active pill picks black or white text to suit its colour.
+
+<Example story="navigation-tabs--colors" caption="Teal from Tabs, and a tab of its own blue" />
+
+<Example
+  story="navigation-tabs--icons-and-contrast"
+  caption="Lime pills with autoContrast, right and icon-only sections, a disabled pill"
+/>
+
+## Tabs position
+
+`justify` on `tabsList` places the tabs, and `grow` stretches them to fill it. Style props such as `ml: "auto"`
+on one tab pull it to the end.
+
+<Example story="navigation-tabs--position" caption="Centred, grown to fill, and Account pulled right" />
+
+## Inverted tabs
+
+`inverted` puts the line above the tabs, for a list under its panels:
+
+<Example story="navigation-tabs--inverted" caption="Panels above the tabs" />
+
+## Vertical tabs placement
+
+`orientation: "vertical"` stacks the tabs beside the panels; `placement` is `left` (default) or `right`.
+
+<Example story="navigation-tabs--vertical" caption="Left and right, default and outline" />
+
+## Disabled tabs
+
+A tab with `disabled` can't be selected and is skipped by the arrow keys.
+
+<Example story="navigation-tabs--disabled" caption="Settings disabled" />
+
+## Activation mode
+
+By default the arrow keys move focus and select the tab they land on. With `activateTabWithKeyboard: false`
+they only move focus, and Space or Enter selects. `loop: false` stops them at the first and last tab.
+
+## Tab deactivation
+
+With `allowTabDeactivation`, clicking the selected tab deselects it (`onChange` gets `null`).
+
+## Unmount inactive tabs
+
+Panels stay in the page while hidden. `keepMounted: false`, on Tabs or one panel, leaves a hidden panel's
+content out until its tab is selected.
+
+## Accessibility
+
+The list is a `tablist` with `aria-orientation`, each tab a `tab` with `aria-selected` and `aria-controls`, and
+each panel a `tabpanel` labelled by its tab. Only the selected tab is in the tab order. A tab with no text
+needs a name: give its icon a `label`.
+
+## Keyboard interactions
+
+| Key                    | What it does                                              |
+| ---------------------- | --------------------------------------------------------- |
+| ArrowRight / ArrowLeft | Next or previous tab, horizontal (reversed right to left) |
+| ArrowDown / ArrowUp    | Next or previous tab, vertical                            |
+| Home / End             | First or last tab                                         |
+| Space / Enter          | Select the focused tab, when arrows don't                 |

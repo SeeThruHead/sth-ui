@@ -1,0 +1,58 @@
+---
+title: ActionBar
+description: "A fixed-position bottom bar for bulk selection actions."
+status: built
+ticket: su-nbn9
+files:
+  - components/ActionBar/ActionBar.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+ActionBar is a bar fixed to the bottom of the screen that appears when items are selected, with actions for the
+selection. It is built from Affix, Transition and Paper. Keep `ActionBar.Model` (from `ActionBar.init({ id })`) in
+your model, call `ActionBar.setOpened(model, selection.length > 0)` when the selection changes and pass its
+messages through `ActionBar.update`. Its content can be anything: `ui.ActionBarDivider` adds a vertical divider
+and `ui.ActionBarCloseButton({ onClose })` a close button. Like Mantine's `onClose`, the close button and Escape
+only ask: give the close button `ActionBar.Message.RequestedClose()` and the bar sends the `CloseRequested` out
+message; clear the selection there and the bar closes because `opened` follows it. `Opened` and `Closed` report
+the transition.
+
+The root has `role="group"`, named "Actions" unless you set `ariaLabel`.
+
+<Example height={260} story="overlays-actionbar--usage" caption="Select rows to show the bar" />
+
+## With ActionIcon buttons
+
+<Example height={260} story="overlays-actionbar--with-actions" caption="Icon actions between two dividers" />
+
+## Placement
+
+The bar is centred 30px above the bottom by default. `position` moves it; for a position that is not centred, set
+`styles: { root: [...] }` with `marginInline: 0` to drop the centring.
+
+<Example height={260} story="overlays-actionbar--placement" caption="Bottom right" />
+
+## Close on Escape
+
+The bar does not close on Escape unless `closeOnEscape` is set:
+
+<Example height={260} story="overlays-actionbar--close-on-escape" caption="Select a row, then press Escape" />
+
+## Transitions and keepMounted
+
+It pops in over 200ms by default; `transitionProps` changes the transition, its duration and timing function.
+`keepMounted` keeps the closed bar in the page, hidden.
+
+## Styles API
+
+ActionBar's part is `root` (the Paper); the divider and close button are their own components with a `root` part.
+
+## Differences from Mantine
+
+- The open state lives in your model (`setOpened`), and the close button is given the message to send. Mantine
+  calls the close button's own `onClick` before `onClose`; here a click sends one message.
+- `ActionBar.Divider` and `ActionBar.CloseButton` are `ui.ActionBarDivider` and `ui.ActionBarCloseButton`.

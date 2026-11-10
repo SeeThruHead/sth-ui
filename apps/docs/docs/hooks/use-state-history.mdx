@@ -1,0 +1,24 @@
+---
+title: useStateHistory
+description: "A value with undo and redo through its history."
+status: built
+ticket: su-37qg
+files:
+  - hooks/useStateHistory/history.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`stateHistory(initial)` makes `{ history, current }`. `setHistory(state, value)` adds a value after the current one
+and drops anything ahead of it, `backHistory(state, steps = 1)` and `forwardHistory(state, steps = 1)` move through
+the history without going past either end, and `currentOf(state)` is the current value. Reset by starting again with
+`stateHistory(initial)`.
+
+<Example height={160} story="hooks-usestatehistory--usage" caption="Set, back, forward and reset" />
+
+## Differences from Mantine
+
+- These are pure functions over a Model value rather than a hook returning handlers.

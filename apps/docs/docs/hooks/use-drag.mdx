@@ -1,0 +1,31 @@
+---
+title: useDrag
+description: "Track pointer drag gestures with movement, velocity and taps."
+status: built
+ticket: su-a3bf
+files:
+  - hooks/useDrag/drag.ts
+  - hooks/mounts.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+The `drag({ axis, axisThreshold, threshold, filterTaps, tapThreshold })` Mount sends `Dragged` for each step of a
+pointer drag that starts on the element: `xy`, `initial`, `movement` (from the start), `delta` (since the last event),
+`distance`, `direction`, `velocity` (pixels per millisecond, 0 when released after a 100ms pause), `elapsedTime`, and
+`first`, `last`, `active`, `tap` and `canceled`. Nothing is sent until the pointer moves past `threshold` (a number or
+`[x, y]`); `filterTaps` reports a short press as a `tap`, within `tapThreshold` (3px). `axis` keeps only `x` or `y`, or
+`lock` chooses the dominant axis once the movement passes `axisThreshold` (1px). Other buttons, other pointers and a
+second press are ignored, and text selection is turned off on the page while dragging. `dragStep` is the pure step
+behind it.
+
+<Example height={140} story="hooks-usedrag--usage" caption="A card that can be dragged and tapped" />
+
+## Differences from Mantine
+
+- It is a Mount sending `Dragged` rather than a hook calling a handler; `enabled` is leaving the Mount out, and the
+  handler's `cancel()` is not available (a `pointercancel` still ends the drag with `canceled: true`).
+- The event itself is not included, since a Message carries data.

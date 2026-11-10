@@ -1,0 +1,31 @@
+---
+title: DateTimePicker
+description: "An input that opens an InlineDateTimePicker in a popover."
+status: built
+ticket: su-q18l
+files:
+  - dates/DateTimePicker/DateTimePicker.ts
+  - dates/DateTimePicker/model.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+DateTimePicker is an input that opens an [InlineDateTimePicker](/dates/inline-date-time-picker) in a Popover and shows
+the value as `valueFormat` (`"DD/MM/YYYY HH:mm"`, with `:ss` when `withSeconds` is set). Enter in the time fields or
+the submit button closes it. Closing drops a range that only has a start and clamps the value to `minDate` and
+`maxDate`, as Mantine does. `clearable`, `name` (a hidden `YYYY-MM-DD HH:mm:ss` value), `readOnly`, `disabled` and
+every Input prop work as on the other picker inputs.
+
+Keep `DateTimePicker.init({ id, today, type, value }, context)` in the Model and route its Messages and Commands through
+`update(model, message, context)`; it reports `Changed`, `Opened` and `Closed`.
+
+<Configurator story="dates-datetimepicker--configurator" />
+
+## Differences from Mantine
+
+- It is a submodel; the context goes to `init`, `update` and the view.
+- `dropdownType="modal"` is not supported; the dropdown is always a Popover.

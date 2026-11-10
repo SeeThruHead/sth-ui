@@ -1,0 +1,39 @@
+---
+title: AreaChart
+description: "Area chart component with stacked, percent and default types."
+status: built
+ticket: su-1loe
+files:
+  - charts/AreaChart/AreaChart.ts
+  - charts/grid/gridView.ts
+  - charts/grid/grid.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+AreaChart takes the same data, axes, grid, legend and tooltip props as [LineChart](/charts/line-chart), and fills
+the area under each series with a gradient (`fillOpacity`, 0.2, at the top fading out).
+
+<Configurator story="charts-areachart--configurator" />
+
+## Stacked and percent
+
+`type: "stacked"` stacks the series on one another, and `type: "percent"` stacks them to 100% of each day, with the
+y axis in percent. Stacked types fill flat unless `withGradient`. `connectNulls: false` breaks an area at a missing
+value, and negative values fill up to zero.
+
+<Example
+  height={880}
+  story="charts-areachart--types"
+  caption="Stacked with legend, percent, and an area with gaps and negative values"
+/>
+
+## Differences from Mantine
+
+- It draws its own SVG rather than recharts; `areaProps`, `areaChartProps` and children are not supported.
+- Not ported yet: the `split` and `stream` types, `orientation: "vertical"`, a right y axis, point labels, the brush,
+  reference areas and dots.

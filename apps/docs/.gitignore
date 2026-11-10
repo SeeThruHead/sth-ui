@@ -1,0 +1,8 @@
+.docusaurus/
+build/
+build-logs/
+static/storybook/
+src/props.json
+src/examples.json
+src/styles-api.json
+src/configurators.json

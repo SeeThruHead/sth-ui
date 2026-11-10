@@ -1,0 +1,37 @@
+---
+title: Treemap
+description: "Nested rectangles sized by value."
+status: built
+ticket: su-xoco
+files:
+  - charts/Treemap/Treemap.ts
+  - charts/Treemap/squarify.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`data` is a list of `{ name, value, color, children }` nodes; a node with children is sized by their sum and holds
+them inside it. Tiles are laid out by recharts' squarify algorithm (`aspectRatio`, the golden ratio by default), take
+their `color` or their parent's, or a blue shade by position, and show their name when they are big enough. Hovering a
+tile shows its value.
+
+<Example height={330} story="charts-treemap--usage" caption="Frameworks grouped by area" />
+
+## Colours, borders and tooltip
+
+- `autoContrast` picks black or white text for each tile; `textColor` sets one colour for all.
+- `strokeColor` and `strokeWidth` (1) draw the borders between tiles.
+- `height` (300) sizes the chart, and `valueFormatter` formats the tooltip value; `withTooltip={false}` turns it off.
+
+<Example
+  height={420}
+  story="charts-treemap--options"
+  caption="Contrasting labels with thick borders; one text colour, square tiles, no tooltip"
+/>
+
+## Differences from Mantine
+
+- `dataKey`, `treemapProps`, `tooltipProps` and `children` are recharts props and are not supported.

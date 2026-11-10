@@ -1,0 +1,51 @@
+---
+title: List
+description: "Display ordered or unordered list."
+status: built
+ticket: su-y6j7
+files:
+  - components/List/List.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+List renders `items` (each with its `children`) as a `<ul>`, or an `<ol>` with `type: "ordered"`. `size` (`xs` to
+`xl`) sets the text, `withPadding` indents it further, `spacing` adds space between items and `listStyleType` changes
+the markers.
+
+<Configurator story="typography-list--configurator" />
+
+<Example height={200} story="typography-list--ordered" caption="Ordered, large, with padding" />
+
+## With icons
+
+`icon` replaces the markers on every item, and an item's own `icon` overrides it. `center` centres the icon on the
+text.
+
+<Example height={200} story="typography-list--with-icons" caption="Icons, one overridden" />
+
+## Nested lists
+
+Put a List in an item's children:
+
+<Example height={260} story="typography-list--nested" caption="Three levels" />
+
+## Ordered list numbering
+
+`start` sets the first number, `reversed` counts down, and an item's `value` sets its own number (the next items
+continue from it).
+
+<Example height={200} story="typography-list--numbering" caption="Start, reversed and values" />
+
+## Styles API
+
+Its parts are `root`, `item`, `itemWrapper`, `itemIcon` and `itemLabel`. The root carries `data-type` and
+`data-with-padding`; items carry `data-with-icon` and `data-centered`.
+
+## Differences from Mantine
+
+- `List.Item` is an entry in `items`.

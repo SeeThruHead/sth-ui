@@ -1,0 +1,31 @@
+---
+title: CopyButton
+description: "Copies given text to clipboard."
+status: built
+ticket: su-fjw7
+files:
+  - components/CopyButton/CopyButton.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+CopyButton copies `value` to the clipboard. It renders nothing of its own: `children` gets `copied` and `copy` (the
+message to send when the button is pressed) and returns your button. Keep `CopyButton.Model` (from
+`CopyButton.init()`) in your model and pass its messages to `CopyButton.update`.
+
+<Example height={100} story="buttons-copybutton--usage" caption="A button that copies a link" />
+
+## Security
+
+The clipboard is only available on secure pages (`https`, or `http` on localhost), and some browsers block it inside
+iframes unless the frame is allowed to use it. When the browser refuses, `copied` stays `false`.
+
+## Timeout
+
+`copied` turns back to `false` after `timeout` ms (1000 by default), passed to `CopyButton.update` as
+`{ timeout }`.
+
+<Example height={100} story="buttons-copybutton--timeout" caption="An icon button with a tooltip, 2 seconds" />

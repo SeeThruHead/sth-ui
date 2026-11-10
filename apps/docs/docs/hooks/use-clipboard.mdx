@@ -1,0 +1,25 @@
+---
+title: useClipboard
+description: "Copy text to the clipboard."
+status: built
+ticket: su-d649
+files:
+  - hooks/useClipboard/clipboard.ts
+  - hooks/commands.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`copyText({ text })` is a Command that writes to the clipboard and sends `Copied` or `CopyFailed` with the error.
+`expireCopy({ generation, timeout })` sends `CopyExpired` after the timeout (Mantine's is 2000ms). The state functions
+in `clipboard.ts` (`copied`, `copyFailed`, `expired`, `resetClipboard`) keep `{ copied, error, generation }`, so only
+the latest copy's timer clears `copied`.
+
+<Example height={90} story="hooks-useclipboard--usage" caption="useClipboard" />
+
+## Differences from Mantine
+
+- It is a pair of Commands and pure state functions rather than a hook; the error is a string in an `Option`.

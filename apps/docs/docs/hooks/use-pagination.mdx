@@ -1,0 +1,25 @@
+---
+title: usePagination
+description: "Page ranges and page steps for pagination."
+status: built
+ticket: su-u77u
+files:
+  - hooks/usePagination/pagination.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`paginationRange({ total, active, siblings, boundaries, startValue })` is the list of pages to show, with `"dots"` for
+the gaps, exactly as Mantine computes it (`siblings` and `boundaries` default to 1). `nextPage`, `previousPage`,
+`toFirstPage` and `toLastPage` give the page to move to, clamped to `startValue` (1) and `total`; keep the active page
+in the Model. It is the logic behind [Pagination](/navigation/pagination).
+
+<Example height={120} story="navigation-pagination--usage" caption="usePagination" />
+
+## Differences from Mantine
+
+- These are pure functions over the active page in the Model rather than a hook; `onChange` is the Message that stores the new page.
+- With `boundaries: 0` the first and last pages are not shown, as in Mantine.

@@ -1,0 +1,44 @@
+---
+title: Notification
+description: "Show dynamic notifications and alerts to user, part of notifications system."
+status: built
+ticket: su-xrb3
+files:
+  - components/Notification/Notification.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Notification shows a message with an optional `title`, a coloured bar on the left and a close button. `onClose` is the
+message the close button sends. `color`, `radius`, `withBorder` and `withCloseButton` change how it looks, and
+`loading` shows a loader in place of the bar or icon.
+
+<Configurator story="feedback-notification--configurator" />
+
+## With icon
+
+An `icon` replaces the bar with a round coloured badge:
+
+<Example height={200} story="feedback-notification--with-icon" caption="Error and success" />
+
+## States
+
+<Example
+  height={380}
+  story="feedback-notification--states"
+  caption="Loading with a border, no close button, title only"
+/>
+
+## Accessibility
+
+The root has `role="alert"` unless you give another `role`. The close button is named by `closeButtonLabel` ("Close
+notification" by default).
+
+## Styles API
+
+Its parts are `root`, `icon`, `loader`, `body`, `title`, `description` and `closeButton`. The root carries
+`data-with-icon` and `data-with-border`, and the description `data-with-title`.

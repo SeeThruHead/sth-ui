@@ -1,0 +1,33 @@
+---
+title: BubbleChart
+description: "Bubble chart component."
+status: built
+ticket: su-kv7o
+files:
+  - charts/BubbleChart/BubbleChart.ts
+  - charts/BubbleChart/bubble.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+BubbleChart draws one row of bubbles: `dataKey.x` names each bubble's category on the x axis, `dataKey.y` its height
+in the row, and `dataKey.z` its size. `range: [min, max]` gives the bubbles' areas in square pixels for the smallest
+and largest `z`. `label` names the row on the left, and `color` colours the bubbles. Hovering a bubble shows its
+category and `z`, formatted by `valueFormatter`.
+
+<Configurator story="charts-bubblechart--configurator" />
+
+## Colours and tooltip
+
+`textColor` and `gridColor` colour the labels and the axis, and `withTooltip: false` turns the tooltip off.
+
+<Example height={110} story="charts-bubblechart--options" caption="Blue labels, no tooltip, missing values" />
+
+## Differences from Mantine
+
+- It lays itself out in HTML rather than recharts; `xAxisProps`, `yAxisProps`, `zAxisProps`, `scatterProps` and
+  `tooltipProps` are not supported, and there is no hover cursor.

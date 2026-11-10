@@ -1,0 +1,46 @@
+---
+title: Schedule
+description: "Day, week, month and year views behind one header, with the date and view kept for you, and a phone layout."
+status: built
+ticket: su-vl50
+files:
+  - schedule/Schedule/Schedule.ts
+  - schedule/Schedule/model.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`schedule.Schedule(h, { model, toParentMessage, events })` shows the [DayView](/schedule/day-view),
+[WeekView](/schedule/week-view), [MonthView](/schedule/month-view) or [YearView](/schedule/year-view) for the date and
+view in its model, and switches between them from the header's tabs; clicking a month in the year view opens that
+month. Keep `Schedule.init({ id, date, view })` (from `Schedule/model.ts`, starting on the week view) in your model
+and route its Messages through `Schedule.update(model, message, context)`, mapping the Commands it returns. `update`
+reports `DateChanged` and `ViewChanged` along with the views' own out messages, such as `EventDropped`.
+
+The options shared by the views (`locale`, `radius`, `labels`, `mode`, `renderEventBody`, `renderEvent`,
+`withEventsDragAndDrop`, `withEventResize`, `withDragSlotSelect`, `withExternalEventDrop`,
+`withInteractiveBackgroundEvents`, `withAgenda`, the click handlers and `recurrenceExpansionLimit`) are given once;
+`dayViewProps`, `weekViewProps`, `monthViewProps`, `yearViewProps` and `mobileMonthViewProps` set the rest per view.
+
+<Example
+  height={680}
+  story="schedule-schedule--usage"
+  caption="A schedule starting on the week; switch views from the header"
+/>
+
+## Layout
+
+`layout="responsive"` shows the [MobileMonthView](/schedule/mobile-month-view) instead of the day, week and month views
+when the schedule is 600px wide or less; its back button opens the year view, and the day picked on it is kept in the
+model.
+
+<Example height={620} story="schedule-schedule--mobile" caption="The same schedule in a phone-sized container" />
+
+## Differences from Mantine
+
+- The date, view and selected day live in the schedule's model rather than being controlled or uncontrolled props, and
+  changes come back as out messages.
+- Interactions are configured on the model's `update` (its `context`) rather than through callbacks on the component.

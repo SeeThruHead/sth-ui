@@ -1,0 +1,4858 @@
+{
+  "Group": {
+    "selectors": {
+      "root": "Root element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-grow",
+        "selector": "root",
+        "condition": "`grow` prop is set"
+      }
+    ]
+  },
+  "WaffleChart": {
+    "selectors": {
+      "root": "Root container element",
+      "grid": "SVG grid element",
+      "cell": "Individual cell rect",
+      "legend": "Legend container",
+      "legendItem": "Legend item wrapper",
+      "legendSwatch": "Legend color swatch",
+      "legendLabel": "Legend text label"
+    },
+    "modifiers": []
+  },
+  "YearView": {
+    "selectors": {
+      "yearView": "Root element",
+      "yearViewMonths": "Container for all months",
+      "yearViewMonth": "Individual month container",
+      "yearViewWeekday": "Weekday name cell",
+      "yearViewDay": "Day cell",
+      "yearViewWeek": "Week row",
+      "yearViewWeekNumber": "Week number indicator",
+      "yearViewWeekdays": "Weekdays row",
+      "yearViewWeekdaysCorner": "Top-left corner in weekdays row",
+      "yearViewMonthCaption": "Month name label",
+      "yearViewDayIndicators": "Container for day event indicators",
+      "yearViewDayIndicator": "Individual day event indicator",
+      "header": "Header container, part of ScheduleHeader",
+      "headerControl": "Header control element, part of ScheduleHeader",
+      "viewSelect": "View select element, part of ScheduleHeader",
+      "monthYearSelectTarget": "Month/year select target button, part of MonthYearSelect",
+      "monthYearSelectDropdown": "Month/year select dropdown, part of MonthYearSelect",
+      "monthYearSelectControl": "Month/year select control, part of MonthYearSelect",
+      "monthYearSelectList": "Month/year select list, part of MonthYearSelect",
+      "monthYearSelectLabel": "Month/year select label, part of MonthYearSelect"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-today",
+        "selector": "yearViewDay",
+        "condition": "Day is today"
+      },
+      {
+        "modifier": "data-weekend",
+        "selector": "yearViewDay",
+        "condition": "Day is a weekend day"
+      },
+      {
+        "modifier": "data-outside",
+        "selector": "yearViewDay",
+        "condition": "Day is outside current month"
+      },
+      {
+        "modifier": "data-static",
+        "selector": "yearView",
+        "condition": "`mode=\"static\"` is set"
+      }
+    ]
+  },
+  "AgendaView": {
+    "selectors": {
+      "agendaView": "Root element",
+      "agendaViewHeader": "Header container with date range and close button",
+      "agendaViewHeaderLabel": "Date range label in the header",
+      "agendaViewBody": "Body container for date groups",
+      "agendaViewDateGroup": "Date group container",
+      "agendaViewDateHeader": "Date header text within a group",
+      "agendaViewEvent": "Event item button",
+      "agendaViewEventBody": "Event body layout container",
+      "agendaViewEventColor": "Event color indicator",
+      "agendaViewEventTitle": "Event title text",
+      "agendaViewEventTime": "Event time label",
+      "agendaViewNoEvents": "No events message"
+    },
+    "modifiers": []
+  },
+  "Kbd": {
+    "selectors": {
+      "root": "Root element"
+    }
+  },
+  "SwitchGroup": {
+    "selectors": {
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element"
+    }
+  },
+  "Switch": {
+    "selectors": {
+      "root": "Root element",
+      "track": "Switch track, contains `thumb` and `trackLabel`",
+      "trackLabel": "Label displayed inside `track`",
+      "thumb": "Thumb displayed inside `track`",
+      "input": "Input element (`input[type=\"checkbox\"]`), hidden by default",
+      "body": "Input body, contains all other elements",
+      "labelWrapper": "Contains `label`, `description` and `error`",
+      "label": "Label element",
+      "description": "Description displayed below the label",
+      "error": "Error message displayed below the label"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-error",
+        "selector": "track",
+        "condition": "`error` prop is set"
+      },
+      {
+        "modifier": "data-label-position",
+        "selector": ["track", "root"],
+        "value": "value of `labelPosition` prop"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "label",
+        "condition": "`disabled` prop is set"
+      }
+    ]
+  },
+  "Image": {
+    "selectors": {
+      "root": "Root element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-fallback",
+        "selector": "root",
+        "condition": "Image failed to load"
+      }
+    ]
+  },
+  "SunburstChart": {
+    "selectors": {
+      "root": "Root element",
+      "tooltip": "Tooltip root element",
+      "tooltipBody": "Tooltip wrapper around all items",
+      "tooltipItem": "Tooltip item representing data series",
+      "tooltipItemBody": "Tooltip item wrapper around item color and name",
+      "tooltipItemColor": "Tooltip item color",
+      "tooltipItemName": "Tooltip item name",
+      "tooltipItemData": "Tooltip item data",
+      "tooltipLabel": "Label of the tooltip"
+    },
+    "modifiers": []
+  },
+  "AppShell": {
+    "selectors": {
+      "root": "Root element (`AppShell` component)",
+      "navbar": "`AppShell.Navbar` root element",
+      "header": "`AppShell.Header` root element",
+      "main": "`AppShell.Main` root element",
+      "aside": "`AppShell.Aside` root element",
+      "footer": "`AppShell.Footer` root element",
+      "section": "`AppShell.Section` root element",
+      "resizeHandle": "Resize handle rendered in resizable sections"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-resizing",
+        "selector": "root",
+        "condition": "User is resizing the window or a section is being resized"
+      },
+      {
+        "modifier": "data-layout",
+        "selector": "root",
+        "value": "Value of the `layout` prop"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "root",
+        "condition": "`disabled` prop is set"
+      },
+      {
+        "modifier": "data-with-border",
+        "selector": ["navbar", "header", "aside", "footer"],
+        "condition": "`withBorder` prop is set either on the `AppShell` or on the associated component"
+      },
+      {
+        "modifier": "data-grow",
+        "selector": "section",
+        "condition": "`grow` prop is set on the `AppShell.Section`"
+      },
+      {
+        "modifier": "data-section",
+        "selector": "resizeHandle",
+        "value": "Section the handle resizes: `navbar`, `aside`, `header` or `footer`"
+      },
+      {
+        "modifier": "data-orientation",
+        "selector": "resizeHandle",
+        "value": "Orientation of the handle: `vertical` or `horizontal`"
+      },
+      {
+        "modifier": "data-active",
+        "selector": "resizeHandle",
+        "condition": "Section is being resized"
+      }
+    ]
+  },
+  "Title": {
+    "selectors": {
+      "root": "Root element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-order",
+        "selector": "root",
+        "value": "Value of the `order` prop"
+      },
+      {
+        "modifier": "data-line-clamp",
+        "selector": "root",
+        "condition": "`lineClamp` prop is a number"
+      }
+    ]
+  },
+  "MatrixChart": {
+    "selectors": {
+      "root": "Root SVG element",
+      "cell": "Individual cell rect element",
+      "xLabel": "X-axis label text",
+      "yLabel": "Y-axis label text",
+      "legend": "Legend group element",
+      "legendLabel": "Legend text label",
+      "legendRect": "Legend color rect"
+    },
+    "modifiers": []
+  },
+  "Popover": {
+    "selectors": {
+      "dropdown": "Dropdown element",
+      "arrow": "Dropdown arrow",
+      "overlay": "Overlay element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-position",
+        "selector": "dropdown",
+        "value": "Value of floating ui dropdown position"
+      }
+    ]
+  },
+  "Stepper": {
+    "selectors": {
+      "root": "Root element",
+      "steps": "Steps controls wrapper",
+      "separator": "Separator line between step controls",
+      "verticalSeparator": "Vertical separator line between step controls",
+      "content": "Current step content wrapper",
+      "stepWrapper": "Wrapper for the step icon and separator",
+      "step": "Step control button",
+      "stepIcon": "Step icon wrapper",
+      "stepCompletedIcon": "Completed step icon, rendered within stepIcon",
+      "stepIconContent": "Step icon content wrapper for non-completed steps, rendered within stepIcon",
+      "stepBody": "Contains stepLabel and stepDescription",
+      "stepLabel": "Step label",
+      "stepDescription": "Step description",
+      "stepLoader": "Step loader"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-progress",
+        "selector": "stepIcon",
+        "condition": "Step is current"
+      },
+      {
+        "modifier": "data-completed",
+        "selector": "stepIcon",
+        "condition": "Step is completed"
+      },
+      {
+        "modifier": "data-label-position",
+        "selector": ["steps", "step"],
+        "condition": "`labelPosition` prop is set and `orientation` is not `vertical`",
+        "value": "`right` or `bottom`"
+      }
+    ]
+  },
+  "AspectRatio": {
+    "selectors": {
+      "root": "Root element"
+    }
+  },
+  "FloatingIndicator": {
+    "selectors": {
+      "root": "Indicator element that animates to match the target position and size"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-initialized",
+        "selector": "root",
+        "condition": "Indicator has been initialized and transitions are enabled"
+      },
+      {
+        "modifier": "data-hidden",
+        "selector": "root",
+        "condition": "Indicator is hidden (when displayAfterTransitionEnd is true)"
+      }
+    ]
+  },
+  "Autocomplete": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element",
+      "dropdown": "Dropdown root element",
+      "options": "Options wrapper",
+      "option": "Option",
+      "empty": "Nothing found message",
+      "group": "Options group wrapper",
+      "groupLabel": "Options group label"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-combobox-selected",
+        "selector": "option",
+        "condition": "Option is selected"
+      },
+      {
+        "modifier": "data-combobox-active",
+        "selector": "option",
+        "condition": "Options was activated by keyboard"
+      },
+      {
+        "modifier": "data-combobox-disabled",
+        "selector": "option",
+        "condition": "Option is disabled"
+      }
+    ]
+  },
+  "MaskInput": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element"
+    }
+  },
+  "Marquee": {
+    "selectors": {
+      "root": "Root element",
+      "content": "Animated scrolling container",
+      "group": "Repeated children wrapper"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-orientation",
+        "selector": "root",
+        "condition": "Value depends on `orientation` prop",
+        "value": "horizontal | vertical"
+      },
+      {
+        "modifier": "data-reverse",
+        "selector": "root",
+        "condition": "`reverse` prop is set"
+      },
+      {
+        "modifier": "data-pause-on-hover",
+        "selector": "root",
+        "condition": "`pauseOnHover` prop is set"
+      },
+      {
+        "modifier": "data-fade-edges",
+        "selector": "root",
+        "condition": "`fadeEdges` prop is `true` (default)"
+      }
+    ]
+  },
+  "DataList": {
+    "selectors": {
+      "root": "Root `dl` element",
+      "item": "DataList.Item root element",
+      "itemLabel": "DataList.ItemLabel `dt` element",
+      "itemValue": "DataList.ItemValue `dd` element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-orientation",
+        "selector": "root",
+        "value": "Value of `orientation` prop"
+      },
+      {
+        "modifier": "data-with-divider",
+        "selector": "root",
+        "condition": "`withDivider` prop is set"
+      }
+    ]
+  },
+  "OverflowList": {
+    "selectors": {
+      "root": "Root element"
+    },
+    "modifiers": []
+  },
+  "TreeSelect": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element",
+      "dropdown": "Dropdown root element",
+      "options": "Options wrapper",
+      "option": "Option",
+      "empty": "Nothing found message",
+      "group": "Options group wrapper",
+      "groupLabel": "Options group label",
+      "pill": "Value pill",
+      "inputField": "Input field",
+      "pillsList": "List of pills, also contains input field"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-combobox-selected",
+        "selector": "option",
+        "condition": "Option is selected"
+      },
+      {
+        "modifier": "data-combobox-active",
+        "selector": "option",
+        "condition": "Options was activated by keyboard"
+      },
+      {
+        "modifier": "data-combobox-disabled",
+        "selector": "option",
+        "condition": "Option is disabled"
+      }
+    ]
+  },
+  "ColorSwatch": {
+    "selectors": {
+      "root": "Root element",
+      "alphaOverlay": "Overlay with checkerboard pattern",
+      "shadowOverlay": "Overlay with inner box-shadow",
+      "colorOverlay": "Overlay with given color background",
+      "childrenOverlay": "Overlay with `children` inside"
+    }
+  },
+  "Carousel": {
+    "selectors": {
+      "root": "Root element",
+      "slide": "`Carousel.Slide` root element",
+      "container": "Slides container",
+      "viewport": "Main element, contains slides container and all controls",
+      "controls": "Next/previous controls container",
+      "control": "Next/previous control",
+      "indicators": "Indicators container",
+      "indicator": "Indicator button"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-orientation",
+        "selector": "root",
+        "value": "Value of `orientation` prop"
+      },
+      {
+        "modifier": "data-include-gap-in-size",
+        "selector": "root",
+        "condition": "`includeGapInSize` prop is set"
+      },
+      {
+        "modifier": "data-inactive",
+        "selector": "control",
+        "condition": "No previous/next slides are available"
+      },
+      {
+        "modifier": "data-active",
+        "selector": "indicator",
+        "condition": "Associated slide is active"
+      }
+    ]
+  },
+  "Chip": {
+    "selectors": {
+      "root": "Root element",
+      "checkIcon": "Check icon, visible when checked prop is true",
+      "iconWrapper": "Wraps `checkIcon` for alignment",
+      "input": "Input element, hidden by default",
+      "label": "Input label, used as a chip body"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-checked",
+        "selector": "label",
+        "condition": "Chip is checked"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "label",
+        "condition": "`disabled` prop is set"
+      }
+    ]
+  },
+  "JsonInput": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element"
+    }
+  },
+  "SemiCircleProgress": {
+    "selectors": {
+      "root": "Root element",
+      "svg": "Root svg element",
+      "emptySegment": "Empty circle segment",
+      "filledSegment": "Filled circle segment",
+      "label": "Label element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-position",
+        "selector": "label",
+        "value": "Value of `labelPosition` prop"
+      },
+      {
+        "modifier": "data-orientation",
+        "selector": "label",
+        "value": "Value of `orientation` prop"
+      }
+    ]
+  },
+  "ButtonGroupSection": {
+    "selectors": {
+      "groupSection": "Root element"
+    },
+    "modifiers": []
+  },
+  "ButtonGroup": {
+    "selectors": {
+      "group": "Root element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-orientation",
+        "selector": "group",
+        "value": "Value of `orientation` prop"
+      }
+    ]
+  },
+  "Button": {
+    "selectors": {
+      "root": "Root element",
+      "loader": "Loader component, displayed only when `loading` prop is set",
+      "inner": "Contains all other elements, child of the `root` element",
+      "section": "Left and right sections of the button",
+      "label": "Button children"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-disabled",
+        "selector": "root",
+        "condition": "`disabled` prop is set"
+      },
+      {
+        "modifier": "data-loading",
+        "selector": ["root", "label"],
+        "condition": "`loading` prop is set"
+      },
+      {
+        "modifier": "data-block",
+        "selector": "root",
+        "condition": "`fullWidth` prop is set"
+      },
+      {
+        "modifier": "data-with-left-section",
+        "selector": "root",
+        "condition": "`leftSection` is set"
+      },
+      {
+        "modifier": "data-with-right-section",
+        "selector": "root",
+        "condition": "`rightSection` is set"
+      },
+      {
+        "modifier": "data-position",
+        "selector": "section",
+        "value": "Section position: left or right"
+      }
+    ]
+  },
+  "Modal": {
+    "selectors": {
+      "root": "Root element",
+      "inner": "Element used to center modal, has fixed position, takes entire screen",
+      "content": "`Modal.Content` root element",
+      "header": "Contains title and close button",
+      "overlay": "Overlay displayed under the `Modal.Content`",
+      "title": "Modal title (h2 tag), displayed in the header",
+      "body": "Modal body, displayed after header",
+      "close": "Close button"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-full-screen",
+        "selector": "root",
+        "condition": "`fullScreen` prop is set"
+      },
+      {
+        "modifier": "data-centered",
+        "selector": "root",
+        "condition": "`centered` prop is set"
+      }
+    ]
+  },
+  "Spotlight": {
+    "selectors": {
+      "root": "Root element",
+      "inner": "Element used to center modal, has fixed position, takes entire screen",
+      "content": "`Modal.Content` root element",
+      "header": "Contains title and close button",
+      "overlay": "Overlay displayed under the `Modal.Content`",
+      "title": "Modal title (h2 tag), displayed in the header",
+      "body": "Modal body, displayed after header",
+      "close": "Close button",
+      "search": "Search input (`Spotlight.Search`)",
+      "actionsList": "Actions list (`Spotlight.ActionsList`)",
+      "empty": "Empty state (`Spotlight.Empty`)",
+      "footer": "Footer (`Spotlight.Footer`)",
+      "action": "Action (`Spotlight.Action`)",
+      "actionBody": "Body of the action, contains label and description",
+      "actionLabel": "`Spotlight.Action` label",
+      "actionDescription": "`Spotlight.Action` description",
+      "actionSection": "`Spotlight.Action` left and right sections",
+      "actionsGroup": "`Spotlight.ActionsGroup` root element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-selected",
+        "selector": "action",
+        "condition": "Action is selected with up/down keys"
+      },
+      {
+        "modifier": "data-position",
+        "selector": "actionSection",
+        "value": "Section position: left or right"
+      },
+      {
+        "modifier": "data-dimmed",
+        "selector": "actionSection",
+        "condition": "`dimmedSections` prop is set on `Spotlight.Action` component"
+      }
+    ]
+  },
+  "Fieldset": {
+    "selectors": {
+      "root": "Root element",
+      "legend": "Legend element"
+    }
+  },
+  "Flex": {
+    "selectors": {
+      "root": "Root element"
+    }
+  },
+  "ResourcesMonthView": {
+    "selectors": {
+      "resourcesMonthView": "Root element",
+      "resourcesMonthViewRoot": "Root container wrapping scroll area",
+      "resourcesMonthViewScrollArea": "Scroll area component",
+      "resourcesMonthViewDayLabelsRow": "Row containing day labels",
+      "resourcesMonthViewCorner": "Top-left corner element",
+      "resourcesMonthViewDayLabel": "Individual day label element",
+      "resourcesMonthViewDayLabelWeekday": "Weekday text inside day label",
+      "resourcesMonthViewDayLabelNumber": "Day number inside day label",
+      "resourcesMonthViewRow": "Resource row element",
+      "resourcesMonthViewResourceLabel": "Resource label element",
+      "resourcesMonthViewRowSlots": "Container for all day cells in a row",
+      "resourcesMonthViewCell": "Individual day cell element",
+      "resourcesMonthViewEventWrapper": "Event wrapper element",
+      "resourcesMonthViewResizeHandle": "Event resize handle element",
+      "resourcesMonthViewInner": "Inner container wrapping day labels and rows",
+      "resourcesMonthViewGroupColumn": "Group label column element",
+      "resourcesMonthViewGroupColumnEmpty": "Empty group column cell for ungrouped resources",
+      "moreEventsButton": "More events button, part of MoreEvents",
+      "moreEventsList": "More events list, part of MoreEvents",
+      "moreEventsDropdown": "More events dropdown, part of MoreEvents",
+      "header": "Header container, part of ScheduleHeader",
+      "headerControl": "Header control element, part of ScheduleHeader",
+      "viewSelect": "View select element, part of ScheduleHeader",
+      "monthYearSelectTarget": "MonthYearSelect target button, part of ScheduleHeader",
+      "monthYearSelectDropdown": "MonthYearSelect dropdown, part of ScheduleHeader",
+      "monthYearSelectControl": "MonthYearSelect control, part of ScheduleHeader",
+      "monthYearSelectList": "MonthYearSelect list, part of ScheduleHeader",
+      "monthYearSelectLabel": "MonthYearSelect label, part of ScheduleHeader"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-weekend",
+        "selector": "resourcesMonthViewDayLabel",
+        "condition": "Day label represents a weekend day"
+      },
+      {
+        "modifier": "data-today",
+        "selector": "resourcesMonthViewDayLabel",
+        "condition": "Day label represents today and `highlightToday` is true"
+      },
+      {
+        "modifier": "data-weekend",
+        "selector": "resourcesMonthViewCell",
+        "condition": "Cell represents a weekend day"
+      },
+      {
+        "modifier": "data-drop-target",
+        "selector": "resourcesMonthViewCell",
+        "condition": "Cell is the current drag drop target"
+      },
+      {
+        "modifier": "data-drag-selected",
+        "selector": "resourcesMonthViewCell",
+        "condition": "Cell is selected during drag-to-select"
+      },
+      {
+        "modifier": "data-static",
+        "selector": "resourcesMonthViewCell",
+        "condition": "`mode=\"static\"` is set"
+      },
+      {
+        "modifier": "data-static",
+        "selector": "resourcesMonthView",
+        "condition": "`mode=\"static\"` is set"
+      }
+    ]
+  },
+  "Center": {
+    "selectors": {
+      "root": "Root element"
+    }
+  },
+  "RangeSlider": {
+    "selectors": {
+      "root": "Root element",
+      "label": "Thumb label",
+      "thumb": "Thumb element",
+      "trackContainer": "Wraps track element",
+      "track": "Slider track",
+      "bar": "Track filled part",
+      "markWrapper": "Contains `mark` and `markLabel` elements",
+      "mark": "Mark displayed on track",
+      "markLabel": "Label of the associated mark, displayed below track"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-orientation",
+        "selector": "root",
+        "condition": "Determines slider orientation, `horizontal` by default"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": ["trackContainer", "track", "bar", "thumb", "mark"],
+        "condition": "`disabled` prop is set"
+      },
+      {
+        "modifier": "data-inverted",
+        "selector": ["track", "bar"],
+        "condition": "`inverted` prop is set"
+      },
+      {
+        "modifier": "data-dragging",
+        "selector": "thumb",
+        "condition": "slider is being dragged"
+      },
+      {
+        "modifier": "data-filled",
+        "selector": "mark",
+        "condition": "mark position is less or equal slider value"
+      }
+    ]
+  },
+  "Slider": {
+    "selectors": {
+      "root": "Root element",
+      "label": "Thumb label",
+      "thumb": "Thumb element",
+      "trackContainer": "Wraps track element",
+      "track": "Slider track",
+      "bar": "Track filled part",
+      "markWrapper": "Contains `mark` and `markLabel` elements",
+      "mark": "Mark displayed on track",
+      "markLabel": "Label of the associated mark, displayed below track"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-orientation",
+        "selector": "root",
+        "condition": "Determines slider orientation, `horizontal` by default"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": ["trackContainer", "track", "bar", "thumb", "mark"],
+        "condition": "`disabled` prop is set"
+      },
+      {
+        "modifier": "data-inverted",
+        "selector": ["track", "bar"],
+        "condition": "`inverted` prop is set"
+      },
+      {
+        "modifier": "data-dragging",
+        "selector": "thumb",
+        "condition": "slider is being dragged"
+      },
+      {
+        "modifier": "data-filled",
+        "selector": "mark",
+        "condition": "mark position is less or equal slider value"
+      }
+    ]
+  },
+  "PieChart": {
+    "selectors": {
+      "root": "Root element",
+      "legend": "Legend root element",
+      "legendItem": "Legend item representing data series",
+      "legendItemColor": "Legend item color",
+      "legendItemName": "Legend item name",
+      "tooltip": "Tooltip root element",
+      "tooltipBody": "Tooltip wrapper around all items",
+      "tooltipItem": "Tooltip item representing data series",
+      "tooltipItemBody": "Tooltip item wrapper around item color and name",
+      "tooltipItemColor": "Tooltip item color",
+      "tooltipItemName": "Tooltip item name",
+      "tooltipItemData": "Tooltip item data",
+      "tooltipLabel": "Label of the tooltip"
+    },
+    "modifiers": []
+  },
+  "DayView": {
+    "selectors": {
+      "dayView": "Root element",
+      "dayViewInner": "Inner container wrapping slot labels and slots",
+      "dayViewScrollArea": "Scroll area component",
+      "dayViewAllDay": "All-day events container",
+      "dayViewAllDayEvents": "All-day events wrapper",
+      "dayViewSlot": "Individual time slot element",
+      "dayViewSlots": "Container for all slots",
+      "dayViewTimeSlots": "Container for time slots (excludes all-day)",
+      "dayViewSlotLabel": "Time slot label element",
+      "dayViewSlotLabels": "Container for all slot labels",
+      "dayViewBackgroundEvent": "Background event element",
+      "dayViewBackgroundEventResizeHandle": "Resize handle of an interactive background event",
+      "dayViewDragPreview": "Ghost preview shown at the snapped position while dragging an event",
+      "header": "Header container, part of ScheduleHeader",
+      "headerControl": "Header control element, part of ScheduleHeader",
+      "viewSelect": "View select element, part of ScheduleHeader",
+      "event": "Event element, part of ScheduleEvent",
+      "eventInner": "Event inner element, part of ScheduleEvent",
+      "eventResizeHandle": "Event resize handle element, part of ScheduleEvent",
+      "moreEventsButton": "More events button, part of MoreEvents",
+      "moreEventsList": "More events list, part of MoreEvents",
+      "moreEventsDropdown": "More events dropdown, part of MoreEvents",
+      "currentTimeIndicator": "Current time indicator container, part of CurrentTimeIndicator",
+      "currentTimeIndicatorLine": "Current time indicator line, part of CurrentTimeIndicator",
+      "currentTimeIndicatorThumb": "Current time indicator thumb, part of CurrentTimeIndicator",
+      "currentTimeIndicatorTimeBubble": "Current time indicator time bubble, part of CurrentTimeIndicator",
+      "agendaView": "AgendaView root element, shown when agenda is open",
+      "agendaViewHeader": "AgendaView header container",
+      "agendaViewHeaderLabel": "AgendaView date range label",
+      "agendaViewBody": "AgendaView body container",
+      "agendaViewDateGroup": "AgendaView date group container",
+      "agendaViewDateHeader": "AgendaView date header text",
+      "agendaViewEvent": "AgendaView event item button",
+      "agendaViewEventBody": "AgendaView event body container",
+      "agendaViewEventColor": "AgendaView event color indicator",
+      "agendaViewEventTitle": "AgendaView event title text",
+      "agendaViewEventTime": "AgendaView event time label",
+      "agendaViewNoEvents": "AgendaView no events message"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-hour-start",
+        "selector": "dayViewSlot",
+        "condition": "Slot is at the start of an hour"
+      },
+      {
+        "modifier": "data-business-hours",
+        "selector": "dayViewSlot",
+        "condition": "`highlightBusinessHours` is true and slot is within business hours"
+      },
+      {
+        "modifier": "data-non-business-hours",
+        "selector": "dayViewSlot",
+        "condition": "`highlightBusinessHours` is true and slot is outside business hours"
+      },
+      {
+        "modifier": "data-partial-business-hours",
+        "selector": "dayViewSlot",
+        "condition": "`highlightBusinessHours` is true and a business hours boundary falls inside the slot"
+      },
+      {
+        "modifier": "data-drop-target",
+        "selector": "dayViewSlot",
+        "condition": "Slot is the current drag drop target"
+      },
+      {
+        "modifier": "data-static",
+        "selector": "dayView",
+        "condition": "`mode=\"static\"` is set"
+      },
+      {
+        "modifier": "data-all-day",
+        "selector": "dayViewSlotLabel",
+        "condition": "Label is for all-day slot"
+      }
+    ]
+  },
+  "Sparkline": {
+    "selectors": {
+      "root": "Root element"
+    },
+    "modifiers": []
+  },
+  "RadioCard": {
+    "selectors": {
+      "card": "Root element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-checked",
+        "selector": "card",
+        "condition": "`checked` prop is set"
+      },
+      {
+        "modifier": "data-with-border",
+        "selector": "card",
+        "condition": "`withBorder` prop is set"
+      }
+    ]
+  },
+  "RadioGroup": {
+    "selectors": {
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element"
+    }
+  },
+  "RadioIndicator": {
+    "selectors": {
+      "indicator": "Root element",
+      "icon": "Radio icon"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-checked",
+        "selector": "indicator",
+        "condition": "`checked` prop is set"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "indicator",
+        "condition": "`disabled` prop is set"
+      }
+    ]
+  },
+  "Radio": {
+    "selectors": {
+      "root": "Root element",
+      "radio": "Input element (`input[type=\"radio\"]`)",
+      "icon": "Radio icon, used to display checked icon",
+      "inner": "Wrapper for `icon` and `input`",
+      "body": "Input body, contains all other elements",
+      "labelWrapper": "Contains `label`, `description` and `error`",
+      "label": "Label element",
+      "description": "Description displayed below the label",
+      "error": "Error message displayed below the label"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-error",
+        "selector": "radio",
+        "condition": "`error` prop is set"
+      },
+      {
+        "modifier": "data-label-position",
+        "selector": "inner",
+        "value": "Value of `labelPosition` prop"
+      }
+    ]
+  },
+  "FloatingWindow": {
+    "selectors": {
+      "root": "Root element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-dragging",
+        "selector": "root",
+        "condition": "Window is being dragged"
+      }
+    ]
+  },
+  "DropzoneFullScreen": {
+    "selectors": {
+      "fullScreen": "Dropzone.Fullscreen root element",
+      "root": "Dropzone root element",
+      "inner": "Dropzone inner element (wraps children)"
+    }
+  },
+  "Dropzone": {
+    "selectors": {
+      "root": "Dropzone root element",
+      "inner": "Dropzone inner element (wraps children)"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-accept",
+        "selector": "root",
+        "condition": "Files that are dragged over the dropzone are accepted"
+      },
+      {
+        "modifier": "data-reject",
+        "selector": "root",
+        "condition": "Files that are dragged over the dropzone are rejected"
+      },
+      {
+        "modifier": "data-idle",
+        "selector": "root",
+        "condition": "Dropzone is idle"
+      },
+      {
+        "modifier": "data-loading",
+        "selector": "root",
+        "condition": "`loading` prop is set"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "root",
+        "condition": "`disabled` prop is set"
+      },
+      {
+        "modifier": "data-activate-on-click",
+        "selector": "root",
+        "condition": "`activateOnClick` prop is `true`"
+      }
+    ]
+  },
+  "TimeGrid": {
+    "selectors": {
+      "root": "Root element",
+      "control": "Time grid control",
+      "simpleGrid": "SimpleGrid component root"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-active",
+        "selector": "control",
+        "condition": "Current component value is the same as control value"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "control",
+        "condition": "Component is disabled by one of the props: `minTime`, `maxTime`, `disableTime`, `disabled`"
+      }
+    ]
+  },
+  "Notification": {
+    "selectors": {
+      "root": "Root element",
+      "loader": "Loader component, displayed only when `loading` prop is set",
+      "icon": "Icon component, displayed only when `icon` prop is set",
+      "body": "Notification body, contains all other elements",
+      "title": "Title element, displayed only when `title` prop is set",
+      "description": "Description displayed below the title",
+      "closeButton": "Close button element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-with-icon",
+        "selector": "root",
+        "condition": "`icon` prop is set"
+      },
+      {
+        "modifier": "data-with-border",
+        "selector": "root",
+        "condition": "`withBorder` prop is set"
+      },
+      {
+        "modifier": "data-with-title",
+        "selector": "description",
+        "condition": "`title` prop is set"
+      }
+    ]
+  },
+  "BarsList": {
+    "selectors": {
+      "root": "Root element",
+      "labelsRow": "Container for labels row",
+      "bar": "Bar container element",
+      "barLabel": "Bar label element with name inside",
+      "barValue": "Bar value element"
+    },
+    "modifiers": []
+  },
+  "ActionBar": {
+    "selectors": {
+      "root": "Root element (Paper)",
+      "divider": "ActionBar.Divider element",
+      "closeButton": "ActionBar.CloseButton element"
+    }
+  },
+  "CompositeChart": {
+    "selectors": {
+      "root": "Root element",
+      "area": "Area of the chart",
+      "line": "Line of the chart",
+      "bar": "Bar of the chart",
+      "axis": "X and Y axis of the chart",
+      "container": "Recharts ResponsiveContainer component",
+      "grid": "Recharts CartesianGrid component",
+      "legend": "Legend root element",
+      "legendItem": "Legend item representing data series",
+      "legendItemColor": "Legend item color",
+      "legendItemName": "Legend item name",
+      "tooltip": "Tooltip root element",
+      "tooltipBody": "Tooltip wrapper around all items",
+      "tooltipItem": "Tooltip item representing data series",
+      "tooltipItemBody": "Tooltip item wrapper around item color and name",
+      "tooltipItemColor": "Tooltip item color",
+      "tooltipItemName": "Tooltip item name",
+      "tooltipItemData": "Tooltip item data",
+      "tooltipLabel": "Label of the tooltip",
+      "referenceLine": "Reference line",
+      "referenceArea": "Reference area",
+      "referenceDot": "Reference dot",
+      "axisLabel": "X and Y axis labels",
+      "brush": "Brush (range selector) root element"
+    },
+    "modifiers": []
+  },
+  "EmptyState": {
+    "selectors": {
+      "root": "Root element",
+      "body": "Wrapper around `title`, `description` and `actions`",
+      "indicator": "Wrapper around the icon or illustration",
+      "title": "Title element",
+      "description": "Description element",
+      "actions": "Wrapper around action buttons"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-align",
+        "selector": "root",
+        "value": "Value of `align` prop"
+      },
+      {
+        "modifier": "data-variant",
+        "selector": "root",
+        "value": "Value of `variant` prop"
+      },
+      {
+        "modifier": "data-with-background",
+        "selector": "indicator",
+        "condition": "`withIndicatorBackground` prop is set or `variant` is set"
+      }
+    ]
+  },
+  "AvatarGroup": {
+    "selectors": {
+      "group": "Root element"
+    }
+  },
+  "Avatar": {
+    "selectors": {
+      "root": "Root element",
+      "image": "`img` element",
+      "placeholder": "Avatar placeholder, displayed when the image cannot be loaded"
+    }
+  },
+  "ColorInput": {
+    "selectors": {
+      "wrapper": "Root element",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element",
+      "preview": "Color preview, displayed only when `format` supports alpha channel",
+      "body": "Contains alpha/hue sliders and color preview",
+      "slider": "Alpha and hue sliders root",
+      "sliderOverlay": "Element used to display various overlays over hue and alpha sliders",
+      "saturation": "Saturation picker",
+      "saturationOverlay": "Element used to display various overlays over saturation picker",
+      "sliders": "Contains alpha and hue sliders",
+      "thumb": "Thumb of all sliders",
+      "swatch": "Color swatch",
+      "swatches": "Color swatches list",
+      "dropdown": "Popover dropdown",
+      "colorPreview": "Color swatch preview in input left section",
+      "eyeDropperButton": "Eye dropper button",
+      "eyeDropperIcon": "Default eye dropper icon"
+    }
+  },
+  "Progress": {
+    "selectors": {
+      "root": "Root element",
+      "section": "`Progress.Section` root element",
+      "label": "`Progress.Label` root element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-orientation",
+        "selector": "root",
+        "condition": "`orientation` prop",
+        "value": "vertical | horizontal"
+      },
+      {
+        "modifier": "data-striped",
+        "selector": "section",
+        "condition": "`striped` or `animated` props are set"
+      },
+      {
+        "modifier": "data-animated",
+        "selector": "section",
+        "condition": "`animated` prop is set"
+      }
+    ]
+  },
+  "Select": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element",
+      "dropdown": "Dropdown root element",
+      "options": "Options wrapper",
+      "option": "Option",
+      "empty": "Nothing found message",
+      "group": "Options group wrapper",
+      "groupLabel": "Options group label"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-combobox-selected",
+        "selector": "option",
+        "condition": "Option is selected"
+      },
+      {
+        "modifier": "data-combobox-active",
+        "selector": "option",
+        "condition": "Options was activated by keyboard"
+      },
+      {
+        "modifier": "data-combobox-disabled",
+        "selector": "option",
+        "condition": "Option is disabled"
+      }
+    ]
+  },
+  "ScrollArea": {
+    "selectors": {
+      "root": "Root element",
+      "content": "Wraps component children",
+      "viewport": "Main scrollable area",
+      "scrollbar": "Horizontal or vertical scrollbar root",
+      "thumb": "Scrollbar thumb",
+      "corner": "Corner between horizontal and vertical scrollbars"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-hidden",
+        "selector": ["scrollbar", "corner"],
+        "condition": "type=\"never\""
+      },
+      {
+        "modifier": "data-hovered",
+        "selector": "corner",
+        "condition": "One of the scrollbars is hovered"
+      },
+      {
+        "modifier": "data-orientation",
+        "selector": "scrollbar",
+        "value": "\"horizontal\" or \"vertical\" depending on scrollbar position"
+      }
+    ]
+  },
+  "CalendarHeader": {
+    "selectors": {
+      "calendarHeader": "Calendar header root element",
+      "calendarHeaderControl": "Previous/next calendar header controls",
+      "calendarHeaderControlIcon": "Icon of previous/next calendar header controls",
+      "calendarHeaderLevel": "Level control (changes levels when clicked, month -> year -> decade)",
+      "calendarHeaderSelect": "Native select element used for level navigation when withNativeLevelSelect is enabled"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-direction",
+        "selector": "calendarHeaderControl",
+        "value": "`\"previous\"` or `\"next\"` depending on the control type"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "calendarHeaderControl",
+        "condition": "Control is disabled for any reason"
+      }
+    ]
+  },
+  "Calendar": {
+    "selectors": {
+      "calendarHeader": "Calendar header root element",
+      "calendarHeaderControl": "Previous/next calendar header controls",
+      "calendarHeaderControlIcon": "Icon of previous/next calendar header controls",
+      "calendarHeaderLevel": "Level control (changes levels when clicked, month -> year -> decade)",
+      "calendarHeaderSelect": "Native select element used for level navigation when withNativeLevelSelect is enabled",
+      "levelsGroup": "Group of months levels",
+      "yearsList": "Years list table element",
+      "yearsListRow": "Years list row element",
+      "yearsListCell": "Years list cell element",
+      "yearsListControl": "Button used to pick months and years",
+      "monthsList": "Months list table element",
+      "monthsListRow": "Months list row element",
+      "monthsListCell": "Months list cell element",
+      "monthsListControl": "Button used to pick months and years",
+      "monthThead": "thead element of month table",
+      "monthRow": "tr element of month table",
+      "monthTbody": "tbody element of month table",
+      "monthCell": "td element of month table",
+      "month": "Month table element",
+      "weekdaysRow": "Weekdays tr element",
+      "weekday": "Weekday th element",
+      "day": "Month day control",
+      "weekNumber": "Week number td element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-direction",
+        "selector": "calendarHeaderControl",
+        "value": "`\"previous\"` or `\"next\"` depending on the control type"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "calendarHeaderControl",
+        "condition": "Control is disabled for any reason"
+      },
+      {
+        "modifier": "data-with-spacing",
+        "selector": "monthCell",
+        "condition": "`withCellSpacing` prop is set"
+      },
+      {
+        "modifier": "data-today",
+        "selector": "day",
+        "condition": "Date is the same as new Date()"
+      },
+      {
+        "modifier": "data-hidden",
+        "selector": "day",
+        "condition": "Day is outside of current month and `hideOutsideDates` is set"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "day",
+        "condition": "Day disabled by one of the props (`excludeDate`, `getDayProps`, etc.)"
+      },
+      {
+        "modifier": "data-weekend",
+        "selector": "day",
+        "condition": "Day is weekend"
+      },
+      {
+        "modifier": "data-outside",
+        "selector": "day",
+        "condition": "Day is outside of the current month"
+      },
+      {
+        "modifier": "data-selected",
+        "selector": "day",
+        "condition": "Day is selected"
+      },
+      {
+        "modifier": "data-in-range",
+        "selector": "day",
+        "condition": "Day is in range selection"
+      },
+      {
+        "modifier": "data-first-in-range",
+        "selector": "day",
+        "condition": "Day is first in range selection"
+      },
+      {
+        "modifier": "data-last-in-range",
+        "selector": "day",
+        "condition": "Day is last in range selection"
+      }
+    ]
+  },
+  "DateInput": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element",
+      "calendarHeader": "Calendar header root element",
+      "calendarHeaderControl": "Previous/next calendar header controls",
+      "calendarHeaderControlIcon": "Icon of previous/next calendar header controls",
+      "calendarHeaderLevel": "Level control (changes levels when clicked, month -> year -> decade)",
+      "calendarHeaderSelect": "Native select element used for level navigation when withNativeLevelSelect is enabled",
+      "levelsGroup": "Group of months levels",
+      "yearsList": "Years list table element",
+      "yearsListRow": "Years list row element",
+      "yearsListCell": "Years list cell element",
+      "yearsListControl": "Button used to pick months and years",
+      "monthsList": "Months list table element",
+      "monthsListRow": "Months list row element",
+      "monthsListCell": "Months list cell element",
+      "monthsListControl": "Button used to pick months and years",
+      "monthThead": "thead element of month table",
+      "monthRow": "tr element of month table",
+      "monthTbody": "tbody element of month table",
+      "monthCell": "td element of month table",
+      "month": "Month table element",
+      "weekdaysRow": "Weekdays tr element",
+      "weekday": "Weekday th element",
+      "day": "Month day control",
+      "weekNumber": "Week number td element",
+      "presetsRoot": "Root element, contains calendar and presets",
+      "presetsList": "Presets wrapper element",
+      "presetButton": "Preset button"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-direction",
+        "selector": "calendarHeaderControl",
+        "value": "`\"previous\"` or `\"next\"` depending on the control type"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "calendarHeaderControl",
+        "condition": "Control is disabled for any reason"
+      },
+      {
+        "modifier": "data-with-spacing",
+        "selector": "monthCell",
+        "condition": "`withCellSpacing` prop is set"
+      },
+      {
+        "modifier": "data-today",
+        "selector": "day",
+        "condition": "Date is the same as new Date()"
+      },
+      {
+        "modifier": "data-hidden",
+        "selector": "day",
+        "condition": "Day is outside of current month and `hideOutsideDates` is set"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "day",
+        "condition": "Day disabled by one of the props (`excludeDate`, `getDayProps`, etc.)"
+      },
+      {
+        "modifier": "data-weekend",
+        "selector": "day",
+        "condition": "Day is weekend"
+      },
+      {
+        "modifier": "data-outside",
+        "selector": "day",
+        "condition": "Day is outside of the current month"
+      },
+      {
+        "modifier": "data-selected",
+        "selector": "day",
+        "condition": "Day is selected"
+      },
+      {
+        "modifier": "data-in-range",
+        "selector": "day",
+        "condition": "Day is in range selection"
+      },
+      {
+        "modifier": "data-first-in-range",
+        "selector": "day",
+        "condition": "Day is first in range selection"
+      },
+      {
+        "modifier": "data-last-in-range",
+        "selector": "day",
+        "condition": "Day is last in range selection"
+      }
+    ]
+  },
+  "DatePickerInput": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element",
+      "calendarHeader": "Calendar header root element",
+      "calendarHeaderControl": "Previous/next calendar header controls",
+      "calendarHeaderControlIcon": "Icon of previous/next calendar header controls",
+      "calendarHeaderLevel": "Level control (changes levels when clicked, month -> year -> decade)",
+      "calendarHeaderSelect": "Native select element used for level navigation when withNativeLevelSelect is enabled",
+      "levelsGroup": "Group of months levels",
+      "yearsList": "Years list table element",
+      "yearsListRow": "Years list row element",
+      "yearsListCell": "Years list cell element",
+      "yearsListControl": "Button used to pick months and years",
+      "monthsList": "Months list table element",
+      "monthsListRow": "Months list row element",
+      "monthsListCell": "Months list cell element",
+      "monthsListControl": "Button used to pick months and years",
+      "monthThead": "thead element of month table",
+      "monthRow": "tr element of month table",
+      "monthTbody": "tbody element of month table",
+      "monthCell": "td element of month table",
+      "month": "Month table element",
+      "weekdaysRow": "Weekdays tr element",
+      "weekday": "Weekday th element",
+      "day": "Month day control",
+      "weekNumber": "Week number td element",
+      "datePickerRoot": "Date picker root element, contains calendar and presets",
+      "presetsList": "Presets wrapper element",
+      "presetButton": "Preset button",
+      "placeholder": "Placeholder element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-direction",
+        "selector": "calendarHeaderControl",
+        "value": "`\"previous\"` or `\"next\"` depending on the control type"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "calendarHeaderControl",
+        "condition": "Control is disabled for any reason"
+      },
+      {
+        "modifier": "data-with-spacing",
+        "selector": "monthCell",
+        "condition": "`withCellSpacing` prop is set"
+      },
+      {
+        "modifier": "data-today",
+        "selector": "day",
+        "condition": "Date is the same as new Date()"
+      },
+      {
+        "modifier": "data-hidden",
+        "selector": "day",
+        "condition": "Day is outside of current month and `hideOutsideDates` is set"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "day",
+        "condition": "Day disabled by one of the props (`excludeDate`, `getDayProps`, etc.)"
+      },
+      {
+        "modifier": "data-weekend",
+        "selector": "day",
+        "condition": "Day is weekend"
+      },
+      {
+        "modifier": "data-outside",
+        "selector": "day",
+        "condition": "Day is outside of the current month"
+      },
+      {
+        "modifier": "data-selected",
+        "selector": "day",
+        "condition": "Day is selected"
+      },
+      {
+        "modifier": "data-in-range",
+        "selector": "day",
+        "condition": "Day is in range selection"
+      },
+      {
+        "modifier": "data-first-in-range",
+        "selector": "day",
+        "condition": "Day is first in range selection"
+      },
+      {
+        "modifier": "data-last-in-range",
+        "selector": "day",
+        "condition": "Day is last in range selection"
+      }
+    ]
+  },
+  "DatePicker": {
+    "selectors": {
+      "calendarHeader": "Calendar header root element",
+      "calendarHeaderControl": "Previous/next calendar header controls",
+      "calendarHeaderControlIcon": "Icon of previous/next calendar header controls",
+      "calendarHeaderLevel": "Level control (changes levels when clicked, month -> year -> decade)",
+      "calendarHeaderSelect": "Native select element used for level navigation when withNativeLevelSelect is enabled",
+      "levelsGroup": "Group of months levels",
+      "yearsList": "Years list table element",
+      "yearsListRow": "Years list row element",
+      "yearsListCell": "Years list cell element",
+      "yearsListControl": "Button used to pick months and years",
+      "monthsList": "Months list table element",
+      "monthsListRow": "Months list row element",
+      "monthsListCell": "Months list cell element",
+      "monthsListControl": "Button used to pick months and years",
+      "monthThead": "thead element of month table",
+      "monthRow": "tr element of month table",
+      "monthTbody": "tbody element of month table",
+      "monthCell": "td element of month table",
+      "month": "Month table element",
+      "weekdaysRow": "Weekdays tr element",
+      "weekday": "Weekday th element",
+      "day": "Month day control",
+      "weekNumber": "Week number td element",
+      "datePickerRoot": "Date picker root element, contains calendar and presets",
+      "presetsList": "Presets wrapper element",
+      "presetButton": "Preset button"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-direction",
+        "selector": "calendarHeaderControl",
+        "value": "`\"previous\"` or `\"next\"` depending on the control type"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "calendarHeaderControl",
+        "condition": "Control is disabled for any reason"
+      },
+      {
+        "modifier": "data-with-spacing",
+        "selector": "monthCell",
+        "condition": "`withCellSpacing` prop is set"
+      },
+      {
+        "modifier": "data-today",
+        "selector": "day",
+        "condition": "Date is the same as new Date()"
+      },
+      {
+        "modifier": "data-hidden",
+        "selector": "day",
+        "condition": "Day is outside of current month and `hideOutsideDates` is set"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "day",
+        "condition": "Day disabled by one of the props (`excludeDate`, `getDayProps`, etc.)"
+      },
+      {
+        "modifier": "data-weekend",
+        "selector": "day",
+        "condition": "Day is weekend"
+      },
+      {
+        "modifier": "data-outside",
+        "selector": "day",
+        "condition": "Day is outside of the current month"
+      },
+      {
+        "modifier": "data-selected",
+        "selector": "day",
+        "condition": "Day is selected"
+      },
+      {
+        "modifier": "data-in-range",
+        "selector": "day",
+        "condition": "Day is in range selection"
+      },
+      {
+        "modifier": "data-first-in-range",
+        "selector": "day",
+        "condition": "Day is first in range selection"
+      },
+      {
+        "modifier": "data-last-in-range",
+        "selector": "day",
+        "condition": "Day is last in range selection"
+      }
+    ]
+  },
+  "DateTimePicker": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element",
+      "calendarHeader": "Calendar header root element",
+      "calendarHeaderControl": "Previous/next calendar header controls",
+      "calendarHeaderControlIcon": "Icon of previous/next calendar header controls",
+      "calendarHeaderLevel": "Level control (changes levels when clicked, month -> year -> decade)",
+      "calendarHeaderSelect": "Native select element used for level navigation when withNativeLevelSelect is enabled",
+      "levelsGroup": "Group of months levels",
+      "yearsList": "Years list table element",
+      "yearsListRow": "Years list row element",
+      "yearsListCell": "Years list cell element",
+      "yearsListControl": "Button used to pick months and years",
+      "monthsList": "Months list table element",
+      "monthsListRow": "Months list row element",
+      "monthsListCell": "Months list cell element",
+      "monthsListControl": "Button used to pick months and years",
+      "monthThead": "thead element of month table",
+      "monthRow": "tr element of month table",
+      "monthTbody": "tbody element of month table",
+      "monthCell": "td element of month table",
+      "month": "Month table element",
+      "weekdaysRow": "Weekdays tr element",
+      "weekday": "Weekday th element",
+      "day": "Month day control",
+      "weekNumber": "Week number td element",
+      "datePickerRoot": "Date picker root element, contains calendar and presets",
+      "presetsList": "Presets wrapper element",
+      "presetButton": "Preset button",
+      "placeholder": "Placeholder element",
+      "timeWrapper": "Wrapper around time input and submit button",
+      "timeInput": "TimeInput",
+      "submitButton": "Submit button",
+      "rangeTimeWrapper": "Wrapper around two time inputs in range mode",
+      "rangeTimeInput": "Time input in range mode",
+      "rangeInfo": "Range dates preview in range mode"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-direction",
+        "selector": "calendarHeaderControl",
+        "value": "`\"previous\"` or `\"next\"` depending on the control type"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "calendarHeaderControl",
+        "condition": "Control is disabled for any reason"
+      },
+      {
+        "modifier": "data-with-spacing",
+        "selector": "monthCell",
+        "condition": "`withCellSpacing` prop is set"
+      },
+      {
+        "modifier": "data-today",
+        "selector": "day",
+        "condition": "Date is the same as new Date()"
+      },
+      {
+        "modifier": "data-hidden",
+        "selector": "day",
+        "condition": "Day is outside of current month and `hideOutsideDates` is set"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "day",
+        "condition": "Day disabled by one of the props (`excludeDate`, `getDayProps`, etc.)"
+      },
+      {
+        "modifier": "data-weekend",
+        "selector": "day",
+        "condition": "Day is weekend"
+      },
+      {
+        "modifier": "data-outside",
+        "selector": "day",
+        "condition": "Day is outside of the current month"
+      },
+      {
+        "modifier": "data-selected",
+        "selector": "day",
+        "condition": "Day is selected"
+      },
+      {
+        "modifier": "data-in-range",
+        "selector": "day",
+        "condition": "Day is in range selection"
+      },
+      {
+        "modifier": "data-first-in-range",
+        "selector": "day",
+        "condition": "Day is first in range selection"
+      },
+      {
+        "modifier": "data-last-in-range",
+        "selector": "day",
+        "condition": "Day is last in range selection"
+      }
+    ]
+  },
+  "DecadeLevelGroup": {
+    "selectors": {
+      "calendarHeader": "Calendar header root element",
+      "calendarHeaderControl": "Previous/next calendar header controls",
+      "calendarHeaderControlIcon": "Icon of previous/next calendar header controls",
+      "calendarHeaderLevel": "Level control (changes levels when clicked, month -> year -> decade)",
+      "calendarHeaderSelect": "Native select element used for level navigation when withNativeLevelSelect is enabled",
+      "levelsGroup": "Group of decades levels",
+      "yearsList": "Years list table element",
+      "yearsListRow": "Years list row element",
+      "yearsListCell": "Years list cell element",
+      "yearsListControl": "Button used to pick months and years"
+    }
+  },
+  "InlineDateTimePicker": {
+    "selectors": {
+      "root": "Root element",
+      "calendarHeader": "Calendar header root element",
+      "calendarHeaderControl": "Previous/next calendar header controls",
+      "calendarHeaderControlIcon": "Icon of previous/next calendar header controls",
+      "calendarHeaderLevel": "Level control (changes levels when clicked, month -> year -> decade)",
+      "calendarHeaderSelect": "Native select element used for level navigation when withNativeLevelSelect is enabled",
+      "levelsGroup": "Group of months levels",
+      "yearsList": "Years list table element",
+      "yearsListRow": "Years list row element",
+      "yearsListCell": "Years list cell element",
+      "yearsListControl": "Button used to pick months and years",
+      "monthsList": "Months list table element",
+      "monthsListRow": "Months list row element",
+      "monthsListCell": "Months list cell element",
+      "monthsListControl": "Button used to pick months and years",
+      "monthThead": "thead element of month table",
+      "monthRow": "tr element of month table",
+      "monthTbody": "tbody element of month table",
+      "monthCell": "td element of month table",
+      "month": "Month table element",
+      "weekdaysRow": "Weekdays tr element",
+      "weekday": "Weekday th element",
+      "day": "Month day control",
+      "weekNumber": "Week number td element",
+      "datePickerRoot": "Date picker root element, contains calendar and presets",
+      "presetsList": "Presets wrapper element",
+      "presetButton": "Preset button",
+      "timeWrapper": "Wrapper around time input and submit button",
+      "timeInput": "TimeInput",
+      "submitButton": "Submit button",
+      "rangeTimeWrapper": "Wrapper around two time inputs and submit button in range mode",
+      "rangeTimeInput": "Time input in range mode",
+      "rangeInfo": "Range dates preview in range mode"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-direction",
+        "selector": "calendarHeaderControl",
+        "value": "`\"previous\"` or `\"next\"` depending on the control type"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "calendarHeaderControl",
+        "condition": "Control is disabled for any reason"
+      },
+      {
+        "modifier": "data-with-spacing",
+        "selector": "monthCell",
+        "condition": "`withCellSpacing` prop is set"
+      },
+      {
+        "modifier": "data-today",
+        "selector": "day",
+        "condition": "Date is the same as new Date()"
+      },
+      {
+        "modifier": "data-hidden",
+        "selector": "day",
+        "condition": "Day is outside of current month and `hideOutsideDates` is set"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "day",
+        "condition": "Day disabled by one of the props (`excludeDate`, `getDayProps`, etc.)"
+      },
+      {
+        "modifier": "data-weekend",
+        "selector": "day",
+        "condition": "Day is weekend"
+      },
+      {
+        "modifier": "data-outside",
+        "selector": "day",
+        "condition": "Day is outside of the current month"
+      },
+      {
+        "modifier": "data-selected",
+        "selector": "day",
+        "condition": "Day is selected"
+      },
+      {
+        "modifier": "data-in-range",
+        "selector": "day",
+        "condition": "Day is in range selection"
+      },
+      {
+        "modifier": "data-first-in-range",
+        "selector": "day",
+        "condition": "Day is first in range selection"
+      },
+      {
+        "modifier": "data-last-in-range",
+        "selector": "day",
+        "condition": "Day is last in range selection"
+      }
+    ]
+  },
+  "MonthLevelGroup": {
+    "selectors": {
+      "calendarHeader": "Calendar header root element",
+      "calendarHeaderControl": "Previous/next calendar header controls",
+      "calendarHeaderControlIcon": "Icon of previous/next calendar header controls",
+      "calendarHeaderLevel": "Level control (changes levels when clicked, month -> year -> decade)",
+      "calendarHeaderSelect": "Native select element used for level navigation when withNativeLevelSelect is enabled",
+      "levelsGroup": "Group of months levels",
+      "monthThead": "thead element of month table",
+      "monthRow": "tr element of month table",
+      "monthTbody": "tbody element of month table",
+      "monthCell": "td element of month table",
+      "month": "Month table element",
+      "weekdaysRow": "Weekdays tr element",
+      "weekday": "Weekday th element",
+      "day": "Month day control",
+      "weekNumber": "Week number td element"
+    }
+  },
+  "MonthPickerInput": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element",
+      "calendarHeader": "Calendar header root element",
+      "calendarHeaderControl": "Previous/next calendar header controls",
+      "calendarHeaderControlIcon": "Icon of previous/next calendar header controls",
+      "calendarHeaderLevel": "Level control (changes levels when clicked, month -> year -> decade)",
+      "calendarHeaderSelect": "Native select element used for level navigation when withNativeLevelSelect is enabled",
+      "levelsGroup": "Group of years levels",
+      "yearsList": "Years list table element",
+      "yearsListRow": "Years list row element",
+      "yearsListCell": "Years list cell element",
+      "yearsListControl": "Button used to pick months and years",
+      "monthsList": "Months list table element",
+      "monthsListRow": "Months list row element",
+      "monthsListCell": "Months list cell element",
+      "monthsListControl": "Button used to pick months and years",
+      "monthPickerRoot": "Month picker root element, contains calendar and presets",
+      "presetsList": "Presets wrapper element",
+      "presetButton": "Preset button",
+      "placeholder": "Placeholder element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-direction",
+        "selector": "calendarHeaderControl",
+        "value": "`\"previous\"` or `\"next\"` depending on the control type"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "calendarHeaderControl",
+        "condition": "Control is disabled for any reason"
+      }
+    ]
+  },
+  "MonthPicker": {
+    "selectors": {
+      "calendarHeader": "Calendar header root element",
+      "calendarHeaderControl": "Previous/next calendar header controls",
+      "calendarHeaderControlIcon": "Icon of previous/next calendar header controls",
+      "calendarHeaderLevel": "Level control (changes levels when clicked, month -> year -> decade)",
+      "calendarHeaderSelect": "Native select element used for level navigation when withNativeLevelSelect is enabled",
+      "levelsGroup": "Group of years levels",
+      "yearsList": "Years list table element",
+      "yearsListRow": "Years list row element",
+      "yearsListCell": "Years list cell element",
+      "yearsListControl": "Button used to pick months and years",
+      "monthsList": "Months list table element",
+      "monthsListRow": "Months list row element",
+      "monthsListCell": "Months list cell element",
+      "monthsListControl": "Button used to pick months and years",
+      "monthPickerRoot": "Month picker root element, contains calendar and presets",
+      "presetsList": "Presets wrapper element",
+      "presetButton": "Preset button"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-direction",
+        "selector": "calendarHeaderControl",
+        "value": "`\"previous\"` or `\"next\"` depending on the control type"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "calendarHeaderControl",
+        "condition": "Control is disabled for any reason"
+      }
+    ]
+  },
+  "Month": {
+    "selectors": {
+      "monthThead": "thead element of month table",
+      "monthRow": "tr element of month table",
+      "monthTbody": "tbody element of month table",
+      "monthCell": "td element of month table",
+      "month": "Month table element",
+      "weekdaysRow": "Weekdays tr element",
+      "weekday": "Weekday th element",
+      "day": "Month day control",
+      "weekNumber": "Week number td element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-with-spacing",
+        "selector": "monthCell",
+        "condition": "`withCellSpacing` prop is set"
+      },
+      {
+        "modifier": "data-today",
+        "selector": "day",
+        "condition": "Date is the same as new Date()"
+      },
+      {
+        "modifier": "data-hidden",
+        "selector": "day",
+        "condition": "Day is outside of current month and `hideOutsideDates` is set"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "day",
+        "condition": "Day disabled by one of the props (`excludeDate`, `getDayProps`, etc.)"
+      },
+      {
+        "modifier": "data-weekend",
+        "selector": "day",
+        "condition": "Day is weekend"
+      },
+      {
+        "modifier": "data-outside",
+        "selector": "day",
+        "condition": "Day is outside of the current month"
+      },
+      {
+        "modifier": "data-selected",
+        "selector": "day",
+        "condition": "Day is selected"
+      },
+      {
+        "modifier": "data-in-range",
+        "selector": "day",
+        "condition": "Day is in range selection"
+      },
+      {
+        "modifier": "data-first-in-range",
+        "selector": "day",
+        "condition": "Day is first in range selection"
+      },
+      {
+        "modifier": "data-last-in-range",
+        "selector": "day",
+        "condition": "Day is last in range selection"
+      }
+    ]
+  },
+  "TimeInput": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element"
+    }
+  },
+  "YearLevelGroup": {
+    "selectors": {
+      "calendarHeader": "Calendar header root element",
+      "calendarHeaderControl": "Previous/next calendar header controls",
+      "calendarHeaderControlIcon": "Icon of previous/next calendar header controls",
+      "calendarHeaderLevel": "Level control (changes levels when clicked, month -> year -> decade)",
+      "calendarHeaderSelect": "Native select element used for level navigation when withNativeLevelSelect is enabled",
+      "levelsGroup": "Group of years levels",
+      "monthsList": "Months list table element",
+      "monthsListRow": "Months list row element",
+      "monthsListCell": "Months list cell element",
+      "monthsListControl": "Button used to pick months and years"
+    }
+  },
+  "YearPickerInput": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element",
+      "calendarHeader": "Calendar header root element",
+      "calendarHeaderControl": "Previous/next calendar header controls",
+      "calendarHeaderControlIcon": "Icon of previous/next calendar header controls",
+      "calendarHeaderLevel": "Level control (changes levels when clicked, month -> year -> decade)",
+      "calendarHeaderSelect": "Native select element used for level navigation when withNativeLevelSelect is enabled",
+      "levelsGroup": "Group of decades levels",
+      "yearsList": "Years list table element",
+      "yearsListRow": "Years list row element",
+      "yearsListCell": "Years list cell element",
+      "yearsListControl": "Button used to pick months and years",
+      "yearPickerRoot": "Year picker root element, contains calendar and presets",
+      "presetsList": "Presets wrapper element",
+      "presetButton": "Preset button",
+      "placeholder": "Placeholder element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-direction",
+        "selector": "calendarHeaderControl",
+        "value": "`\"previous\"` or `\"next\"` depending on the control type"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "calendarHeaderControl",
+        "condition": "Control is disabled for any reason"
+      }
+    ]
+  },
+  "YearPicker": {
+    "selectors": {
+      "calendarHeader": "Calendar header root element",
+      "calendarHeaderControl": "Previous/next calendar header controls",
+      "calendarHeaderControlIcon": "Icon of previous/next calendar header controls",
+      "calendarHeaderLevel": "Level control (changes levels when clicked, month -> year -> decade)",
+      "calendarHeaderSelect": "Native select element used for level navigation when withNativeLevelSelect is enabled",
+      "levelsGroup": "Group of decades levels",
+      "yearsList": "Years list table element",
+      "yearsListRow": "Years list row element",
+      "yearsListCell": "Years list cell element",
+      "yearsListControl": "Button used to pick months and years",
+      "yearPickerRoot": "Year picker root element, contains calendar and presets",
+      "presetsList": "Presets wrapper element",
+      "presetButton": "Preset button"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-direction",
+        "selector": "calendarHeaderControl",
+        "value": "`\"previous\"` or `\"next\"` depending on the control type"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "calendarHeaderControl",
+        "condition": "Control is disabled for any reason"
+      }
+    ]
+  },
+  "DonutChart": {
+    "selectors": {
+      "root": "Root element",
+      "label": "Chart label, controlled by `chartLabel` prop",
+      "legend": "Legend root element",
+      "legendItem": "Legend item representing data series",
+      "legendItemColor": "Legend item color",
+      "legendItemName": "Legend item name",
+      "tooltip": "Tooltip root element",
+      "tooltipBody": "Tooltip wrapper around all items",
+      "tooltipItem": "Tooltip item representing data series",
+      "tooltipItemBody": "Tooltip item wrapper around item color and name",
+      "tooltipItemColor": "Tooltip item color",
+      "tooltipItemName": "Tooltip item name",
+      "tooltipItemData": "Tooltip item data",
+      "tooltipLabel": "Label of the tooltip"
+    },
+    "modifiers": []
+  },
+  "ResourcesDayView": {
+    "selectors": {
+      "resourcesDayView": "Root element",
+      "resourcesDayViewRoot": "Root container wrapping scroll area",
+      "resourcesDayViewInner": "Inner container wrapping time labels and rows",
+      "resourcesDayViewTimeLabelsRow": "Row containing time labels",
+      "resourcesDayViewScrollArea": "Scroll area component",
+      "resourcesDayViewCorner": "Top-left corner element",
+      "resourcesDayViewTimeLabel": "Individual time label element",
+      "resourcesDayViewResourceLabel": "Resource label element",
+      "resourcesDayViewRow": "Resource row element",
+      "resourcesDayViewRowSlot": "Individual time slot element",
+      "resourcesDayViewRowSlots": "Container for all slots in a row",
+      "resourcesDayViewBackgroundEvent": "Background event element",
+      "resourcesDayViewAllDayEvent": "All-day event element",
+      "resourcesDayViewCurrentTimeIndicator": "Current time indicator container",
+      "resourcesDayViewCurrentTimeIndicatorLine": "Current time indicator line",
+      "resourcesDayViewCurrentTimeIndicatorThumb": "Current time indicator thumb",
+      "resourcesDayViewCurrentTimeIndicatorTimeBubble": "Current time indicator time bubble",
+      "resourcesDayViewEventWrapper": "Event wrapper element",
+      "resourcesDayViewDragPreview": "Ghost preview shown at the snapped position while dragging an event",
+      "resourcesDayViewResizeHandle": "Event resize handle element",
+      "resourcesDayViewGroupColumn": "Group label column element",
+      "resourcesDayViewGroupColumnEmpty": "Empty group column cell for ungrouped resources",
+      "moreEventsButton": "More events button, part of MoreEvents",
+      "moreEventsList": "More events list, part of MoreEvents",
+      "moreEventsDropdown": "More events dropdown, part of MoreEvents",
+      "header": "Header container, part of ScheduleHeader",
+      "headerControl": "Header control element, part of ScheduleHeader",
+      "viewSelect": "View select element, part of ScheduleHeader",
+      "monthYearSelectTarget": "MonthYearSelect target button, part of ScheduleHeader",
+      "monthYearSelectDropdown": "MonthYearSelect dropdown, part of ScheduleHeader",
+      "monthYearSelectControl": "MonthYearSelect control, part of ScheduleHeader",
+      "monthYearSelectList": "MonthYearSelect list, part of ScheduleHeader",
+      "monthYearSelectLabel": "MonthYearSelect label, part of ScheduleHeader"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-hour-start",
+        "selector": "resourcesDayViewRowSlot",
+        "condition": "Slot is at the start of an hour"
+      },
+      {
+        "modifier": "data-business-hours",
+        "selector": "resourcesDayViewRowSlot",
+        "condition": "`highlightBusinessHours` is true and slot is within business hours"
+      },
+      {
+        "modifier": "data-non-business-hours",
+        "selector": "resourcesDayViewRowSlot",
+        "condition": "`highlightBusinessHours` is true and slot is outside business hours"
+      },
+      {
+        "modifier": "data-partial-business-hours",
+        "selector": "resourcesDayViewRowSlot",
+        "condition": "`highlightBusinessHours` is true and a business hours boundary falls inside the slot"
+      },
+      {
+        "modifier": "data-drop-target",
+        "selector": "resourcesDayViewRowSlot",
+        "condition": "Slot is the current drag drop target"
+      },
+      {
+        "modifier": "data-drag-selected",
+        "selector": "resourcesDayViewRowSlot",
+        "condition": "Slot is selected during drag-to-select"
+      },
+      {
+        "modifier": "data-static",
+        "selector": "resourcesDayView",
+        "condition": "`mode=\"static\"` is set"
+      },
+      {
+        "modifier": "data-scrolled",
+        "selector": "resourcesDayViewTimeLabelsRow",
+        "condition": "Scroll area is scrolled vertically"
+      },
+      {
+        "modifier": "data-scrolled-x",
+        "selector": "resourcesDayViewResourceLabel",
+        "condition": "Scroll area is scrolled horizontally"
+      },
+      {
+        "modifier": "data-resizing",
+        "selector": "resourcesDayView",
+        "condition": "An event is being resized"
+      },
+      {
+        "modifier": "data-resizing",
+        "selector": "resourcesDayViewEventWrapper",
+        "condition": "This event is being resized"
+      },
+      {
+        "modifier": "data-edge",
+        "selector": "resourcesDayViewResizeHandle",
+        "condition": "Set to 'start' or 'end' based on resize handle position"
+      },
+      {
+        "modifier": "data-active",
+        "selector": "resourcesDayViewResizeHandle",
+        "condition": "Resize handle is actively being dragged"
+      }
+    ]
+  },
+  "Code": {
+    "selectors": {
+      "root": "Root element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-block",
+        "selector": "root",
+        "condition": "`block` prop is set"
+      }
+    ]
+  },
+  "FileInput": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element",
+      "placeholder": "Placeholder text"
+    }
+  },
+  "Cascader": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element",
+      "dropdown": "Dropdown root element",
+      "options": "Options wrapper",
+      "option": "Option",
+      "empty": "Nothing found message",
+      "group": "Options group wrapper",
+      "groupLabel": "Options group label",
+      "columnsList": "Wrapper of all cascading columns in the dropdown",
+      "columnsOverflow": "Control displayed to reveal levels hidden by `maxDisplayedLevels`",
+      "column": "Single cascading column",
+      "columnScroll": "Scrollable options area of a column",
+      "columnOption": "Option control inside a column",
+      "columnOptionLabel": "Label of the column option",
+      "columnOptionIcon": "Expand chevron of the column option",
+      "columnOptionCheck": "Check icon displayed on the selected leaf option",
+      "columnEmpty": "Empty state of a column",
+      "flatOption": "Option content in the flat list (search results / `withColumns={false}`)"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-active",
+        "selector": "columnOption",
+        "condition": "Option is highlighted in the column that is currently being navigated"
+      },
+      {
+        "modifier": "data-in-path",
+        "selector": "columnOption",
+        "condition": "Option is highlighted in one of the previous (ancestor) columns"
+      },
+      {
+        "modifier": "data-selected",
+        "selector": "columnOption",
+        "condition": "Option is the selected value"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "columnOption",
+        "condition": "Option is disabled"
+      }
+    ]
+  },
+  "Rating": {
+    "selectors": {
+      "root": "Root element",
+      "starSymbol": "Symbol element (star icon by default, or custom symbol)",
+      "input": "Item input, hidden by default",
+      "label": "Item label, used to display star icon",
+      "symbolBody": "Wrapper around star icon, used for clip-path masking in fractional ratings",
+      "symbolGroup": "Container for all fractional symbols of a single rating unit"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-read-only",
+        "selector": "label",
+        "condition": "`readOnly` prop is set"
+      },
+      {
+        "modifier": "data-active",
+        "selector": "input",
+        "condition": "Input value is the same as component value"
+      },
+      {
+        "modifier": "data-active",
+        "selector": "symbolGroup",
+        "condition": "Symbol group is being hovered"
+      },
+      {
+        "modifier": "data-filled",
+        "selector": "starSymbol",
+        "condition": "Associated input value is less or equal to the component value"
+      }
+    ]
+  },
+  "TextInput": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element"
+    }
+  },
+  "Affix": {
+    "selectors": {
+      "root": "Root element"
+    }
+  },
+  "HoverCard": {
+    "selectors": {
+      "dropdown": "Dropdown element",
+      "arrow": "Dropdown arrow",
+      "overlay": "Overlay element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-position",
+        "selector": "dropdown",
+        "value": "Value of floating ui dropdown position"
+      }
+    ]
+  },
+  "GaugeChart": {
+    "selectors": {
+      "root": "Root SVG element",
+      "track": "Background arc path",
+      "section": "Filled section arc path",
+      "sectionCap": "Round-capped copy of the first and last sections, rendered when roundCaps is set",
+      "needle": "Target marker line",
+      "label": "Center label container"
+    },
+    "modifiers": []
+  },
+  "Menu": {
+    "selectors": {
+      "dropdown": "Dropdown element",
+      "arrow": "Dropdown arrow",
+      "overlay": "Overlay element",
+      "divider": "`Menu.Divider` root element",
+      "label": "`Menu.Label` root element",
+      "item": "`Menu.Item` root element",
+      "itemLabel": "Label of `Menu.Item`",
+      "itemSection": "Left and right sections of `Menu.Item`",
+      "itemIndicator": "Indicator slot of `Menu.CheckboxItem` and `Menu.RadioItem`",
+      "chevron": "Sub menu chevron",
+      "search": "`Menu.Search` input element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-disabled",
+        "selector": "item",
+        "condition": "`disabled` prop is set on `Menu.Item`"
+      }
+    ]
+  },
+  "RingProgress": {
+    "selectors": {
+      "root": "Root container element",
+      "svg": "SVG element containing all ring sections",
+      "curve": "Individual ring section (circle element)",
+      "label": "Label displayed in the center of the ring"
+    }
+  },
+  "Textarea": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element"
+    }
+  },
+  "Card": {
+    "selectors": {
+      "root": "Root element",
+      "section": "`Card.Section` root element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-first-section",
+        "selector": "section",
+        "condition": "`Card.Section` is the child of the `Card`"
+      },
+      {
+        "modifier": "data-last-section",
+        "selector": "section",
+        "condition": "`Card.Section` is the last child of the `Card`"
+      },
+      {
+        "modifier": "data-with-border",
+        "selector": "root",
+        "condition": "`withBorder` prop is set on `Card` component"
+      },
+      {
+        "modifier": "data-with-border",
+        "selector": "section",
+        "condition": "`withBorder` prop is set on `Card.Section` component"
+      },
+      {
+        "modifier": "data-inherit-padding",
+        "selector": "section",
+        "condition": "`inheritPadding` prop is set on `Card.Section` component"
+      }
+    ]
+  },
+  "Table": {
+    "selectors": {
+      "table": "Root `table` element (`Table` component)",
+      "thead": "`thead` element (`Table.Thead` component)",
+      "tbody": "`tbody` element (`Table.Tbody` component)",
+      "tfoot": "`tfoot` element (`Table.Tfoot` component)",
+      "tr": "`tr` element (`Table.Tr` component)",
+      "th": "`th` element (`Table.Th` component)",
+      "td": "`td` element (`Table.Td` component)",
+      "caption": "`caption` element (`Table.Caption` component)"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-with-table-border",
+        "selector": "table",
+        "condition": "`withTableBorder` prop is set on `Table` component"
+      },
+      {
+        "modifier": "data-with-column-border",
+        "selector": ["th", "td"],
+        "condition": "`withColumnsBorder` prop is set on `Table` component"
+      },
+      {
+        "modifier": "data-with-row-border",
+        "selector": "tr",
+        "condition": "`withRowsBorder` prop is set on `Table` component"
+      },
+      {
+        "modifier": "data-striped",
+        "selector": "tr",
+        "condition": "`striped` prop is set on `Table` component",
+        "value": "odd | even"
+      },
+      {
+        "modifier": "data-hover",
+        "selector": "tr",
+        "condition": "`highlightOnHover` prop is set on `Table` component"
+      },
+      {
+        "modifier": "data-size",
+        "selector": "tr",
+        "value": "value of `captionSize` prop on `Table` component"
+      }
+    ]
+  },
+  "BackgroundImage": {
+    "selectors": {
+      "root": "Root element"
+    }
+  },
+  "Splitter": {
+    "selectors": {
+      "root": "Root element",
+      "pane": "Pane element (`Splitter.Pane` component)",
+      "handle": "Handle element between panes, contains the separator line and the thumb",
+      "thumb": "Thumb element inside the handle, contains the grip icon"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-orientation",
+        "selector": ["root", "handle", "thumb"],
+        "value": "Value of `orientation` prop"
+      },
+      {
+        "modifier": "data-active",
+        "selector": ["handle", "thumb"],
+        "condition": "Handle is being dragged"
+      },
+      {
+        "modifier": "data-collapsed",
+        "selector": "pane",
+        "condition": "Pane is collapsed"
+      }
+    ]
+  },
+  "PillsInputField": {
+    "selectors": {
+      "field": "Root element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-type",
+        "selector": "field",
+        "value": "Value of `type` prop"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "field",
+        "condition": "`disabled` prop is set"
+      }
+    ]
+  },
+  "PillsInput": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element"
+    }
+  },
+  "AngleSlider": {
+    "selectors": {
+      "root": "Root element",
+      "label": "Label inside the slider",
+      "marks": "Wrapper for all marks",
+      "mark": "Mark element",
+      "thumb": "Slider thumb"
+    },
+    "modifiers": [
+      {
+        "modifier": "disabled",
+        "selector": "root",
+        "condition": "`disabled` prop is set"
+      }
+    ]
+  },
+  "Toggle": {
+    "selectors": {
+      "root": "Root element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-active",
+        "selector": "root",
+        "condition": "Toggle is in active state"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "root",
+        "condition": "`disabled` prop is set"
+      },
+      {
+        "modifier": "data-auto-width",
+        "selector": "root",
+        "condition": "`autoWidth` prop is set"
+      }
+    ]
+  },
+  "ActionIconGroup": {
+    "selectors": {
+      "group": "Root element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-orientation",
+        "selector": "group",
+        "value": "Value of `orientation` prop"
+      }
+    ]
+  },
+  "ActionIcon": {
+    "selectors": {
+      "root": "Root element",
+      "loader": "`Loader` component, rendered inside root element when `loading` prop is set",
+      "icon": "Inner icon wrapper"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-disabled",
+        "selector": "root",
+        "condition": "`disabled` prop is set"
+      },
+      {
+        "modifier": "data-loading",
+        "selector": ["root", "icon"],
+        "condition": "`loading` prop is set"
+      }
+    ]
+  },
+  "Tooltip": {
+    "selectors": {
+      "tooltip": "Root element",
+      "arrow": "Tooltip arrow, rendered inside tooltip"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-multiline",
+        "selector": "tooltip",
+        "condition": "`multiline` prop is set"
+      }
+    ]
+  },
+  "ResourcesSchedule": {
+    "selectors": {
+      "root": "Root element",
+      "resourcesDayView": "ResourcesDayView root element",
+      "resourcesDayViewRoot": "ResourcesDayView root container",
+      "resourcesDayViewInner": "ResourcesDayView inner container",
+      "resourcesDayViewTimeLabelsRow": "ResourcesDayView time labels row",
+      "resourcesDayViewScrollArea": "ResourcesDayView scroll area",
+      "resourcesDayViewCorner": "ResourcesDayView top-left corner",
+      "resourcesDayViewTimeLabel": "ResourcesDayView time label",
+      "resourcesDayViewResourceLabel": "ResourcesDayView resource label",
+      "resourcesDayViewRow": "ResourcesDayView resource row",
+      "resourcesDayViewRowSlot": "ResourcesDayView time slot",
+      "resourcesDayViewRowSlots": "ResourcesDayView slots container",
+      "resourcesDayViewBackgroundEvent": "ResourcesDayView background event",
+      "resourcesDayViewAllDayEvent": "ResourcesDayView all-day event",
+      "resourcesDayViewCurrentTimeIndicator": "ResourcesDayView current time indicator container",
+      "resourcesDayViewCurrentTimeIndicatorLine": "ResourcesDayView current time indicator line",
+      "resourcesDayViewCurrentTimeIndicatorThumb": "ResourcesDayView current time indicator thumb",
+      "resourcesDayViewCurrentTimeIndicatorTimeBubble": "ResourcesDayView current time indicator time bubble",
+      "resourcesDayViewEventWrapper": "ResourcesDayView event wrapper",
+      "resourcesDayViewDragPreview": "ResourcesDayView drag preview ghost element",
+      "resourcesDayViewResizeHandle": "ResourcesDayView event resize handle",
+      "resourcesDayViewGroupColumn": "ResourcesDayView group label column",
+      "resourcesDayViewGroupColumnEmpty": "ResourcesDayView empty group column cell",
+      "resourcesWeekView": "ResourcesWeekView root element",
+      "resourcesWeekViewRoot": "ResourcesWeekView root container",
+      "resourcesWeekViewInner": "ResourcesWeekView inner container",
+      "resourcesWeekViewHeaderRows": "ResourcesWeekView header rows container",
+      "resourcesWeekViewHeaderContent": "ResourcesWeekView header content container",
+      "resourcesWeekViewDayLabelsRow": "ResourcesWeekView day labels row",
+      "resourcesWeekViewDayLabel": "ResourcesWeekView day label",
+      "resourcesWeekViewTimeLabelsRow": "ResourcesWeekView time labels row",
+      "resourcesWeekViewScrollArea": "ResourcesWeekView scroll area",
+      "resourcesWeekViewCorner": "ResourcesWeekView top-left corner",
+      "resourcesWeekViewTimeLabel": "ResourcesWeekView time label",
+      "resourcesWeekViewResourceLabel": "ResourcesWeekView resource label",
+      "resourcesWeekViewRow": "ResourcesWeekView resource row",
+      "resourcesWeekViewRowSlot": "ResourcesWeekView time slot",
+      "resourcesWeekViewRowSlots": "ResourcesWeekView slots container",
+      "resourcesWeekViewBackgroundEvent": "ResourcesWeekView background event",
+      "resourcesWeekViewAllDayEvent": "ResourcesWeekView all-day event",
+      "resourcesWeekViewCurrentTimeIndicator": "ResourcesWeekView current time indicator container",
+      "resourcesWeekViewCurrentTimeIndicatorLine": "ResourcesWeekView current time indicator line",
+      "resourcesWeekViewCurrentTimeIndicatorThumb": "ResourcesWeekView current time indicator thumb",
+      "resourcesWeekViewCurrentTimeIndicatorTimeBubble": "ResourcesWeekView current time indicator time bubble",
+      "resourcesWeekViewEventWrapper": "ResourcesWeekView event wrapper",
+      "resourcesWeekViewDragPreview": "ResourcesWeekView drag preview ghost element",
+      "resourcesWeekViewResizeHandle": "ResourcesWeekView event resize handle",
+      "resourcesWeekViewGroupColumn": "ResourcesWeekView group label column",
+      "resourcesWeekViewGroupColumnEmpty": "ResourcesWeekView empty group column cell",
+      "resourcesMonthView": "ResourcesMonthView root element",
+      "resourcesMonthViewRoot": "ResourcesMonthView root container",
+      "resourcesMonthViewScrollArea": "ResourcesMonthView scroll area",
+      "resourcesMonthViewDayLabelsRow": "ResourcesMonthView day labels row",
+      "resourcesMonthViewCorner": "ResourcesMonthView top-left corner",
+      "resourcesMonthViewDayLabel": "ResourcesMonthView day label",
+      "resourcesMonthViewDayLabelWeekday": "ResourcesMonthView weekday text inside day label",
+      "resourcesMonthViewDayLabelNumber": "ResourcesMonthView day number inside day label",
+      "resourcesMonthViewRow": "ResourcesMonthView resource row",
+      "resourcesMonthViewResourceLabel": "ResourcesMonthView resource label",
+      "resourcesMonthViewRowSlots": "ResourcesMonthView day cells container",
+      "resourcesMonthViewCell": "ResourcesMonthView day cell",
+      "resourcesMonthViewEventWrapper": "ResourcesMonthView event wrapper",
+      "resourcesMonthViewResizeHandle": "ResourcesMonthView event resize handle",
+      "resourcesMonthViewInner": "ResourcesMonthView inner container",
+      "resourcesMonthViewGroupColumn": "ResourcesMonthView group label column",
+      "resourcesMonthViewGroupColumnEmpty": "ResourcesMonthView empty group column cell",
+      "moreEventsButton": "More events button, part of MoreEvents",
+      "moreEventsList": "More events list, part of MoreEvents",
+      "moreEventsDropdown": "More events dropdown, part of MoreEvents",
+      "header": "ScheduleHeader container",
+      "headerControl": "ScheduleHeader control element",
+      "viewSelect": "ViewSelect element",
+      "monthYearSelectTarget": "MonthYearSelect target button",
+      "monthYearSelectDropdown": "MonthYearSelect dropdown",
+      "monthYearSelectControl": "MonthYearSelect control",
+      "monthYearSelectList": "MonthYearSelect list",
+      "monthYearSelectLabel": "MonthYearSelect label"
+    },
+    "modifiers": []
+  },
+  "SimpleGrid": {
+    "selectors": {
+      "root": "Root element",
+      "container": "Container element, available only when `type=\"container\"` is set"
+    }
+  },
+  "Heatmap": {
+    "selectors": {
+      "root": "Root element",
+      "weekdayLabel": "Weekday text element",
+      "monthLabel": "Month text element",
+      "rect": "Rect that represents date",
+      "legend": "Legend group element",
+      "legendLabel": "Legend text label (Less/More)",
+      "legendRect": "Legend color rect"
+    },
+    "modifiers": []
+  },
+  "Breadcrumbs": {
+    "selectors": {
+      "root": "Root element",
+      "separator": "Separator between children",
+      "breadcrumb": "Breadcrumb item"
+    }
+  },
+  "Paper": {
+    "selectors": {
+      "root": "Root element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-with-border",
+        "selector": "root",
+        "condition": "`withBorderProp` is set"
+      }
+    ]
+  },
+  "ComboboxPopover": {
+    "selectors": {
+      "dropdown": "Dropdown root element",
+      "options": "Options wrapper",
+      "option": "Option",
+      "empty": "Nothing found message",
+      "group": "Options group wrapper",
+      "groupLabel": "Options group label",
+      "search": "Search input, displayed only when `searchable` prop is set"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-checked",
+        "selector": "option",
+        "condition": "Option is selected"
+      },
+      {
+        "modifier": "data-combobox-active",
+        "selector": "option",
+        "condition": "Option is selected"
+      },
+      {
+        "modifier": "data-combobox-disabled",
+        "selector": "option",
+        "condition": "Option is disabled"
+      },
+      {
+        "modifier": "data-reverse",
+        "selector": "option",
+        "condition": "`checkIconPosition` is `right`"
+      },
+      {
+        "modifier": "data-hidden",
+        "selector": "dropdown",
+        "condition": "There are no options to display and `nothingFoundMessage` is not set"
+      }
+    ]
+  },
+  "PinInput": {
+    "selectors": {
+      "root": "Root element",
+      "pinInput": "Input item wrapper",
+      "input": "Input element"
+    },
+    "modifiers": []
+  },
+  "Schedule": {
+    "selectors": {
+      "root": "Root element",
+      "desktopView": "Desktop view container (visible on large screens when layout=\"responsive\")",
+      "mobileView": "Mobile view container (visible on small screens when layout=\"responsive\")",
+      "dayView": "DayView root element",
+      "dayViewInner": "DayView inner container",
+      "dayViewScrollArea": "DayView scroll area component",
+      "dayViewAllDay": "DayView all-day events container",
+      "dayViewAllDayEvents": "DayView all-day events wrapper",
+      "dayViewSlot": "DayView individual time slot",
+      "dayViewSlots": "DayView slots container",
+      "dayViewTimeSlots": "DayView time slots container",
+      "dayViewSlotLabel": "DayView time slot label",
+      "dayViewSlotLabels": "DayView slot labels container",
+      "dayViewBackgroundEvent": "DayView background event element",
+      "dayViewBackgroundEventResizeHandle": "DayView resize handle of an interactive background event",
+      "dayViewDragPreview": "DayView drag preview ghost element",
+      "weekView": "WeekView root element",
+      "weekViewRoot": "WeekView root container",
+      "weekViewHeader": "WeekView header row",
+      "weekViewInner": "WeekView inner container",
+      "weekViewAllDaySlotsEvents": "WeekView all-day events container",
+      "weekViewAllDaySlots": "WeekView all-day slots container",
+      "weekViewAllDaySlotsList": "WeekView all-day slots list",
+      "weekViewAllDaySlot": "WeekView individual all-day slot",
+      "weekViewAllDaySlotsLabel": "WeekView all-day slots label",
+      "weekViewScrollArea": "WeekView scroll area",
+      "weekViewCorner": "WeekView top-left corner",
+      "weekViewSlotLabels": "WeekView slot labels container",
+      "weekViewSlotLabel": "WeekView individual slot label",
+      "weekViewDayLabel": "WeekView day label",
+      "weekViewDayWeekday": "WeekView weekday label",
+      "weekViewDay": "WeekView day column",
+      "weekViewDayNumber": "WeekView day number",
+      "weekViewDaySlot": "WeekView individual day slot",
+      "weekViewDaySlots": "WeekView day slots container",
+      "weekViewWeekLabel": "WeekView week label",
+      "weekViewWeekNumber": "WeekView week number",
+      "weekViewBackgroundEvent": "WeekView background event element",
+      "weekViewBackgroundEventResizeHandle": "WeekView resize handle of an interactive background event",
+      "weekViewDragPreview": "WeekView drag preview ghost element",
+      "monthView": "MonthView root element",
+      "monthViewScrollArea": "MonthView scroll area wrapper",
+      "monthViewInner": "MonthView inner container",
+      "monthViewWeek": "MonthView week row",
+      "monthViewDay": "MonthView day cell",
+      "monthViewDayLabel": "MonthView day number label",
+      "monthViewWeekNumber": "MonthView week number",
+      "monthViewWeekday": "MonthView weekday name",
+      "monthViewWeekdays": "MonthView weekdays row",
+      "monthViewWeekdaysCorner": "MonthView top-left corner",
+      "monthViewEvents": "MonthView events container",
+      "monthViewBackgroundEvent": "MonthView background event element",
+      "yearView": "YearView root element",
+      "yearViewMonths": "YearView months container",
+      "yearViewMonth": "YearView individual month",
+      "yearViewWeekday": "YearView weekday name",
+      "yearViewDay": "YearView day cell",
+      "yearViewWeek": "YearView week row",
+      "yearViewWeekNumber": "YearView week number",
+      "yearViewWeekdays": "YearView weekdays row",
+      "yearViewWeekdaysCorner": "YearView top-left corner",
+      "yearViewMonthCaption": "YearView month caption",
+      "yearViewDayIndicators": "YearView day indicators container",
+      "yearViewDayIndicator": "YearView individual day indicator",
+      "mobileMonthView": "MobileMonthView root element",
+      "mobileMonthViewCalendar": "MobileMonthView calendar grid",
+      "mobileMonthViewWeekdays": "MobileMonthView weekdays row",
+      "mobileMonthViewWeekday": "MobileMonthView individual weekday",
+      "mobileMonthViewWeekdaysCorner": "MobileMonthView weekdays corner (for week numbers)",
+      "mobileMonthViewWeek": "MobileMonthView week row",
+      "mobileMonthViewWeekNumber": "MobileMonthView week number",
+      "mobileMonthViewDay": "MobileMonthView day cell",
+      "mobileMonthViewDayIndicators": "MobileMonthView day indicators container",
+      "mobileMonthViewDayIndicator": "MobileMonthView individual day indicator",
+      "mobileMonthViewEventsList": "MobileMonthView events list container",
+      "mobileMonthViewEventsHeader": "MobileMonthView events list header",
+      "mobileMonthViewHeader": "MobileMonthView header with back button and label",
+      "mobileMonthViewHeaderBackButton": "MobileMonthView header back button",
+      "mobileMonthViewHeaderLabel": "MobileMonthView header month/year label",
+      "mobileMonthViewEvent": "MobileMonthView event item",
+      "mobileMonthViewEventBody": "MobileMonthView event body button",
+      "mobileMonthViewEventTitle": "MobileMonthView event title",
+      "mobileMonthViewEventTime": "MobileMonthView event time label",
+      "mobileMonthViewEventColor": "MobileMonthView event color indicator",
+      "mobileMonthViewNoEvents": "MobileMonthView no events message",
+      "header": "ScheduleHeader container",
+      "headerControl": "ScheduleHeader control element",
+      "viewSelect": "ViewSelect element",
+      "monthYearSelectTarget": "MonthYearSelect target button",
+      "monthYearSelectDropdown": "MonthYearSelect dropdown",
+      "monthYearSelectControl": "MonthYearSelect control",
+      "monthYearSelectList": "MonthYearSelect list",
+      "monthYearSelectLabel": "MonthYearSelect label",
+      "event": "ScheduleEvent element",
+      "eventInner": "ScheduleEvent inner element",
+      "eventResizeHandle": "ScheduleEvent resize handle element",
+      "moreEventsButton": "MoreEvents button",
+      "moreEventsList": "MoreEvents list",
+      "moreEventsDropdown": "MoreEvents dropdown",
+      "currentTimeIndicator": "CurrentTimeIndicator container",
+      "currentTimeIndicatorLine": "CurrentTimeIndicator line",
+      "currentTimeIndicatorThumb": "CurrentTimeIndicator thumb",
+      "currentTimeIndicatorTimeBubble": "CurrentTimeIndicator time bubble",
+      "agendaView": "AgendaView root element, shown when agenda is open",
+      "agendaViewHeader": "AgendaView header container",
+      "agendaViewHeaderLabel": "AgendaView date range label",
+      "agendaViewBody": "AgendaView body container",
+      "agendaViewDateGroup": "AgendaView date group container",
+      "agendaViewDateHeader": "AgendaView date header text",
+      "agendaViewEvent": "AgendaView event item button",
+      "agendaViewEventBody": "AgendaView event body container",
+      "agendaViewEventColor": "AgendaView event color indicator",
+      "agendaViewEventTitle": "AgendaView event title text",
+      "agendaViewEventTime": "AgendaView event time label",
+      "agendaViewNoEvents": "AgendaView no events message"
+    },
+    "modifiers": []
+  },
+  "BubbleChart": {
+    "selectors": {
+      "root": "Root element",
+      "axis": "X and Y axis of the chart",
+      "tooltip": "Tooltip root element"
+    },
+    "modifiers": []
+  },
+  "Mark": {
+    "selectors": {
+      "root": "Root element"
+    }
+  },
+  "Input": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-error",
+        "selector": ["wrapper", "input"],
+        "condition": "`error` prop is set"
+      },
+      {
+        "modifier": "data-success",
+        "selector": ["wrapper", "input"],
+        "condition": "`success` prop is set and `error` is not set"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "input",
+        "condition": "`disabled` prop is set"
+      },
+      {
+        "modifier": "data-with-right-section",
+        "selector": "wrapper",
+        "condition": "`rightSection` prop is set"
+      },
+      {
+        "modifier": "data-with-left-section",
+        "selector": "wrapper",
+        "condition": "`leftSection` prop is set"
+      },
+      {
+        "modifier": "data-multiline",
+        "selector": "wrapper",
+        "condition": "`multiline` prop is set"
+      },
+      {
+        "modifier": "data-pointer",
+        "selector": "wrapper",
+        "condition": "`pointer` prop is set"
+      },
+      {
+        "modifier": "data-position",
+        "selector": "section",
+        "value": "Section position: left or right"
+      }
+    ]
+  },
+  "InputWrapper": {
+    "selectors": {
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element"
+    }
+  },
+  "BulletChart": {
+    "selectors": {
+      "root": "Root element",
+      "label": "Label element",
+      "trackWrapper": "Wrapper around track and value labels",
+      "track": "Container for ranges, bar, and target",
+      "range": "Background range band",
+      "bar": "Actual value bar",
+      "target": "Target marker line",
+      "rangeLabel": "Value label at the end of each range",
+      "barLabel": "Value label for the actual value bar",
+      "targetLabel": "Value label for the target marker"
+    },
+    "modifiers": []
+  },
+  "ThemeIcon": {
+    "selectors": {
+      "root": "Root element"
+    }
+  },
+  "LoadingOverlay": {
+    "selectors": {
+      "root": "Root element",
+      "overlay": "`Overlay` component",
+      "loader": "`Loader` component"
+    }
+  },
+  "Scroller": {
+    "selectors": {
+      "root": "Root element",
+      "container": "Scrollable container",
+      "content": "Wraps component children",
+      "control": "Start and end scroll control buttons",
+      "chevron": "Chevron icon inside controls"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-draggable",
+        "selector": "container",
+        "condition": "`draggable` prop is set"
+      },
+      {
+        "modifier": "data-position",
+        "selector": "control",
+        "value": "\"start\" or \"end\" depending on control position"
+      },
+      {
+        "modifier": "data-hidden",
+        "selector": "control",
+        "condition": "Control is hidden because scrolling is not available in that direction"
+      }
+    ]
+  },
+  "PillGroup": {
+    "selectors": {
+      "group": "Root element"
+    }
+  },
+  "Pill": {
+    "selectors": {
+      "root": "Root element",
+      "label": "Pill label (children)",
+      "remove": "Remove button"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-with-remove",
+        "selector": "root",
+        "condition": "`withRemoveButton` prop is set"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "root",
+        "condition": "`disabled` prop is set"
+      }
+    ]
+  },
+  "Tree": {
+    "selectors": {
+      "root": "Root element",
+      "node": "Node element (li), contains label and subtree elements",
+      "subtree": "Subtree element (ul)",
+      "label": "Node label"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-selected",
+        "selector": ["node", "label"],
+        "condition": "The node is selected"
+      },
+      {
+        "modifier": "data-hovered",
+        "selector": ["node", "label"],
+        "condition": "The node is hovered"
+      },
+      {
+        "modifier": "data-level",
+        "selector": "node",
+        "value": "Nesting level of the node"
+      }
+    ]
+  },
+  "Indicator": {
+    "selectors": {
+      "root": "Root element",
+      "indicator": "Indicator element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-inline",
+        "selector": "root",
+        "condition": "`inline` prop is set"
+      },
+      {
+        "modifier": "data-with-label",
+        "selector": "indicator",
+        "condition": "`label` prop is set"
+      },
+      {
+        "modifier": "data-with-border",
+        "selector": "indicator",
+        "condition": "`withBorder` prop is set"
+      },
+      {
+        "modifier": "data-processing",
+        "selector": "indicator",
+        "condition": "`processing` prop is set"
+      }
+    ]
+  },
+  "MonthView": {
+    "selectors": {
+      "monthView": "Root element",
+      "monthViewScrollArea": "Scroll area wrapper",
+      "monthViewInner": "Inner container",
+      "monthViewWeek": "Week row",
+      "monthViewDay": "Day cell",
+      "monthViewDayLabel": "Day number label",
+      "monthViewWeekNumber": "Week number indicator",
+      "monthViewWeekday": "Weekday name cell",
+      "monthViewWeekdays": "Weekdays row",
+      "monthViewWeekdaysCorner": "Top-left corner in weekdays row",
+      "monthViewEvents": "Events container in day cell",
+      "monthViewBackgroundEvent": "Background event element",
+      "header": "Header container, part of ScheduleHeader",
+      "headerControl": "Header control element, part of ScheduleHeader",
+      "viewSelect": "View select element, part of ScheduleHeader",
+      "monthYearSelectTarget": "Month/year select target button, part of MonthYearSelect",
+      "monthYearSelectDropdown": "Month/year select dropdown, part of MonthYearSelect",
+      "monthYearSelectControl": "Month/year select control, part of MonthYearSelect",
+      "monthYearSelectList": "Month/year select list, part of MonthYearSelect",
+      "monthYearSelectLabel": "Month/year select label, part of MonthYearSelect",
+      "agendaView": "AgendaView root element, shown when agenda is open",
+      "agendaViewHeader": "AgendaView header container",
+      "agendaViewHeaderLabel": "AgendaView date range label",
+      "agendaViewBody": "AgendaView body container",
+      "agendaViewDateGroup": "AgendaView date group container",
+      "agendaViewDateHeader": "AgendaView date header text",
+      "agendaViewEvent": "AgendaView event item button",
+      "agendaViewEventBody": "AgendaView event body container",
+      "agendaViewEventColor": "AgendaView event color indicator",
+      "agendaViewEventTitle": "AgendaView event title text",
+      "agendaViewEventTime": "AgendaView event time label",
+      "agendaViewNoEvents": "AgendaView no events message"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-today",
+        "selector": "monthViewDay",
+        "condition": "Day is today"
+      },
+      {
+        "modifier": "data-weekend",
+        "selector": "monthViewDay",
+        "condition": "Day is a weekend day"
+      },
+      {
+        "modifier": "data-outside",
+        "selector": "monthViewDay",
+        "condition": "Day is outside current month"
+      },
+      {
+        "modifier": "data-static",
+        "selector": "monthView",
+        "condition": "`mode=\"static\"` is set"
+      }
+    ]
+  },
+  "CodeHighlight": {
+    "selectors": {
+      "codeHighlight": "Root element",
+      "showCodeButton": "Button that reveals full code when it is collapsed",
+      "pre": "Pre element, contains code element",
+      "code": "Code element",
+      "control": "Control button, copy/collapse, custom controls",
+      "controlTooltip": "Root element of control tooltip",
+      "controls": "A wrapper around controls",
+      "scrollarea": "Scroll area, contains code",
+      "lineNumbers": "Line numbers column",
+      "codeWrapper": "Wrapper element around line numbers and scroll area"
+    }
+  },
+  "CodeHighlightTabs": {
+    "selectors": {
+      "codeHighlight": "Root element of inner CodeHighlight component",
+      "showCodeButton": "Button that reveals full code when it is collapsed",
+      "pre": "Pre element, contains code element",
+      "code": "Code element",
+      "control": "Control button, copy/collapse, custom controls",
+      "controlTooltip": "Root element of control tooltip",
+      "controls": "A wrapper around controls",
+      "scrollarea": "Scroll area, contains code",
+      "lineNumbers": "Line numbers column",
+      "codeWrapper": "Wrapper element around line numbers and scroll area",
+      "root": "Root element",
+      "filesScrollarea": "Scrollarea with files list",
+      "files": "Files names list",
+      "file": "File name",
+      "fileIcon": "File icon"
+    }
+  },
+  "InlineCodeHighlight": {
+    "selectors": {
+      "inlineCodeHighlight": "Root element"
+    }
+  },
+  "JsonViewer": {
+    "selectors": {
+      "root": "Root element",
+      "node": "Container for a single tree node",
+      "toggle": "Expand/collapse chevron icon",
+      "key": "Object key label",
+      "value": "Primitive value display",
+      "bracket": "Opening/closing brackets",
+      "type": "Type badge",
+      "size": "Item/key count label",
+      "ellipsis": "Collapsed content indicator or show more/less button",
+      "copyButton": "Copy to clipboard button",
+      "content": "Content wrapper with padding",
+      "row": "Single row wrapper for a node",
+      "scrollarea": "Scroll area wrapper",
+      "lineNumbers": "Line numbers column",
+      "wrapper": "Flex wrapper around line numbers and content",
+      "copyAllButton": "Copy all JSON button positioned at top-right corner",
+      "controls": "Expand all / collapse all controls container",
+      "control": "Expand all / collapse all button"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-with-border",
+        "selector": "root",
+        "condition": "`withBorder` prop is set"
+      },
+      {
+        "modifier": "data-type",
+        "selector": "node",
+        "value": "`array`, `object` or primitive value type name"
+      },
+      {
+        "modifier": "data-highlight",
+        "selector": "node",
+        "condition": "Node path is present in `highlightItems`",
+        "value": "`added` or `removed`"
+      },
+      {
+        "modifier": "data-root",
+        "selector": "row",
+        "condition": "Root node row"
+      },
+      {
+        "modifier": "data-hoverable",
+        "selector": "row",
+        "condition": "Row can be expanded, collapsed or selected"
+      },
+      {
+        "modifier": "data-expanded",
+        "selector": "toggle",
+        "condition": "Node is expanded"
+      },
+      {
+        "modifier": "data-value-type",
+        "selector": ["value", "type"],
+        "value": "Value type name, for example `string`, `number`, `array`"
+      },
+      {
+        "modifier": "data-wrap",
+        "selector": "value",
+        "condition": "String value is longer than 20 characters and is wrapped onto multiple lines"
+      },
+      {
+        "modifier": "data-clickable",
+        "selector": "ellipsis",
+        "condition": "Ellipsis is rendered as show more/less button for a collapsed string"
+      }
+    ]
+  },
+  "SankeyChart": {
+    "selectors": {
+      "root": "Root element",
+      "tooltip": "Tooltip root element",
+      "tooltipBody": "Tooltip wrapper around all items",
+      "tooltipItem": "Tooltip item representing data series",
+      "tooltipItemBody": "Tooltip item wrapper around item color and name",
+      "tooltipItemColor": "Tooltip item color",
+      "tooltipItemName": "Tooltip item name",
+      "tooltipItemData": "Tooltip item data",
+      "tooltipLabel": "Label of the tooltip"
+    },
+    "modifiers": []
+  },
+  "Menubar": {
+    "selectors": {
+      "root": "Root element with `role=\"menubar\"`",
+      "target": "`Menubar.Target` top-level trigger button"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-expanded",
+        "selector": "target",
+        "condition": "Associated menu is opened"
+      }
+    ]
+  },
+  "Overlay": {
+    "selectors": {
+      "root": "Root element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-center",
+        "selector": "root",
+        "condition": "`center` prop is set"
+      },
+      {
+        "modifier": "data-fixed",
+        "selector": "root",
+        "condition": "`fixed` prop is set"
+      }
+    ]
+  },
+  "Stack": {
+    "selectors": {
+      "root": "Root element"
+    }
+  },
+  "Loader": {
+    "selectors": {
+      "root": "Root element"
+    }
+  },
+  "MobileMonthView": {
+    "selectors": {
+      "mobileMonthView": "Root element",
+      "mobileMonthViewHeader": "Header container with back button and month label",
+      "mobileMonthViewHeaderBackButton": "Back button with year text",
+      "mobileMonthViewHeaderLabel": "Month and year label in the header",
+      "mobileMonthViewCalendar": "Calendar grid container",
+      "mobileMonthViewWeekdays": "Weekdays row",
+      "mobileMonthViewWeekday": "Individual weekday name",
+      "mobileMonthViewWeekdaysCorner": "Weekdays corner (for week numbers)",
+      "mobileMonthViewWeek": "Week row",
+      "mobileMonthViewWeekNumber": "Week number button",
+      "mobileMonthViewDay": "Day cell button",
+      "mobileMonthViewDayIndicators": "Day indicators container",
+      "mobileMonthViewDayIndicator": "Individual day indicator dot",
+      "mobileMonthViewEventsList": "Events list container",
+      "mobileMonthViewEventsHeader": "Events list header (selected date)",
+      "mobileMonthViewEvent": "Event item button",
+      "mobileMonthViewEventColor": "Event color indicator",
+      "mobileMonthViewEventBody": "Event body layout container",
+      "mobileMonthViewEventTitle": "Event title text",
+      "mobileMonthViewEventTime": "Event time label",
+      "mobileMonthViewNoEvents": "No events message"
+    },
+    "modifiers": []
+  },
+  "Divider": {
+    "selectors": {
+      "root": "Root element",
+      "label": "Label element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-with-label",
+        "selector": "root",
+        "condition": "`label` prop is truthy"
+      },
+      {
+        "modifier": "data-orientation",
+        "selector": "root",
+        "value": "Value of `orientation` prop"
+      },
+      {
+        "modifier": "data-position",
+        "selector": "label",
+        "value": "Value of `labelPosition` prop"
+      }
+    ]
+  },
+  "Treemap": {
+    "selectors": {
+      "root": "Root element",
+      "tooltip": "Tooltip root element",
+      "tooltipBody": "Tooltip wrapper around all items",
+      "tooltipItem": "Tooltip item representing data series",
+      "tooltipItemBody": "Tooltip item wrapper around item color and name",
+      "tooltipItemColor": "Tooltip item color",
+      "tooltipItemName": "Tooltip item name",
+      "tooltipItemData": "Tooltip item data",
+      "tooltipLabel": "Label of the tooltip"
+    },
+    "modifiers": []
+  },
+  "WeekView": {
+    "selectors": {
+      "weekView": "Root element",
+      "weekViewRoot": "Week view root container",
+      "weekViewHeader": "Header row with day labels",
+      "weekViewInner": "Inner container",
+      "weekViewAllDaySlotsEvents": "All-day events container",
+      "weekViewAllDaySlots": "All-day slots container",
+      "weekViewAllDaySlotsList": "List of all-day slots",
+      "weekViewAllDaySlot": "Individual all-day slot",
+      "weekViewAllDaySlotsLabel": "All-day slots label",
+      "weekViewScrollArea": "Scroll area for time slots",
+      "weekViewCorner": "Top-left corner element",
+      "weekViewSlotLabels": "Container for slot labels",
+      "weekViewSlotLabel": "Individual slot label",
+      "weekViewDayLabel": "Day label element",
+      "weekViewDayWeekday": "Weekday label",
+      "weekViewDay": "Day column",
+      "weekViewDayNumber": "Day number in header",
+      "weekViewDaySlot": "Individual day time slot",
+      "weekViewDaySlots": "Container for day slots",
+      "weekViewWeekLabel": "Week label",
+      "weekViewWeekNumber": "Week number indicator",
+      "weekViewBackgroundEvent": "Background event element",
+      "weekViewBackgroundEventResizeHandle": "Resize handle of an interactive background event",
+      "weekViewDragPreview": "Ghost preview shown at the snapped position while dragging an event",
+      "header": "Header container, part of ScheduleHeader",
+      "headerControl": "Header control element, part of ScheduleHeader",
+      "viewSelect": "View select element, part of ScheduleHeader",
+      "monthYearSelectTarget": "Month/year select target button, part of MonthYearSelect",
+      "monthYearSelectDropdown": "Month/year select dropdown, part of MonthYearSelect",
+      "monthYearSelectControl": "Month/year select control, part of MonthYearSelect",
+      "monthYearSelectList": "Month/year select list, part of MonthYearSelect",
+      "monthYearSelectLabel": "Month/year select label, part of MonthYearSelect",
+      "currentTimeIndicator": "Current time indicator container, part of CurrentTimeIndicator",
+      "currentTimeIndicatorLine": "Current time indicator line, part of CurrentTimeIndicator",
+      "currentTimeIndicatorThumb": "Current time indicator thumb, part of CurrentTimeIndicator",
+      "currentTimeIndicatorTimeBubble": "Current time indicator time bubble, part of CurrentTimeIndicator",
+      "agendaView": "AgendaView root element, shown when agenda is open",
+      "agendaViewHeader": "AgendaView header container",
+      "agendaViewHeaderLabel": "AgendaView date range label",
+      "agendaViewBody": "AgendaView body container",
+      "agendaViewDateGroup": "AgendaView date group container",
+      "agendaViewDateHeader": "AgendaView date header text",
+      "agendaViewEvent": "AgendaView event item button",
+      "agendaViewEventBody": "AgendaView event body container",
+      "agendaViewEventColor": "AgendaView event color indicator",
+      "agendaViewEventTitle": "AgendaView event title text",
+      "agendaViewEventTime": "AgendaView event time label",
+      "agendaViewNoEvents": "AgendaView no events message"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-today",
+        "selector": "weekViewDayLabel",
+        "condition": "Day is today"
+      },
+      {
+        "modifier": "data-weekend",
+        "selector": "weekViewDay",
+        "condition": "Day is a weekend day"
+      },
+      {
+        "modifier": "data-highlight-today",
+        "selector": "weekViewDay",
+        "condition": "`highlightToday=\"column\"` and day is today"
+      },
+      {
+        "modifier": "data-hour-start",
+        "selector": "weekViewDaySlot",
+        "condition": "Slot is at the start of an hour"
+      },
+      {
+        "modifier": "data-business-hours",
+        "selector": "weekViewDaySlot",
+        "condition": "`highlightBusinessHours` is true and slot is within business hours"
+      },
+      {
+        "modifier": "data-non-business-hours",
+        "selector": "weekViewDaySlot",
+        "condition": "`highlightBusinessHours` is true and slot is outside business hours"
+      },
+      {
+        "modifier": "data-partial-business-hours",
+        "selector": "weekViewDaySlot",
+        "condition": "`highlightBusinessHours` is true and a business hours boundary falls inside the slot"
+      },
+      {
+        "modifier": "data-static",
+        "selector": "weekView",
+        "condition": "`mode=\"static\"` is set"
+      }
+    ]
+  },
+  "Text": {
+    "selectors": {
+      "root": "Root element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-truncate",
+        "selector": "root",
+        "condition": "`truncate` prop is set",
+        "value": "Value of `truncate` prop"
+      },
+      {
+        "modifier": "data-line-clamp",
+        "selector": "root",
+        "condition": "`lineClamp` prop is a number"
+      },
+      {
+        "modifier": "data-inline",
+        "selector": "root",
+        "condition": "`inline` prop is set"
+      },
+      {
+        "modifier": "data-inherit",
+        "selector": "root",
+        "condition": "`inherit` prop is set"
+      }
+    ]
+  },
+  "Combobox": {
+    "selectors": {
+      "options": "`Combobox.Options` component",
+      "dropdown": "`Combobox.Dropdown` component",
+      "option": "`Combobox.Option` component",
+      "search": "`Combobox.Search` input",
+      "empty": "`Combobox.Empty` component",
+      "header": "`Combobox.Header` component",
+      "footer": "`Combobox.Footer` component",
+      "group": "`Combobox.Group` component",
+      "groupLabel": "Label of `Combobox.Group` component"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-combobox-selected",
+        "selector": "option",
+        "condition": "Option is selected"
+      },
+      {
+        "modifier": "data-combobox-active",
+        "selector": "option",
+        "condition": "`active` prop is set"
+      },
+      {
+        "modifier": "data-combobox-disabled",
+        "selector": "option",
+        "condition": "`disabled` prop is set"
+      },
+      {
+        "modifier": "data-hidden",
+        "selector": "dropdown",
+        "condition": "`hidden` prop is set"
+      }
+    ]
+  },
+  "Lightbox": {
+    "selectors": {
+      "root": "Root element – holds CSS variables, renders overlay and content",
+      "overlay": "Background overlay behind the lightbox",
+      "content": "Full-screen dialog container with all lightbox controls",
+      "toolbar": "Top toolbar wrapper",
+      "toolbarGroup": "Left/right toolbar button group",
+      "toolbarButton": "Individual toolbar action button",
+      "counter": "Slide counter text (e.g. \"2 / 5\")",
+      "slides": "Slides area wrapper",
+      "slidesViewport": "Embla viewport (overflow hidden)",
+      "slidesContainer": "Embla container (flex row of slides)",
+      "slide": "Individual slide wrapper",
+      "slideImage": "Image element inside a slide",
+      "slideVideo": "Video element inside a slide",
+      "thumbnails": "Thumbnails strip wrapper",
+      "thumbnailsViewport": "Thumbnails Embla viewport",
+      "thumbnailsContainer": "Thumbnails Embla container",
+      "thumbnail": "Individual thumbnail button",
+      "thumbnailImage": "Image inside a thumbnail",
+      "navigation": "Navigation arrows wrapper",
+      "navigationButton": "Previous/next navigation button",
+      "caption": "Caption text below the active slide",
+      "closeButton": "Close button"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-active",
+        "selector": "thumbnail",
+        "condition": "Thumbnail corresponds to the currently active slide"
+      },
+      {
+        "modifier": "data-inactive",
+        "selector": "navigationButton",
+        "condition": "Navigation button is disabled (first/last slide without loop)"
+      },
+      {
+        "modifier": "data-zoom-enabled",
+        "selector": "slideImage",
+        "condition": "`withZoom` prop is set on the lightbox"
+      },
+      {
+        "modifier": "data-zoomed",
+        "selector": "slideImage",
+        "condition": "Image is currently zoomed in"
+      },
+      {
+        "modifier": "data-dragging",
+        "selector": "slideImage",
+        "condition": "Image is being dragged while zoomed"
+      }
+    ]
+  },
+  "Badge": {
+    "selectors": {
+      "root": "Root element",
+      "section": "Left and right sections",
+      "label": "Badge children"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-block",
+        "selector": "root",
+        "condition": "`fullWidth` prop is set"
+      },
+      {
+        "modifier": "data-position",
+        "selector": "section",
+        "value": "Section position: left or right"
+      }
+    ]
+  },
+  "Highlight": {
+    "selectors": {
+      "root": "Root element"
+    }
+  },
+  "Notifications": {
+    "selectors": {
+      "root": "Notifications container, contains all notifications",
+      "notification": "Single notification",
+      "progress": "Auto close progress line at the bottom of the notification, displayed only when `withAutoCloseProgress` is set"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-paused",
+        "selector": "progress",
+        "condition": "Auto close timer is paused (for example, when the notification is hovered), the line is faded out"
+      }
+    ]
+  },
+  "Blockquote": {
+    "selectors": {
+      "root": "Root element",
+      "icon": "Icon element",
+      "cite": "Cite element"
+    }
+  },
+  "RadarChart": {
+    "selectors": {
+      "root": "Root element",
+      "container": "Recharts ResponsiveContainer component",
+      "tooltip": "Tooltip root element",
+      "tooltipBody": "Tooltip wrapper around all items",
+      "tooltipItem": "Tooltip item representing data series",
+      "tooltipItemBody": "Tooltip item wrapper around item color and name",
+      "tooltipItemColor": "Tooltip item color",
+      "tooltipItemName": "Tooltip item name",
+      "tooltipItemData": "Tooltip item data",
+      "tooltipLabel": "Label of the tooltip",
+      "legend": "Legend root element",
+      "legendItem": "Legend item representing data series",
+      "legendItemColor": "Legend item color",
+      "legendItemName": "Legend item name"
+    },
+    "modifiers": []
+  },
+  "ResourcesWeekView": {
+    "selectors": {
+      "resourcesWeekView": "Root element",
+      "resourcesWeekViewRoot": "Root container wrapping scroll area",
+      "resourcesWeekViewInner": "Inner container wrapping header rows and resource rows",
+      "resourcesWeekViewHeaderRows": "Container for header rows (corner, day labels, time labels)",
+      "resourcesWeekViewHeaderContent": "Container for day labels and time labels rows",
+      "resourcesWeekViewDayLabelsRow": "Row containing day labels",
+      "resourcesWeekViewDayLabel": "Individual day label element",
+      "resourcesWeekViewTimeLabelsRow": "Row containing time labels",
+      "resourcesWeekViewScrollArea": "Scroll area component",
+      "resourcesWeekViewCorner": "Top-left corner element",
+      "resourcesWeekViewTimeLabel": "Individual time label element",
+      "resourcesWeekViewResourceLabel": "Resource label element",
+      "resourcesWeekViewRow": "Resource row element",
+      "resourcesWeekViewRowSlot": "Individual time slot element",
+      "resourcesWeekViewRowSlots": "Container for all slots in a row",
+      "resourcesWeekViewBackgroundEvent": "Background event element",
+      "resourcesWeekViewAllDayEvent": "All-day event element",
+      "resourcesWeekViewCurrentTimeIndicator": "Current time indicator container",
+      "resourcesWeekViewCurrentTimeIndicatorLine": "Current time indicator line",
+      "resourcesWeekViewCurrentTimeIndicatorThumb": "Current time indicator thumb",
+      "resourcesWeekViewCurrentTimeIndicatorTimeBubble": "Current time indicator time bubble",
+      "resourcesWeekViewEventWrapper": "Event wrapper element",
+      "resourcesWeekViewDragPreview": "Ghost preview shown at the snapped position while dragging an event",
+      "resourcesWeekViewResizeHandle": "Event resize handle element",
+      "resourcesWeekViewGroupColumn": "Group label column element",
+      "resourcesWeekViewGroupColumnEmpty": "Empty group column cell for ungrouped resources",
+      "moreEventsButton": "More events button, part of MoreEvents",
+      "moreEventsList": "More events list, part of MoreEvents",
+      "moreEventsDropdown": "More events dropdown, part of MoreEvents",
+      "header": "Header container, part of ScheduleHeader",
+      "headerControl": "Header control element, part of ScheduleHeader",
+      "viewSelect": "View select element, part of ScheduleHeader",
+      "monthYearSelectTarget": "MonthYearSelect target button, part of ScheduleHeader",
+      "monthYearSelectDropdown": "MonthYearSelect dropdown, part of ScheduleHeader",
+      "monthYearSelectControl": "MonthYearSelect control, part of ScheduleHeader",
+      "monthYearSelectList": "MonthYearSelect list, part of ScheduleHeader",
+      "monthYearSelectLabel": "MonthYearSelect label, part of ScheduleHeader"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-hour-start",
+        "selector": "resourcesWeekViewRowSlot",
+        "condition": "Slot is at the start of an hour"
+      },
+      {
+        "modifier": "data-business-hours",
+        "selector": "resourcesWeekViewRowSlot",
+        "condition": "`highlightBusinessHours` is true and slot is within business hours"
+      },
+      {
+        "modifier": "data-non-business-hours",
+        "selector": "resourcesWeekViewRowSlot",
+        "condition": "`highlightBusinessHours` is true and slot is outside business hours"
+      },
+      {
+        "modifier": "data-partial-business-hours",
+        "selector": "resourcesWeekViewRowSlot",
+        "condition": "`highlightBusinessHours` is true and a business hours boundary falls inside the slot"
+      },
+      {
+        "modifier": "data-drop-target",
+        "selector": "resourcesWeekViewRowSlot",
+        "condition": "Slot is the current drag drop target"
+      },
+      {
+        "modifier": "data-drag-selected",
+        "selector": "resourcesWeekViewRowSlot",
+        "condition": "Slot is selected during drag-to-select"
+      },
+      {
+        "modifier": "data-static",
+        "selector": "resourcesWeekView",
+        "condition": "`mode=\"static\"` is set"
+      },
+      {
+        "modifier": "data-scrolled",
+        "selector": "resourcesWeekViewTimeLabelsRow",
+        "condition": "Scroll area is scrolled vertically"
+      },
+      {
+        "modifier": "data-scrolled-x",
+        "selector": "resourcesWeekViewResourceLabel",
+        "condition": "Scroll area is scrolled horizontally"
+      },
+      {
+        "modifier": "data-today",
+        "selector": "resourcesWeekViewDayLabel",
+        "condition": "Day label represents today and `highlightToday` is true"
+      },
+      {
+        "modifier": "data-weekend",
+        "selector": "resourcesWeekViewDayLabel",
+        "condition": "Day label represents a weekend day"
+      }
+    ]
+  },
+  "UnstyledButton": {
+    "selectors": {
+      "root": "Root element"
+    }
+  },
+  "List": {
+    "selectors": {
+      "root": "Root element",
+      "item": "ListItem root element",
+      "itemIcon": "ListItem icon",
+      "itemLabel": "ListItem content",
+      "itemWrapper": "ListItem wrapper element, container, icon and content"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-with-padding",
+        "selector": "root",
+        "condition": "`withPadding` prop is set"
+      },
+      {
+        "modifier": "data-centered",
+        "selector": "item",
+        "condition": "`center` prop is set on List component"
+      },
+      {
+        "modifier": "data-with-icon",
+        "selector": "item",
+        "condition": "`icon` prop is set on ListItem component"
+      }
+    ]
+  },
+  "TagsInput": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element",
+      "dropdown": "Dropdown root element",
+      "options": "Options wrapper",
+      "option": "Option",
+      "empty": "Nothing found message",
+      "group": "Options group wrapper",
+      "groupLabel": "Options group label",
+      "pill": "Value pill",
+      "inputField": "Input field",
+      "pillsList": "List of pills, also contains input field"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-combobox-active",
+        "selector": "option",
+        "condition": "Options was activated by keyboard"
+      },
+      {
+        "modifier": "data-combobox-disabled",
+        "selector": "option",
+        "condition": "Option is disabled"
+      }
+    ]
+  },
+  "Typography": {
+    "selectors": {
+      "root": "Root element"
+    }
+  },
+  "BarChart": {
+    "selectors": {
+      "root": "Root element",
+      "bar": "Bar of the chart",
+      "axis": "X and Y axis of the chart",
+      "container": "Recharts ResponsiveContainer component",
+      "grid": "Recharts CartesianGrid component",
+      "legend": "Legend root element",
+      "legendItem": "Legend item representing data series",
+      "legendItemColor": "Legend item color",
+      "legendItemName": "Legend item name",
+      "tooltip": "Tooltip root element",
+      "tooltipBody": "Tooltip wrapper around all items",
+      "tooltipItem": "Tooltip item representing data series",
+      "tooltipItemBody": "Tooltip item wrapper around item color and name",
+      "tooltipItemColor": "Tooltip item color",
+      "tooltipItemName": "Tooltip item name",
+      "tooltipItemData": "Tooltip item data",
+      "tooltipLabel": "Label of the tooltip",
+      "referenceLine": "Reference line",
+      "referenceArea": "Reference area",
+      "referenceDot": "Reference dot",
+      "axisLabel": "X and Y axis labels",
+      "brush": "Brush (range selector) root element"
+    },
+    "modifiers": []
+  },
+  "AlphaSlider": {
+    "selectors": {
+      "slider": "Root element",
+      "sliderOverlay": "Element used to display various overlays over hue slider",
+      "thumb": "Thumb of the hue slider"
+    }
+  },
+  "ColorPicker": {
+    "selectors": {
+      "wrapper": "Root element",
+      "preview": "Color preview, displayed only when `format` supports alpha channel",
+      "body": "Contains alpha/hue sliders and color preview",
+      "slider": "Alpha and hue sliders root",
+      "sliderOverlay": "Element used to display various overlays over hue and alpha sliders",
+      "saturation": "Saturation picker",
+      "saturationOverlay": "Element used to display various overlays over saturation picker",
+      "sliders": "Contains alpha and hue sliders",
+      "thumb": "Thumb of all sliders",
+      "swatch": "Color swatch",
+      "swatches": "Color swatches list"
+    }
+  },
+  "HueSlider": {
+    "selectors": {
+      "slider": "Root element",
+      "sliderOverlay": "Element used to display various overlays over hue slider",
+      "thumb": "Thumb of the hue slider"
+    }
+  },
+  "Accordion": {
+    "selectors": {
+      "root": "Root element",
+      "item": "`Accordion.Item` root element",
+      "control": "`Accordion.Control` root element",
+      "chevron": "`Accordion.Control` chevron container element",
+      "label": "`Accordion.Control` label",
+      "icon": "`Accordion.Control` icon",
+      "itemTitle": "`Accordion.Control` title (h2-h6) tag",
+      "panel": "`Accordion.Panel` root element",
+      "content": "Wrapper element of `Accordion.Panel` `children`"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-active",
+        "selector": ["item", "control"],
+        "condition": "Item is active (opened)"
+      },
+      {
+        "modifier": "data-chevron-position",
+        "selector": "control",
+        "value": "Value of `chevronPosition` prop on `Accordion`"
+      }
+    ]
+  },
+  "NativeSelect": {
+    "selectors": {
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element",
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom"
+    }
+  },
+  "Pagination": {
+    "selectors": {
+      "root": "Root element",
+      "control": "Control element: items, next/previous, first/last buttons",
+      "dots": "Dots icon wrapper",
+      "items": "Wrapper around page number controls, used with `layout=\"responsive\"`",
+      "label": "Compact label element displayed in narrow containers with `layout=\"responsive\"`"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-active",
+        "selector": "control",
+        "condition": "Control is active"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "control",
+        "condition": "Control is disabled"
+      },
+      {
+        "modifier": "data-layout",
+        "selector": "root",
+        "value": "Value of `layout` prop"
+      }
+    ]
+  },
+  "Tabs": {
+    "selectors": {
+      "root": "Root element (`Tabs` component)",
+      "list": "List of tabs (`Tabs.List` component)",
+      "panel": "Panel with tab content (`Tabs.Panel` component)",
+      "tab": "Tab button (`Tabs.Tab` component)",
+      "tabLabel": "Label of `Tabs.Tab`",
+      "tabSection": "Left and right sections of `Tabs.Tab`"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-orientation",
+        "selector": ["root", "tab", "list", "panel"],
+        "value": "Value of `orientation` prop"
+      },
+      {
+        "modifier": "data-placement",
+        "selector": ["root", "tab", "list"],
+        "condition": "Value of `orientation` prop is \"vertical\" on `Tabs` component",
+        "value": "Value of placement prop"
+      },
+      {
+        "modifier": "data-inverted",
+        "selector": ["tab", "list"],
+        "condition": "`inverted` prop is set on `Tabs` component"
+      },
+      {
+        "modifier": "data-grow",
+        "selector": ["list"],
+        "condition": "`grow` prop is set on `Tabs.List` component"
+      },
+      {
+        "modifier": "data-position",
+        "selector": ["tabSection"],
+        "value": "Position of the section, left or right"
+      }
+    ]
+  },
+  "ScatterChart": {
+    "selectors": {
+      "root": "Root element",
+      "scatter": "recharts Scatter component",
+      "axis": "X and Y axis of the chart",
+      "container": "Recharts ResponsiveContainer component",
+      "grid": "Recharts CartesianGrid component",
+      "legend": "Legend root element",
+      "legendItem": "Legend item representing data series",
+      "legendItemColor": "Legend item color",
+      "legendItemName": "Legend item name",
+      "tooltip": "Tooltip root element",
+      "tooltipBody": "Tooltip wrapper around all items",
+      "tooltipItem": "Tooltip item representing data series",
+      "tooltipItemBody": "Tooltip item wrapper around item color and name",
+      "tooltipItemColor": "Tooltip item color",
+      "tooltipItemName": "Tooltip item name",
+      "tooltipItemData": "Tooltip item data",
+      "tooltipLabel": "Label of the tooltip",
+      "referenceLine": "Reference line",
+      "referenceArea": "Reference area",
+      "referenceDot": "Reference dot",
+      "axisLabel": "X and Y axis labels"
+    },
+    "modifiers": []
+  },
+  "Timeline": {
+    "selectors": {
+      "root": "Root element",
+      "item": "Item root element",
+      "itemBody": "Item body, wraps title and content",
+      "itemTitle": "Item title, controlled by title prop",
+      "itemContent": "Item content, controlled by children prop",
+      "itemBullet": "Item bullet",
+      "itemOpposite": "Item opposite content, controlled by opposite prop on Timeline.Item"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-active",
+        "selector": ["item", "itemBullet"],
+        "condition": "Item index is =< Timeline active prop"
+      },
+      {
+        "modifier": "data-line-active",
+        "selector": ["item"],
+        "condition": "Item index is < Timeline active prop"
+      }
+    ]
+  },
+  "Skeleton": {
+    "selectors": {
+      "root": "Root element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-visible",
+        "selector": "root",
+        "condition": "`visible` prop is set"
+      },
+      {
+        "modifier": "data-animate",
+        "selector": "root",
+        "condition": "`animate` prop is set"
+      }
+    ]
+  },
+  "CheckboxCard": {
+    "selectors": {
+      "card": "Root element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-checked",
+        "selector": "card",
+        "condition": "`checked` prop is set"
+      },
+      {
+        "modifier": "data-with-border",
+        "selector": "card",
+        "condition": "`withBorder` prop is set"
+      }
+    ]
+  },
+  "CheckboxGroup": {
+    "selectors": {
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element"
+    }
+  },
+  "CheckboxIndicator": {
+    "selectors": {
+      "indicator": "Root element",
+      "icon": "Checkbox icon"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-checked",
+        "selector": "indicator",
+        "condition": "`checked` prop is set"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "indicator",
+        "condition": "`disabled` prop is set"
+      }
+    ]
+  },
+  "Checkbox": {
+    "selectors": {
+      "root": "Root element",
+      "input": "Input element (`input[type=\"checkbox\"]`)",
+      "icon": "Checkbox icon, used to display checkmark and indeterminate state icon",
+      "inner": "Wrapper for `icon` and `input`",
+      "body": "Input body, contains all other elements",
+      "labelWrapper": "Contains `label`, `description` and `error`",
+      "label": "Label element",
+      "description": "Description displayed below the label",
+      "error": "Error message displayed below the label"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-checked",
+        "selector": "root",
+        "condition": "`checked` prop is set"
+      },
+      {
+        "modifier": "data-error",
+        "selector": "input",
+        "condition": "`error` prop is set"
+      },
+      {
+        "modifier": "data-indeterminate",
+        "selector": "input",
+        "condition": "`indeterminate` prop is set"
+      },
+      {
+        "modifier": "data-label-position",
+        "selector": "inner",
+        "value": "Value of `labelPosition` prop"
+      }
+    ]
+  },
+  "PasswordInput": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element",
+      "innerInput": "Actual input element",
+      "visibilityToggle": "Visibility toggle button"
+    }
+  },
+  "Dialog": {
+    "selectors": {
+      "root": "Root element",
+      "closeButton": "Close button"
+    }
+  },
+  "RichTextEditor": {
+    "selectors": {
+      "root": "Root element",
+      "toolbar": "Toolbar element",
+      "content": "Content area",
+      "Typography": "Typography component, wraps content",
+      "control": "RichTextEditor.Control root element, used as a base for all controls",
+      "controlIcon": "Control icon element",
+      "controlsGroup": "RichTextEditor.ControlsGroup component root",
+      "linkEditor": "Link editor root element",
+      "linkEditorSave": "Link editor save button",
+      "linkEditorInput": "Link editor url input",
+      "linkEditorExternalControl": "Link editor external button",
+      "linkEditorDropdown": "Link editor popover dropdown element",
+      "tableInsertDropdown": "RichTextEditor.TableInsert popover dropdown element",
+      "tableInsertGrid": "RichTextEditor.TableInsert size picker grid",
+      "tableInsertCell": "RichTextEditor.TableInsert size picker grid cell",
+      "tableInsertLabel": "RichTextEditor.TableInsert selected size label"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-active",
+        "selector": "control",
+        "condition": "Control is active"
+      }
+    ]
+  },
+  "CandlestickChart": {
+    "selectors": {
+      "root": "Root element",
+      "candle": "Candle shape representing open, high, low and close values",
+      "axis": "X and Y axis of the chart",
+      "container": "Recharts ResponsiveContainer component",
+      "grid": "Recharts CartesianGrid component",
+      "tooltip": "Tooltip root element",
+      "tooltipBody": "Tooltip wrapper around all items",
+      "tooltipItem": "Tooltip item representing open, high, low or close value",
+      "tooltipItemBody": "Tooltip item wrapper around item color and name",
+      "tooltipItemColor": "Tooltip item color",
+      "tooltipItemName": "Tooltip item name",
+      "tooltipItemData": "Tooltip item data",
+      "tooltipLabel": "Label of the tooltip",
+      "referenceLine": "Reference line",
+      "referenceArea": "Reference area",
+      "referenceDot": "Reference dot",
+      "axisLabel": "X and Y axis labels"
+    },
+    "modifiers": []
+  },
+  "RadialBarChart": {
+    "selectors": {
+      "root": "Root element",
+      "tooltip": "Tooltip root element",
+      "legend": "Legend root element",
+      "legendItem": "Legend item representing data series",
+      "legendItemColor": "Legend item color",
+      "legendItemName": "Legend item name"
+    },
+    "modifiers": []
+  },
+  "Drawer": {
+    "selectors": {
+      "root": "Root element",
+      "inner": "Element used to center modal, has fixed position, takes entire screen",
+      "content": "`Drawer.Content` root element",
+      "header": "Contains title and close button",
+      "overlay": "Overlay displayed under the `Drawer.Content`",
+      "title": "Drawer title (h2 tag), displayed in the header",
+      "body": "Drawer body, displayed after header",
+      "close": "Close button"
+    }
+  },
+  "SegmentedControl": {
+    "selectors": {
+      "root": "Root element",
+      "control": "Wrapper element for input and label",
+      "input": "Input element (`input[type=\"radio\"]`), hidden by default",
+      "label": "Label element associated with input",
+      "indicator": "Floating indicator that moves between items",
+      "innerLabel": "Wrapper of label element children"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-full-width",
+        "selector": "root",
+        "condition": "`fullWidth` prop is set"
+      },
+      {
+        "modifier": "data-with-items-borders",
+        "selector": "root",
+        "condition": "`withItemsBorders` prop is not `false`"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "root",
+        "condition": "Value of `disabled` prop"
+      },
+      {
+        "modifier": "data-orientation",
+        "selector": "control",
+        "value": "Value of `orientation` prop"
+      },
+      {
+        "modifier": "data-active",
+        "selector": ["label", "control"],
+        "condition": "Associated input is checked"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "label",
+        "condition": "Associated input is disabled"
+      },
+      {
+        "modifier": "data-read-only",
+        "selector": "label",
+        "condition": "`readOnly` prop is set"
+      }
+    ]
+  },
+  "TimePicker": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element",
+      "control": "Button in the dropdown which is used to select hours/minutes/seconds/am-pm",
+      "controlsList": "List of buttons with hours/minutes/seconds/am-pm",
+      "controlsListGroup": "Group of controlsLists",
+      "dropdown": "Popover dropdown",
+      "fieldsRoot": "A wrapper element for all fieldsGroups",
+      "fieldsGroup": "A wrapper element for hours/minutes/seconds/am-pm fields",
+      "field": "Hours/minutes/seconds/am-pm input field",
+      "presetControl": "Time preset button",
+      "presetsGroup": "Wraps preset controls and label",
+      "presetsGroupLabel": "Labels of the preset group",
+      "presetsRoot": "Element wrapping all presets content",
+      "scrollarea": "Scroll area in the dropdown"
+    },
+    "modifiers": []
+  },
+  "Alert": {
+    "selectors": {
+      "root": "Root element",
+      "wrapper": "Wrapper around `body` and `icon`",
+      "body": "Body element, contains `title` and `message`",
+      "title": "Title element, contains `label` and `icon`",
+      "label": "Title label",
+      "message": "Alert message",
+      "icon": "Icon element",
+      "closeButton": "Close button"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-with-close-button",
+        "selector": "title",
+        "condition": "`withCloseButton` prop is set"
+      }
+    ]
+  },
+  "Anchor": {
+    "selectors": {
+      "root": "Root element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-truncate",
+        "selector": "root",
+        "condition": "`truncate` prop is set",
+        "value": "Value of `truncate` prop"
+      },
+      {
+        "modifier": "data-line-clamp",
+        "selector": "root",
+        "condition": "`lineClamp` prop is a number"
+      },
+      {
+        "modifier": "data-inline",
+        "selector": "root",
+        "condition": "`inline` prop is set"
+      },
+      {
+        "modifier": "data-inherit",
+        "selector": "root",
+        "condition": "`inherit` prop is set"
+      },
+      {
+        "modifier": "data-underline",
+        "selector": "root",
+        "value": "Value of `underline` prop"
+      }
+    ]
+  },
+  "Spoiler": {
+    "selectors": {
+      "root": "Root element",
+      "content": "Wraps content to set max-height and transition",
+      "control": "Show/hide content control"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-has-spoiler",
+        "selector": "root",
+        "condition": "Whether the control button is shown or not"
+      }
+    ]
+  },
+  "TableOfContents": {
+    "selectors": {
+      "root": "Root element",
+      "control": "Control element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-active",
+        "selector": "control",
+        "condition": "Associated heading is currently the best match in the viewport"
+      }
+    ]
+  },
+  "Tour": {
+    "selectors": {
+      "root": "Root element",
+      "overlay": "Overlay that dims the page and contains the spotlight cutout",
+      "spotlight": "Cutout in the overlay that highlights the current step target",
+      "tooltip": "Floating element with the current step content",
+      "title": "Step title",
+      "body": "Step body content",
+      "navigation": "Container of the navigation buttons and step counter",
+      "navigationButton": "Previous and next step buttons",
+      "closeButton": "Button that closes the tour",
+      "stepCounter": "Current step index displayed in the navigation",
+      "beacon": "Pulsing marker displayed on the step target before the tour starts",
+      "beaconPulse": "Animated ring rendered inside the beacon"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-with-overlay-interaction",
+        "selector": "overlay",
+        "condition": "`withOverlayInteraction` prop is set"
+      },
+      {
+        "modifier": "data-centered",
+        "selector": "tooltip",
+        "condition": "Current step does not have a target element and is displayed in the center"
+      }
+    ]
+  },
+  "NumberInput": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element",
+      "controls": "Increment and decrement buttons wrapper",
+      "control": "Increment and decrement buttons"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-direction",
+        "selector": "control",
+        "value": "`up` or `down` depending on the control"
+      }
+    ]
+  },
+  "InputBase": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element"
+    }
+  },
+  "Burger": {
+    "selectors": {
+      "root": "Root element (button)",
+      "burger": "Inner element that contains burger lines"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-opened",
+        "selector": "burger",
+        "condition": "opened prop is set"
+      }
+    ]
+  },
+  "MultiSelect": {
+    "selectors": {
+      "wrapper": "Root element of the Input",
+      "input": "Input element",
+      "section": "Left and right sections",
+      "bottomSection": "Bottom section element, rendered inside the input border at the bottom",
+      "root": "Root element",
+      "label": "Label element",
+      "required": "Required asterisk element, rendered inside label",
+      "description": "Description element",
+      "error": "Error element",
+      "success": "Success element",
+      "dropdown": "Dropdown root element",
+      "options": "Options wrapper",
+      "option": "Option",
+      "empty": "Nothing found message",
+      "group": "Options group wrapper",
+      "groupLabel": "Options group label",
+      "pill": "Value pill",
+      "inputField": "Input field",
+      "pillsList": "List of pills, also contains input field"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-combobox-selected",
+        "selector": "option",
+        "condition": "Option is selected"
+      },
+      {
+        "modifier": "data-combobox-active",
+        "selector": "option",
+        "condition": "Options was activated by keyboard"
+      },
+      {
+        "modifier": "data-combobox-disabled",
+        "selector": "option",
+        "condition": "Option is disabled"
+      }
+    ]
+  },
+  "CloseButton": {
+    "selectors": {
+      "root": "Root element"
+    }
+  },
+  "AreaChart": {
+    "selectors": {
+      "root": "Root element",
+      "area": "Area of the chart",
+      "axis": "X and Y axis of the chart",
+      "container": "Recharts ResponsiveContainer component",
+      "grid": "Recharts CartesianGrid component",
+      "legend": "Legend root element",
+      "legendItem": "Legend item representing data series",
+      "legendItemColor": "Legend item color",
+      "legendItemName": "Legend item name",
+      "tooltip": "Tooltip root element",
+      "tooltipBody": "Tooltip wrapper around all items",
+      "tooltipItem": "Tooltip item representing data series",
+      "tooltipItemBody": "Tooltip item wrapper around item color and name",
+      "tooltipItemColor": "Tooltip item color",
+      "tooltipItemName": "Tooltip item name",
+      "tooltipItemData": "Tooltip item data",
+      "tooltipLabel": "Label of the tooltip",
+      "referenceLine": "Reference line",
+      "referenceArea": "Reference area",
+      "referenceDot": "Reference dot",
+      "axisLabel": "X and Y axis labels",
+      "brush": "Brush (range selector) root element"
+    },
+    "modifiers": []
+  },
+  "Toolbar": {
+    "selectors": {
+      "root": "Root element",
+      "group": "`Toolbar.Group` and `Toolbar.ToggleGroup` root element",
+      "toggle": "`Toolbar.Toggle` and `Toolbar.ToggleItem` root element",
+      "divider": "`Toolbar.Divider` root element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-orientation",
+        "selector": ["root", "group", "divider"],
+        "value": "Value of `orientation` prop"
+      },
+      {
+        "modifier": "data-with-border",
+        "selector": "root",
+        "condition": "`withBorder` prop is set"
+      },
+      {
+        "modifier": "data-active",
+        "selector": "toggle",
+        "condition": "Toggle is in active state"
+      },
+      {
+        "modifier": "data-disabled",
+        "selector": "toggle",
+        "condition": "`disabled` prop is set on toggle or on the parent `Toolbar.ToggleGroup`"
+      },
+      {
+        "modifier": "data-auto-width",
+        "selector": "toggle",
+        "condition": "`autoWidth` prop is set on toggle"
+      }
+    ]
+  },
+  "Grid": {
+    "selectors": {
+      "container": "Container element, only used with `type=\"container\"` prop",
+      "root": "Root element",
+      "inner": "Columns wrapper",
+      "col": "`Grid.Col` root element"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-with-gap",
+        "selector": "root",
+        "condition": "CSS variables for gap, rowGap, and columnGap are set. Variables include: --grid-gap, --grid-row-gap, --grid-column-gap, --grid-margin, --grid-col-padding-x, --grid-col-padding-y",
+        "value": "true"
+      },
+      {
+        "modifier": "data-with-col-vars",
+        "selector": "col",
+        "condition": "CSS variables for column layout are set. Variables include: --col-flex-grow, --col-flex-basis, --col-width, --col-max-width, --col-offset, --col-order, --col-align-self",
+        "value": "true"
+      }
+    ]
+  },
+  "LineChart": {
+    "selectors": {
+      "root": "Root element",
+      "line": "Line of the chart",
+      "axis": "X and Y axis of the chart",
+      "container": "Recharts ResponsiveContainer component",
+      "grid": "Recharts CartesianGrid component",
+      "legend": "Legend root element",
+      "legendItem": "Legend item representing data series",
+      "legendItemColor": "Legend item color",
+      "legendItemName": "Legend item name",
+      "tooltip": "Tooltip root element",
+      "tooltipBody": "Tooltip wrapper around all items",
+      "tooltipItem": "Tooltip item representing data series",
+      "tooltipItemBody": "Tooltip item wrapper around item color and name",
+      "tooltipItemColor": "Tooltip item color",
+      "tooltipItemName": "Tooltip item name",
+      "tooltipItemData": "Tooltip item data",
+      "tooltipLabel": "Label of the tooltip",
+      "referenceLine": "Reference line",
+      "referenceArea": "Reference area",
+      "referenceDot": "Reference dot",
+      "axisLabel": "X and Y axis labels",
+      "brush": "Brush (range selector) root element"
+    },
+    "modifiers": []
+  },
+  "Container": {
+    "selectors": {
+      "root": "Root element"
+    }
+  },
+  "FunnelChart": {
+    "selectors": {
+      "root": "Root element",
+      "legend": "Legend root element",
+      "legendItem": "Legend item representing data series",
+      "legendItemColor": "Legend item color",
+      "legendItemName": "Legend item name",
+      "tooltip": "Tooltip root element",
+      "tooltipBody": "Tooltip wrapper around all items",
+      "tooltipItem": "Tooltip item representing data series",
+      "tooltipItemBody": "Tooltip item wrapper around item color and name",
+      "tooltipItemColor": "Tooltip item color",
+      "tooltipItemName": "Tooltip item name",
+      "tooltipItemData": "Tooltip item data",
+      "tooltipLabel": "Label of the tooltip"
+    },
+    "modifiers": []
+  },
+  "MiniCalendar": {
+    "selectors": {
+      "root": "Root element",
+      "control": "Button in the dropdown which is used to select hours/minutes/seconds/am-pm",
+      "days": "Days container",
+      "day": "Single day element",
+      "dayMonth": "Day element in month view",
+      "dayNumber": "Day number element"
+    },
+    "modifiers": [
+      {
+        "modifier": "disabled",
+        "selector": "control",
+        "condition": "Next/previous range is after `maxDate` or before `minDate`"
+      },
+      {
+        "modifier": "direction",
+        "selector": "control",
+        "value": "`previous` or `next`"
+      },
+      {
+        "modifier": "selected",
+        "selector": "day",
+        "condition": "The day matches the `value`"
+      },
+      {
+        "modifier": "disabled",
+        "selector": "day",
+        "condition": "The day is before `minDate` or after `maxDate`"
+      }
+    ]
+  },
+  "RollingNumber": {
+    "selectors": {
+      "root": "Root element",
+      "copyValue": "Transparent text layer with the formatted value, used for text selection and copying",
+      "digit": "Wrapper of a single digit, clips the digits column",
+      "digitColumn": "Column of digits inside `digit`, animated on value change",
+      "char": "Non-digit character: prefix, suffix, decimal and thousands separators"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-tabular-numbers",
+        "selector": "root",
+        "condition": "`tabularNumbers` prop is set"
+      },
+      {
+        "modifier": "data-empty",
+        "selector": ["digit", "char"],
+        "condition": "Slot is not present in the current value and is animated out"
+      },
+      {
+        "modifier": "data-direction",
+        "selector": "digitColumn",
+        "value": "Direction in which the digit rolls, `up` or `down`"
+      }
+    ]
+  },
+  "NavLink": {
+    "selectors": {
+      "root": "Root element",
+      "body": "Contains label and description",
+      "section": "Left and right sections",
+      "label": "NavLink label",
+      "description": "Dimmed description displayed below the label",
+      "children": "Wrapper around nested links",
+      "chevron": "Default chevron icon",
+      "collapse": "Nested links Collapse container"
+    },
+    "modifiers": [
+      {
+        "modifier": "data-active",
+        "selector": "root",
+        "condition": "`active` prop is set"
+      }
+    ]
+  }
+}

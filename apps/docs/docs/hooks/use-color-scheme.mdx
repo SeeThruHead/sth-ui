@@ -1,0 +1,23 @@
+---
+title: useColorScheme
+description: "Follow the system color scheme."
+status: built
+ticket: su-nxd1
+files:
+  - hooks/useColorScheme/colorScheme.ts
+  - hooks/browser.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`colorScheme` is a Stream of `"dark"` or `"light"`, from the `(prefers-color-scheme: dark)` media query, starting with
+the current scheme. Return it from a Subscription.
+
+<Example height={80} story="hooks-usecolorscheme--usage" caption="This system's color scheme" />
+
+## Differences from Mantine
+
+- It is a Stream for a Subscription rather than a hook; the Model's own initial value replaces `initialValue`.

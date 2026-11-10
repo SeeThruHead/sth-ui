@@ -1,0 +1,117 @@
+---
+title: Tooltip
+description: "Renders tooltip at given element on mouse over or other event."
+status: built
+ticket: su-bcm0
+files:
+  - components/Tooltip/Tooltip.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Tooltip is built on `@foldkit/ui`'s accessible tooltip, so its state lives in your model: keep `Tooltip.Model` (from
+`Tooltip.init({ id })`) and pass its messages through `Tooltip.update`. `label` is what it says, and `target` builds
+the element it describes.
+
+<Configurator story="overlays-tooltip--configurator" />
+
+## Tooltip target
+
+Mantine's Tooltip wraps a single child and clones it with a ref. Here `target` gets the attributes to put on the
+element as `bind`, and every sth-ui component takes `bind`, so any of them can be the target. The bundle makes the
+target a `button` and links it to the tooltip with `aria-describedby`, so use a Button, an ActionIcon or another
+button-like component.
+
+## Color
+
+`color` takes any theme color or CSS color and fills the tooltip with it; `autoContrast` picks a readable text
+color for light fills. Without it the tooltip is dark in the light scheme and light in the dark one.
+
+<Example height={160} story="overlays-tooltip--color" caption="blue, grape and teal tooltips" />
+
+## Offset
+
+`offset` (default 5) is the gap between the target and the tooltip. `position` is `top` (default), `right`,
+`bottom` or `left`, each with `-start` and `-end`; the tooltip flips and shifts to stay on screen.
+
+<Example height={160} story="overlays-tooltip--offset" caption="position right, offset 20" />
+
+## Arrow
+
+`withArrow` adds the arrow, a small square rotated 45 degrees in the tooltip's color. `arrowSize` (4),
+`arrowOffset` (5) and `arrowRadius` (0) shape it; `arrowPosition` `side` (default) puts it `arrowOffset` from the
+edge for `-start` and `-end` positions, `center` centres it on the tooltip.
+
+<Example height={160} story="overlays-tooltip--arrow" caption="top-start with the arrow at the side" />
+
+## Controlled
+
+`opened` shows or hides the tooltip whatever the pointer does, as Mantine's `opened`; the examples above use it to
+stay open. `disabled` keeps it closed.
+
+## Multiline
+
+The label stays on one line unless `multiline` lets it wrap; give the tooltip a width with `w`.
+
+<Example height={220} story="overlays-tooltip--multiline" caption="Hover the button: a 220px wrapped label" />
+
+## Close and open delay
+
+`Tooltip.init({ id, openDelay, closeDelay })` sets how long the pointer must stay on the target before the tooltip
+opens, and how long it stays open after the pointer leaves. Coming back before the close delay ends keeps it open.
+
+<Example height={160} story="overlays-tooltip--delay" caption="No delay, a 500ms open delay and a 500ms close delay" />
+
+## Tooltip.Group
+
+`Tooltip.updateGroup(models, index, message, { openDelay, closeDelay })` updates a list of tooltips that share their
+delays: the first waits for `openDelay`, and moving to another tooltip of the group while one is open shows the next at
+once and closes the last.
+
+<Example height={160} story="overlays-tooltip--group" caption="Hover Button 1, then move to Button 2" />
+
+## Interactive, keepMounted and transition
+
+`interactive: true` in `Tooltip.init` lets the pointer move onto the tooltip (its links and buttons work) without it
+closing. `keepMounted` keeps the tooltip in the DOM, hidden, while it is closed. `transitionProps.duration` sets how
+long it fades in.
+
+<Example
+  height={160}
+  story="overlays-tooltip--interactive"
+  caption="An interactive tooltip with a link, kept mounted, fading in over 300ms"
+/>
+
+## Tooltip.Floating
+
+`ui.TooltipFloating` follows the pointer while it is over the target, placed by `position` (default `right`) at
+`offset` (default 10) from it. Its state is `TooltipFloating.initFloating`, `FloatingMessage` and `updateFloating`.
+
+<Example
+  height={260}
+  story="overlays-tooltip--floating"
+  caption="Hover the boxes: the first follows the chosen position, the second is coloured and multiline"
+/>
+
+## Accessibility
+
+The tooltip has `role="tooltip"` and the target points at it with `aria-describedby`, so screen readers read the
+label as the target's description. It shows on hover and on keyboard focus (not on a mouse click's focus), and
+Escape hides it until the pointer or focus leaves. It never takes pointer events or focus, so put links and buttons
+in a [Popover](/overlays/popover) instead.
+
+## Differences from Mantine
+
+- State lives in your model (`Tooltip.Model`), as with every stateful sth-ui component.
+- It shows on keyboard focus as well as on hover, which Mantine leaves off by default (`events.focus`); `events`
+  is not configurable.
+- `inline` and `arrowPosition: "merge"` are not ported. `transitionProps` takes only a duration (it fades in).
+- `Tooltip.Group` is a function over your list of tooltip models, `Tooltip.updateGroup`, rather than a wrapping
+  component, and an interactive tooltip stays open for at least 100ms after the pointer leaves the target, the time
+  to cross the gap to the tooltip (Mantine uses a safe polygon).
+- `arrowPosition: "center"` centres the arrow on the tooltip, not on the target, so it can sit off the target's
+  centre when the tooltip is shifted to stay on screen.

@@ -1,0 +1,23 @@
+---
+title: useDocumentVisibility
+description: "Follow whether the page is visible."
+status: built
+ticket: su-f50p
+files:
+  - hooks/browser.ts
+  - hooks/shared/watch.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`documentVisibility` is a Stream of `document.visibilityState` (`visible` or `hidden`), starting with the current state
+and sending it again on each `visibilitychange`. Return it from a Subscription.
+
+<Example height={80} story="hooks-usedocumentvisibility--usage" caption="useDocumentVisibility" />
+
+## Differences from Mantine
+
+- It is a Stream for a Subscription rather than a hook.

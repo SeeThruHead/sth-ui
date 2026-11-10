@@ -1,0 +1,29 @@
+{
+  "name": "@sth-ui/release",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "lint": "oxlint -c ../lint/oxlintrc.json src tools",
+    "test": "bun --bun vitest run",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "publish:canary": "bun tools/publish.ts canary",
+    "publish:release": "bun tools/publish.ts release"
+  },
+  "dependencies": {
+    "@effect/platform-bun": "4.1.2",
+    "effect": "4.1.2"
+  },
+  "devDependencies": {
+    "@effect/vitest": "4.1.2",
+    "@sth-ui/testing": "workspace:*",
+    "@types/bun": "1.4.3",
+    "@vitest/coverage-istanbul": "5.0.5",
+    "oxfmt": "0.73.0",
+    "oxlint": "1.88.0",
+    "oxlint-tsgolint": "7.0.2004",
+    "typescript": "7.0.2",
+    "vitest": "5.0.5"
+  }
+}

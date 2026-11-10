@@ -1,0 +1,36 @@
+---
+title: HueSlider
+description: "Slider component for selecting hue channel in color pickers (0 – 360 degrees)."
+status: built
+ticket: su-udm8
+files:
+  - components/HueSlider/HueSlider.ts
+  - components/AlphaSlider/colorSlider.ts
+  - components/AlphaSlider/model.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+HueSlider picks a whole-number hue from 0 to 360 along the colour wheel, and its thumb shows the chosen hue. Keep `HueSlider.Model` (from `HueSlider.init({ id })`) and the value in your model, pass its messages
+through `HueSlider.update(model, message, value)` and lift `HueSlider.subscriptions` so dragging follows the
+pointer. The `Changed` out message carries the value while it moves and `ChangeEnded` when the drag or key press
+ends; `ScrubStarted` and `ScrubEnded` mark the drag.
+
+<Example height={120} story="inputs-hueslider--usage" caption="Drag the thumb or use the arrow keys" />
+
+## Sizes and focus
+
+`size` (`xs` to `xl`, `md` by default) sets the thumb, and `focusable: false` takes the slider out of the tab order.
+Arrow Left and Arrow Right move it by five percent.
+
+## Styles API
+
+Its parts are `slider`, `sliderOverlay` (the hue gradient and the inset shadow) and `thumb`, and the
+slider carries `data-hue`.
+
+## Differences from Mantine
+
+- State lives in your model, and dragging needs the subscription lifted into yours.

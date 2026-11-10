@@ -1,0 +1,39 @@
+---
+title: AspectRatio
+description: "Keeps its content at a fixed width-to-height ratio as the width changes."
+status: built
+ticket: su-f1um
+files:
+  - components/AspectRatio/AspectRatio.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+<Example story="layout-aspectratio--usage" caption="A 1080 by 720 picture, 300px wide" />
+
+## Ratio
+
+`ratio` is width divided by height (`16 / 9`, `4 / 3`); the default is 1, a square.
+
+<Example story="layout-aspectratio--square-by-default" caption="Square, and 1 by 2" />
+
+## Images, video and embeds
+
+Every direct child gets the ratio and the full width, like Mantine's `& > *` rule, and an image or video child also
+gets `object-fit: cover`, so a bare `img` fills the box. A child positioned absolutely, such as an Overlay, sits on
+top without taking room.
+
+<Example height={240} story="layout-aspectratio--bare-image-with-overlay" caption="A bare image with an overlay" />
+
+<Example height={280} story="layout-aspectratio--embed" caption="An embedded page at 16 by 9" />
+
+## Inside a flex container
+
+Give AspectRatio a `flex` basis to size it in a flex row:
+
+<Example height={140} story="layout-aspectratio--flex" caption="100px square in a flex row" />
+
+## Styles API
+
+It has one part, `root`.

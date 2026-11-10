@@ -1,0 +1,58 @@
+---
+title: WeekView
+description: "A week of a schedule: day columns of timed events, a row of all-day events across the week, business hours and the current time."
+status: built
+ticket: su-zx8o
+files:
+  - schedule/WeekView/WeekView.ts
+  - schedule/weekLayout.ts
+  - schedule/TimeGrid/TimeGrid.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`schedule.WeekView(h, { date, events })` shows the week containing `date`. Timed events sit in their day's column,
+laid out side by side when they overlap; all-day and multi-day events run across the all-day row, cut off with a
+square edge where they continue past the week. Recurring events are expanded for the week.
+
+Like [DayView](/schedule/day-view), it keeps no state of its own: `onDateChange` gets the date a week before or after,
+or today, and `onDayClick` the day whose heading was clicked. Pass the view's `model` (from `DayView/model.ts`) with
+`toParentMessage` to drag events between days and times (all-day events move to the day they are dropped on,
+keeping their length), resize them, select slots, drop items from outside and open
+the agenda; `update` reports the same out messages as the day view.
+
+<Example
+  height={620}
+  story="schedule-weekview--usage"
+  caption="A working week: drag events between days, resize them, select empty slots, and open the agenda"
+/>
+
+## Days and labels
+
+`firstDayOfWeek` (Monday) starts the week, and `withWeekendDays={false}` leaves out `weekendDays` (Saturday and
+Sunday); weekend headings are red. `weekdayFormat` (`ddd`) formats the headings, `withWeekNumber` shows the week number
+in the corner, and `highlightToday` circles today's date. The header's label is `weekLabelFormat` (`MMM DD`) for the
+first and last day plus the year, or whatever `renderWeekLabel` returns.
+
+<Example
+  height={560}
+  story="schedule-weekview--options"
+  caption="A static working week starting on Sunday, cascaded, with long weekday names; then the defaults without a header"
+/>
+
+## Time range, slots and the current time
+
+`startTime`, `endTime`, `intervalMinutes` (60), `slotLabelInterval`, `slotLabelFormat`, `slotHeight`,
+`allDaySlotHeight`, `withSubHourGridLines`, `withAllDaySlots`, `highlightBusinessHours`, `businessHours`,
+`startScrollTime` and `maxHeight` work as in the day view. Arrow keys move between slots and across days. Give `now` to draw the current time line on its day;
+`forceCurrentTimeIndicator` draws it on the same weekday of any week shown.
+
+## Differences from Mantine
+
+- `now` is a prop rather than read from the clock.
+- Clicking a weekday heading calls `onDayClick` instead of both `onViewChange("day")` and `onDateChange`, since a click
+  sends one Message.
+- The current time line is drawn on its day's column only, with its time shown when that is the first column.

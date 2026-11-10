@@ -1,0 +1,108 @@
+---
+title: Input
+description: "Base component to create custom inputs."
+status: built
+ticket: su-kbrx
+files:
+  - components/Input/Input.ts
+  - components/Input/InputWrapper.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Disclaimer
+
+`Input` is the base for the other inputs (TextInput, Textarea, Select and the rest). Reach for it to build a
+custom input; for a plain text field use `TextInput` once it is built.
+
+## Usage
+
+`Input` renders the field itself, with Mantine's `variant` (`default`, `filled`, `unstyled`), `size` (`xs` to
+`xl`), `radius`, `disabled`, and `error` and `success` styles. Bind it like any Foldkit field: `value` from your
+model, `onInput` (or `onChange`) to a message.
+
+<Configurator story="inputs-input--configurator" />
+
+<Example story="inputs-input--variants" caption="default, filled and unstyled" />
+
+<Example story="inputs-input--sizes" caption="xs to xl" />
+
+## Loading state
+
+`loading` shows a loader in the right section, or the left one with `loadingPosition: "left"`.
+
+<Example story="inputs-input--loading" caption="Loading" />
+
+## Left and right sections
+
+`leftSection` and `rightSection` sit inside the field; `leftSectionWidth` and `rightSectionWidth` size them, and
+`leftSectionPointerEvents` and `rightSectionPointerEvents` (default `none`) let them take clicks.
+
+<Example story="inputs-input--sections" caption="An icon, and a clear button that empties the field" />
+
+## Change input element
+
+`component` is `input` (default), `textarea`, `select` or `button`. Set `pointer` for a pointer cursor, and
+`multiline` with `textarea`.
+
+<Example story="inputs-input--component" caption="A button and a select" />
+
+<Example story="inputs-input--disabled" caption="Disabled, read only, and a multiline textarea with radius xl" />
+
+## Input.Wrapper component
+
+`InputWrapper` adds the label, description and error around a field. Give it an `id`, and build the field in
+`input`, spreading the `wiring` it hands you: that sets the field's `id`, links the label to it, and fills
+`aria-describedby` with the description and error, as Mantine does through context.
+
+<Example story="inputs-input--wrapper" caption="Label, description and error" />
+
+## inputWrapperOrder
+
+`inputWrapperOrder` sets the order of `label`, `description`, `input` and `error`:
+
+<Example story="inputs-input--wrapper-order" caption="Description below; error and description below" />
+
+## required and withAsterisk props
+
+`required` on the wrapper shows a red asterisk after the label; on the field it sets the `required` attribute.
+`withAsterisk` shows or hides the asterisk on its own.
+
+## error prop
+
+`error: true` styles the field and sets `aria-invalid`; text shows it under the field as well.
+`withErrorStyles: false` keeps the message but leaves the field unstyled.
+
+<Example story="inputs-input--error" caption="Error as boolean, as text, and without error styles" />
+
+## success prop
+
+<Example story="inputs-input--success" caption="Success as boolean and as text" />
+
+## Input.Label, Input.Description and Input.Error components
+
+`InputLabel`, `InputDescription`, `InputError` and `InputSuccess` are the wrapper's parts on their own, for
+custom layouts.
+
+<Example story="inputs-input--compound" caption="Label, description and error" />
+
+## Input.Placeholder component
+
+`InputPlaceholder` shows placeholder text inside a field that has no `placeholder` attribute, such as a button:
+
+<Example story="inputs-input--placeholder" caption="A button input with a placeholder" />
+
+## Input.ClearButton component
+
+`InputClearButton` is a small CloseButton sized for the field, with the field's background, for the right
+section:
+
+<Example story="inputs-input--clear-button" caption="Clear the field" />
+
+## Accessibility
+
+With a wrapper, the label names the field and the description and error describe it. Without one, give the field
+an accessible name (`attributes: { input: { "aria-label": "..." } }`). Set `withAria: false` only when you wire
+the attributes yourself.

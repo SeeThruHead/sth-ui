@@ -1,0 +1,122 @@
+---
+title: Accordion
+description: "Divide content into collapsible sections."
+status: built
+ticket: su-h3om
+files:
+  - components/Accordion/Accordion.ts
+  - components/Collapse/Collapse.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Accordion is built from parts: `accordionItem({ value, children })` holds an `accordionControl` (the button) and an
+`accordionPanel` (the content, animated with [Collapse](/miscellaneous/collapse)). It is controlled: pass `value`
+(the open item, or `null`) and `onChange`, which gets the next value.
+
+<Configurator story="datadisplay-accordion--configurator" />
+
+## Variants
+
+`variant` is `default`, `contained`, `filled` or `separated`.
+
+<Example height={760} story="datadisplay-accordion--variants" caption="The four variants" />
+
+## order prop
+
+`order` (2 to 6) wraps each control in a heading of that level, which assistive technology uses to navigate. The
+examples here use `order: 3`.
+
+## Change chevron
+
+`chevron` replaces the chevron icon, `chevron: null` removes it, and an `accordionControl` can take its own
+`chevron`. The chevron rotates 180° while its item is open (it carries `data-rotate`), so a custom chevron can set
+its own rotation through `styles.chevron`; `disableChevronRotation` turns rotation off. `chevronSize` sets the
+chevron's box (15px by default) and `chevronIconSize` the default icon (16px). With `chevronPosition: "left"` the
+chevron comes before the label.
+
+<Example height={320} story="datadisplay-accordion--chevron" caption="A plus that turns into a cross" />
+
+<Example height={320} story="datadisplay-accordion--chevron-position" caption="Chevron on the left" />
+
+## Custom control label
+
+A control's children can be any content; give it an `ariaLabel` when they are more than its name.
+
+<Example height={360} story="datadisplay-accordion--label" caption="Avatars and descriptions in the controls" />
+
+## With icons
+
+`icon` shows before the label.
+
+<Example height={280} story="datadisplay-accordion--icons" caption="Filled variant with icons" />
+
+## Change transition
+
+`transitionDuration` (200ms by default) sets the panel and chevron transition; `0` turns it off.
+
+<Example height={560} story="datadisplay-accordion--transitions" caption="One second, and no transition" />
+
+## Default opened items
+
+With `multiple: true`, `value` is a list and several items can be open at once.
+
+<Example height={420} story="datadisplay-accordion--multiple" caption="Apples and Bananas open" />
+
+## Disable collapse
+
+`disableCollapse` keeps the open item open when its control is clicked again, so one item always stays open.
+
+<Example height={320} story="datadisplay-accordion--disable-collapse" caption="Apples cannot be closed" />
+
+## Compose controls
+
+`wrap` on a control puts it inside other content, such as a menu button beside it.
+
+<Example height={240} story="datadisplay-accordion--side-controls" caption="Controls with a button beside them" />
+
+## Disabled items
+
+A control with `disabled` cannot be opened and is skipped by the arrow keys.
+
+<Example height={320} story="datadisplay-accordion--disabled" caption="Bananas disabled" />
+
+## Unstyled Accordion
+
+`unstyled` removes every style.
+
+<Example height={300} story="datadisplay-accordion--unstyled" caption="No styles" />
+
+## Styles API
+
+Accordion's named parts are `root`, `item`, `control`, `chevron`, `label`, `icon`, `itemTitle`, `panel` and
+`content`, each taking `styles` and `attributes`. Items, controls and panels also take style props and their own
+`styles`. `radius` rounds the `contained`, `filled` and `separated` items, and `keepMounted: false` (on the
+Accordion or a panel) leaves closed panels out of the page.
+
+<Example
+  height={620}
+  story="datadisplay-accordion--states"
+  caption="Radius, chevron sizes, unmounted panels, headings"
+/>
+
+## Accessibility
+
+Each control is a button with `aria-expanded` and `aria-controls`, and each panel is a `role="region"` named by its
+control.
+
+## Keyboard interactions
+
+Arrow Down and Arrow Up move focus to the next and previous control (looping unless `loop: false`), Home and End to
+the first and last, and Space or Enter toggles the focused item.
+
+## Differences from Mantine
+
+- The parts are values made with `accordionItem`, `accordionControl` and `accordionPanel` rather than components,
+  and controls compose with `wrap` instead of wrapping `Accordion.Control` in a component.
+- Accordion is always controlled: keep the value in your model.
+- `keepMountedMode` is not ported (see [Collapse](/miscellaneous/collapse)).

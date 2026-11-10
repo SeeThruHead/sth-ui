@@ -1,0 +1,75 @@
+---
+title: Popover
+description: "Display popover section relative to given target element."
+status: built
+ticket: su-qf4x
+files:
+  - components/Popover/Popover.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Popover is built on `@foldkit/ui`'s accessible popover, so its state lives in your model: keep `Popover.Model`
+(from `Popover.init({ id })`) and pass its messages through `Popover.update`. `target` builds the element that
+opens it, and gets the attributes to put on it as `bind`; every sth-ui component takes `bind`, so a Button works as
+Mantine's `Popover.Target` child. `children` is the dropdown, Mantine's `Popover.Dropdown`.
+
+<Configurator story="overlays-popover--configurator" />
+
+## Controlled
+
+`Popover.open(model)` and `Popover.close(model)` open and close it from your own messages, and `update` reports
+`Opened` and `Closed` out messages, as Mantine's `onOpen` and `onClose`.
+
+## Same width
+
+`width: "target"` makes the dropdown as wide as the target, for input dropdowns:
+
+<Example story="overlays-popover--same-width" caption="A 280px target and a 280px dropdown" />
+
+## Position and offset
+
+`position` is `top`, `right`, `bottom` (default) or `left`, each with `-start` and `-end`; it flips and shifts to
+stay on screen. `offset` (default 8) is the gap to the target. `withinPortal: false` keeps the dropdown where it is
+rendered instead of moving it to the page's portal root. `zIndex` defaults to 300.
+
+<Example
+  height={180}
+  story="overlays-popover--positions"
+  caption="Right, 16px away, a 10px arrow with a 2px radius, z-index 400"
+/>
+
+## Dropdown arrow
+
+`withArrow` adds the arrow. `arrowSize` (7), `arrowOffset` (5) and `arrowRadius` (0) shape it; `arrowPosition`
+`side` (default) puts it `arrowOffset` from the edge for `-start` and `-end` positions, `center` centres it on the
+target. The arrow follows the side the dropdown ends up on.
+
+<Example height={200} story="overlays-popover--arrow" caption="bottom-start, arrow at the side" />
+
+## Disabled
+
+`disabled` keeps the dropdown closed, whatever the target does:
+
+<Example
+  height={160}
+  story="overlays-popover--disabled"
+  caption="Click Toggle popover: nothing opens until you enable it"
+/>
+
+## Accessibility
+
+The target gets `aria-expanded` and `aria-controls`; focus moves into the dropdown when it opens and back to the
+target on Escape. A click outside, or focus leaving the dropdown, closes it.
+
+## Differences from Mantine
+
+- State lives in your model (`Popover.Model`), as with every stateful sth-ui component.
+- `closeOnEscape`, `closeOnClickOutside` and `returnFocus` are `@foldkit/ui`'s behaviour and always on; `trapFocus`,
+  `withOverlay`, `middlewares` and `keepMounted` are not ported yet.
+- `data-position` on the dropdown is the requested `position`; the side it lands on after flipping is in
+  `data-placement`.

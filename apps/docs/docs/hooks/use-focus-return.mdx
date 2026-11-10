@@ -1,0 +1,23 @@
+---
+title: useFocusReturn
+description: "Remember where focus was and put it back."
+status: built
+ticket: su-hmie
+files:
+  - hooks/commands.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`rememberFocus({ key })` is a Command that marks the focused element under a key, and `returnFocus({ key })` focuses
+it again and clears the mark. Run the first when something opens and the second when it closes, as Mantine's hook
+does with `opened` and `shouldReturnFocus`.
+
+<Example height={140} story="hooks-usefocusreturn--usage" caption="useFocusReturn" />
+
+## Differences from Mantine
+
+- It is two Commands rather than a hook watching `opened`; the element is marked with a data attribute, since a Model cannot hold it.

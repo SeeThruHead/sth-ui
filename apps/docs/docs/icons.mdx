@@ -1,0 +1,38 @@
+---
+title: Icons
+description: "Phosphor's 1,512 icons in six weights, as Foldkit views."
+sidebar_position: 2
+---
+
+import { Example } from "@site/src/components/Example"
+
+# Icons
+
+`@sth-ui/icons` has every [Phosphor](https://phosphoricons.com) icon, the set Mantine's own examples use, as a
+Foldkit view. Import each icon from its own module, so an app only ships the icons it uses:
+
+```ts
+import { HouseIcon } from "@sth-ui/icons/icons/HouseIcon.ts"
+
+ui.Button(h, { leftSection: HouseIcon(h, { size: 16 }), children: ["Home"] })
+```
+
+<Example story="guides-icons--gallery" caption="A few of the 1,512 icons, each labelled" />
+
+## Weights
+
+`weight` is `thin`, `light`, `regular` (the default), `bold`, `fill` or `duotone`.
+
+<Example story="guides-icons--weights" caption="One icon in every weight" />
+
+## Size, colour and names
+
+`size` takes pixels or any CSS length and defaults to `1em`, so an icon matches the text around it. `color`
+defaults to `currentColor`, so it follows the text colour. An icon is hidden from screen readers unless it has
+a `label`, which makes it an image with that name; give one to every icon that carries meaning on its own, such
+as the only content of a button. `mirrored` flips it for right-to-left layouts.
+
+<Example
+  story="guides-icons--sizes-and-colors"
+  caption="16px, a gold filled star, 3rem duotone, and one that follows its text"
+/>

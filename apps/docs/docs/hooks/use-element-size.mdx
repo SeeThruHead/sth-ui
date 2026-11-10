@@ -1,0 +1,22 @@
+---
+title: useElementSize and useResizeObserver
+description: "Follow an element's size."
+status: built
+ticket: su-w1ek
+files:
+  - hooks/mounts.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+The `resizeObserver()` Mount sends `Resized` with the element's content box (`x`, `y`, `width`, `height`, `top`,
+`left`, `bottom`, `right`) whenever it changes; for `useElementSize`, keep only `width` and `height`.
+
+<Example height={170} story="hooks-useelementsize--usage" caption="useElementSize and useResizeObserver" />
+
+## Differences from Mantine
+
+- It is a Mount sending a Message rather than a ref; sizes arrive as the observer reports them rather than on the next animation frame.

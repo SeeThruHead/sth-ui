@@ -1,0 +1,75 @@
+---
+title: SegmentedControl
+description: "A linear set of two or more segments."
+status: built
+ticket: su-kkhv
+files:
+  - components/SegmentedControl/SegmentedControl.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+SegmentedControl is built on `@foldkit/ui`'s radio group: keep `SegmentedControl.Model` (from
+`SegmentedControl.init({ id })`) and the chosen `value` in your model, pass its messages through
+`SegmentedControl.update`, and take the new value from its `Selected` out message. Without a `value` the first item
+is chosen. Name the group with `ariaLabel`.
+
+<Configurator story="inputs-segmentedcontrol--configurator" />
+
+## Controlled
+
+SegmentedControl is always controlled: `value` is what it shows.
+
+## Data prop
+
+`data` takes strings, or items with a `value`, a `label` (any content) and `disabled`.
+
+## Disabled
+
+<Example height={200} story="inputs-segmentedcontrol--disabled" caption="A disabled control, then a disabled option" />
+
+## React node as label
+
+<Example story="inputs-segmentedcontrol--labels" caption="Icons next to each label" />
+
+## Color
+
+`color` fills the indicator; the chosen label turns white.
+
+<Example story="inputs-segmentedcontrol--color" caption="A blue indicator" />
+
+## Auto contrast
+
+`autoContrast` picks black or white for the chosen label from the color's lightness.
+
+<Example height={140} story="inputs-segmentedcontrol--auto-contrast" caption="Lime without and with auto contrast" />
+
+## Transitions
+
+The indicator slides to the chosen segment over `transitionDuration` (200ms by default) with
+`transitionTimingFunction`. It is placed with CSS anchor positioning, so nothing is measured in JavaScript.
+
+<Example height={160} story="inputs-segmentedcontrol--transitions" caption="No transition, then 500ms linear" />
+
+## readOnly
+
+<Example story="inputs-segmentedcontrol--read-only" caption="Read only, Vue chosen" />
+
+## Accessibility and usability
+
+The control is a `role="radiogroup"` and each segment a `role="radio"`; only the chosen segment is in the tab order,
+and the arrow keys of its `orientation` move to the next segment and choose it. Name the group with `ariaLabel`, and
+for icon-only segments put a visually hidden label next to each icon.
+
+<Example story="inputs-segmentedcontrol--icons-only" caption="Icons with visually hidden labels" />
+
+## Differences from Mantine
+
+- State lives in your model; there is no `defaultValue`.
+- The indicator follows the chosen segment with CSS anchor positioning instead of
+  measuring the segments; where anchor positioning is missing it does not show.
+- The arrow keys follow `orientation` instead of both directions.

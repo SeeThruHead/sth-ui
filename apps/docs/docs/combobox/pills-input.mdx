@@ -1,0 +1,41 @@
+---
+title: PillsInput
+description: "Base component for custom tags inputs and multi selects."
+status: built
+ticket: su-qqmo
+files:
+  - components/PillsInput/PillsInput.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+PillsInput is an input that holds [pills](/combobox/pill) followed by a text field, the base MultiSelect and
+TagsInput are built on. Keep `PillsInput.Model` (from `PillsInput.init({ id })`) in your model and pass its messages
+through `PillsInput.update`: clicking anywhere in the input focuses the field. Give it the `pills` to show and a
+`field` with its `value`, `placeholder`, `onInput`, `onKeyDown`, `onFocus` and `onBlur`.
+
+<Configurator story="combobox-pillsinput--configurator" />
+
+## Field type
+
+`field.type` is `visible` (default), `hidden` (the field is there for the keyboard but takes no space), or `auto`
+(hidden until it has focus). `field.pointer` gives it a pointer cursor, for a select that opens on click.
+
+## Input props
+
+PillsInput takes Input's `label`, `description`, `error`, `required`, `size`, `radius`, `variant`, `disabled`,
+`leftSection` and `rightSection`. In a `filled` input, give the pills `variant: "contrast"`.
+
+## Accessibility
+
+The label, description and error point at the field, which is the input's only focusable part.
+
+## Differences from Mantine
+
+- Mantine composes `PillsInput` with `Pill.Group` and `PillsInput.Field` as children and shares state through React
+  context. Here PillsInput lays out its `pills` and `field` itself, so it can wire the label and messages to the field.
+- Pills do not switch to the contrast variant by themselves in a filled input.

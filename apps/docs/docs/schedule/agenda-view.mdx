@@ -1,0 +1,43 @@
+---
+title: AgendaView
+description: "A schedule as a list: the events between two dates, grouped by day."
+status: built
+ticket: su-vmkb
+files:
+  - schedule/AgendaView/AgendaView.ts
+  - schedule/AgendaView/agenda.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`schedule.AgendaView(h, { rangeStart, rangeEnd, events })` lists the events from `rangeStart` to `rangeEnd` (dates,
+inclusive) under a header for each day that has any. Recurring events are expanded for the range, multi-day events
+appear on every day they cover, and background events are left out. Each row shows the event's color, title and times,
+or "All day". `onEventClick` turns a click into your Message.
+
+<Example
+  height={420}
+  story="schedule-agendaview--usage"
+  caption="Three days of events, with a recurring standup and a multi-day conference"
+/>
+
+## Formats, labels and mode
+
+`headerFormat` (`MMMM D, YYYY`) formats the two dates of the range in the header and `dateHeaderFormat`
+(`dddd, MMMM D`) each day's heading; either can be a function. `labels.noEvents` is shown when the range is empty and
+`labels.allDay` for events without times. `mode="static"` turns off clicks, and `renderEvent` replaces each row,
+receiving the attributes and children it would have had.
+
+<Example
+  height={300}
+  story="schedule-agendaview--options"
+  caption="Static with custom formats and rows, and an empty range"
+/>
+
+## Differences from Mantine
+
+- Event ids that repeat keep their first event instead of throwing.
+- `renderEvent` works with attribute lists instead of React props.

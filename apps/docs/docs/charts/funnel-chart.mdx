@@ -1,0 +1,40 @@
+---
+title: FunnelChart
+description: "Funnel chart component."
+status: built
+ticket: su-tqxr
+files:
+  - charts/FunnelChart/FunnelChart.ts
+  - charts/FunnelChart/funnel.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+`data` is a list of `{ name, value, color }`, one row of the funnel each, top to bottom. Each row's top edge is as wide
+as its value against the largest, and its bottom edge as wide as the next row's; the last row narrows to a point.
+`size` (300) sets the chart's width and height. Hovering a row shows a tooltip.
+
+<Configurator story="charts-funnelchart--configurator" />
+
+## Labels, legend and tooltip
+
+- `withLabels` writes each row's value to the `right` (default), `left` or `inside` it (`labelsPosition`), formatted
+  by `valueFormatter`; `labelColor` colours them.
+- `withLegend` adds a legend below; hovering one of its items fades the other rows.
+- `tooltipDataSource: "segment"` shows only the hovered row, and `withTooltip: false` turns the tooltip off.
+- `strokeColor` and `strokeWidth` set the rows' outline.
+
+<Example
+  height={720}
+  story="charts-funnelchart--options"
+  caption="Labels right, inside and left; legend with a segment tooltip; no tooltip"
+/>
+
+## Differences from Mantine
+
+- It draws its own SVG rather than recharts; `funnelProps`, `funnelChartProps`, `tooltipProps`, `legendProps` and
+  children are not supported.

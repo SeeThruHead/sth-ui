@@ -1,0 +1,33 @@
+---
+title: Fieldset
+description: "Group related elements in a form."
+status: built
+ticket: su-scit
+files:
+  - components/Fieldset/Fieldset.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+<Configurator story="inputs-fieldset--configurator" />
+
+## Usage
+
+Fieldset groups related inputs in a `<fieldset>` with a `legend`. `variant` is `default`, `filled` or `unstyled`, and
+`radius` rounds the corners.
+
+<Example height={240} story="inputs-fieldset--usage" caption="Personal information" />
+
+<Example height={460} story="inputs-fieldset--variants" caption="Filled with md radius, and unstyled" />
+
+## Disabled
+
+`disabled` disables every input and button inside the fieldset, as the browser does for a disabled `<fieldset>`.
+
+<Example height={280} story="inputs-fieldset--disabled" caption="Disabled" />
+
+## Styles API
+
+Its parts are `root` and `legend`; the root carries `data-variant`.

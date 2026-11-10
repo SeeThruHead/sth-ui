@@ -1,0 +1,29 @@
+---
+title: TimeValue
+description: "Shows a time string in 24 or 12 hour format."
+status: built
+ticket: su-hsnn
+files:
+  - dates/TimeValue/TimeValue.ts
+  - dates/time/clock.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+TimeValue shows `value` (`"HH:mm"` or `"HH:mm:ss"`) as `format` (`"24h"` by default, or `"12h"` with `amPmLabels`),
+with seconds when `withSeconds` is set. A value that is not a time shows nothing. `timeValue(props)` returns the same
+text as a string.
+
+<Example
+  height={200}
+  story="dates-timevalue--usage"
+  caption="24 and 12 hour formats, seconds, custom labels, and an invalid value"
+/>
+
+## Differences from Mantine
+
+- `value` is a string; Mantine also takes a `Date`, which this port avoids (read the time out of it first).
+- The text is wrapped in a `span`, where Mantine renders it bare.

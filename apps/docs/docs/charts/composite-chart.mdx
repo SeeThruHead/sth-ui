@@ -1,0 +1,34 @@
+---
+title: CompositeChart
+description: "Composed chart with support for Area, Bar and Line series."
+status: built
+ticket: su-bmdn
+files:
+  - charts/CompositeChart/CompositeChart.ts
+  - charts/grid/gridView.ts
+  - charts/grid/bars.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+CompositeChart draws each series by its `type`: `line`, `area` (filled at 0.2 opacity) or `bar`. It takes the same
+data, axes, grid, legend and tooltip props as [LineChart](/charts/line-chart). With bar series the x axis has bands
+and the lines and areas pass through the middle of each band; `maxBarWidth` caps the bars' width.
+
+<Configurator story="charts-compositechart--configurator" />
+
+## Lines and areas only
+
+Without bar series the x axis runs edge to edge, as in LineChart.
+
+<Example height={300} story="charts-compositechart--lines" caption="A dashed line and an area, with a legend" />
+
+## Differences from Mantine
+
+- It draws its own SVG and HTML rather than recharts; `lineProps`, `areaProps`, `barProps`, `composedChartProps` and
+  children are not supported.
+- Not ported yet: a right y axis, point labels, the brush and reference areas.

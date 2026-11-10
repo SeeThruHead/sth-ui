@@ -1,0 +1,41 @@
+---
+title: Loader
+description: "An animated loading indicator in three shapes, sized and coloured from the theme. It is a status with the accessible name Loading (or your label), so a screen reader announces it."
+status: built
+ticket: su-92bq
+files:
+  - components/Loader/Loader.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+<Configurator story="feedback-loader--configurator" />
+
+<Example story="feedback-loader--types" caption="oval, bars and dots" />
+
+## Size and colour
+
+`size` is `xs` to `xl`, a number of pixels or any CSS size; `color` is a theme colour, a shade or any CSS
+colour.
+
+<Example story="feedback-loader--sizes-and-colors" caption="xs, xl in red, and 50px dots in a custom colour" />
+
+## Custom loaders
+
+`loaders` adds your own types, or replaces a built-in one, and `type` picks one. Set it once as a default and
+every Loader (and every Button's `loading` state) can use it:
+
+```ts
+const line: LoaderView = (h, root) => h.span(root(styles.line), [])
+
+createUi({ components: { Loader: { defaultProps: { loaders: { line }, type: "line" } } } })
+```
+
+`root(shape)` gives the loader's own attributes with your style added, so size, colour and the accessible
+name still apply. An unknown `type` falls back to `oval`.
+
+<Example story="feedback-loader--custom-loaders" caption="A custom line, a replaced oval and an unknown type" />
+
+`children` replaces the shape entirely with your own content.

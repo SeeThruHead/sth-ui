@@ -1,0 +1,46 @@
+---
+title: Getting started
+sidebar_position: 1
+slug: /
+---
+
+import { Example } from "@site/src/components/Example"
+
+# sth-ui
+
+Mantine's components, ported to [Foldkit](https://foldkit.dev) and Effect and styled with StyleX. The components
+take Mantine's props, name their parts the way Mantine does, and are themed the StyleX way, so one set of
+components can look different in each app.
+
+<Example story="buttons-button--variants" caption="Button, in every variant" />
+
+## Use it in an app
+
+1. Add `@sth-ui/core` to the app's `package.json` (`"@sth-ui/core": "workspace:*"` in a workspace) and compile it
+   with StyleX like the app's own code (`@stylexjs/unplugin` in Vite).
+2. Import at least one stylesheet of the app's own. A production build appends StyleX's CSS to it; without one
+   the components render unstyled.
+3. Target current browsers in `browserslist` (`last 2 Chrome versions`, Safari, iOS, Firefox) so `light-dark()`
+   reaches the browser as written.
+4. Build the components once and wrap the app in `ThemeProvider`:
+
+```ts
+import { createUi } from "@sth-ui/core/Ui.ts"
+
+const ui = createUi({ components: { Button: { defaultProps: { radius: "xl" } } } })
+
+const view = (model: Model, h: HtmlBuilder<Message>) =>
+  ui.ThemeProvider(h, {
+    primaryColor: "grape",
+    colorScheme: "auto",
+    children: [ui.Button(h, { onClick: Message.Saved(), children: ["Save"] })]
+  })
+```
+
+## What is different from Mantine
+
+- Themes are StyleX themes (`stylex.createTheme`) applied to a part of the page, not a theme object read at run
+  time. See [Theme](/theming/theme).
+- The Styles API takes StyleX styles per named part instead of class names. See [Styles API](/styling/styles-api).
+- Components that hold state (menus, comboboxes, tabs) expose a Foldkit `Model`, `Message`, `init` and `update`,
+  because Foldkit has no component state.

@@ -1,0 +1,21 @@
+---
+title: Stack
+description: "Lay things out in a column with even gaps. Items stretch to the column's width unless align says otherwise."
+status: built
+ticket: su-hppz
+files:
+  - components/Stack/Stack.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+<Configurator story="layout-stack--configurator" />
+
+## Gap, align and justify
+
+`gap` takes a theme size or pixels (default `md`). `align` and `justify` take any `align-items` and
+`justify-content` value (defaults `stretch` and `flex-start`).
+
+<Example story="layout-stack--align-and-justify" caption="Centred, at the bottom of a 260px column" />

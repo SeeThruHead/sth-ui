@@ -1,0 +1,26 @@
+---
+title: useMove
+description: "Track dragging across an element as a position from 0 to 1."
+status: built
+ticket: su-ah5l
+files:
+  - hooks/useMove/scrub.ts
+  - hooks/mounts.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+The `move({ dir })` Mount sends `ScrubStarted` when the element is pressed (mouse or touch), `Moved` with `{ x, y }`
+from 0 to 1 within the element as the pointer moves anywhere on the page, and `ScrubEnded` on release; `dir: "rtl"`
+mirrors `x`. It is the building block for sliders and color pickers. `movePosition(point, rect, dir)` is the pure
+calculation.
+
+<Example height={170} story="hooks-usemove--usage" caption="useMove" />
+
+## Differences from Mantine
+
+- It is a Mount sending Messages rather than a hook with `onChange` and handlers; `active` is the Model's own flag between `ScrubStarted` and `ScrubEnded`.
+- Positions arrive on each pointer event rather than on the next animation frame.

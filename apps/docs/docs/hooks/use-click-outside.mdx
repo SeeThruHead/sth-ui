@@ -1,0 +1,47 @@
+---
+title: useClickOutside
+description: "A Mount that reports clicks outside an element as a Message."
+status: built
+ticket: su-83my
+files:
+  - hooks/useClickOutside/clickOutside.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`clickOutside(options)` is a Mount. Put it on the element with `h.OnMount` and map its `ClickedOutside` message
+(which carries the event's name) to one of the app's own; a click or touch anywhere outside the element sends it.
+
+```ts
+import * as Mount from "foldkit/mount"
+import { clickOutside } from "@sth-ui/hooks/useClickOutside/clickOutside.ts"
+
+h.div([h.OnMount(Mount.mapMessage(clickOutside(), () => Message.Closed()))], [dropdown])
+```
+
+<Example height={160} story="hooks-useclickoutside--usage" caption="Click outside the paper to close it" />
+
+## Options
+
+- `events` (`["mousedown", "touchstart"]`) are the document events that count as a click.
+- `nodes` are CSS selectors for the elements that count as inside, in place of the element the Mount is on: a click
+  reports only when it is outside all of them, and never while one of them is missing.
+- `capture` (`false`) listens in the capture phase.
+
+Clicks on elements that left the page while the event was handled (a button that removes itself) are ignored, as in
+Mantine.
+
+<Example
+  height={200}
+  story="hooks-useclickoutside--nodes"
+  caption="Clicks outside both papers are counted, on click, in the capture phase"
+/>
+
+## Differences from Mantine
+
+- It is a Mount, not a hook returning a ref: the element it is on is the ref, and the handler is a Message.
+- `nodes` are selectors rather than element references.
+- `enabled` is not an option: leave the Mount out of the view while it should not listen.

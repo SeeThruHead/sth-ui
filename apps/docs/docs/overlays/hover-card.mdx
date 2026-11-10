@@ -1,0 +1,49 @@
+---
+title: HoverCard
+description: "Display popover section when target element is hovered."
+status: built
+ticket: su-dwir
+files:
+  - components/HoverCard/HoverCard.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+HoverCard opens a card when the pointer rests on its target, and keeps it open while the pointer is over the target
+or the card. Keep `HoverCard.Model` (from `HoverCard.init({ id })`) in your model and pass its messages to
+`HoverCard.update`. `target` renders the trigger from the attributes it is given. It takes Popover's `position`,
+`offset`, `width`, `shadow`, `radius`, arrow and portal options.
+
+<Example height={200} story="overlays-hovercard--usage" caption="Hover the button" />
+
+## Delays
+
+`openDelay` (0 by default) and `closeDelay` (150 by default) are set in `HoverCard.init`.
+
+<Example height={160} story="overlays-hovercard--delay" caption="A slow open and a slow close" />
+
+## Keyboard interactions
+
+Focusing the target with the keyboard opens the card; Escape closes it and returns focus to the target.
+
+## Dropdown role
+
+`role` sets the card's role (`dialog` by default) and the target's `aria-haspopup`; use `tooltip` for a card that
+only explains its target. `withRoles={false}` leaves the ARIA attributes off.
+
+<Example height={180} story="overlays-hovercard--role" caption="A tooltip-like card" />
+
+## Accessibility
+
+The target gets `aria-haspopup`, `aria-expanded` and, while open, `aria-controls` naming the card.
+
+## Differences from Mantine
+
+- `HoverCard.Group` (shared delays) and the `events` and `interactive` props are not ported. Moving from the target to
+  the card is covered by `closeDelay` rather than a safe triangle.
+- `initiallyOpened` is an `init` option; `onOpen` and `onClose` are the `Opened` and `Closed` out messages.
+- `data-position` on the dropdown is the requested `position`; the side it lands on after flipping is in
+  `data-placement`.

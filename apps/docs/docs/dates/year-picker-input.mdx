@@ -1,0 +1,29 @@
+---
+title: YearPickerInput
+description: "An input that opens a YearPicker in a popover."
+status: built
+ticket: su-8z7i
+files:
+  - dates/YearPickerInput/YearPickerInput.ts
+  - dates/picker/PickerInput.ts
+  - dates/picker/inputModel.ts
+  - dates/picker/format.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+YearPickerInput is a button-like input that opens a [YearPicker](/dates/year-picker) in a Popover. Keep
+`PickerInput.init({ id, today, level: "year", type, value })` in the Model, route its Messages through
+`PickerInput.update(model, message, options)` and its Commands back to the runtime, and render it with `model` and
+`toParentMessage`. `update` reports `Changed` with the new value, and `Opened` and `Closed`. The value is shown as
+`YYYY` by default; label, description, error, sections and the other Input props work as on TextInput.
+
+<Example height={300} story="dates-yearpickerinput--usage" caption="One year, a range, and a disabled input" />
+
+## Differences from Mantine
+
+- It is a submodel (`init`, `update`, out messages) rather than a controlled or uncontrolled component.
+- `dropdownType="modal"` is not supported; the dropdown is always a Popover.

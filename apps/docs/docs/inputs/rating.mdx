@@ -1,0 +1,64 @@
+---
+title: Rating
+description: "Pick and display rating."
+status: built
+ticket: su-cynz
+files:
+  - components/Rating/Rating.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Rating is a row of symbols you pick a value from. Keep `Rating.Model` (from `Rating.init({ id })`, which remembers
+the hovered value for the preview) and the `value` in your model, pass its messages through `Rating.update`, and
+take the new value from its `Changed` out message (`Hovered` carries the previewed value, Mantine's `onHover`).
+
+<Configurator story="inputs-rating--configurator" />
+
+## Controlled
+
+Rating is always controlled: `value` is what it shows.
+
+## Read only
+
+<Example story="inputs-rating--read-only" caption="3.5 stars, read only" />
+
+## Allow clear
+
+`allowClear` lets a click on the chosen value clear it to 0.
+
+<Example height={140} story="inputs-rating--allow-clear" caption="Click the third star to clear it" />
+
+## Fractions
+
+`fractions` splits each symbol into that many parts, each its own choice.
+
+<Example height={160} story="inputs-rating--fractions" caption="Halves, thirds and quarters" />
+
+## Custom symbol
+
+`emptySymbol` and `fullSymbol` replace the star; the full symbol is drawn over the empty one, clipped to how much of
+it is filled.
+
+<Example story="inputs-rating--symbol" caption="Suns that become moons" />
+
+## Symbols for each item
+
+Either symbol can be a function of the item's value. `highlightSelectedOnly` fills only the chosen item.
+
+<Example story="inputs-rating--custom-symbol" caption="Faces from sad to happy" />
+
+## Accessibility
+
+Rating is a `role="radiogroup"` (named by `ariaLabel`, "Rating" by default) of `role="radio"` items named by
+`getSymbolLabel` (the value by default). Only the chosen item is in the tab order; the arrow keys move the value by
+one fraction.
+
+## Differences from Mantine
+
+- State lives in your model, including the hovered value Mantine keeps inside the component.
+- Touch dragging across the symbols is not ported yet; tapping a symbol chooses it.

@@ -1,0 +1,24 @@
+---
+title: Affix
+description: "Renders children inside portal at fixed position."
+status: built
+ticket: su-8k7k
+files:
+  - components/Affix/Affix.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+Affix fixes its children to a corner of the screen, inside a [Portal](/miscellaneous/portal). `position` takes
+`top`, `left`, `bottom` and `right` as spacing values or pixels (bottom right, 0 and 0, by default), `zIndex` is 200
+by default, and `withinPortal: false` keeps it where it is written.
+
+<Example height={160} story="overlays-affix--usage" caption="A button fixed 20px from the bottom left" />
+
+## Differences from Mantine
+
+- Mantine's demo shows the button only once the page scrolls; the example frame here does not scroll, so it is always
+  shown.

@@ -1,0 +1,24 @@
+---
+title: useMask
+description: "Format text into an input mask."
+status: built
+ticket: su-55sc
+files:
+  - hooks/useMask/mask.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`formatMask(raw, options)` fits raw characters into a mask such as `"(999) 999-9999"` (`9` a digit, `a` a letter, `*`
+either, with custom `tokens`, `slotChar`, `alwaysShowMask` and the rest of Mantine's options), `unformatMask` reads
+the raw characters back, `isMaskComplete` says whether every slot is filled, and `generatePattern` builds an input
+`pattern`. The cursor and keyboard handling live in [MaskInput](/inputs/mask-input), which is built on them.
+
+<Example height={120} story="inputs-maskinput--usage" caption="useMask" />
+
+## Differences from Mantine
+
+- The formatting is pure functions; the editing behaviour Mantine's hook attaches to an input is MaskInput's.

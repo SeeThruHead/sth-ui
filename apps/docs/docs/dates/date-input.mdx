@@ -1,0 +1,46 @@
+---
+title: DateInput
+description: "A text input for a date that parses what is typed and opens a calendar."
+status: built
+ticket: su-arf0
+files:
+  - dates/DateInput/DateInput.ts
+  - dates/DateInput/model.ts
+  - dates/date/parse.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+DateInput is a text input for one date. Focusing or clicking it opens a [Calendar](/dates/calendar) below it; picking
+a day sets the value and closes it, and Escape or leaving the input closes it too. Keep
+`DateInput.init({ id, today, value }, context)` in the Model, route its Messages through
+`DateInput.update(model, message, context)`, and render it with `model` and `toParentMessage`. `update` reports
+`Changed` with the new value, a `YYYY-MM-DD` string or `null`.
+
+<Configurator story="dates-dateinput--configurator" />
+
+## Typing a date
+
+What is typed is read with `valueFormat` (`"MMMM D, YYYY"` by default, dayjs tokens, month names in `locale`), and
+`YYYY-MM-DD` is always accepted. A date that parses and falls between `minDate` and `maxDate` becomes the value and
+the calendar moves to it. On leaving, the input shows the value in `valueFormat` again unless `fixOnBlur` is `false`.
+`dateParser` replaces the parser. Emptying the input clears the value when `clearable` or `allowDeselect` is set.
+
+## Clearing, presets and forms
+
+- `clearable` adds a clear button and lets picking the selected day again clear it (`allowDeselect` overrides that).
+- `presets` lists dates (or `null`) beside the calendar.
+- `name` writes the value into a hidden input.
+- Every Calendar prop goes to the dropdown, which keeps focus in the input.
+
+## Differences from Mantine
+
+- It is a submodel; the context (`valueFormat`, `minDate`, `clearable` and the rest) is passed to `init` and `update`
+  as well as the view.
+- Typed text is read by `valueFormat` or as `YYYY-MM-DD`; Mantine's last fallback, the browser's `Date` parser, is
+  left out because its results differ between browsers.
+- `withTime` belongs to DateTimePicker here.

@@ -1,0 +1,9 @@
+[
+  {
+    "app": "wish-farm",
+    "file": "src/domains/plan/Forecast.test.ts",
+    "test": "Forecast > waits",
+    "since": "2026-10-30",
+    "reason": "flaked 3 times in 14 days"
+  }
+]

@@ -1,0 +1,38 @@
+---
+title: Image
+description: "Image with optional fallback."
+status: built
+ticket: su-8841
+files:
+  - components/Image/Image.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`Image` is an `img` with minimal styles. By default it takes 100% of its parent's width; set its size with the
+`w` and `h` style props.
+
+<Example story="data-display-image--usage" caption="An image with radius md" />
+
+## Image height
+
+Set a height with `h` so the page doesn't jump while the image loads:
+
+<Example story="data-display-image--height" caption="200px tall" />
+
+## Image fit
+
+The image has `object-fit: cover` by default, so it covers its box. Set `w="auto"` and `fit="contain"` to keep
+the whole picture instead:
+
+<Example story="data-display-image--contain" caption="200px tall, its own width" />
+
+## Fallback image
+
+Set `fallbackSrc` to show another image when `src` is missing or fails to load. The image gets
+`data-fallback` while it shows the fallback, and `onError` sends a message when loading fails.
+
+<Example story="data-display-image--fallback" caption="A missing picture, shown as a placeholder" />

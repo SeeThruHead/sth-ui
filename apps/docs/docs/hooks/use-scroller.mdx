@@ -1,0 +1,22 @@
+---
+title: useScroller
+description: "Scroll state and buttons for a horizontal scroller."
+status: built
+ticket: su-ptjj
+files:
+  - hooks/useScroller/scroller.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+The Model, Messages, `update` and `scrollState` behind [Scroller](/miscellaneous/scroller): whether it can scroll back or
+forward, scrolling by the `scrollAmount` on the buttons, and dragging to scroll.
+
+<Example height={140} story="miscellaneous-scroller--usage" caption="useScroller" />
+
+## Differences from Mantine
+
+- It is the component's Foldkit submodel rather than a hook.

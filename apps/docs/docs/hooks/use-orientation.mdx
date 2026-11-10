@@ -1,0 +1,24 @@
+---
+title: useOrientation
+description: "Follow the screen orientation."
+status: built
+ticket: su-8d62
+files:
+  - hooks/useOrientation/orientation.ts
+  - hooks/browser.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`orientation` is a Stream of `{ angle, type }` from `screen.orientation`, starting with the current orientation and
+sending each change. Return it from a Subscription.
+
+<Example height={90} story="hooks-useorientation--usage" caption="This screen's orientation" />
+
+## Differences from Mantine
+
+- It is a Stream for a Subscription rather than a hook; the Model's own initial value replaces `defaultAngle` and
+  `defaultType`.

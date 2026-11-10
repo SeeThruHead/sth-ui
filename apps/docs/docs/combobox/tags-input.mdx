@@ -1,0 +1,72 @@
+---
+title: TagsInput
+description: "Capture a list of values from user with free input and suggestions."
+status: built
+ticket: su-wkf8
+files:
+  - components/TagsInput/TagsInput.ts
+  - components/MultiSelect/MultiSelect.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+TagsInput turns what you type into [pills](/combobox/pill): Enter (or a split character) adds the text as a tag,
+Backspace in an empty field removes the last one, and each pill has a remove button. Keep `TagsInput.Model` (from
+`TagsInput.init({ id })`) and the tags in your model, and pass its messages through
+`TagsInput.update(model, message, { values })`; its `Changed` out message carries the new list.
+
+<Configurator story="combobox-tagsinput--configurator" />
+
+## Controlled
+
+TagsInput is always controlled: `value` is the list of tags.
+
+## Clearable
+
+<Example story="combobox-tagsinput--clearable" caption="One tag, with a clear button" />
+
+## Max tags
+
+`update(model, message, { values, maxTags: 3 })` stops adding once there are three.
+
+## Accept value on blur
+
+What is typed becomes a tag when the field loses focus; `acceptValueOnBlur: false` in `update`'s context drops it
+instead.
+
+## Allow duplicates
+
+Tags are unique (ignoring case) unless `allowDuplicates: true` is passed to `update`.
+
+## Split chars
+
+`splitChars` (`[","]` by default) are keys that add the typed text as a tag. Give the same list to the component and to
+`update`, which also splits pasted text by them.
+
+## With suggestions
+
+`data` offers suggestions as you type, leaving out the tags already added. Arrow down to one and press Enter, or
+click it, to add it; Enter without choosing one adds what you typed.
+
+<Example height={300} story="combobox-tagsinput--suggestions" caption="Suggestions for React, Angular and Svelte" />
+
+## Input props
+
+TagsInput takes MultiSelect's input props: `label`, `description`, `error`, `size`, `radius`, `variant`, `limit`,
+`filter`, `maxDropdownHeight`, `name`, `disabled` and `readOnly`.
+
+## Accessibility
+
+The input is a `role="combobox"` named by its `label`. The pills' remove buttons are out of the tab order: Backspace
+removes the last tag from the keyboard.
+
+## Differences from Mantine
+
+- State lives in your model, and `update` takes the current tags and the rules (`maxTags`, `allowDuplicates`,
+  `splitChars`, `acceptValueOnBlur`).
+- Enter in an empty field does not submit a form.
+- `isDuplicate`, `onDuplicate`, `renderOption`, `renderPill` and pill reordering are not ported yet.

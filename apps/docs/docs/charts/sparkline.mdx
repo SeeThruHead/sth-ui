@@ -1,0 +1,47 @@
+---
+title: Sparkline
+description: "Simplified area chart to show trends."
+status: built
+ticket: su-2dei
+files:
+  - charts/Sparkline/Sparkline.ts
+  - charts/shared/geometry.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Sparkline is a small area chart without axes, for showing a trend inline. `data` is a list of numbers (or `null`
+for a missing value); the root takes style props such as `w` and `h`. `color` sets the line and the area, `fillOpacity`
+(0.6) the area's opacity at the top, `strokeWidth` (2) the line, and `withGradient: false` fills the area with one
+flat colour.
+
+<Configurator story="charts-sparkline--configurator" />
+
+## Trend colors
+
+`trendColors: { positive, negative, neutral }` colours the chart by its trend: `positive` when the last value is
+higher than the first, `negative` when it is lower, and `neutral` (or `positive` when it is left out) when they are
+equal.
+
+<Example height={300} story="charts-sparkline--trend" caption="Positive, negative and neutral trends" />
+
+## Curve type and missing values
+
+`curveType` is `linear` (default), `natural`, `monotone`, `step`, `stepBefore`, `stepAfter` or `bump`. `null` values
+are skipped and the line joins across them; `connectNulls: false` breaks the line instead.
+
+<Example
+  height={420}
+  story="charts-sparkline--curves"
+  caption="Every curve type, and a chart with gaps and no gradient"
+/>
+
+## Differences from Mantine
+
+- It draws its own SVG rather than recharts, so `areaProps` is not supported. The value axis starts at 0 and rounds
+  its top up the way recharts does, so the chart has the same shape.
+- Without an `id`, the gradient's id is derived from the data and colour.

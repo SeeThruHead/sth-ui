@@ -1,0 +1,87 @@
+---
+title: Notifications
+description: "A notifications system: show, update and hide notifications from Messages, with a queue, auto close, swipe to dismiss and a stacked layout."
+status: built
+ticket: su-ifey
+files:
+  - components/Notifications/Notifications.ts
+  - components/Notifications/model.ts
+  - components/Notifications/queue.ts
+  - components/Notifications/gesture.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+Put `Notifications.init({ id })` in the Model, route its Messages and Commands through
+`Notifications.update(model, message, context)`, and render `ui.Notifications(h, { ...context, model, toParentMessage })`
+once. Pass the same `context` (`position`, `limit`, `autoClose`, `transitionDuration`, `pauseResetOnHover`) to both.
+Send the Messages these helpers build from anywhere in the app:
+
+- `show({ title, message, color, icon, loading, autoClose, ... })` adds a notification and reports `Opened`.
+- `hideNotification(id)` closes one and reports `Closed`.
+- `updateNotification({ id, ... })` changes one in place, for example to finish a loading notification.
+- `clean()` closes them all; `cleanQueue()` drops the ones waiting in the queue.
+
+<Example
+  height={160}
+  story="extensions-notifications--usage"
+  caption="Buttons that show, update and clean notifications"
+/>
+
+## Positions
+
+`position` sets where notifications appear by default (`bottom-right`); each notification can choose its own. There
+are six positions: `top-left`, `top-right`, `top-center`, `bottom-left`, `bottom-right` and `bottom-center`.
+
+<Example height={120} story="extensions-notifications--positions" caption="A button for each position" />
+
+## Limit and queue
+
+At most `limit` notifications (5 by default) show at each position. The rest wait in a queue, highest `priority` first,
+and appear as others close.
+
+## Auto close
+
+Notifications close after `autoClose` milliseconds (4000 by default). A notification's own `autoClose` overrides it,
+and `false` on either keeps the notification open. Hovering any notification pauses every timer; set
+`pauseResetOnHover="notification"` to pause only the one under the pointer. `withAutoCloseProgress` shows a bar that
+fills until the notification closes.
+
+## Swipe to dismiss
+
+Drag a notification sideways past a third of its width, or flick it, to dismiss it; a horizontal wheel or trackpad
+scroll does the same. `allowDragDismiss` and `allowScrollDismiss` turn them off; a notification with
+`allowClose: false` cannot be dismissed or closed by the user.
+
+## Stacked layout
+
+`layout="stacked"` piles each position's notifications on top of each other, newest in front. Hovering or focusing the
+stack spreads it out; on a touch screen a tap spreads it until you tap elsewhere.
+
+<Example
+  height={160}
+  story="extensions-notifications--stacked"
+  caption="A stacked layout with a custom renderNotification"
+/>
+
+## Custom notifications
+
+`renderNotification(h, entry, close)` draws every notification itself; `icons` maps a notification's `icon` name to
+what the default Notification shows.
+
+## Styles API
+
+Parts: `root` (each position's container), `notification` and `progress`. `containerWidth` (440), `notificationMaxHeight`
+(200), `zIndex` and `transitionDuration` (250) set its sizes and timing; `withinPortal` (true) renders it in a portal.
+
+## Differences from Mantine
+
+- Notifications are shown by Messages handled by `update`, not by global functions and a store; ids are given or
+  numbered by the model, not random. `onOpen` and `onClose` are the `Opened` and `Closed` out messages.
+- A notification's `message`, `title` and `icon` are text and names, since a Model cannot hold views; `icons` and
+  `renderNotification` turn them into views.
+- `notifications.promise` is not ported: show a loading notification and update it from your own Command's result.
+- A stacked notification counts focus and hover together when deciding whether to spread the stack.

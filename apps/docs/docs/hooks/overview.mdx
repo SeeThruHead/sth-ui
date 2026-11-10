@@ -1,0 +1,49 @@
+---
+title: Overview
+description: "How Mantine's hooks map onto Foldkit's Model, Commands, Subscriptions and Mounts."
+sidebar_position: 0
+---
+
+`@sth-ui/hooks` holds Mantine's hooks. Foldkit has no hooks: a view is a function of the Model, and everything that
+changes goes through a Message and `update`. Each hook becomes whichever of four pieces does its job.
+
+| A Mantine hook that                               | becomes                                                                                            | for example                                                                                                                           |
+| ------------------------------------------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| holds state                                       | pure functions over a value in the Model, called from `update`                                     | [useQueue](/hooks/use-queue), [useStateHistory](/hooks/use-state-history), [useListState](/hooks/use-list-state)                      |
+| does something once (set the title, copy, scroll) | a **Command** that `update` returns, whose result comes back as a Message                          | [useDocumentTitle](/hooks/use-document-title), [useClipboard](/hooks/use-clipboard), [useScrollIntoView](/hooks/use-scroll-into-view) |
+| listens to the page over time                     | a **Stream** to return from a Subscription, each value mapped to a Message                         | [useMediaQuery](/hooks/use-media-query), [useIdle](/hooks/use-idle), [useHotkeys](/hooks/use-hotkeys)                                 |
+| needs an element (a ref)                          | a **Mount** put on the element with `h.OnMount`, sending Messages while the element is on the page | [useClickOutside](/hooks/use-click-outside), [useLongPress](/hooks/use-long-press), [useDrag](/hooks/use-drag)                        |
+
+For example, Mantine's
+
+```tsx
+const ref = useClickOutside(() => setOpened(false))
+```
+
+becomes a Mount on the element and a Message:
+
+```ts
+h.div([h.OnMount(Mount.mapMessage(clickOutside(), () => Message.Closed()))], [dropdown])
+```
+
+with `update` storing `opened: false` when `Closed` arrives.
+
+## Where things live
+
+- `browser.ts` has the Streams bound to `window`, `document` and `screen`.
+- `commands.ts` has the Commands.
+- `mounts.ts` has the element Mounts.
+- Each hook's folder has its pure logic, tested on its own, often with properties that hold for any input.
+
+## Not ported
+
+These hooks have no job left once the Model, `update` and Effect are there:
+
+- **State:** `useCounter`, `useDisclosure`, `useToggle`, `useSetState`, `useInputState`, `useMap`, `useSet`,
+  `usePrevious`, `useId`, `useUncontrolled`. Keep the value in the Model.
+- **Timing:** `useDebouncedValue`, `useDebouncedState`, `useDebouncedCallback`, `useThrottledValue`,
+  `useThrottledState`, `useThrottledCallback`, `useInterval`, `useTimeout`. Use Effect's `Stream.debounce`, `Stream.throttle`, `Schedule` and
+  `Effect.sleep` in a Command or Subscription.
+- **Fetching:** `useFetch`. Use `effect/http` in a Command.
+- **React plumbing:** `useMergedRef`, `useHover`, `useDidUpdate`, `useForceUpdate`, `useIsomorphicEffect`, `useLogger`,
+  `useShallowEffect`, `useMounted`, `useIsFirstRender`. Use CSS `:hover` or `OnMouseEnter`; the rest are React lifecycle.

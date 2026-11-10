@@ -1,0 +1,17 @@
+---
+title: VisuallyHidden
+description: "Text that screen readers announce but nobody sees: a name for a button that shows only an icon, or extra context for a link."
+status: built
+ticket: su-0v8e
+files:
+  - components/VisuallyHidden/VisuallyHidden.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+<Example story="miscellaneous-visuallyhidden--usage" caption="An icon button named by hidden text" />
+
+The text stays in the page (one pixel, clipped, taken out of the flow), so it is read out and found by search,
+unlike `display: none`. It takes style props, `mod`, `styles` and `attributes` like every component; its one part
+is `root`.

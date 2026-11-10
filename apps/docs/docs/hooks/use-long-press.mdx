@@ -1,0 +1,25 @@
+---
+title: useLongPress
+description: "Detect a press held past a threshold."
+status: built
+ticket: su-cqqv
+files:
+  - hooks/useLongPress/longPress.ts
+  - hooks/mounts.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+The `longPress({ threshold, events, cancelOnMove })` Mount sends `Pressed` with each stage: `started` on press,
+`longPressed` once it is held for `threshold` (400ms), `finished` when a long press is released, and `cancelled` when
+a press is released early. `events` chooses mouse, touch or both, and `cancelOnMove` (`true` for 10px, or a distance)
+cancels the press when the pointer moves that far.
+
+<Example height={110} story="hooks-uselongpress--usage" caption="useLongPress" />
+
+## Differences from Mantine
+
+- It is a Mount sending stages rather than a hook returning event handlers with callbacks.

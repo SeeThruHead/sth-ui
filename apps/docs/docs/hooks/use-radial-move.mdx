@@ -1,0 +1,24 @@
+---
+title: useRadialMove
+description: "Track dragging around an element's center as an angle."
+status: built
+ticket: su-w1dh
+files:
+  - hooks/useMove/scrub.ts
+  - hooks/mounts.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+The `radialMove({ step })` Mount sends `Turned` with the angle from 0 to 360, clockwise from the top and rounded to
+`step` (0.01), while the element is pressed and dragged, and `TurnEnded` with the final angle on release, between
+`ScrubStarted` and `ScrubEnded`. `normalizeRadialValue(degree, step)` is Mantine's rounding (a full turn is 0).
+
+<Example height={210} story="hooks-useradialmove--usage" caption="useRadialMove" />
+
+## Differences from Mantine
+
+- It is a Mount sending Messages rather than a hook with `onChange` and `onChangeEnd`.

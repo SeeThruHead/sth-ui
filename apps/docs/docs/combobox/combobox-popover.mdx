@@ -1,0 +1,73 @@
+---
+title: ComboboxPopover
+description: "Add combobox dropdown to any button element."
+status: built
+ticket: su-zxji
+files:
+  - components/ComboboxPopover/ComboboxPopover.ts
+  - components/ComboboxPopover/model.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+ComboboxPopover opens a list of options from any button. `target` receives the trigger's attributes to spread into
+your button (`bind`). Hold `ComboboxPopover.init({ id })` in your model and pass `update` a context with the current
+`value` and the selectable `options` (`ComboboxPopover.optionsOf(props)` gives them); it returns `Changed` (or
+`ChangedMany` when `multiple`), `OptionSubmitted`, `Opened`, `Closed` and `SearchChanged` out messages.
+
+<Configurator story="combobox-comboboxpopover--configurator" />
+
+Arrow keys move through the options, Enter chooses, and Escape closes and returns focus to the button.
+
+## Data format
+
+`data` takes strings or objects with `value`, `label`, `disabled` and `group`, as [Select](/combobox/select) does.
+
+## Searchable
+
+`searchable` adds a search field to the top of the dropdown; `limit` caps how many options show, and
+`nothingFoundMessage` shows when nothing matches. `filter` decides which options match.
+
+<Example height={100} story="combobox-comboboxpopover--searchable" caption="Search and a limit of five" />
+
+## Header and footer
+
+`header` and `footer` sit above and below the options, outside the list, with a border between them and the
+options, as Mantine's `Combobox.Header` and `Combobox.Footer`. A header goes above the search field.
+
+<Example height={100} story="combobox-comboboxpopover--searchable" caption="Open With a header" />
+
+## Multiple selection
+
+With `multiple` in the context, choosing toggles an option and the dropdown stays open:
+
+<Example
+  height={100}
+  story="combobox-comboboxpopover--multiple"
+  caption="Several frameworks, and groups with a disabled option"
+/>
+
+## Check icon, deselecting and nothing found
+
+`withCheckIcon` (on by default) marks chosen options, on the side `checkIconPosition` gives. Choosing the chosen option
+again clears it unless the context says `allowDeselect: false`. `name` (and `form`) add a hidden input holding the
+value for forms, joined by `hiddenInputValuesDivider` when there are several.
+
+<Example
+  height={260}
+  story="combobox-comboboxpopover--options"
+  caption="Deselecting, the check on the right and an empty list"
+/>
+
+## Styles API
+
+Its parts are `dropdown`, `options`, `option`, `search`, `empty` and `groupLabel`.
+
+## Differences from Mantine
+
+- `filter` is a predicate, so it cannot reorder options; sort `data` instead.
+- `withAlignedLabels` is not supported.

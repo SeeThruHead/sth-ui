@@ -1,0 +1,36 @@
+---
+title: SimpleGrid
+description: "A grid where every item takes the same share of the row."
+status: built
+ticket: su-mcdf
+files:
+  - components/SimpleGrid/SimpleGrid.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+<Configurator story="layout-simplegrid--configurator" />
+
+## By breakpoint
+
+`cols`, `spacing` and `verticalSpacing` take one value or an object by breakpoint (`{ base: 1, sm: 2, lg: 5 }`).
+
+<Example story="layout-simplegrid--responsive-on-desktop" caption="1, 2 or 5 columns by width (try Phone)" />
+
+## By the grid's own width
+
+`type="container"` uses container queries, so the breakpoints follow the grid's own box rather than the window.
+
+<Example
+  story="layout-simplegrid--container-queries"
+  caption="A grid 700px wide takes the xs value (2), not the window's md (4)"
+/>
+
+## Minimum column width
+
+`minColWidth` fits as many columns as there is room for; `autoFlow` is `auto-fill` (keep empty tracks) or
+`auto-fit` (stretch the items). `autoRows` sets the row height.
+
+<Example story="layout-simplegrid--min-column-width" caption="auto-fill, and auto-fit with 60px rows" />

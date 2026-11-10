@@ -1,0 +1,61 @@
+---
+title: Button
+description: "Button component to render button or link."
+status: built
+ticket: su-hx65
+files:
+  - components/Button/Button.ts
+  - components/Button/ButtonGroup.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+<Configurator story="buttons-button--configurator" caption="Try the variant, colour, size and radius" />
+
+## Variants
+
+`filled` (default), `light`, `outline`, `subtle`, `transparent`, `white`, `default` and `gradient`.
+
+<Example story="buttons-button--variants" caption="Variants" />
+
+## Colors and sizes
+
+`color` takes a palette name, a shade or any CSS colour; `autoContrast` picks black or white text. `size` is
+`xs` to `xl` or `compact-xs` to `compact-xl`.
+
+<Example story="buttons-button--colors" caption="Colors" />
+
+<Example story="buttons-button--sizes" caption="Sizes" />
+
+## Sections and their order
+
+`leftSection` and `rightSection` sit beside the label; `order` rearranges the three.
+
+<Example story="buttons-button--sections-and-order" caption="Sections, order and justify" />
+
+## Loading and disabled
+
+<Example story="buttons-button--states" caption="Disabled and loading" />
+
+## Button group
+
+Mantine's `Button.Group` and `Button.GroupSection` are `ui.ButtonGroup` and `ui.ButtonGroupSection`. Mantine
+styles the buttons inside a group with child selectors, which StyleX does not have, so the group takes its
+buttons and sections as items and tells each where it sits: `groupButton(buttonProps)` and
+`groupSection(sectionProps)`. Joined edges lose their rounding and share `borderWidth` (default 1px), half on
+each side.
+
+<Example story="buttons-buttongroup--with-section" caption="Two buttons around a section" />
+
+<Example story="buttons-buttongroup--vertical" caption="Vertical, with a 2px border" />
+
+A section takes Button's `size`, `radius`, `color`, `variant`, `gradient` and `autoContrast`, but has no hover
+state. Its part is `groupSection`; the group's is `group`.
+
+## Styles API
+
+Parts: `root`, `inner`, `section`, `label`, `loader`.
+
+<Example story="buttons-button--styles-api" caption="Styles on each part" />

@@ -1,0 +1,24 @@
+---
+title: useMediaQuery
+description: "Follow whether a media query matches."
+status: built
+ticket: su-36k1
+files:
+  - hooks/useMediaQuery/mediaQuery.ts
+  - hooks/browser.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`mediaQuery(query)` is a Stream that starts with whether the query matches now and then sends every change. Return
+it from a Subscription and keep the answer in the Model. `mediaQueryMatches(list)` works on any `MediaQueryList`.
+
+<Example height={80} story="hooks-usemediaquery--usage" caption="Whether the window is at least 56.25em wide" />
+
+## Differences from Mantine
+
+- It is a Stream for a Subscription rather than a hook; the Model's own initial value replaces `initialValue`, and
+  `getInitialValueInEffect` has no meaning here.

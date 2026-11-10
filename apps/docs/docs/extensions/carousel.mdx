@@ -1,0 +1,75 @@
+---
+title: Carousel
+description: "Slides that scroll one or several at a time, with controls, indicators, keyboard and drag, on a port of embla's scroll engine."
+status: built
+ticket: su-1r0g
+files:
+  - components/Carousel/Carousel.ts
+  - components/Carousel/model.ts
+  - components/Carousel/engine.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Put `Carousel.init({ id })` in the Model, route its Messages and Commands through
+`Carousel.update(model, message, context)`, and render `ui.Carousel(h, { ...context, model, toParentMessage, slides })`,
+where `slides` holds each slide's children. The `context` holds embla's options (`align`, `loop`, `slidesToScroll`,
+`containScroll`, `dragFree`, `skipSnaps`), `initialSlide` and `duration`; pass the same one to both. `update` reports
+`SlideChanged` with the new index, and `NextSlide` and `PreviousSlide` when the controls are used.
+
+The previous and next controls, arrow keys, Home and End, the indicators (with their own arrow keys) and dragging all
+move it; a live region announces "Slide 2 of 5". The `next()`, `previous()` and `scrollToSlide(index)` Messages move it
+from anywhere.
+
+<Configurator story="extensions-carousel--configurator" />
+
+## Slide size and gap
+
+`slideSize` (`100%`) and `slideGap` (0) take a value or one per breakpoint. `includeGapInSize` (true) counts the gap as
+part of each slide's size, as Mantine does; with `type="container"` the breakpoints follow the carousel's own width
+instead of the window's.
+
+<Example
+  height={200}
+  story="extensions-carousel--multiple"
+  caption="Two or three slides at a time, looping, aligned to the start"
+/>
+
+## Loop, align and contain
+
+`loop` wraps from the last slide to the first, moving slides round so there is never a gap. `align` (`center`) places
+the selected slide in the view; `containScroll` (`trimSnaps`) stops at the ends without leaving empty space, and
+`keepSnaps` keeps a snap for every slide. `slidesToScroll` moves several slides at a time, or as many as fit with
+`"auto"`. `dragFree` lets a drag settle anywhere (`"snap"` settles on the nearest slide), and `skipSnaps` lets a strong
+flick pass several slides.
+
+## Orientation and options
+
+`orientation="vertical"` stacks slides top to bottom and needs a `height`. `withControls` (true), `withIndicators`,
+`withKeyboardEvents` (true) and `draggable` (true) turn the parts on and off; `controlSize` (26), `controlsOffset`
+(`sm`), `nextControlIcon`, `previousControlIcon` and the control labels change the controls.
+
+<Example
+  height={300}
+  story="extensions-carousel--vertical"
+  caption="A vertical carousel with custom controls, and a carousel that grows"
+/>
+
+## Styles API
+
+Parts: `root`, `viewport`, `container`, `slide`, `controls`, `control`, `indicators` and `indicator`, with Mantine's data
+attributes (`data-orientation`, `data-include-gap-in-size`, `data-inactive`, `data-active`, `data-type`).
+
+## Differences from Mantine
+
+- Embla is replaced by a port of its scroll engine (snaps, containment, slide groups, loop points, drag release);
+  movement animates with a CSS transition rather than embla's physics, and right-to-left direction and plugins are not
+  supported.
+- Slides are passed as `slides`, not `Carousel.Slide` children, so the carousel can move slides round for the loop.
+- Container breakpoints are the theme's breakpoint names, not arbitrary widths.
+- Arrow keys are handled on the slides and controls, not on the whole root, so the indicators' own keys don't also move
+  the carousel.

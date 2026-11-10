@@ -1,0 +1,65 @@
+---
+title: Menubar
+description: "Desktop application style menubar with a row of menu triggers."
+status: built
+ticket: su-vevp
+files:
+  - components/Menubar/Menubar.ts
+  - components/Menubar/model.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+Menubar is a row of [Menu](/overlays/menu) triggers. `menus` lists each one's `label` and `items` (with `labels` for
+grouped items and `disabled`). Hold `Menubar.init({ id, count })` in your model and pass `update` the context from
+`Menubar.menubarContext(props)`; it returns a `Selected` out message with the menu's index and the item's value.
+
+<Example height={120} story="overlays-menubar--usage" caption="File, Edit, View and Help" />
+
+## How it differs from Menu
+
+[Menu](/overlays/menu) is one target that toggles one dropdown. Menubar coordinates several: only one is open at a
+time, moving to another target while one is open switches to it, and the whole bar is a single tab stop with arrow
+keys between targets.
+
+## Trigger and loop
+
+Menus open on click, and once one is open, hovering another target switches to it. `trigger: "hover"` opens them on
+hover. `loop: false` stops the arrow keys wrapping from the last menu to the first and back.
+
+<Example height={120} story="overlays-menubar--hover" caption="Hover trigger without looping" />
+
+## Keyboard interactions
+
+| Key                     | Does                                                                     |
+| ----------------------- | ------------------------------------------------------------------------ |
+| ArrowRight / ArrowLeft  | Move to the next / previous menu, switching the open menu if one is open |
+| ArrowDown, Enter, Space | Open the focused menu on its first item                                  |
+| ArrowUp                 | Open the focused menu on its last item                                   |
+| Escape                  | Close the open menu and return focus to its target                       |
+| Home / End              | Move to the first / last menu                                            |
+| Character keys          | Move to the next menu starting with that character                       |
+| Tab                     | Move focus into or out of the bar                                        |
+
+With `dir: "rtl"` ArrowLeft and ArrowRight swap, and disabled menus are skipped:
+
+<Example height={120} story="overlays-menubar--right-to-left" caption="Right to left, View disabled" />
+
+## Styles API
+
+Its parts are `root` and `target`; each dropdown has [Menu](/overlays/menu)'s parts, and `menuProps` passes Menu's
+options (position, width, offset and the rest).
+
+## Accessibility
+
+The root has `role="menubar"` and each target `role="menuitem"`, with `aria-haspopup`, `aria-expanded` and a roving
+`tabindex` so only the focused target is in the tab order.
+
+## Differences from Mantine
+
+- Arrow keys inside an open dropdown move through its items; switching menus from inside a dropdown is done from the
+  targets.
+- Submenus and checkbox or radio items wait on Menu supporting them.

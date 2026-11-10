@@ -1,0 +1,96 @@
+{
+  "config": {},
+  "suites": [
+    {
+      "title": "plan.feature.spec.js",
+      "file": "plan.feature.spec.js",
+      "specs": [],
+      "suites": [
+        {
+          "title": "Plan",
+          "file": "plan.feature.spec.js",
+          "specs": [
+            {
+              "title": "Shows paydays",
+              "file": "plan.feature.spec.js",
+              "tests": [
+                {
+                  "projectName": "desktop",
+                  "status": "expected",
+                  "results": [{}]
+                }
+              ]
+            },
+            {
+              "title": "Adds a wish",
+              "file": "plan.feature.spec.js",
+              "tests": [
+                {
+                  "projectName": "desktop",
+                  "status": "flaky",
+                  "results": [
+                    {
+                      "error": {
+                        "message": "Timed out"
+                      }
+                    },
+                    {}
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Deletes a wish",
+              "file": "plan.feature.spec.js",
+              "tests": [
+                {
+                  "projectName": "desktop",
+                  "status": "unexpected",
+                  "results": [
+                    {
+                      "error": {
+                        "message": "first try"
+                      }
+                    },
+                    {
+                      "error": {
+                        "message": "locator not found\n  at x"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "projectName": "iphone",
+                  "status": "unexpected",
+                  "results": [
+                    {
+                      "error": {
+                        "message": "first try"
+                      }
+                    },
+                    {
+                      "error": {
+                        "message": "locator not found\n  at x"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Later",
+              "file": "plan.feature.spec.js",
+              "tests": [
+                {
+                  "projectName": "desktop",
+                  "status": "skipped",
+                  "results": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

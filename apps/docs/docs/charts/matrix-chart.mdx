@@ -1,0 +1,39 @@
+---
+title: MatrixChart
+description: "Matrix heatmap: values by two categories."
+status: built
+ticket: su-tq4v
+files:
+  - charts/MatrixChart/MatrixChart.ts
+  - charts/MatrixChart/matrix.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`data` is a list of `{ x, y, value }` cells. Columns and rows follow the order the `x` and `y` values first appear
+(or `xLabels` and `yLabels`), and each cell is coloured by its value against the domain (the finite values' range, or
+`domain`) in four shades of green; missing values are gray. `withXLabels` and `withYLabels` name the columns and rows.
+The chart is an image described by its size and range.
+
+<Example height={230} story="charts-matrixchart--usage" caption="Values by day and hour" />
+
+## Labels, legend, tooltip and colours
+
+- `xLabelsRotation` (-90) turns the column labels, and `xLabelsPosition` puts them `bottom` or `top`.
+- `withLegend` adds a Less to More scale below (`legendLabels`).
+- `withTooltip` with `getTooltipLabel(cell)` shows a label above the pointer.
+- `colors`, `emptyColor`, `cellSize`, `gap`, `cellRadius` and `fontSize` style the cells.
+- `ariaLabel` names the chart instead of the generated description.
+
+<Example
+  height={560}
+  story="charts-matrixchart--options"
+  caption="Rotated labels, legend and tooltip; top labels with custom colours and a fixed domain; no data"
+/>
+
+## Differences from Mantine
+
+- `getTooltipLabel` returns a string, and `getCellProps` and `tooltipProps` are not supported.

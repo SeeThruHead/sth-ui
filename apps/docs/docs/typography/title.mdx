@@ -1,0 +1,30 @@
+---
+title: Title
+description: "h1 to h6 headings with the theme's heading sizes."
+status: built
+ticket: su-zaej
+files:
+  - components/Title/Title.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+<Example story="typography-title--orders" caption="Orders 1 to 6" />
+
+<Configurator story="typography-title--configurator" />
+
+## Size apart from order
+
+`order` picks the element (and so its place in the page outline); `size` changes only how big it looks: another
+heading (`h1`...`h6`), a theme size (`xs`...`xl`) or pixels.
+
+<Example story="typography-title--sizes" caption="An h3 as big as h1, an h1 at xs, an h2 at 40px" />
+
+## Line clamp and text wrap
+
+<Example story="typography-title--clamp-and-wrap" caption="One line, and balanced" />
+
+Heading sizes, line heights, weight and font come from the `heading` and `font` token groups, so a theme changes
+every title at once.

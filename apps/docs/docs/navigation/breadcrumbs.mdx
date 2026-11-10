@@ -1,0 +1,35 @@
+---
+title: Breadcrumbs
+description: "Separates list of react nodes with given separator."
+status: built
+ticket: su-zdev
+files:
+  - components/Breadcrumbs/Breadcrumbs.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+Breadcrumbs puts `separator` (`/` by default) between its `children`, with `separatorMargin` (`xs`) on each side. A
+child can be any content, wrapped in a `breadcrumb` div, or a function that receives the breadcrumb part to spread into
+its own root, as Mantine clones its element children:
+
+```ts
+ui.Breadcrumbs(h, {
+  children: links.map(
+    ({ title, href }) =>
+      (crumb: BreadcrumbBinding) =>
+        ui.Anchor(h, { ...crumb, href, children: [title] })
+  )
+})
+```
+
+<Example height={100} story="navigation-breadcrumbs--usage" caption="Links with the default and a custom separator" />
+
+<Example height={80} story="navigation-breadcrumbs--text" caption="Plain text items" />
+
+## Styles API
+
+Its parts are `root`, `breadcrumb` and `separator`.

@@ -1,0 +1,148 @@
+---
+title: Tree
+description: "Display a Tree structure."
+status: built
+ticket: su-fl03
+files:
+  - components/Tree/Tree.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+Tree shows nested data as an expandable list with the ARIA tree pattern. Keep `Tree.Model` (from
+`Tree.init({ id, data })`) in your model and pass its messages to `Tree.update` with
+`Tree.treeContext({ data, ...options })`.
+
+<Example height={260} story="datadisplay-tree--usage" caption="Files with folder icons and connecting lines" />
+
+## Data prop
+
+`data` is a list of nodes: `value` (unique), `label`, and optionally `children` or `hasChildren`.
+
+<Example height={260} story="datadisplay-tree--selecting" caption="The default labels, select on click" />
+
+## renderNode
+
+`renderNode` renders a node's label. It gets the node, its `level`, `expanded`, `selected`, `hasChildren`,
+`checked` and `indeterminate` state, `actions` (messages that toggle, check or select it), and `elementProps`
+and `elementStyles`. Pass `elementProps` to the element's `bind` and `elementStyles` to its `styles.root`.
+
+## Tree messages
+
+What Mantine's `useTree` controller does, the messages do: `ExpandedAll`, `CollapsedAll`, `Expanded`,
+`Collapsed`, `Selected`, `ClearedSelection`, `Checked`, `CheckedAll` and the rest. The model holds
+`expanded`, `selected` and `checked`, and `update` returns `NodeExpanded` and `NodeCollapsed` out messages.
+
+<Example height={330} story="datadisplay-tree--controller" caption="Expand all and collapse all" />
+
+## Checked state
+
+A node is checked when all of its children are, and indeterminate when some are.
+
+<Example height={260} story="datadisplay-tree--checked" caption="Checkboxes in each node" />
+
+## Check strictly
+
+With `checkStrictly` in `init`, checking a node checks only that node.
+
+<Example height={260} story="datadisplay-tree--check-strictly" caption="Independent checkboxes" />
+
+## Initial expanded state
+
+`initialExpandedState` in `init`; `getTreeExpandedState(data, values)` builds one (`"*"` expands every node).
+
+<Example height={260} story="datadisplay-tree--expanded-state" caption="src and components start expanded" />
+
+## Connecting lines
+
+`withLines` draws lines from each parent to its children.
+
+<Example height={520} story="datadisplay-tree--lines" caption="Every node expanded, with lines" />
+
+## Drag and drop
+
+`withDragAndDrop` lets nodes be dragged before, after or inside other nodes. A drop sends a `DragDropped` out message
+with `draggedNode`, `targetNode` and `position`; `moveTreeNode(data, payload)` returns the data rearranged. A node
+can't be dropped on itself or inside its own children.
+
+<Example height={260} story="datadisplay-tree--drag-drop" caption="Drag files and folders" />
+
+### Restricting drop targets
+
+`allowDrop` (in `Tree.treeContext`) decides whether a drop is allowed; refused targets show no indicator and the
+drop is ignored. A node rendered with `draggable` set to false can't be picked up.
+
+<Example
+  height={260}
+  story="datadisplay-tree--drag-drop-allow"
+  caption="The locked folder can't be moved or dropped into"
+/>
+
+### Drag handle
+
+With `withDragHandle`, a drag starts only from the element given `dragHandleProps`.
+
+<Example height={230} story="datadisplay-tree--drag-drop-handle" caption="Drag by the handle" />
+
+## Async loading
+
+A node with `hasChildren: true` and no `children` has its children loaded the first time it is expanded. Pass
+`loadChildren: true` in the context given to `Tree.update`: expanding such a node marks it loading, shows a loader
+row under it and sends the `LoadChildren` out message with its value. Fetch the children, merge them into your
+data with `Tree.mergeAsyncChildren(data, value, children)` and send `Tree.Message.ChildrenLoaded({ value })`, or
+`ChildrenLoadFailed({ value, error })` if the fetch fails. A node is not fetched twice, and `Tree.Message.LoadNode`
+loads one without expanding it. `renderNode` receives `isLoading` and `loadError` for each node.
+
+<Example height={300} story="datadisplay-tree--async-loading" caption="Expand Documents or Photos" />
+
+## Search and filter
+
+`Tree.filterTreeData(data, query)` keeps the nodes whose label contains the query (case-insensitive) with their
+ancestors; a matching parent keeps all its children. Give the filtered data to the tree, and on each search
+expand what is left with `Tree.Message.SetExpanded({ state: Tree.getTreeExpandedState(filtered, "*") })`, or
+collapse everything with `CollapsedAll` when the query is empty:
+
+<Example height={420} story="datadisplay-tree--search-filter" caption="Type to filter the files" />
+
+A third argument replaces the matching with your own `(query, node) => boolean`, for example a fuzzy match:
+
+<Example height={420} story="datadisplay-tree--search-fuzzy" caption="Letters in order, like acrd for Accordion" />
+
+To keep the whole tree, expand only the branches that match and mark the matches with Highlight in `renderNode`:
+
+<Example height={420} story="datadisplay-tree--search-highlight" caption="Matches highlighted in place" />
+
+## Virtualization
+
+Tree does not virtualize itself; supply a virtual list. `Tree.flattenTreeData(data, model.expanded)` turns the data
+into the list of visible nodes, each with its `level`, `parent`, `expanded` and the `linesPath` that draws connecting
+lines in a flat layout. Render each with `ui.FlatTreeNode`, which gives a row Tree's styles, aria attributes, keys and
+`renderNode` support, inside an element carrying `ui.treeRootAttributes` (`role="tree"` and the click handling).
+
+This example puts 1,830 nodes in foldkit's VirtualList, which renders only the rows in view:
+
+<Example height={340} story="datadisplay-tree--virtualized" caption="Virtualized tree with lines" />
+
+Without a virtual list, the same parts render a flat tree directly:
+
+<Example height={260} story="datadisplay-tree--flat" caption="Flat tree" />
+
+## Keyboard interactions
+
+| Key                 | Description                                                                       |
+| ------------------- | --------------------------------------------------------------------------------- |
+| ArrowDown / ArrowUp | Next or previous visible node (with Shift, selects the range)                     |
+| ArrowRight          | Expands the node, or moves to its first child                                     |
+| ArrowLeft           | Collapses the node, or moves to its parent                                        |
+| Space               | Expands or collapses (`expandOnSpace`, on by default), checks with `checkOnSpace` |
+
+## Differences from Mantine
+
+- The fuzzy search demo matches letters in order with a regular expression; Mantine's uses Fuse.js.
+- The flat layout for virtualization is a separate ticket.
+- While dragging, a refused target still lets the drop event through (the browser shows a move cursor); the drop is
+  ignored.
+- The checkbox demos use `Checkbox` until `Checkbox.Indicator` is ported.

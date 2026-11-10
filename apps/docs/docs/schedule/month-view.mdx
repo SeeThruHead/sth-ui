@@ -1,0 +1,50 @@
+---
+title: MonthView
+description: "A month of a schedule: weeks of days with their events as bars, a +N more popover when a day is full, and drag and drop between days."
+status: built
+ticket: su-ngb4
+files:
+  - schedule/MonthView/MonthView.ts
+  - schedule/monthLayout.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`schedule.MonthView(h, { date, events })` shows the month containing `date`. Each week lays its events out as bars in
+rows, multi-day events run across the days they cover (square at an edge where they continue into another week), and
+a day shows at most `maxEventsPerDay` (2) rows with a "+N more" button for the rest. Recurring events are expanded for
+the weeks shown.
+
+`onDateChange` gets the first day of the previous or next month, or today; `onDayClick` and `onWeekNumberClick` report
+clicks on a day or a week number. Pass the view's `model` (from `DayView/model.ts`) with `toParentMessage` to open the
+"+N more" popovers, drag events to another day at the same time, drag across days to select them, drop items from
+outside and open the agenda. Arrow keys move between days and weeks.
+
+<Example
+  height={760}
+  story="schedule-monthview--usage"
+  caption="January with week numbers: drag an event to another day, drag across empty days, or open a full day's events"
+/>
+
+## Days and weeks
+
+`firstDayOfWeek` (Monday) starts each week and `withWeekendDays={false}` leaves out `weekendDays`. `withOutsideDays`
+shows the days of the months around this one, and `consistentWeeks` always shows six weeks. `withWeekDays` shows the
+weekday names in `weekdayFormat` (`ddd`), `withWeekNumbers` adds a column of week numbers, and `highlightToday` circles
+today's date when `now` is given. `getDayProps` and `getWeekNumberProps` add attributes to a day or a week number.
+
+<Example
+  height={900}
+  story="schedule-monthview--options"
+  caption="A static working month from Sunday, one row per day with clipped bars; then the defaults"
+/>
+
+## Differences from Mantine
+
+- The header shows the month as a title (`headerFormat`, `MMMM YYYY`) rather than month and year selects.
+- `now` is a prop rather than read from the clock.
+- `getDayProps`, `getWeekNumberProps`, the control props and `renderEvent` work with attribute lists instead of React
+  props, and the "+N more" popover is shared, opening for one day at a time.

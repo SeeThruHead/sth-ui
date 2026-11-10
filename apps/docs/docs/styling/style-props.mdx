@@ -1,0 +1,21 @@
+---
+title: Style props
+sidebar_position: 2
+---
+
+import { Example } from "@site/src/components/Example"
+
+# Style props
+
+Every component takes Mantine's style props on its root: `m`, `mt`, `p`, `px`, `w`, `maw`, `h`, `c`, `bg`, `bd`,
+`bdrs`, `ff`, `fz`, `fw`, `lh`, `ta`, `tt`, `pos`, `display`, `flex` and the rest. Theme sizes (`m="md"`), negative
+spacing (`mt="-sm"`), palette colours (`c="grape"`, `bg="grape.1"`) and plain CSS values all work.
+
+<Example story="layout-box--style-props" caption="Style props on Box" />
+
+## Responsive values
+
+Give an object to change a value by breakpoint: `p={{ base: "xs", sm: "xl" }}`. Each breakpoint keeps the last
+value set below it. `bd` and `bg` take plain values only.
+
+<Example story="layout-box--responsive-on-desktop" caption="Padding, size and colour by breakpoint (try Phone)" />

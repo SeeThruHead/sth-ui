@@ -1,0 +1,25 @@
+---
+title: useSelection
+description: "Functions for a selection of items kept in the Model."
+status: built
+ticket: su-6des
+files:
+  - hooks/useSelection/selection.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+A selection is a list of distinct items in the order they were picked. `select`, `deselect` and `toggle` change one
+item, `setSelection(items)` replaces it (dropping repeats), and `isAllSelected(data, selection)` and
+`isSomeSelected(data, selection)` answer Mantine's questions; `isAllSelected` is `false` for empty data.
+
+<Example height={260} story="hooks-useselection--usage" caption="Select all, with an indeterminate state" />
+
+## Differences from Mantine
+
+- These are pure functions over a Model value rather than a hook; `data` is passed to the two questions.
+- `resetSelectionOnDataChange` belongs in `update`: store an empty selection when the data changes, and
+  `resetSelection` is storing `[]`.

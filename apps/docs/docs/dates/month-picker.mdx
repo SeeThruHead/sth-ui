@@ -1,0 +1,25 @@
+---
+title: MonthPicker
+description: "A calendar that picks one month, several months or a range of months."
+status: built
+ticket: su-5w1l
+files:
+  - dates/MonthPicker/MonthPicker.ts
+  - dates/picker/Picker.ts
+  - dates/picker/model.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+MonthPicker is the [DatePicker](/dates/date-picker) model one level up: `Picker.init({ id, today, level: "month", type })`
+opens on the months and never goes down to days. `type` is `"default"`, `"multiple"` or `"range"`, and the value holds
+the first day of each picked month. Presets, columns and the Calendar props work as they do on DatePicker.
+
+<Example height={360} story="dates-monthpicker--usage" caption="One month, several months and a range" />
+
+## Differences from Mantine
+
+- It is a submodel, as DatePicker is; the value is an array of `YYYY-MM-DD` strings.

@@ -1,0 +1,21 @@
+---
+title: Flex
+description: "A flex container whose direction, gaps, alignment and wrapping can change by breakpoint."
+status: built
+ticket: su-wbt2
+files:
+  - components/Flex/Flex.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+<Configurator story="layout-flex--configurator" />
+
+## By breakpoint
+
+`gap`, `rowGap`, `columnGap`, `align`, `justify`, `wrap` and `direction` take one value or an object by
+breakpoint, like the style props. `component` picks the element.
+
+<Example story="layout-flex--responsive-on-desktop" caption="A column on phones, a centred row from sm (try Phone)" />

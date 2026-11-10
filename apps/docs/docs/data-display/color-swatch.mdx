@@ -1,0 +1,36 @@
+---
+title: ColorSwatch
+description: "Displays color."
+status: built
+ticket: su-9xq3
+files:
+  - components/ColorSwatch/ColorSwatch.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+ColorSwatch shows a color, with a checkerboard behind it so transparent colors read as transparent. `color` is any CSS
+color (or a theme shade such as `orange.5`), `size` defaults to 28px and `radius` to a full circle. `ariaLabel` names
+it for screen readers (as an image).
+
+<Configurator story="datadisplay-colorswatch--configurator" />
+
+## withShadow
+
+`withShadow` (on by default) adds an inner shadow, so light colors keep an edge.
+
+<Example height={100} story="datadisplay-colorswatch--shadow" caption="With and without the shadow" />
+
+## Polymorphic component
+
+`component="button"` makes it a button; `onClick` and `children` (drawn over the color) work with any component.
+
+<Example height={100} story="datadisplay-colorswatch--component" caption="A button that toggles a check" />
+
+## Differences from Mantine
+
+- A labelled swatch that isn't a button gets `role="img"` so its label is read.

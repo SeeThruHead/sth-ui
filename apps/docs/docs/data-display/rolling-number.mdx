@@ -1,0 +1,45 @@
+---
+title: RollingNumber
+description: "Animate value changes with rolling digits."
+status: built
+ticket: su-5taq
+files:
+  - components/RollingNumber/RollingNumber.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+RollingNumber shows `value` with each digit on a rolling strip, so a change rolls the digits up or down to the new
+number. Keep the value you showed before and pass it as `previousValue`: that is what the digits roll from, and which
+way (Mantine keeps it in a ref).
+
+<Example
+  height={160}
+  story="datadisplay-rollingnumber--usage"
+  caption="Increment, decrement or jump to another number"
+/>
+
+## Prefix and suffix
+
+`prefix` and `suffix` are shown around the number; `decimalScale`, `fixedDecimalScale`, `decimalSeparator` and
+`thousandSeparator` format it as [NumberFormatter](/data-display/number-formatter) does.
+
+<Example height={160} story="datadisplay-rollingnumber--prefix" caption="A price with a currency" />
+
+## Animation duration
+
+`animationDuration` (600ms by default) and `timingFunction` (`ease`) set how the digits roll.
+
+<Example height={300} story="datadisplay-rollingnumber--duration" caption="200ms, 600ms and 1200ms" />
+
+## Text selection and copying
+
+The whole value sits as transparent text under the digits, so selecting and copying gives the number, not the strips.
+
+## Accessibility
+
+The number is a `role="img"` named by its full value; `withLiveRegion` makes it a `role="status"` so screen readers
+announce changes. `tabularNumbers` (on by default) keeps every digit the same width.

@@ -1,0 +1,36 @@
+---
+title: Skeleton
+description: "Indicate content loading state."
+status: built
+ticket: su-qe4e
+files:
+  - components/Skeleton/Skeleton.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Use `Skeleton` as a placeholder while content loads:
+
+- `height`: any CSS length, or pixels
+- `width`: any CSS length, or pixels (default 100%)
+- `radius`: a theme radius or any CSS value (default the theme's)
+- `circle`: width and a round radius follow `height`
+- `animate`: the fade, on by default
+
+<Configurator story="feedback-skeleton--configurator" />
+
+## With content
+
+To show that content already on the page is loading, wrap it in Skeleton and turn the overlay off with
+`visible: false` once it's ready. While visible, the skeleton is `aria-busy` and its content is covered.
+
+<Example story="feedback-skeleton--with-content" caption="Two paragraphs, still loading" />
+
+<Example
+  story="feedback-skeleton--still-and-sized"
+  caption="No animation at 120 by 40, and 5rem by 3rem with no radius"
+/>

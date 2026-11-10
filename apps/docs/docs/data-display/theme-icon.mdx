@@ -1,0 +1,47 @@
+---
+title: ThemeIcon
+description: "Render an icon inside an element with theme colours."
+status: built
+ticket: su-xjvn
+files:
+  - components/ThemeIcon/ThemeIcon.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+ThemeIcon is a coloured square for an icon: `variant` is `filled` (the default), `light`, `outline`,
+`transparent`, `white`, `default` or `gradient`, `color` any palette colour, shade or CSS colour.
+
+<Configurator story="data-display-themeicon--configurator" />
+
+<Example story="data-display-themeicon--variants" caption="Every variant" />
+
+## Size and radius
+
+`size` is `xs` to `xl` (default `md`, 28px), pixels or any CSS length; `radius` defaults to the theme's.
+
+<Example story="data-display-themeicon--sizes" caption="xs to xl, 60 pixels with radius xl, and 4rem" />
+
+## Gradient
+
+`variant="gradient"` reads `gradient`: `from`, `to` and `deg`.
+
+<Example story="data-display-themeicon--gradient" caption="Blue to cyan at 90 degrees" />
+
+## autoContrast
+
+With `autoContrast`, a `filled` ThemeIcon picks black or white for its icon, so light colours stay readable.
+It works for palette colours today; shades and custom colours follow with su-j00m.
+
+<Example story="data-display-themeicon--auto-contrast" caption="Lime, without and with autoContrast" />
+
+## Styles API
+
+ThemeIcon has one part, `root`. ThemeIcon carries no text, so give it a name with `attributes` when the icon
+means something on its own, or leave it decorative.
+
+<Example story="data-display-themeicon--colors-and-styles" caption="Light teal, a custom colour, and a styled border" />

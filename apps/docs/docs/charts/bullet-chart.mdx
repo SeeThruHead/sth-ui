@@ -1,0 +1,37 @@
+---
+title: BulletChart
+description: "Bullet chart: a value against a target over qualitative ranges."
+status: built
+ticket: su-vq1c
+files:
+  - charts/BulletChart/BulletChart.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+BulletChart draws `ranges` (each `{ value, color }`) as bands across a track scaled to the largest range, a bar for
+`value` and a line for `target`, with their values marked above and below. `label` names it on the left, and
+`barColor` and `targetColor` colour the bar and the target.
+
+<Example height={90} story="charts-bulletchart--usage" caption="Revenue of 270 against a target of 250" />
+
+## Orientation, sizes and tooltip
+
+- `orientation: "vertical"` stands it upright.
+- `size` (32) and `barSize` (16) set the track's and the bar's thickness.
+- `targetRatio` (0.7) and `targetSize` (2) set the target line's length and width.
+- `valueFormatter` formats every value.
+- `withTooltip` shows "Value / Target" (or `getTooltipLabel({ value, target })`) above the pointer.
+
+<Example
+  height={420}
+  story="charts-bulletchart--options"
+  caption="Formatted with a tooltip; thin with a custom tooltip; vertical; no ranges"
+/>
+
+## Differences from Mantine
+
+- The tooltip follows the pointer rather than sitting above the track, and `getTooltipLabel` returns a string.

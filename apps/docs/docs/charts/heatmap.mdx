@@ -1,0 +1,44 @@
+---
+title: Heatmap
+description: "Calendar heatmap: values by day, a column per week."
+status: built
+ticket: su-6c8y
+files:
+  - charts/Heatmap/Heatmap.ts
+  - charts/Heatmap/calendar.ts
+  - charts/shared/floatingLabel.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+`data` maps `YYYY-MM-DD` days to values. Each day is a square, a column per week starting on `firstDayOfWeek`
+(Monday), coloured by its value against the domain (the data's lowest and highest, or `domain`) in four shades of
+green; days without a value are gray. `startDate` and `endDate` (a year after the start by default) bound the range.
+
+<Configurator story="charts-heatmap--configurator" />
+
+## Labels, legend, tooltip and layout
+
+- `withMonthLabels` names the months above (or below, `monthLabelsPosition: "bottom"`), and `withWeekdayLabels`
+  names the weekdays; `monthLabels` and `weekdayLabels` translate them.
+- `withLegend` adds a Less to More scale below (`legendLabels`).
+- `withTooltip` with `getTooltipLabel({ date, value })` shows a label above the pointer.
+- `splitMonths` leaves a gap column between months.
+- `withOutsideDates: false` hides days before the start and after the end in the first and last weeks.
+- `rectSize`, `gap`, `rectRadius`, `colors` and `fontSize` style the squares.
+
+<Example
+  height={420}
+  story="charts-heatmap--options"
+  caption="Labels, legend and tooltip; split months with labels below; a start date only"
+/>
+
+## Differences from Mantine
+
+- `startDate` is required: the house rules keep the clock out of views, so the heatmap cannot default to a year
+  before today. Dates are `YYYY-MM-DD` strings or Effect `DateTime` values rather than JavaScript `Date`s.
+- `getTooltipLabel` returns a string, and `getRectProps` and `tooltipProps` are not supported.

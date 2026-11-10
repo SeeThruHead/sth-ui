@@ -1,0 +1,40 @@
+---
+title: RadarChart
+description: "Radar chart component."
+status: built
+ticket: su-7uph
+files:
+  - charts/RadarChart/RadarChart.ts
+  - charts/RadarChart/radar.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+`data` is a list of rows, one per axis, `dataKey` the row field that names the axis, and `series` the fields drawn
+as polygons, each `{ name, color, strokeColor?, opacity?, label? }` (opacity 0.4 by default). The first axis points
+up and the rest follow clockwise. Give the chart a height with `h`.
+
+<Configurator story="charts-radarchart--configurator" />
+
+## Multiple series, legend, tooltip and dots
+
+- `withLegend` adds a legend below; hovering one of its series fades the others.
+- `withTooltip` shows every series' value on the axis nearest the pointer.
+- `withDots` marks each value.
+- `withPolarGrid`, `withPolarAngleAxis` (on) and `withPolarRadiusAxis` (off) toggle the grid and the labels.
+- `gridColor` and `textColor` colour them.
+
+<Example
+  height={420}
+  story="charts-radarchart--multiple"
+  caption="Two months of sales, with legend, tooltip and dots"
+/>
+
+## Differences from Mantine
+
+- It draws its own SVG rather than recharts, in a 300 by 300 square scaled to fit, so its labels are 12px at a height
+  of 300; `radarProps`, `polarGridProps`, the axis props and children are not supported.

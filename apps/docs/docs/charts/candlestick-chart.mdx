@@ -1,0 +1,41 @@
+---
+title: CandlestickChart
+description: "Open, high, low and close prices as candles."
+status: built
+ticket: su-p8vu
+files:
+  - charts/CandlestickChart/CandlestickChart.ts
+  - charts/CandlestickChart/candles.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+`data` is a list of rows with `open`, `high`, `low` and `close` prices, and `dataKey` names the x-axis field. Each row
+is a candle: a wick from low to high and a body from open to close, in `upColor` (teal) when it closed at or above its
+open and `downColor` (red) otherwise. The y-axis covers the lowest low to the highest high with 5% to spare. Rows
+missing a price are skipped. Hovering a column shows its four prices.
+
+<Configurator story="charts-candlestickchart--configurator" />
+
+## Keys, labels, colours and sizes
+
+- `dataKeys` names the four price fields, and `labels` renames them in the tooltip.
+- `upColor`, `downColor`, `maxCandleWidth` and `candleStrokeWidth` (1) style the candles.
+- `valueFormatter` and `unit` format prices, `referenceLines` marks levels, and `xAxisLabel` and `yAxisLabel` name the
+  axes.
+- The grid, axes and tick lines take the same props as [BarChart](/charts/bar-chart).
+
+<Example
+  height={330}
+  story="charts-candlestickchart--options"
+  caption="Custom keys and colours, narrow candles, a resistance line and a skipped row"
+/>
+
+## Differences from Mantine
+
+- `referenceAreas`, `referenceDots`, `xAxisProps`, `yAxisProps`, `gridProps`, `tooltipProps`, `composedChartProps` and
+  `children` are recharts props and are not supported.

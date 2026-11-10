@@ -1,0 +1,92 @@
+---
+title: ScrollArea
+description: "Area with custom scrollbars."
+status: built
+ticket: su-9la9
+files:
+  - components/ScrollArea/ScrollArea.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+ScrollArea scrolls its content with the browser's own scrolling and draws thin scrollbars over it. Keep
+`ScrollArea.Model` (from `ScrollArea.init({ id })`) in your model, pass its messages to `ScrollArea.update` with
+`{ type, scrollHideDelay }`, and lift `ScrollArea.subscriptions` so dragging a thumb follows the pointer.
+
+<Configurator story="miscellaneous-scrollarea--configurator" />
+
+## Scrollbar type
+
+`type` decides when the scrollbars show:
+
+- `hover` (default): while the pointer is over the area, and for `scrollHideDelay` ms (1000) after it leaves
+- `scroll`: while scrolling, and for `scrollHideDelay` ms after
+- `auto`: whenever the content overflows
+- `always`: always, even when nothing overflows
+- `never`: never; the area still scrolls
+
+<Example height={420} story="miscellaneous-scrollarea--types" caption="auto, always, scroll and never" />
+
+## Offset size
+
+`offsetScrollbars` pads the content so the scrollbars don't cover it: `true` (or `xy`) for both, `x` or `y` for one, or
+`present` for only the scrollbars showing. The padding is the scrollbar size unless `scrollAreaVars.offsetSize` is set.
+
+<Example height={260} story="miscellaneous-scrollarea--offset-size" caption="A 6px scrollbar with 20px of offset" />
+
+## Horizontal scrollbars
+
+<Example height={260} story="miscellaneous-scrollarea--horizontal" caption="600px of content in a 300px area" />
+
+## Disable horizontal scrollbars
+
+`scrollbars` is `xy` (default), `x`, `y`, or `false` for none.
+
+<Example height={260} story="miscellaneous-scrollarea--scrollbars" caption='scrollbars="y"' />
+
+## Vertical scrollbar position
+
+`verticalScrollbarPosition` puts the vertical scrollbar on the `left` or `right` whatever the text direction.
+
+<Example height={260} story="miscellaneous-scrollarea--vertical-scrollbar-position" caption="Left and right" />
+
+## Subscribe to scroll position changes
+
+`update` returns a `ScrollPositionChanged` out message with `x` and `y` on every scroll.
+
+<Example height={300} story="miscellaneous-scrollarea--scroll-position" caption="The position, as you scroll" />
+
+## Scroll boundary callbacks
+
+`TopReached`, `BottomReached`, `LeftReached` and `RightReached` out messages fire when a scroll reaches an edge.
+
+<Example height={320} story="miscellaneous-scrollarea--boundaries" caption="Counting each edge reached" />
+
+## Scroll to position
+
+`ScrollArea.scrollTo(model, { top, left, behavior })` is a command that scrolls the area.
+
+<Example height={300} story="miscellaneous-scrollarea--scroll-to" caption="Bottom, center and top" />
+
+## Start scroll position
+
+`startScrollPosition` scrolls the area once, when it first renders.
+
+<Example height={260} story="miscellaneous-scrollarea--start-scroll-position" caption="Starts 250px down" />
+
+## ScrollArea.Autosize
+
+`ScrollAreaAutosize` grows with its content up to its `mah`, then scrolls. Its `OverflowChanged` out message says when
+the content starts or stops overflowing (not on the first render, as in Mantine).
+
+<Example height={460} story="miscellaneous-scrollarea--autosize" caption="Up to 300px tall" />
+
+## Differences from Mantine
+
+- `viewportRef` and `viewportProps` are not ported: use `ScrollArea.scrollTo` and the out messages instead.
+- Scrolling an element into view (Mantine's `use-scroll-into-view` hook) is not ported yet.
+- Over the scrollbars, the wheel scrolls the area as in Mantine; elsewhere the browser scrolls it natively.

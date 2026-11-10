@@ -1,0 +1,75 @@
+---
+title: Select
+description: "Custom searchable select."
+status: built
+ticket: su-u8cl
+files:
+  - components/Select/Select.ts
+  - components/Combobox/Combobox.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Select picks one value from a list. Keep `Select.Model` (from `Select.init({ id })`) and the `value` (a string or
+`null`) in your model, pass its messages through `Select.update`, and take the new value from its `Changed` out
+message. It takes every [Combobox](/combobox) prop: `data`, `label`, `description`, `error`, `size`, `radius`,
+`variant`, `limit`, `filter` and `maxDropdownHeight`.
+
+<Configurator story="combobox-select--configurator" />
+
+## Controlled
+
+Select is always controlled: `value` is what it has chosen. To start with a value, give `init` its label as
+`inputValue`.
+
+## Clearable
+
+`clearable` swaps the chevron for a button that clears the value while one is chosen.
+
+<Example story="combobox-select--clearable" caption="React, with a clear button" />
+
+## Allow deselect
+
+By default, choosing the chosen option again clears it. `Select.init({ id, allowDeselect: false })` turns that off.
+
+<Example height={200} story="combobox-select--allow-deselect" caption="One that keeps its value, one that lets go" />
+
+## Searchable
+
+Without `searchable` the input is read only and a click opens the list; with it, typing filters the options and
+`nothingFoundMessage` shows when nothing matches.
+
+<Example height={320} story="combobox-select--searchable" caption="Type to search" />
+
+## Checked option icon
+
+`withCheckIcon` (default on) shows a check next to the chosen option, and `checkIconPosition` puts it on the
+`left` (default) or the `right`.
+
+<Example height={320} story="combobox-select--check-icon" caption="The check on the right" />
+
+## Group options
+
+<Example height={320} story="combobox-select--groups" caption="Frontend and backend" />
+
+## Disabled options
+
+<Example height={320} story="combobox-select--disabled-options" caption="Vue and Svelte can't be chosen" />
+
+## Accessibility
+
+Select is a `role="combobox"` input named by its `label`, controlling a `role="listbox"`; the arrow keys move
+through the options and Enter chooses one.
+
+## Differences from Mantine
+
+- State lives in your model; `Changed` carries the value instead of `onChange(value, option)`.
+- `data` groups are written per item (`{ value, label, group }`) instead of `{ group, items }`.
+- The clear button replaces the chevron, where Mantine shows both (`clearSectionMode="both"`): foldkit's combobox
+  has one button slot.
+- `renderOption`, `autoSelectOnBlur`, `clearSectionMode`, `openOnFocus`, `leftSection`, the ScrollArea list and
+  the rest of the [Combobox](/combobox) gaps are not ported yet.

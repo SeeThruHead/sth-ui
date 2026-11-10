@@ -1,0 +1,103 @@
+---
+title: Stepper
+description: "Display content divided into a steps sequence."
+status: built
+ticket: su-ro5n
+files:
+  - components/Stepper/Stepper.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Stepper shows a sequence of steps and the content of the active one. `active` is the index of the current step (from
+your model), `steps` lists the steps with their `label`, `description` and content (`children`), and `completed` is
+shown once `active` is past the last step. `onStepClick` makes steps clickable.
+
+<Configurator story="navigation-stepper--configurator" />
+
+## Allow step select
+
+A step's `allowStepSelect` decides whether it can be clicked, whatever its state. Here a step can be selected once
+it has been visited and when it is not the current one:
+
+<Example height={300} story="navigation-stepper--allow-step-select" caption="Visited steps only" />
+
+## Disable next steps selection
+
+By default any step can be clicked; `allowNextStepsSelect: false` allows only the completed ones (and steps with
+`allowStepSelect`). Steps that cannot be clicked are left out of the tab order.
+
+<Example height={300} story="navigation-stepper--allow-next-steps" caption="Completed steps only" />
+
+## Color, radius and size
+
+`color` (the primary colour by default), `radius` (round by default) and `size` (`xs` to `xl`, `md` by default) set
+the icons and text; `iconSize` sets the icon alone, and `contentPadding` the space above the content.
+
+<Example height={140} story="navigation-stepper--color-size" caption="Teal, md radius, small" />
+
+## With custom icons
+
+`icon`, `progressIcon` and `completedIcon`, on the Stepper or on a step, replace the step number, the icon of the
+current step and the check mark. Each can be a function of the step index, as can `label` and `description`.
+
+<Example height={140} story="navigation-stepper--icons" caption="Icons per step and a completed icon" />
+
+Steps can be icons only; name them with `ariaLabel`:
+
+<Example height={120} story="navigation-stepper--icons-only" caption="Icons only" />
+
+## Vertical orientation
+
+<Example height={280} story="navigation-stepper--orientation" caption="Vertical" />
+
+## Label position
+
+`labelPosition: "bottom"` puts the labels under the icons:
+
+<Example height={140} story="navigation-stepper--label-position" caption="Labels below" />
+
+## Icon position
+
+`iconPosition: "right"` puts the icon after the label:
+
+<Example height={140} story="navigation-stepper--icon-position" caption="Icons on the right" />
+
+## Loading state
+
+A step with `loading` shows a loader in its icon:
+
+<Example height={140} story="navigation-stepper--loading" caption="Second step loading" />
+
+## Step color
+
+A step's `color` overrides the Stepper's:
+
+<Example height={140} story="navigation-stepper--step-color" caption="A red second step" />
+
+## keepMounted and wrap
+
+`keepMounted` keeps every step's content in the page and hides the inactive ones. Horizontal steps wrap onto more
+lines when there is no room; `wrap: false` keeps them on one line. `autoContrast` picks a readable colour for the
+icons of completed steps.
+
+## Styles API
+
+Its parts are `root`, `steps`, `separator`, `content`, `step`, `stepWrapper`, `stepIcon`, `stepIconContent`,
+`stepCompletedIcon`, `stepBody`, `stepLabel`, `stepDescription`, `stepLoader` and `verticalSeparator`. Steps carry
+`data-progress`, `data-completed`, `data-icon-position`, `data-label-position` and `data-allow-click`; separators carry
+`data-active`.
+
+## Accessibility
+
+Each step is a button, named by its label and description or by `ariaLabel`. Tab and Shift Tab move between clickable
+steps and Space or Enter selects one; steps that cannot be clicked are skipped.
+
+## Differences from Mantine
+
+- `Stepper.Step` and `Stepper.Completed` are the `steps` and `completed` props, and the active step lives in your
+  model.

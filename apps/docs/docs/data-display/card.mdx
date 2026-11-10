@@ -1,0 +1,63 @@
+---
+title: Card
+description: "Card with sections."
+status: built
+ticket: su-8xw6
+files:
+  - components/Card/Card.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+Card is a [Paper](/miscellaneous/paper) with a padding of its own and sections that reach its edges. If you
+don't need sections, use Paper.
+
+<Example story="data-display-card--usage" caption="An image section, a title with a badge, text and a button" />
+
+## Horizontal orientation
+
+`orientation="horizontal"` lays the card out in a row; sections then reach its top and bottom edges.
+
+<Example story="data-display-card--horizontal" caption="A cover beside the project's stats" />
+
+## Polymorphic component
+
+`component` renders the card as another element, such as a link:
+
+<Example story="data-display-card--as-link" caption="A card that is a link" />
+
+## Card sections
+
+`cardSection` removes the card's padding from a section:
+
+- The first child of the card gets negative top and side margins, so it reaches the top edge.
+- The last child gets negative bottom and side margins.
+- One in the middle only gets negative side margins.
+
+Mantine finds the first and last section with CSS; StyleX styles an element only by its own classes, so here
+the card places each `cardSection` among its children itself.
+
+```ts
+ui.Card(h, {
+  padding: "xl",
+  children: [
+    cardSection({ children: ["First section"] }),
+    ui.Text(h, { children: ["Some other content"] }),
+    cardSection({ children: ["Middle section"] }),
+    cardSection({ children: ["Last section"] })
+  ]
+})
+```
+
+## withBorder and inheritPadding
+
+`withBorder` draws borders between a section and its neighbours (not along the card's own edge), and
+`inheritPadding` gives the section the card's side padding. A section takes style props (`py`, `mt`...) and its
+own `styles`.
+
+<Example story="data-display-card--sections" caption="A bordered header, text, an image and a bordered footer" />
+
+<Example story="data-display-card--padding-and-shadow" caption="Padding xl, no radius, shadow md and no border" />

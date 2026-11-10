@@ -1,0 +1,26 @@
+---
+title: Box
+description: "Base component for every other component: an element of your choice with style props, data attributes and breakpoint visibility."
+status: built
+ticket: su-tv4v
+files:
+  - components/Box/Box.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+<Example story="layout-box--usage" caption="A Box as a link, with a background and margin" />
+
+<Example story="layout-box--style-props" caption="Style props" />
+
+## Element and data attributes
+
+`component` picks the element (`section`, `nav`, `a`...). `mod` adds data attributes: `mod={{ active: true, step:
+2 }}` gives `data-active` and `data-step="2"`.
+
+## Hide or show by width
+
+`hiddenFrom="sm"` hides it from the `sm` breakpoint up; `visibleFrom="sm"` shows it only from there.
+
+<Example story="layout-box--visibility-on-desktop" caption="Phone only and desktop only (try Phone)" />

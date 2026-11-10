@@ -1,0 +1,27 @@
+---
+title: useHotkeys
+description: "Run actions on keyboard shortcuts."
+status: built
+ticket: su-gqeu
+files:
+  - hooks/hotkey.ts
+  - hooks/browser.ts
+  - hooks/mounts.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`hotkeys(items, { tagsToIgnore, triggerOnContentEditable })` is a Stream of the hotkeys pressed anywhere on the page,
+each item `[hotkey, { preventDefault, usePhysicalKeys }]`. Hotkeys read as Mantine's: `mod+K` is Ctrl or Cmd with K,
+modifiers must match exactly, and `[plus]` is the plus key. Keys typed in `INPUT`, `TEXTAREA` and `SELECT` are
+ignored by default, as is content editable text unless `triggerOnContentEditable`. For one element (Mantine's
+`getHotkeyHandler`), put the `hotkeyHandler(hotkeys, options)` Mount on it; it does not ignore any tags.
+
+<Example height={170} story="hooks-usehotkeys--usage" caption="useHotkeys" />
+
+## Differences from Mantine
+
+- `hotkeys` is a Stream of the matching hotkey strings and `hotkeyHandler` a Mount sending `HotkeyPressed`, rather than handlers.

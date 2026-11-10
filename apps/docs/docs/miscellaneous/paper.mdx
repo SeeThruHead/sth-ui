@@ -1,0 +1,21 @@
+---
+title: Paper
+description: "A surface with the page's background, the theme radius and an optional shadow and border: the base for cards, dropdowns and dialogs."
+status: built
+ticket: su-q55o
+files:
+  - components/Paper/Paper.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+<Configurator story="miscellaneous-paper--configurator" />
+
+## Radius, shadow and border
+
+`radius` and `shadow` take a theme size or any CSS value; `withBorder` adds a one pixel border that follows the
+colour scheme. `component` picks the element.
+
+<Example story="miscellaneous-paper--radius-shadow-border" caption="Border, radius and shadows" />

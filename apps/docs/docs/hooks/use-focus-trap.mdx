@@ -1,0 +1,24 @@
+---
+title: useFocusTrap
+description: "Keep Tab inside an element."
+status: built
+ticket: su-fsxd
+files:
+  - hooks/useFocusTrap/focusTrap.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`focusTrapAttributes(h, { active, returnFocus })` gives the attributes and Mount that trap focus in an element: while
+`active`, focus moves into it (to the element marked with `FocusTrapInitialFocus`, else the first tabbable one), Tab and
+Shift+Tab cycle inside it, and with `returnFocus` focus goes back where it was when the trap turns off. It is what
+[FocusTrap](/miscellaneous/focus-trap) and the overlays are built on.
+
+<Example height={200} story="hooks-usefocustrap--usage" caption="useFocusTrap" />
+
+## Differences from Mantine
+
+- It is a set of attributes with a Mount rather than a ref; `active` comes from the Model.

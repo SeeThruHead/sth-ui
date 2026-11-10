@@ -1,0 +1,43 @@
+---
+title: SemiCircleProgress
+description: "Represent progress with semi circle diagram."
+status: built
+ticket: su-vvp0
+files:
+  - components/SemiCircleProgress/SemiCircleProgress.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+SemiCircleProgress shows a `value` from 0 to 100 on a half circle. `size` (200) and `thickness` (12) set its
+dimensions, `orientation` (`up` or `down`) and `fillDirection` (`left-to-right` or `right-to-left`) which way it
+fills, and `filledSegmentColor` its colour.
+
+<Configurator story="feedback-semicircleprogress--configurator" />
+
+<Example height={260} story="feedback-semicircleprogress--orientations" caption="Every orientation and direction" />
+
+## Change empty segment color
+
+<Example height={140} story="feedback-semicircleprogress--empty-segment" caption="A dimmed empty segment" />
+
+## Change label position
+
+`labelPosition` is `bottom` (the default) or `center`:
+
+<Example height={260} story="feedback-semicircleprogress--label-position" caption="Bottom and center" />
+
+## Filled segment transition
+
+`transitionDuration` animates the filled segment when the value changes:
+
+<Example height={220} story="feedback-semicircleprogress--transitions" caption="Step the value" />
+
+## Styles API
+
+Its parts are `root`, `svg`, `emptySegment`, `filledSegment` and `label`. The label carries `data-position` and
+`data-orientation`.

@@ -1,0 +1,50 @@
+---
+title: Progress
+description: "Give user feedback for status of the task."
+status: built
+ticket: su-6ibc
+files:
+  - components/Progress/Progress.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Progress shows how far along a task is: `value` is a percentage, `color` the bar's colour (the primary colour by
+default), `size` `xs` to `xl` (or pixels) and `radius` the corners. `striped` adds stripes and `animated` moves them.
+
+<Configurator story="feedback-progress--configurator" />
+
+## Compound components
+
+`ProgressRoot` takes several `sections`, each with its own `value`, `color` and an optional `label` inside it.
+
+<Example height={80} story="feedback-progress--compound" caption="Documents, photos and other" />
+
+## Vertical orientation
+
+`orientation: "vertical"` fills from the bottom; give it a height. `autoContrast` picks a readable label colour for
+light sections.
+
+<Example height={260} story="feedback-progress--vertical" caption="Plain, striped and in sections" />
+
+## Section width transition
+
+`transitionDuration` (100ms by default) animates a section as its value changes.
+
+## Example: progress with segments
+
+<Example height={160} story="feedback-progress--segments" caption="Password strength in four segments" />
+
+## Accessibility
+
+Each section is a `role="progressbar"` with its value; name it with `label` on Progress or `ariaLabel` on a section,
+and turn the roles off with `withAria: false` when the bar is only decoration.
+
+## Differences from Mantine
+
+- `ProgressRoot` takes its sections as data rather than `Progress.Section` and `Progress.Label` children.
+- Section tooltips (Mantine wraps sections in Tooltip) are not ported yet.

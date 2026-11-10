@@ -1,0 +1,26 @@
+---
+title: CloseButton
+description: "The small × button that closes a Modal, Drawer, Notification or Alert."
+status: built
+ticket: su-zoq9
+files:
+  - components/CloseButton/CloseButton.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+<Example story="buttons-closebutton--usage" caption="A close button" />
+
+<Example story="buttons-closebutton--sizes" caption="Default, xs to xl, and a custom size, icon size and radius" />
+
+## Name it
+
+The icon has no text, so give every CloseButton a `label` (its accessible name), as Mantine's examples pass
+`aria-label`.
+
+## Options
+
+`size` is `xs` to `xl` (default `md`, 28px) or pixels; `iconSize` sizes the × (default 70%); `radius`;
+`variant` is `subtle` (a hover background, the default) or `transparent`. `icon` replaces the ×, `children`
+follow it, and `disabled` dims it.

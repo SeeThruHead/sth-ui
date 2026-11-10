@@ -1,0 +1,41 @@
+---
+title: Grid
+description: "A 12-column flex grid. Columns are gridCol({ span, offset, order, align, children }) items; Grid works out each column's size from its own columns, gutter and grow."
+status: built
+ticket: su-5dvw
+files:
+  - components/Grid/Grid.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+<Configurator story="layout-grid--configurator" />
+
+## Offset, auto and content
+
+`offset` leaves that many columns empty before a column. `span="auto"` takes the space left in the row;
+`span="content"` is as wide as its content.
+
+<Example story="layout-grid--offset-auto-and-content" caption="Offset, content, auto and span" />
+
+## Grow, columns, justify and align
+
+`grow` makes the last row fill the width. `columns` changes the count (24 here). `justify`, `align` and
+`overflow` set the row's alignment and overflow.
+
+<Example story="layout-grid--grow-and-columns" caption="Grow, 24 columns, a centred column" />
+
+## By breakpoint
+
+`span`, `offset`, `order`, `align` and `gutter` take an object by breakpoint. Here the columns stack, in
+reverse order, on phones and sit side by side from `md`.
+
+<Example story="layout-grid--responsive-on-desktop" caption="Side by side from md (try Phone)" />
+
+## By the grid's own width
+
+`type="container"` uses container queries on the grid's own box.
+
+<Example story="layout-grid--container-queries" caption="A 700px grid takes its xs spans" />

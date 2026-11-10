@@ -1,0 +1,57 @@
+---
+title: Avatar
+description: "Display user profile image, initials or fallback icon."
+status: built
+ticket: su-52fy
+files:
+  - components/Avatar/Avatar.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+<Configurator story="data-display-avatar--configurator" />
+
+## Initials
+
+To show initials instead of the default placeholder, set `name` to the person's name, such as
+`name: "John Doe"`. With a name set, `color: "initials"` picks a colour from it, the same one Mantine would:
+
+<Example story="data-display-avatar--initials" caption="Seven names, each with its own colour" />
+
+## Allowed initials colors
+
+By default every theme colour except gray and dark can be picked for initials. `allowedInitialsColors` limits
+the choice:
+
+<Example story="data-display-avatar--allowed-colors" caption="Only blue and red" />
+
+## Placeholder
+
+When the image can't be loaded or there is no `src`, Avatar shows a placeholder: its `children`, the initials of
+`name`, or an icon. `alt` becomes the placeholder's `title`.
+
+<Example story="data-display-avatar--placeholders" caption="Default, indigo, initials and a star" />
+
+## Variants
+
+`variant` is `light` (the default), `filled`, `outline`, `transparent`, `white`, `default` or `gradient`;
+`color` defaults to gray.
+
+<Example story="data-display-avatar--variants" caption="Every variant in blue" />
+
+<Example story="data-display-avatar--sizes" caption="xs to xl, 100 pixels and 3rem with radius md" />
+
+## AvatarGroup
+
+`AvatarGroup` stacks avatars, overlapping each by `spacing` (default `sm`). Give it the avatars' props as its
+children:
+
+<Example story="data-display-avatar--group" caption="Three pictures and +5" />
+
+## Polymorphic component
+
+`component` renders the avatar as another element, such as a link to the person's profile.

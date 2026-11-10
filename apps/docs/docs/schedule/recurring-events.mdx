@@ -1,0 +1,84 @@
+---
+title: Recurring events
+description: "Series events with RFC 5545 rules, excluded dates and moved occurrences, expanded for whatever range a view shows."
+status: built
+ticket: su-cciy
+files:
+  - schedule/recurrence.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Recurring events
+
+The schedule views support recurring events through [RFC 5545](https://datatracker.ietf.org/doc/html/rfc5545)
+recurrence rules, using the same rrule library as Mantine. There are three shapes of event:
+
+1. A **series event** has a `recurrence` field with an `rrule` string.
+2. An **override event** has `recurringEventId` and `recurrenceId`, and replaces one occurrence of a series.
+3. A **one-off event** has none of these fields.
+
+## Series event
+
+`recurrence.rrule` holds the rule. `recurrence.exdate` lists occurrences to leave out and `recurrence.dtstart` sets
+the series start when it is not the event's `start`.
+
+```ts
+const series: ScheduleEvent = {
+  id: "weekly-series",
+  title: "Weekly planning",
+  start: "2024-01-15 10:00:00",
+  end: "2024-01-15 11:00:00",
+  color: "blue",
+  recurrence: { rrule: "FREQ=WEEKLY;BYDAY=MO,WE;COUNT=16", exdate: ["2024-01-22 10:00:00"] }
+}
+```
+
+Common rules: `FREQ=DAILY;COUNT=10` (ten days), `FREQ=WEEKLY;BYDAY=MO,WE,FR` (Mondays, Wednesdays and Fridays),
+`FREQ=MONTHLY;BYMONTHDAY=15` (the 15th of each month) and `FREQ=YEARLY;COUNT=5` (five years).
+
+## Override event
+
+An override replaces one occurrence: `recurringEventId` names the series and `recurrenceId` the occurrence's original
+start, in `YYYY-MM-DD HH:mm:ss` form.
+
+```ts
+const moved: ScheduleEvent = {
+  id: "weekly-series-override",
+  title: "Weekly planning (moved)",
+  start: "2024-01-17 16:00:00",
+  end: "2024-01-17 17:00:00",
+  color: "grape",
+  recurringEventId: "weekly-series",
+  recurrenceId: "2024-01-17 10:00:00"
+}
+```
+
+<Example
+  height={760}
+  story="schedule-schedule--recurring"
+  caption="A Monday and Wednesday series in a week and a month: one Wednesday is moved to the afternoon and one Monday is left out"
+/>
+
+## How rendering works
+
+Each view expands recurring events for the dates it shows: it generates the occurrences of each rule in that range,
+drops those listed in `exdate`, swaps in overrides, and merges the result with the one-off events. A generated
+occurrence carries `recurringInstance`: `isRecurringInstance`, the series' `recurringEventId`, its `recurrenceId`, and
+the `originalStart` and `originalEnd` it had before any override. Its `id` combines the series id and the occurrence,
+so out messages such as `EventDropped` name the occurrence that moved.
+
+## expandRecurringEvents
+
+`expandRecurringEvents({ events, rangeStart, rangeEnd, expansionLimit })` from `recurrence.ts` does the same expansion
+for your own code, for instance to list a month's occurrences.
+
+## recurrenceExpansionLimit
+
+Every view takes `recurrenceExpansionLimit` (2000), the most occurrences generated for one series, so an unbounded rule
+cannot produce an unbounded list.
+
+## Differences from Mantine
+
+- Event times are strings in `YYYY-MM-DD HH:mm:ss` form only; `Date` objects are not accepted.

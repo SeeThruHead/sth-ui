@@ -1,0 +1,67 @@
+---
+title: FloatingWindow
+description: "Draggable floating area."
+status: built
+ticket: su-6a1m
+files:
+  - components/FloatingWindow/FloatingWindow.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+FloatingWindow is a [Paper](/miscellaneous/paper) fixed on the screen that you can drag around. Keep
+`FloatingWindow.Model` (from `FloatingWindow.init({ id })`) in your model, pass its messages through
+`FloatingWindow.update(model, message, rules)`, and add `FloatingWindow.subscriptions` to your app: it follows the
+pointer while you drag. `initialPosition` takes `top`, `left`, `right` or `bottom` in pixels, and `update` reports
+`PositionChanged`, `DragStarted` and `DragEnded`.
+
+<Example height={360} story="overlays-floatingwindow--usage" caption="Show the window and drag it" />
+
+## Constrain to viewport
+
+The window stays inside the screen while you drag it; `constrainToViewport: false` lets it leave, and
+`constrainOffset` keeps it that many pixels from the edges. Give the same values to `update` in its rules.
+
+## Drag handle selector
+
+`dragHandleSelector` limits dragging to an element inside the window, and `excludeDragHandleSelector` keeps elements,
+such as its buttons, from starting a drag.
+
+<Example height={360} story="overlays-floatingwindow--drag-handle-example" caption="Only the header drags it" />
+
+## Enabled prop
+
+`enabled: false` turns dragging off.
+
+<Example height={400} story="overlays-floatingwindow--enabled-example" caption="A switch for dragging" />
+
+## Set position
+
+`FloatingWindow.setPosition(model, { bottom: 40, right: 40 })` is a command that moves the window, for example from a
+button.
+
+<Example height={360} story="overlays-floatingwindow--set-position-example" caption="Move it to the bottom right" />
+
+## Resize handle
+
+`FloatingWindowResizeHandle` inside the window resizes it from the bottom right, by dragging or with the arrow keys when
+focused, within `dimensions` (`initialWidth`, `minWidth`, `maxWidth` and the same for height) and the screen.
+`update` reports `SizeChanged`, `ResizeStarted` and `ResizeEnded`.
+
+<Example height={400} story="overlays-floatingwindow--resize-handle-example" caption="A window you can resize" />
+
+## Lock axis
+
+`axis: "x"` or `"y"` keeps the window on one line; pass the same `axis` to `update`.
+
+<Example height={360} story="overlays-floatingwindow--axis-example" caption="Moves left and right only" />
+
+## Differences from Mantine
+
+- State lives in your model; `update` takes the rules (`axis`, `constrainToViewport`, `constrainOffset`,
+  `dimensions`) and `FloatingWindow.subscriptions` follows the pointer, where Mantine uses the `useFloatingWindow`
+  hook and refs.
+- `setPositionRef` is the `setPosition` command.

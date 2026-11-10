@@ -1,0 +1,104 @@
+---
+title: MaskInput
+description: "Input with mask pattern for formatted text entry."
+status: built
+ticket: su-v9wo
+files:
+  - components/MaskInput/MaskInput.ts
+  - hooks/mask.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+MaskInput formats what is typed into `mask`: tokens take characters, literals are inserted for you, and the caret
+skips over them. It accepts every [Input](/inputs/input) prop. Hold `MaskInput.init({ id })` in your model and route
+its messages; `update` returns `ChangedRaw` (the raw and masked values) and `Completed` (when every required slot is
+filled) as out messages, and the model keeps `raw`, `masked` and `complete`.
+
+<Configurator story="inputs-maskinput--configurator" />
+
+## Dynamic mask
+
+`modify` gets the raw value on each keystroke and can return a different `mask`, `tokens` or `slotChar`. American
+Express numbers (starting with 34 or 37) switch to their own grouping:
+
+<Example height={100} story="inputs-maskinput--dynamic" caption="Credit card" />
+
+## Custom tokens
+
+`tokens` adds or replaces tokens with a pattern each:
+
+<Example height={100} story="inputs-maskinput--custom-tokens" caption="Hex color" />
+
+## Regex array format
+
+`mask` can also be an array of literal strings and patterns, one per slot:
+
+<Example height={100} story="inputs-maskinput--regex" caption="Time" />
+
+## Transform
+
+`transform` changes each character before it is checked; `slotChar` sets what empty slots show (one character, or one
+per slot):
+
+<Example height={130} story="inputs-maskinput--transform" caption="Upper-cased promo code" />
+
+## Disabled state
+
+<Example height={100} story="inputs-maskinput--disabled" caption="Disabled" />
+
+## Error state
+
+<Example height={120} story="inputs-maskinput--error" caption="With an error" />
+
+## Success state
+
+<Example height={120} story="inputs-maskinput--success" caption="With a success message" />
+
+## Reset value
+
+Send `MaskInput.Message.Reset()` to clear the field; it starts again from `defaultValue`:
+
+<Example height={150} story="inputs-maskinput--reset" caption="Reset button" />
+
+## Mask pattern syntax
+
+Each character of the mask is a **token** (a slot to type into) or a **literal** (inserted automatically).
+
+### Built-in tokens
+
+- `9`: a digit (`[0-9]`)
+- `a`: a letter (`[A-Za-z]`)
+- `A`: an uppercase letter (`[A-Z]`)
+- `*`: a letter or digit (`[A-Za-z0-9]`)
+- `#`: a digit or sign (`[-+0-9]`)
+
+### Optional segments
+
+`?` marks every slot after it optional, so the value is complete without them. `alwaysShowMask` keeps the slots
+visible when the field is empty, `showMaskOnFocus: false` hides them on focus, and `autoClear` empties an incomplete
+value on blur.
+
+<Example
+  height={280}
+  story="inputs-maskinput--syntax"
+  caption="Optional extension, escaping and the always-shown mask"
+/>
+
+### Escaping
+
+Put `\` before a token character to make it a literal: `"\\A999"` starts with a fixed `A`.
+
+## Utilities
+
+`formatMask(raw, options)`, `unformatMask(masked, options)`, `isMaskComplete(masked, options)` and
+`generatePattern("full" | "full-inexact", options)` from `hooks/mask.ts` work without the input.
+
+## Differences from Mantine
+
+- The reset ref is a `Reset` message, and `onChangeRaw` / `onComplete` are the `ChangedRaw` and `Completed` out messages.
+- `beforeMaskedStateChange` is left out: Mantine declares it but never calls it.

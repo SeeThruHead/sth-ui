@@ -1,0 +1,44 @@
+---
+title: DatePickerInput
+description: "An input that opens a DatePicker in a popover."
+status: built
+ticket: su-kj9v
+files:
+  - dates/DatePickerInput/DatePickerInput.ts
+  - dates/picker/PickerInput.ts
+  - dates/picker/inputModel.ts
+  - dates/picker/format.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+DatePickerInput is a button-like input that opens a [DatePicker](/dates/date-picker) in a Popover. Keep
+`PickerInput.init({ id, today, level: "day", type, value })` in the Model, route its Messages through
+`PickerInput.update(model, message, options)` and its Commands back to the runtime, and render it with `model` and
+`toParentMessage`. `update` reports `Changed` with the new value, and `Opened` and `Closed`. The value is shown as
+`MMMM D, YYYY` by default; label, description, error, sections and the other Input props work as on TextInput.
+
+<Example
+  height={520}
+  story="dates-datepickerinput--usage"
+  caption="One date, several, a range, read only, and a range that stays open"
+/>
+
+## Types, presets and formats
+
+- `type: "multiple"` keeps the dropdown open and sorts the dates (`sortDates`, an `update` option, turns that off).
+- `type: "range"` closes once both ends are picked; closing with only a start drops it, as Mantine does.
+- `closeOnChange: false` (an `update` option) keeps the dropdown open after a pick.
+- `valueFormat` (dayjs tokens, `"MMMM D, YYYY"` by default), `labelSeparator` and `valueFormatter` shape the text, and
+  `clearable` adds a clear button once there is a value.
+- `presets`, `numberOfColumns` and every other DatePicker prop go to the dropdown; `popoverProps` to the Popover.
+- `name` writes the value into a hidden input for forms, in Mantine's format.
+- `readOnly` and `disabled` keep the dropdown shut.
+
+## Differences from Mantine
+
+- It is a submodel (`init`, `update`, out messages) rather than a controlled or uncontrolled component.
+- `dropdownType="modal"` is not supported; the dropdown is always a Popover.

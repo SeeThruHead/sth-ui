@@ -1,0 +1,62 @@
+---
+title: FileInput
+description: "Capture files from user."
+status: built
+ticket: su-6qa9
+files:
+  - components/FileInput/FileInput.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+FileInput looks like an input and opens the file picker when clicked. Keep `FileInput.Model` (from
+`FileInput.init({ id })`) and the chosen files in your model, pass its messages through `FileInput.update`, and take
+the new files from its `Changed` out message. It takes Input's `label`, `description`, `error`, `size`, `radius`,
+`variant` and sections.
+
+<Configurator story="inputs-fileinput--configurator" />
+
+## Controlled
+
+FileInput is always controlled: `value` is the list of chosen files (empty for none).
+
+## Multiple
+
+`multiple` lets the picker choose several files; their names are listed, separated by commas.
+
+## Accept
+
+`accept` limits the picker to some file types, as on a file input.
+
+<Example height={120} story="inputs-fileinput--accept" caption="PNG and JPEG only" />
+
+## Clearable
+
+`clearable` adds a button that clears the chosen files. `clearSectionMode` is `both` (the clear button beside the
+`rightSection`), `rightSection` (no clear button) or `clear` (the clear button replaces the right section while there
+are files).
+
+## Custom value component
+
+`valueComponent` renders the chosen files, for example as [pills](/combobox/pill).
+
+## Error state
+
+<Example height={200} story="inputs-fileinput--error" caption="A boolean error and an error message" />
+
+## Left and right sections
+
+<Example height={200} story="inputs-fileinput--sections" caption="An icon on either side" />
+
+## Form submission
+
+`name` and `form` go on the hidden file input, so a form sends the chosen files; `capture` asks a phone for its camera.
+
+## Differences from Mantine
+
+- `value` is always a list of files, also without `multiple`, where Mantine gives one `File` or `null`.
+- Clearing replaces the hidden file input instead of resetting it, so `resetRef` is not needed.

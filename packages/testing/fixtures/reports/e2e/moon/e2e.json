@@ -1,0 +1,10 @@
+{
+  "actions": [
+    {
+      "label": "RunTask(wish-farm:e2e)",
+      "status": "passed",
+      "duration": { "secs": 90, "nanos": 0 },
+      "node": { "action": "run-task", "params": { "target": "wish-farm:e2e" } }
+    }
+  ]
+}

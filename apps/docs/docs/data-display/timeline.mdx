@@ -1,0 +1,55 @@
+---
+title: Timeline
+description: "Display list of events in chronological order."
+status: built
+ticket: su-4aov
+files:
+  - components/Timeline/Timeline.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Timeline draws its `items` along a line. Each item has a `title`, `children` and an optional `bullet`; `active` is
+the index of the last reached item, and every item up to it, and the line before it, takes the `color`.
+
+<Configurator story="datadisplay-timeline--configurator" />
+
+## Line and bullet props
+
+`bulletSize` and `lineWidth` size the bullets and the line, `radius` rounds the bullets, `color` colours the reached
+part, `align` puts the line on the `left` (default) or `right`, and `reverseActive` counts `active` from the end.
+Each item can set its own `color`, `radius` and `lineVariant` (`solid`, `dashed` or `dotted`), and `active` or
+`lineActive` by hand.
+
+<Example height={460} story="datadisplay-timeline--line-and-bullet" caption="Larger bullets and a thicker line" />
+
+## Opposite content
+
+`opposite` on an item puts content on the other side of the line; the line then runs down the middle.
+
+<Example height={420} story="datadisplay-timeline--opposite" caption="Times opposite each event" />
+
+## Alternate items
+
+`alternate` swaps an item's sides.
+
+<Example height={420} story="datadisplay-timeline--alternate" caption="Every other item swapped" />
+
+## Bullet as content
+
+`bullet` can be any content: an icon, an avatar, a badge.
+
+<Example height={360} story="datadisplay-timeline--bullet" caption="Default, avatar, icon and initials bullets" />
+
+## Accessibility
+
+Timeline is a list of plain blocks; give the titles and content the words a screen reader needs.
+
+## Differences from Mantine
+
+- Items are `items` data rather than `Timeline.Item` children, so there is no "Wrap Timeline.Item" section.
+- The bullet demo uses an initials Avatar where Mantine's uses ThemeIcon, which is not ported yet.

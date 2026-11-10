@@ -1,0 +1,67 @@
+---
+title: TextInput
+description: "Capture string input from user."
+status: built
+ticket: su-cf3j
+files:
+  - components/Input/InputBase.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+`TextInput` is an [Input](/inputs/input) inside an Input.Wrapper: every Input prop (variant, size, radius,
+sections, loading, error, success, disabled) and every wrapper prop (label, description, error, required,
+withAsterisk, inputWrapperOrder) in one component. Give it an `id`; it links the label, description and error to
+the field.
+
+<Configurator story="inputs-textinput--configurator" />
+
+## Loading state
+
+<Example story="inputs-textinput--loading" caption="Loading" />
+
+## Controlled
+
+Keep the value in your model and update it from `onInput` (each keystroke) or `onChange` (on commit):
+
+<Example story="inputs-textinput--controlled" caption="The model holds the name; the text below follows it" />
+
+## Left and right sections
+
+<Example story="inputs-textinput--sections" caption="An icon on the left, then on the right" />
+
+## Error state
+
+<Example story="inputs-textinput--error" caption="Boolean error and an error message" />
+
+## Success state
+
+<Example story="inputs-textinput--success" caption="A success message" />
+
+## Disabled state
+
+<Example story="inputs-textinput--disabled" caption="Disabled" />
+
+## Input type
+
+`type` sets the input's type, such as `password`, `date` or `datetime-local`:
+
+<Example story="inputs-textinput--types" caption="Password, date and date time" />
+
+## Styles API
+
+TextInput's parts are the wrapper's (`root`, `label`, `required`, `description`, `error`, `success`) and the
+input's (`wrapper`, `input`, `section`). Style props such as `mt` apply to `root`. Defaults and styles set for
+`TextInput` in `createUi` apply on top of those for `Input` and `InputWrapper`, as in Mantine.
+
+<Example story="inputs-textinput--styles-api" caption="A purple label, a dashed input and an italic description" />
+
+## Accessibility
+
+With `label` the field is named by it; `description`, `error` and `success` describe it through
+`aria-describedby`, and `error` sets `aria-invalid`. Without a label, give the field a name with
+`attributes: { input: { "aria-label": "..." } }`.

@@ -1,0 +1,94 @@
+---
+title: Radio
+description: "Wrapper for input type radio."
+status: built
+ticket: su-wh7i
+files:
+  - components/Radio/Radio.ts
+  - components/Radio/RadioGroup.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Radio is a `role="radio"` button named by its label, with `aria-checked` saying whether it is chosen. Keep `checked`
+in your model and update it from `onChange`; a radio can be chosen but not unchosen by clicking it. `id` is required.
+For a set of radios use [Radio.Group](#radiogroup-component), which adds arrow key navigation.
+
+<Configurator story="inputs-radio--configurator" />
+
+## Controlled
+
+Radio is always controlled: `checked` is what it shows and `onChange(true)` is the message it sends when chosen.
+
+## Uncontrolled
+
+Give it a `name` (and `value`) and it renders a hidden input, so a submitted form sends the value while it is
+chosen.
+
+## States
+
+<Example height={200} story="inputs-radio--states" caption="Default, checked, outline and disabled" />
+
+## Light variant
+
+<Example height={160} story="inputs-radio--light-variant" caption="Light radios in theme and CSS colors" />
+
+## Change icon
+
+`icon` is a function of the builder that draws the dot.
+
+<Example story="inputs-radio--icon" caption="A check instead of the dot" />
+
+## Change icon color
+
+<Example story="inputs-radio--icon-color" caption="Lime radio with a dark dot" />
+
+## Disabled state
+
+<Example story="inputs-radio--disabled" caption="Disabled radios" />
+
+## Radio.Group component
+
+`RadioGroup` is built on `@foldkit/ui`'s radio group, so it keeps its own state: hold `RadioGroup.Model` (from
+`RadioGroup.init({ id })`), pass its messages through `RadioGroup.update`, and take the chosen value from its
+`Selected` out message. `options` are the radios (a `value` and any Radio prop); `children` lays them out, and they
+stack without it. Label, description, error and withAsterisk come from Input.Wrapper; `name` sends the value with a
+form.
+
+<Example height={160} story="inputs-radio--group" caption="Click a framework, then use the arrow keys" />
+
+## Radio.Group disabled state
+
+<Example height={160} story="inputs-radio--group-disabled" caption="A disabled group" />
+
+## Radio.Indicator
+
+`ui.RadioIndicator` looks like a radio but is only a picture of one, for custom controls. It takes `checked`,
+`disabled`, `size`, `radius`, `color`, `iconColor`, `variant` and `autoContrast`.
+
+<Example height={100} story="inputs-radio--indicator" caption="States, variants and sizes" />
+
+## Radio.Card
+
+`ui.RadioCard` is a button with `role="radio"` that sends `onChange` when chosen; `withBorder` (on) and `radius` style
+it, and its `children` can be a function of `{ checked }` so an indicator inside follows it. Cards sharing a `name`
+move with the arrow keys and choose as they go, as a radio group does (`dir: "rtl"` swaps left and right).
+
+<Example height={420} story="inputs-radio--card-group" caption="Pick a package manager" />
+
+## Accessibility
+
+A group has `role="radiogroup"`, named by its label (or `ariaLabel`) and described by its description and error.
+Only the chosen radio (or the first) is in the tab order; the arrow keys of the group's `orientation` (`vertical`
+by default, `horizontal` for a row) move to the next radio and choose it. A click on a radio's label chooses it.
+
+## Differences from Mantine
+
+- The radios are `button` elements with `role="radio"` (part `radio`), not native inputs.
+- A group's radios are `options` data laid out by `children`, instead of `Radio` children reading a context; its
+  arrow keys follow `orientation` instead of both directions.
+- `Radio.Indicator` and `Radio.Card` are not ported yet.

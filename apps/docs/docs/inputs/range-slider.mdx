@@ -1,0 +1,108 @@
+---
+title: RangeSlider
+description: "Select a range of numbers with two thumbs."
+status: built
+ticket: su-8x9k
+files:
+  - components/RangeSlider/RangeSlider.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+RangeSlider picks a range with two thumbs. Keep `RangeSlider.Model` (from `RangeSlider.init({ id, min, max, step })`)
+and the value `[from, to]` in your model. Pass its messages to `RangeSlider.update` with
+`RangeSlider.rangeContext({ ...rules, value })`, and take the new range from its `Changed` out message (and
+`ChangeEnded` when a drag or key press ends). Lift `RangeSlider.subscriptions` so dragging follows the pointer.
+
+It takes Slider's `size`, `radius`, `color`, `thumbSize`, `marks`, `label`, `labelAlwaysOn` and `showLabelOnHover`.
+
+<Configurator story="inputs-rangeslider--configurator" />
+
+## Disabled
+
+<Example height={90} story="inputs-rangeslider--disabled" caption="Disabled" />
+
+## Control label
+
+`label` formats the label above each thumb, or `null` hides it; `labelAlwaysOn` keeps it shown.
+
+<Example height={280} story="inputs-rangeslider--label" caption="No label, formatted and always on" />
+
+## Domain
+
+`domain` is the range the track shows; `min` and `max` are the values the thumbs may take.
+
+<Example height={120} story="inputs-rangeslider--domain" caption="A 0 to 100 track, values from 10 to 90" />
+
+## Decimal values
+
+`step` can be a fraction; values round to as many decimals as the step has.
+
+<Example height={90} story="inputs-rangeslider--decimal" caption="Step 0.0005" />
+
+## Step
+
+<Example height={160} story="inputs-rangeslider--step" caption="A decimal step, and a step that matches the marks" />
+
+## minRange
+
+`minRange` (10 by default) is the smallest gap between the thumbs.
+
+<Example height={130} story="inputs-rangeslider--min-range" caption="At least 20 apart" />
+
+## maxRange
+
+`maxRange` is the widest the range may be.
+
+<Example height={130} story="inputs-rangeslider--max-range" caption="At most 50 wide" />
+
+## pushOnOverlap
+
+By default a thumb that reaches the gap pushes the other one along. With `pushOnOverlap={false}` it stops instead.
+
+<Example height={90} story="inputs-rangeslider--push-on-overlap" caption="Thumbs that stop rather than push" />
+
+## Marks
+
+<Example height={160} story="inputs-rangeslider--marks" caption="Marks with and without labels" />
+
+## Restrict selection to marks
+
+`restrictToMarks` lets the thumbs land only on marks, from a drag or the arrow keys.
+
+<Example height={90} story="inputs-rangeslider--restrict-to-marks" caption="Only the marked values" />
+
+## Hidden marks
+
+A mark with `hidden: true` is a value the thumbs snap to without drawing it.
+
+<Example height={150} story="inputs-rangeslider--hidden-marks" caption="Snapping to 20, 40, 60 and 80 too" />
+
+## Inverted
+
+`inverted` fills the track outside the range instead of inside it.
+
+<Example height={90} story="inputs-rangeslider--inverted" caption="Inverted" />
+
+## Accessibility
+
+Each thumb is a `slider` with `aria-valuemin`, `aria-valuemax` and `aria-valuenow`. Name them with
+`thumbFromLabel` and `thumbToLabel` (or `thumbLabel` for both), and give `thumbValueText` for a spoken value. With a
+`name`, two hidden inputs `<name>_from` and `<name>_to` carry the value in a form.
+
+## Keyboard interactions
+
+| Key                   | Description                                                       |
+| --------------------- | ----------------------------------------------------------------- |
+| ArrowRight / ArrowUp  | Increases the focused thumb by one step (or to the next mark)     |
+| ArrowLeft / ArrowDown | Decreases the focused thumb by one step (or to the previous mark) |
+
+## Differences from Mantine
+
+- RangeSlider is always controlled; there is no `defaultValue`.
+- `labelTransitionProps` is not ported: labels fade in and out.
+- `thumbChildren` takes one child for both thumbs or a pair, one for each.

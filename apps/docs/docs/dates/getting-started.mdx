@@ -1,0 +1,43 @@
+---
+title: Getting started
+description: "Set up the @sth-ui/dates package."
+sidebar_position: 0
+---
+
+import { Example } from "@site/src/components/Example"
+
+`@sth-ui/dates` holds Mantine's date components: calendars, date, month and year pickers, and date and time inputs,
+with Mantine's props, Styles API names and behaviour.
+
+## Installation
+
+Install sth-ui from npm (`bun add @seethruhead/sth-ui`; the dates components are its `dates` folder) and compile it
+with StyleX like the app's own code. Build the components once, with any per-component
+defaults:
+
+```ts
+import { createDates } from "@sth-ui/dates/Dates.ts"
+
+const dates = createDates({ components: { Month: { defaultProps: { firstDayOfWeek: 0 } } } })
+```
+
+`dates` (also exported from `Dates.ts`) is the same set with no defaults.
+
+## Dates are strings
+
+As in Mantine, dates are `YYYY-MM-DD` strings, so they go straight into a Model and through a Schema. The arithmetic
+behind the components (`date/date.ts`) works on those strings directly: adding days and months, weekdays, week
+numbers, the weeks of a month and formatting with dayjs' tokens (`D MMMM YYYY`) and the locale's names. There is no
+dayjs and no `Date`.
+
+## Today
+
+A view cannot read the clock, so components that mark today take it as the `today` prop. Read it once with Effect's
+`DateTime.now` in a Command and keep it in the Model.
+
+## Locale
+
+`locale` (`en`) picks the language of month and weekday names, through the browser's `Intl.DateTimeFormat`; there are
+no locale files to import.
+
+<Example height={300} story="dates-month--usage" caption="A month, with today, week numbers and a selected day" />

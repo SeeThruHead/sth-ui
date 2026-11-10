@@ -1,0 +1,30 @@
+---
+title: ResourcesSchedule
+description: "The resources day, week and month views behind one header, with the date and view kept in its model."
+status: built
+ticket: su-w3yb
+files:
+  - schedule/ResourcesSchedule/ResourcesSchedule.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`schedule.ResourcesSchedule(h, { model, toParentMessage, resources, events })` shows the
+[ResourcesDayView](/schedule/resources-day-view), [ResourcesWeekView](/schedule/resources-week-view) or
+[ResourcesMonthView](/schedule/resources-month-view) for the date and view in its model, switching from the header's
+day, week and month tabs. It uses the same model as the [Schedule](/schedule): keep `Schedule.init({ id, date, view })`
+in your model and route its Messages through `Schedule.update`, which reports `DateChanged`, `ViewChanged` and the
+views' out messages, each with the resource it concerns.
+
+Options shared by the views are given once (`groups`, `locale`, `radius`, `labels`, `mode`, `renderEventBody`,
+`renderEvent`, `renderResourceLabel`, the drag, resize and select switches, `onEventClick`, `onTimeSlotClick` and
+`onDayClick`); `dayViewProps`, `weekViewProps` and `monthViewProps` set the rest per view.
+
+<Example height={560} story="schedule-resourcesschedule--usage" caption="Rooms for a day, a week or a month" />
+
+## Differences from Mantine
+
+- The date and view live in the model rather than being controlled or uncontrolled props.

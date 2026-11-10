@@ -1,0 +1,42 @@
+---
+title: YearView
+description: "A year of a schedule: twelve small months whose days show a dot for each of their first three events."
+status: built
+ticket: su-vwn9
+files:
+  - schedule/YearView/YearView.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`schedule.YearView(h, { date, events })` shows the year containing `date` as twelve months, three to a row (two, then
+one, as the view gets narrower). A day with events shows up to three dots in their colors; multi-day events mark every
+day they cover, and recurring events are expanded for the year.
+
+`onDateChange` gets the same date a year before or after, or today. `onDayClick`, `onWeekNumberClick` and
+`onMonthClick` report clicks on a day, a week number or a month's name. Arrow keys move between days in reading order,
+on into the next week and month.
+
+<Example height={900} story="schedule-yearview--usage" caption="2025 with week numbers and today highlighted" />
+
+## Months and days
+
+`monthLabelFormat` (`MMMM`) names each month and `weekdayFormat` (`dd`) the weekdays shown with `withWeekDays`.
+`firstDayOfWeek`, `weekendDays`, `withWeekendDays`, `withOutsideDays`, `withWeekNumbers` and `highlightToday` work as in
+the [MonthView](/schedule/month-view). `renderDay` replaces a day's content, receiving the day and its events, and
+`getDayProps` and `getWeekNumberProps` add attributes.
+
+<Example
+  height={1500}
+  story="schedule-yearview--options"
+  caption="A static working year with short names; then custom day content; then the defaults"
+/>
+
+## Differences from Mantine
+
+- The header shows the year as a title (`headerFormat`, `YYYY`) rather than month and year selects.
+- `now` is a prop rather than read from the clock.
+- `getDayProps`, `getWeekNumberProps` and the control props work with attribute lists instead of React props.

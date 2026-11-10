@@ -1,0 +1,90 @@
+---
+title: Table
+description: "Render table with theme styles."
+status: built
+ticket: su-y5d2
+files:
+  - components/Table/Table.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Table's `children` is a function of a builder `t`, with Mantine's parts as functions: `t.caption`, `t.thead`,
+`t.tbody`, `t.tfoot`, `t.tr` (with `bg` and `attributes`), and `t.th` / `t.td` (with `w`, `colSpan`, `rowSpan` and
+`attributes`). Rows and cells learn their place from the section they are in, so stripes, row borders and column
+borders follow it as Mantine's selectors do.
+
+```ts
+ui.Table(h, {
+  children: (t) => [
+    t.thead([t.tr(headings.map((heading) => t.th([heading])))]),
+    t.tbody(elements.map((element) => t.tr([t.td([element.name]), t.td([element.symbol])])))
+  ]
+})
+```
+
+<Configurator story="typography-table--configurator" />
+
+## data prop
+
+`data` builds the same table from `caption`, `head`, `body` (rows of cells) and `foot`:
+
+<Example height={300} story="typography-table--data" caption="From data" />
+
+## Sticky header
+
+`stickyHeader` keeps the head in view while the table scrolls; `stickyHeaderOffset` moves it down, for example below a
+fixed header.
+
+<Example height={320} story="typography-table--sticky-header" caption="Sticky header in a scroll container" />
+
+## Spacing, borders, stripes and hover
+
+`horizontalSpacing` (`xs`) and `verticalSpacing` (7px) pad the cells. `withRowBorders` (on), `withColumnBorders` and
+`withTableBorder` draw lines in `borderColor`. `striped` (`true` or `"odd"`, or `"even"`) shades rows with
+`stripedColor`, and `highlightOnHover` shades the row under the pointer with `highlightOnHoverColor`.
+
+<Example
+  height={560}
+  story="typography-table--borders"
+  caption="Striped with borders, and even stripes with wide spacing"
+/>
+
+## Caption and tfoot
+
+<Example height={320} story="typography-table--captions" caption="Caption and footer" />
+
+## Scroll container
+
+`ui.TableScrollContainer` gives the table a `minWidth` and an optional `maxHeight`, scrolling the rest. With a
+`scrollArea` (a [ScrollArea](/miscellaneous/scroll-area) model and its messages) it scrolls in a ScrollArea; without
+one it uses the browser's overflow.
+
+<Example height={300} story="typography-table--selection" caption="Row selection in a ScrollArea container" />
+
+## Vertical variant
+
+`variant: "vertical"` styles the `th` in each row as a label:
+
+<Example height={260} story="typography-table--vertical" caption="Key and value rows" />
+
+## Tabular numbers
+
+`tabularNums` gives digits equal widths so columns of numbers line up:
+
+<Example height={260} story="typography-table--tabular-numbers" caption="Units sold" />
+
+## Styles API
+
+Its parts are `table`, `thead`, `tbody`, `tfoot`, `tr`, `th`, `td` and `caption`; the scroll container's are
+`scrollContainer` and `scrollContainerInner`. Rows carry `data-with-row-border`, `data-striped` and `data-hover`, cells
+`data-with-column-border`, the head `data-sticky` and the caption `data-side`.
+
+## Differences from Mantine
+
+- The compound parts (`Table.Thead`, `Table.Tr` and the rest) are the builder's functions.
+- TableScrollContainer scrolls natively unless given a ScrollArea model.

@@ -1,0 +1,37 @@
+---
+title: Styles API
+sidebar_position: 1
+---
+
+import { Example } from "@site/src/components/Example"
+
+# Styles API
+
+Every component names its parts as Mantine does (Button has `root`, `inner`, `section`, `label` and `loader`) and
+takes StyleX styles for each one. A caller's styles are applied last, so they win over the component's and the
+theme's.
+
+```ts
+const parts = stylex.create({
+  root: { borderStyle: "dashed" },
+  label: { letterSpacing: "0.08em" }
+})
+
+ui.Button(h, { styles: { root: parts.root, label: parts.label }, children: ["Every part"] })
+```
+
+<Example story="theming-styles-api--every-part" caption="Styles and attributes on each part" />
+
+## From the theme, then from props
+
+`createUi({ components: { Button: { styles: { root: brand.root } } } })` styles every Button. A Button's own
+`styles` still win where they conflict.
+
+<Example story="theming-styles-api--theme-then-props" caption="Theme styles, overridden by props" />
+
+## Attributes and unstyled
+
+`attributes: { label: { "data-test": "x" } }` puts attributes on a part. `unstyled` drops the component's own
+styles and keeps only the caller's.
+
+<Example story="theming-styles-api--unstyled" caption="Unstyled" />

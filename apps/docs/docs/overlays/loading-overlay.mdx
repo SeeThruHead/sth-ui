@@ -1,0 +1,26 @@
+---
+title: LoadingOverlay
+description: "Covers its positioned parent with a translucent layer and a Loader while something loads, so nothing under it can be clicked."
+status: built
+ticket: su-ws0i
+files:
+  - components/LoadingOverlay/LoadingOverlay.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+<Example height={560} story="overlays-loadingoverlay--usage" caption="Toggle the overlay over a sign-up form" />
+
+## Showing it
+
+`visible` shows it at once, as Mantine does by default (its transition is 0ms). For a fade, hold a
+`Transition.Model` and pass it as `model` with `transitionProps: { duration: 150 }`; it then follows
+`Transition.mounted` like a Modal.
+
+## Options
+
+`loaderProps` go to the Loader (type, size, colour, label), `overlayProps` to the Overlay (colour, opacity,
+blur, radius), and `zIndex` sets both layers (default the theme's overlay layer, 400). The layer is white in
+light mode and dark-5 in dark mode at 75%, one `light-dark()` colour where Mantine renders two overlays. Parts:
+`root`, `loader` and `overlay`.

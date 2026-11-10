@@ -1,0 +1,100 @@
+---
+title: AppShell
+description: "The page frame: header, navbar, aside, footer and main, placed for you and responsive by breakpoint."
+status: built
+ticket: su-rksd
+files:
+  - components/AppShell/AppShell.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+<Example
+  height={520}
+  story="layout-appshell--usage"
+  caption="Header with a burger, a navbar of links, loading content; try Phone, where the navbar hides"
+/>
+
+## Parts
+
+Mantine nests `AppShell.Header`, `AppShell.Navbar` and the rest inside the shell and reads its settings through
+React context. Foldkit has no context, so the shell takes its parts as items, in the order you want them in the
+page:
+
+```ts
+ui.AppShell(h, {
+  header: { height: 60 },
+  navbar: { width: 300, breakpoint: "sm", collapsed: { mobile: !model.navOpen } },
+  padding: "md",
+  children: [
+    appShellHeader({ children: [/* ... */] }),
+    appShellNavbar({ children: [appShellSection({ grow: true, children: [/* ... */] })] }),
+    appShellMain({ children: [/* ... */] })
+  ]
+})
+```
+
+Each part takes `withBorder` and `zIndex`; `appShellSection({ grow, component })` splits a navbar or aside into
+rows, and `grow` makes one take the space left. The parts render as `header`, `nav`, `aside`, `footer` and
+`main`, so they are the page's landmarks.
+
+## Header, navbar, aside and footer
+
+`navbar` and `aside` take a `width` (one value or one per breakpoint), the `breakpoint` below which they cover
+the whole width, and `collapsed: { mobile, desktop }`. `header` and `footer` take a `height`, `collapsed`, and
+`offset: false` to sit over the page instead of pushing it.
+
+<Example
+  height={520}
+  story="layout-appshell--header-navbar-aside-footer"
+  caption="All four parts, sizes by breakpoint"
+/>
+
+## Alt layout
+
+`layout="alt"` runs the navbar and aside the full height, with the header and footer between them.
+
+<Example height={520} story="layout-appshell--alt-layout" caption="Navbar and aside the full height" />
+
+## Static mode
+
+`mode="static"` lays the shell out as a grid inside its parent instead of fixing it to the window, so it can
+live in a box. The navbar and aside stick while the main area scrolls.
+
+<Example height={520} story="layout-appshell--static-mode" caption="A shell in a 420px box" />
+
+## Collapsing and disabling
+
+<Example
+  height={520}
+  story="layout-appshell--collapsed-and-no-offset"
+  caption="Header, navbar and aside collapsed; footer over the page"
+/>
+
+`disabled` renders only `main`, with no offsets, for pages that don't use the frame.
+
+## Resizing
+
+Mantine's `useAppShellResize` is a small model here. Keep `AppShellResize.init({ id, navbar, aside, header, footer,
+initialSizes })` in your Model, route its Messages through `AppShellResize.update`, add `AppShell.subscriptions`
+(lifted to your Model) for the drag, and pass `resize: { model, toParentMessage }` to the shell. Each section given
+options (`min`, `max`, `collapseThreshold`, `label`) gets a separator handle on its inner edge. Drag it, or focus it
+and use the arrow keys (10px, 50px with Shift), `Home` and `End`; `Escape` cancels a drag and a double click goes back
+to the configured size. `update` reports `Resized` while dragging, `ResizeEnded` with every section's size, and
+`CollapseChanged` when a size crosses `collapseThreshold`. Handles hide below a side's breakpoint and while it is
+collapsed, and the `resizeHandle` part styles them.
+
+<Example
+  height={500}
+  story="layout-appshell--resizing"
+  caption="Drag the edges of the navbar, aside, header and footer"
+/>
+
+## Differences from Mantine
+
+- Breakpoints are the theme's names (`xs` to `xl`), not pixel numbers, because StyleX fixes media queries at build
+  time.
+- Right-to-left transforms are not ported; `AppShellResize.init({ dir: "rtl" })` flips the drag direction only.
+- The resize controller's `setSize`, `reset` and `resetAll` are functions on the model (`AppShellResize.setSize`,
+  `resetSize`, `resetAll`), and sizes are reported as `Option`s.

@@ -1,0 +1,53 @@
+---
+title: Collapse
+description: "Animate presence with slide down/up transition."
+status: built
+ticket: su-g1co
+files:
+  - components/Collapse/Collapse.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+Collapse shows its children when `expanded` is true and slides them away when it is false. It needs no model:
+keep `expanded` in yours and flip it with a message.
+
+<Example height={360} story="miscellaneous-collapse--usage" caption="Toggle the content" />
+
+## Horizontal orientation
+
+`orientation: "horizontal"` animates the width instead of the height.
+
+<Example height={280} story="miscellaneous-collapse--horizontal" caption="Expands sideways" />
+
+## Change transition
+
+`transitionDuration` (milliseconds, 200 by default) and `transitionTimingFunction` (`ease` by default) set the
+transition. `animateOpacity: false` keeps the content fully opaque while it slides, and `transitionDuration: 0`
+shows and hides it at once.
+
+<Example height={360} story="miscellaneous-collapse--transition" caption="One second, linear" />
+
+## Example: nested Collapse components
+
+<Example height={420} story="miscellaneous-collapse--nested" caption="A collapse inside a collapse" />
+
+## Transition messages and keepMounted
+
+`onTransitionStart` and `onTransitionEnd` are messages sent when the size transition starts and ends. Collapsed
+content stays in the page, hidden from assistive technology and focus (`aria-hidden` and `inert`), unless
+`keepMounted: false`, which leaves it out while collapsed.
+
+<Example height={260} story="miscellaneous-collapse--states" caption="No fade, unmounted and instant collapses" />
+
+## Differences from Mantine
+
+- The size animates with CSS grid tracks (`grid-template-rows` from `0fr` to `1fr`, or columns when horizontal)
+  rather than measured pixel heights, so it needs no model and no measuring.
+- With `keepMounted: false` the content is removed as soon as it collapses, without the exit animation, because a
+  stateless view cannot wait for the transition to end.
+- `keepMountedMode` and the `use-collapse` hook are not ported: collapsed content is always hidden with
+  `visibility: hidden` once the transition ends. Reduced motion is not applied, as in Mantine's default theme.

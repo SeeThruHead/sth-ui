@@ -1,0 +1,89 @@
+---
+title: ColorPicker
+description: "Pick colors in hex(a), rgb(a), hsl(a) and hsv(a) formats."
+status: built
+ticket: su-kvtj
+files:
+  - components/ColorPicker/ColorPicker.ts
+  - components/ColorPicker/model.ts
+  - components/ColorPicker/color.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+ColorPicker is a saturation area, a hue slider and, for formats with alpha, an alpha slider with a preview swatch.
+Keep `ColorPicker.Model` (from `ColorPicker.init({ id, value })`) and the value string in your model, pass its
+messages through `ColorPicker.update(model, message, { format })` and lift `ColorPicker.subscriptions` so dragging
+follows the pointer.
+
+<Configurator story="inputs-colorpicker--configurator" />
+
+## Controlled
+
+The value is a string. The `Changed` out message carries it in `format` while it changes, and `ChangeEnded` when a
+drag ends, a key is pressed or a swatch is picked. To set the value from outside, call
+`ColorPicker.setValue(model, value)`: it parses any valid colour and is ignored while the saturation area is being
+dragged, like Mantine.
+
+## Uncontrolled
+
+Set `name` and the picker renders a hidden input holding the value, so it goes into the `FormData` of a submitted
+form.
+
+## Color format
+
+`format` is `hex` (the default), `hexa`, `rgb`, `rgba`, `hsl` or `hsla`. The alpha slider and the preview are shown
+only for `hexa`, `rgba` and `hsla`. When the format changes, convert the current colour with
+`ColorPicker.convertHsvaTo(format, model.color)`, as this demo does:
+
+<Example height={380} story="inputs-colorpicker--formats" caption="Choose a format" />
+
+## With swatches
+
+`swatches` adds a list of colours below the picker; the picked one shows a check that is black or white by the
+swatch's luminance.
+
+<Example height={380} story="inputs-colorpicker--swatches" caption="Mantine's colors at shade 6" />
+
+Seven swatches fit a row by default; `swatchesPerRow` changes it:
+
+<Example height={400} story="inputs-colorpicker--swatches-per-row" caption="Swatches per row" />
+
+To show swatches without the picker, set `withPicker: false` and `fullWidth: true`:
+
+<Example height={200} story="inputs-colorpicker--swatches-only" caption="Swatches only" />
+
+## Size
+
+`size` is `xs` to `xl` (`md` by default) and sets the width, the saturation height, the thumbs and the preview:
+
+<Example height={460} story="inputs-colorpicker--sizes" caption="Choose a size" />
+
+## fullWidth
+
+`fullWidth` stretches the picker to its parent's width; `size` still sets the sliders.
+
+<Example height={300} story="inputs-colorpicker--full-width" caption="Full width at size lg" />
+
+## Styles API
+
+Its parts are `wrapper`, `preview`, `body`, `sliders`, `slider`, `sliderOverlay`, `thumb`, `saturation`,
+`saturationOverlay`, `swatches` and `swatch`. The wrapper carries `data-full-width`, the saturation area
+`data-saturation`, the preview `data-preview` and each swatch `data-swatch`; the sliders are AlphaSlider and
+HueSlider's and carry `data-alpha` and `data-hue`.
+
+## Accessibility
+
+The saturation area, the hue slider and the alpha slider are sliders in the tab order (`focusable: false` takes
+them and the swatches out of it), pressing one with the mouse focuses it, and the arrow keys move every one of
+them. Name them with `saturationLabel`, `hueLabel` and `alphaLabel`. Swatches are buttons named by their colour.
+
+## Differences from Mantine
+
+- State lives in your model, and dragging needs the subscriptions lifted into yours.
+- There is no `defaultValue` or `onColorSwatchClick` prop: start the model with `init({ value })`, and a swatch
+  sends the `SwatchClicked` out message.

@@ -1,0 +1,114 @@
+---
+title: NumberInput
+description: "Capture number from user."
+status: built
+ticket: su-wzxf
+files:
+  - components/Input/NumberInput.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+`NumberInput` is a [TextInput](/inputs/text-input) for numbers: every Input and wrapper prop, a `decimal` keyboard on
+phones, increment and decrement controls, and Arrow Up and Arrow Down to step.
+
+<Configurator story="inputs-numberinput--configurator" />
+
+## Controlled
+
+Keep the value in your model and update it from `onChange`. The value is `number | string`: a number when what was
+typed is a complete number, and the text as typed otherwise (`""`, `"-"`, `"12."`), so half-typed numbers are kept
+as they are.
+
+## Value type
+
+`onChange` gets a `number` for complete numbers and a `string` for anything else; check with `typeof` before doing
+arithmetic.
+
+## min and max
+
+`min` and `max` limit the value: the controls stop at them, and the value is clamped when the field is committed
+(on blur, Mantine's `clampBehavior: "blur"`).
+
+<Example story="inputs-numberinput--min-max" caption="Type 25 and leave the field: it becomes 20" />
+
+## Clamp behavior
+
+`clampBehavior: "strict"` clamps while typing; `"none"` never clamps.
+
+<Example story="inputs-numberinput--strict-clamp" caption="Typing 150 shows 100" />
+
+## Prefix and suffix
+
+<Example height={200} story="inputs-numberinput--prefix-suffix" caption="Dollars and percents" />
+
+## Negative numbers
+
+<Example story="inputs-numberinput--allow-negative" caption="A minus sign is refused" />
+
+## Decimal numbers
+
+<Example story="inputs-numberinput--allow-decimal" caption="A decimal separator is refused" />
+
+## Decimal scale
+
+<Example story="inputs-numberinput--decimal-scale" caption="At most two digits after the point" />
+
+## Fixed decimal scale
+
+<Example story="inputs-numberinput--fixed-decimal-scale" caption="2.2 shows as 2.20" />
+
+## Decimal separator
+
+<Example story="inputs-numberinput--decimal-separator" caption="A comma as the decimal separator" />
+
+## Thousand separator
+
+`thousandSeparator` groups thousands with the given text (`true` for a comma).
+
+<Example height={200} story="inputs-numberinput--thousands-separator" caption="Commas, then spaces" />
+
+## Increment/decrement controls
+
+`hideControls` removes the controls; a `rightSection` replaces them.
+
+<Example height={200} story="inputs-numberinput--right-section" caption="No controls, then a custom icon" />
+
+## Grouping, leading zeros, isAllowed, hold to step and custom controls
+
+`thousandsGroupStyle` groups by `thousand` (default), `lakh` (`12,34,567`), `wan` (`123,4567`) or `none`.
+`allowLeadingZeros={false}` drops zeros as you type, and `trimLeadingZeroesOnBlur={false}` keeps them after blur.
+`isAllowed` gets `{ value, floatValue }` for what a key would make and refuses the key when it returns false.
+`selectAllOnFocus` selects the text when the field gets focus. With `stepHoldDelay` and `stepHoldInterval`, holding a
+control keeps stepping. `stepNumber` builds your own controls, as Mantine's `handlersRef` does.
+
+<Example
+  height={520}
+  story="inputs-numberinput--extras"
+  caption="Lakh and wan grouping, leading zeros, isAllowed up to 100, hold to step, custom controls"
+/>
+
+## Error state
+
+<Example height={200} story="inputs-numberinput--error" caption="Boolean error and an error message" />
+
+## Success state
+
+<Example story="inputs-numberinput--success" caption="Success message" />
+
+## Disabled state
+
+<Example story="inputs-numberinput--disabled" caption="Disabled" />
+
+## Differences from Mantine
+
+- Formatting is built in rather than from `react-number-format`: prefix, suffix, thousands grouping, decimal scale and
+  separator, negative and decimal limits. Bigint values are not ported.
+- `onValueChange`, `onMinReached` and `onMaxReached` are not separate callbacks: `onChange` returns your one message,
+  and your update can compare the value with `min` and `max`.
+- `handlersRef` is `stepNumber(value, direction, { step, min, max })`, which your own buttons call.
+- Keys that would be refused (a minus, a separator, extra decimals) are stopped before they reach the field.

@@ -1,0 +1,67 @@
+---
+title: RingProgress
+description: "Give user feedback for status of the task with circle diagram."
+status: built
+ticket: su-4rm1
+files:
+  - components/RingProgress/RingProgress.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+RingProgress draws `sections` (each a `value` in percent and a `color`) around a ring, with an optional `label`
+in the middle.
+
+<Configurator story="feedback-ringprogress--configurator" />
+
+## Size, thickness & rounded caps
+
+`size` (120 by default) and `thickness` (12, at most a quarter of the size) shape the ring; `roundCaps` rounds the
+ends of the first and last sections.
+
+<Example
+  height={240}
+  story="feedback-ringprogress--size"
+  caption="Default, 180 with round caps, and a clamped thickness"
+/>
+
+## Section gaps
+
+`sectionGap` leaves that many degrees between sections.
+
+<Example height={520} story="feedback-ringprogress--section-gap" caption="No gap, 5° and 10°" />
+
+## Start angle
+
+`startAngle` (270, the top, by default) is where the first section starts.
+
+<Example height={200} story="feedback-ringprogress--start-angle" caption="Right, bottom, left and top" />
+
+## Background color
+
+`rootColor` colours the empty part of the ring.
+
+<Example height={180} story="feedback-ringprogress--root-color" caption="Red behind a yellow section" />
+
+## Section events
+
+Each section can send `onMouseEnter`, `onMouseLeave` and `onClick` messages, for example to show which part is
+hovered.
+
+## Customize label
+
+<Example height={180} story="feedback-ringprogress--label" caption="A percentage, and an icon" />
+
+## Filled segment transition
+
+`transitionDuration` animates a section as its value changes.
+
+## Differences from Mantine
+
+- Section tooltips need Tooltip.Floating, which is not ported yet.
+- The transition demo steps through fixed values instead of random ones, as the house rules keep randomness out of
+  components and demos.

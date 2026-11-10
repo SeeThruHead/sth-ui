@@ -1,0 +1,22 @@
+---
+title: useFocusWithin
+description: "Detect focus anywhere inside an element."
+status: built
+ticket: su-8hiy
+files:
+  - hooks/mounts.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+The `focusWithin()` Mount sends `FocusChanged` with `true` when focus moves into the element and `false` when it
+leaves it; moving between elements inside it sends nothing.
+
+<Example height={220} story="hooks-usefocuswithin--usage" caption="useFocusWithin" />
+
+## Differences from Mantine
+
+- It is a Mount sending a Message rather than a hook with `onFocus` and `onBlur` callbacks.

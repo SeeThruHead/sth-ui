@@ -1,0 +1,47 @@
+---
+title: NumberFormatter
+description: "Format number with thousands/decimal separators and suffix/prefix."
+status: built
+ticket: su-rj7q
+files:
+  - components/NumberFormatter/NumberFormatter.ts
+  - components/NumberFormatter/format.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+NumberFormatter renders a number as text in a `<span>`, with the same formatting props as NumberInput. It renders
+nothing when `value` is undefined. `formatNumber(value, format)` gives the same text without the element.
+
+<Example height={80} story="data-display-numberformatter--usage" caption="Dollars with thousands" />
+
+## Prefix and suffix
+
+`prefix` and `suffix` add text before and after the value; a minus sign goes before the prefix.
+
+<Example height={100} story="data-display-numberformatter--prefix-suffix" caption="Prefix and suffix" />
+
+## Thousands separator
+
+`thousandSeparator` (`true` for a comma, or any string) separates groups of digits, and `thousandsGroupStyle` picks
+the grouping: `thousand` (the default), `lakh`, `wan` or `none`. `decimalSeparator` replaces the decimal point.
+
+<Example
+  height={140}
+  story="data-display-numberformatter--thousands-separator"
+  caption="Default, custom, lakh and wan"
+/>
+
+## Decimal scale
+
+`decimalScale` limits the digits after the decimal point, rounding a number and cutting a string;
+`fixedDecimalScale` pads them with zeros to that many. `allowNegative: false` drops the minus sign.
+
+<Example height={80} story="data-display-numberformatter--decimal-scale" caption="5 / 3 to two places" />
+
+## Styles API
+
+It has one part, `root`.

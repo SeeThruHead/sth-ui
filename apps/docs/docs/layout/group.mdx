@@ -1,0 +1,35 @@
+---
+title: Group
+description: "Lay things out in a row with even gaps."
+status: built
+ticket: su-cj56
+files:
+  - components/Group/Group.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+<Configurator story="layout-group--configurator" />
+
+## Gap, justify and align
+
+`gap` takes a theme size or pixels (default `md`). `justify` and `align` take any `justify-content` and
+`align-items` value (defaults `flex-start` and `center`).
+
+<Example story="layout-group--positions" caption="Space between, and flex end" />
+
+## Wrap
+
+Items wrap by default; `wrap="nowrap"` keeps them on one line.
+
+<Example story="layout-group--no-wrap" caption="No wrap in a 260px box" />
+
+## Grow
+
+`grow` makes every item take an equal share of the row. By default each share is capped so a long item cannot
+push the others narrower; `preventGrowOverflow={false}` lifts the cap. Mantine styles the children directly;
+StyleX styles only an element's own classes, so here each child sits in a cell Group adds when `grow` is on.
+
+<Example story="layout-group--grow" caption="Grow, capped and free" />

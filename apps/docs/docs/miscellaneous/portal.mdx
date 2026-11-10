@@ -1,0 +1,37 @@
+---
+title: Portal
+description: "Renders its children somewhere else in the page, outside any box that would clip or stack them. Overlays (Modal, Popover, Tooltip) are built on it."
+status: built
+ticket: su-2iua
+files:
+  - components/Portal/Portal.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+<Example story="miscellaneous-portal--usage" caption="Content escaping a 40px box that clips" />
+
+## Where it goes
+
+By default every Portal shares one node at the top of `body` (the same one `@foldkit/ui`'s Popover and Menu
+use, so they stack together). `reuseTargetNode={false}` gives a Portal its own node at the end of `body`, and
+`target` takes a CSS selector to render into; a selector that finds nothing renders nothing, as in Mantine.
+
+<Example story="miscellaneous-portal--target" caption="Rendered into a box chosen by selector" />
+
+## Use
+
+Like Mantine's, Portal needs nothing but its children; the move happens in a Foldkit `Mount` when it appears:
+
+```ts
+ui.Portal(h, { children: [content] })
+```
+
+When the Portal leaves the view, its content and any node it made are removed.
+
+## Theme
+
+Portalled content leaves the `ThemeProvider` it was rendered under. It keeps the theme because your app's
+provider also applies its theme to `<html>` (see [Theme](/theming/theme)); a provider with `scope: "element"`
+does not, so content portalled out of one gets the page's theme instead.

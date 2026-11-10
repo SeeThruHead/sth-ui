@@ -1,0 +1,64 @@
+---
+title: Indicator
+description: "Display element at the corner of another element."
+status: built
+ticket: su-c2dl
+files:
+  - components/Indicator/Indicator.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Indicator puts a small dot or label at a corner of its children: `top-end` by default, any of `top`, `middle` or
+`bottom` with `start`, `center` or `end`. `size` is 10px by default, `color` the primary color.
+
+<Configurator story="datadisplay-indicator--configurator" />
+
+## Inline
+
+`inline` sizes the indicator's box to its children, for children that are inline, such as an avatar.
+
+<Example height={110} story="datadisplay-indicator--inline" caption="A label on an inline avatar" />
+
+## Offset
+
+`offset` moves the indicator in from the corner (a number, or `{ x, y }`); `withBorder` rings it in the page
+background.
+
+<Example height={110} story="datadisplay-indicator--offset" caption="7px in from the bottom right, with a border" />
+
+## Position
+
+<Example height={300} story="datadisplay-indicator--positions" caption="All nine positions" />
+
+## Processing animation
+
+<Example height={110} story="datadisplay-indicator--processing" caption="A pulsing dot" />
+
+## Disabled
+
+`disabled` hides the indicator.
+
+<Example height={160} story="datadisplay-indicator--disabled" caption="Hidden until toggled" />
+
+## Max value
+
+A number `label` above `maxValue` shows as `maxValue+`.
+
+<Example height={110} story="datadisplay-indicator--max-value" caption="50, 100 and 1000" />
+
+## Show zero
+
+`showZero` (on by default) decides whether a `0` label shows.
+
+<Example height={110} story="datadisplay-indicator--show-zero" caption="A zero shown and hidden" />
+
+## Auto contrast
+
+`autoContrast` picks black or white text to suit the color.
+
+<Example height={110} story="datadisplay-indicator--auto-contrast" caption="Lime and dark cyan, with and without" />

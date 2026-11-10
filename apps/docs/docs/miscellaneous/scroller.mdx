@@ -1,0 +1,63 @@
+---
+title: Scroller
+description: "Horizontal scroll container with navigation controls."
+status: built
+ticket: su-pnh0
+files:
+  - components/Scroller/Scroller.ts
+  - components/Scroller/model.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+Scroller is a horizontal scroll container with chevron controls that appear when its content overflows. The content
+also scrolls with a trackpad, Shift and the mouse wheel, or touch. Keep `Scroller.Model` (from
+`Scroller.init({ id })`) in your model and pass its messages through `Scroller.update(model, message, context)`,
+where the context carries `scrollAmount` and `draggable`.
+
+<Example height={120} story="miscellaneous-scroller--usage" caption="Twenty badges" />
+
+## Mouse drag scrolling
+
+The content can be dragged with the mouse, as `draggable` is on by default; `draggable: false` turns it off. The
+click that ends a drag is swallowed, so dragging across a button does not press it.
+
+<Example height={120} story="miscellaneous-scroller--draggable" caption="Drag the badges" />
+
+## Scroll amount
+
+`scrollAmount` is how far the controls scroll, 200px by default.
+
+<Example height={120} story="miscellaneous-scroller--scroll-amount" caption="300px per click" />
+
+## Control size
+
+`controlSize` sets the width of the controls, 50px by default, as a number of pixels or any CSS length.
+
+<Example height={120} story="miscellaneous-scroller--control-size" caption="70px controls" />
+
+## Custom icons
+
+`startControlIcon` and `endControlIcon` replace the chevrons.
+
+<Example height={120} story="miscellaneous-scroller--custom-icons" caption="Arrow icons" />
+
+## Controls
+
+`showStartControl` and `showEndControl` keep a control visible whatever the scroll position. `edgeGradientColor`
+sets the colour the controls fade from (the body colour by default), and `startControlLabel` and `endControlLabel`
+name them ("Scroll left" and "Scroll right" by default). A hidden control carries `data-hidden` and leaves the tab
+order. In a right-to-left layout the controls swap sides and scroll the other way.
+
+## Styles API
+
+Its parts are `root`, `container`, `content`, `control` and `chevron`. Controls carry `data-position` (`start` or
+`end`), and the container carries `data-draggable` and, while dragging, `data-dragging`.
+
+## Differences from Mantine
+
+- `startControlProps` and `endControlProps` are `startControlLabel`, `endControlLabel` and the Styles API.
+- The scroll state lives in your model, so `Scroller.update` needs your context.

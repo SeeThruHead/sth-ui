@@ -1,0 +1,85 @@
+---
+title: Modal
+description: "A dialog over the page: a dimmed backdrop, a panel with a title and a close button, focus kept inside while it is open and given back when it closes, and the page behind it locked from scrolling."
+status: built
+ticket: su-1tj1
+files:
+  - components/Modal/Modal.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+<Example height={480} story="overlays-modal--usage" caption="Open it with the button" />
+
+<Example height={480} story="overlays-modal--opened" caption="Open, with a title and a sign-in form" />
+
+## State lives in your app
+
+Your app holds a `Modal.Model`, opens it with `Modal.open` and passes its messages to `Modal.update`. Every way of
+closing it (the close button, a click on the backdrop, Escape) is a Modal message, so `update` closes it for you;
+Mantine's `onClose` is the out message `Closed`.
+
+```ts
+const init = () => ({ auth: Modal.init({ id: "auth" }) })
+
+PressedSignIn: () => lift(model, Modal.open(model.auth)),
+GotModal: ({ message }) => lift(model, Modal.update(model.auth, message)),
+
+ui.Modal(h, {
+  model: model.auth,
+  toParentMessage: (message) => Message.GotModal({ message }),
+  title: "Authentication",
+  children: [form]
+})
+```
+
+`lift` stores the new model and maps the commands with `Command.mapMessage`; the out messages are `Opened`,
+`Closed`, `EnteredTransition` and `ExitedTransition`.
+
+## Position and size
+
+`size` is `xs` to `xl` (default `md`, 440px), pixels or any CSS width; `centered` centres it vertically;
+`fullScreen` fills the window; `xOffset` and `yOffset` move it from the edges; `radius`, `padding` and `shadow`
+style the panel.
+
+<Example height={480} story="overlays-modal--centered" caption="Centred, size lg, radius xl, padding xl" />
+
+## Behaviour
+
+`closeOnClickOutside`, `closeOnEscape`, `trapFocus`, `returnFocus` and `lockScroll` are all on by default.
+As in Mantine, Escape closes every open modal (one at a time inside a stack, below), except while text
+is being composed or when it is pressed in an element with `data-sth-stop-propagation="true"` (a dropdown inside
+the modal that uses Escape itself). The scroll lock adds the scrollbar's width to the page's right margin, so
+the page does not move when the scrollbar goes away.
+`withOverlay` and `overlayProps` control the backdrop, `withCloseButton` and `closeButtonProps` the close
+button, `transitionProps` the animation (default `fade-down`, 200ms), `withinPortal` whether it renders at the
+end of the page, and `keepMounted` keeps it in the page while closed.
+
+## Accessibility
+
+The panel is a `dialog` with `aria-modal`, named by its title and described by its body. Give the close button
+a better name with `closeButtonProps: { label: "Close sign in" }` if "Close" is ambiguous.
+
+## Compound components
+
+`ui.ModalRoot` takes the same props as `ui.Modal` except `title`, `withCloseButton`, `overlayProps`,
+`closeButtonProps` and `children`, and builds the modal from parts instead, as Mantine's `Modal.Root` does with
+`Modal.Overlay`, `Modal.Content`, `Modal.Header`, `Modal.Title`, `Modal.CloseButton` and `Modal.Body`:
+`children: (modal) => [modal.overlay(), modal.content([modal.header([modal.title([...]), modal.closeButton()]), modal.body([...])])]`.
+Each part keeps its Styles API name.
+
+<Example height={120} story="overlays-modal--compound" caption="Open modal: a modal built from its parts" />
+
+## Modal.Stack
+
+Pass `stack`, the ids of the open modals in the order they opened, to every modal of a stack. Only the last one
+takes Escape, traps focus and shows its overlay; the others stay in place, hidden, under it, and each sits one
+z-index above the one before. Keep `stack` in your model with `Modal.stackOpened(stack, id)` on a modal's `Opened`
+out message and `Modal.stackClosed(stack, id)` on `Closed`, as `useModalsStack` does.
+
+<Example
+  height={120}
+  story="overlays-modal--stack"
+  caption="Open modal, then Delete and Confirm: each opens over the last, and Escape closes one at a time"
+/>

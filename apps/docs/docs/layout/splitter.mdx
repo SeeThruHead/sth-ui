@@ -1,0 +1,73 @@
+---
+title: Splitter
+description: "Panes side by side or stacked, resized by dragging the handle between them or with the keyboard."
+status: built
+ticket: su-1ikw
+files:
+  - components/Splitter/Splitter.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+<Configurator story="layout-splitter--configurator" />
+
+<Example story="layout-splitter--limits" caption="The left pane 20% to 80% and collapsible" />
+
+## State lives in your app
+
+Mantine keeps the sizes inside a hook. In Foldkit your app holds them: Splitter exports `Model`, `Message`,
+`init`, `update` and `subscriptions`, and the view takes the model and how to wrap its messages.
+
+```ts
+import * as Splitter from "@sth-ui/core/components/Splitter/Splitter.ts"
+
+const init = () => ({
+  splitter: Splitter.init({
+    id: "editor",
+    panels: [{ defaultSize: 30, min: 20, collapsible: true }, { defaultSize: 70 }]
+  })
+})
+
+const update = (model, message) =>
+  Message.match(message, {
+    GotSplitter: ({ message }) => {
+      const { model: splitter, outMessages } = Splitter.update(model.splitter, message)
+      return { model: { ...model, splitter } }
+    }
+  })
+
+const subscriptions = Subscription.lift(Splitter.subscriptions)<Model, Message>({
+  read: (model) => Option.some(model.splitter),
+  toParentMessage: (message) => Message.GotSplitter({ message })
+})
+
+ui.Splitter(h, {
+  model: model.splitter,
+  toParentMessage: (message) => Message.GotSplitter({ message }),
+  children: [left, right]
+})
+```
+
+Each pane's `defaultSize`, `min`, `max`, `collapsible` and `collapseThreshold` (Mantine's `Splitter.Pane` props)
+go to `init`'s `panels`, with `orientation`, `step`, `shiftStep`, `redistribute`, `dir`, `resetOnDoubleClick` and
+starting `sizes`. Mantine's callbacks are `update`'s `outMessages`: `ChangedSizes`, `StartedResize`,
+`EndedResize` and `ChangedCollapse`. Its `splitterRef` methods are functions on the model: `setSizes`,
+`collapse`, `expand`, `toggleCollapse` and `reset`. A custom redistribution function goes to
+`Splitter.updateWith({ redistribute })`.
+
+## Keyboard
+
+Each handle is a `separator`. Arrow keys move it by `step` (with Shift by `shiftStep`), Home and End take the
+pane before it to its smallest and largest size, Enter collapses or expands a collapsible pane, and a double
+click puts the handle back to the panes' default share.
+
+## Vertical, and fixed sizes
+
+<Example story="layout-splitter--rows" caption="Three rows (try Phone)" />
+
+Sizes are numbers or percentages (a share), or `px` and `rem` (fixed). A fixed size keeps its width when the
+splitter resizes, and the other panes share the rest.
+
+<Example story="layout-splitter--fixed-sidebar" caption="A 200px sidebar, 120px to 400px, with a 6px blue line" />

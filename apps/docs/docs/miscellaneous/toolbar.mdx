@@ -1,0 +1,75 @@
+---
+title: Toolbar
+description: "Accessible toolbar with toggle groups and roving tabindex keyboard navigation."
+status: built
+ticket: su-cb2j
+files:
+  - components/Toolbar/Toolbar.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Toolbar groups toggles into one bar. Its `children` is a function that gets the toolbar's parts: `Toggle`, `Group`,
+`ToggleGroup` and `Divider`. They share the toolbar's size, colors and orientation.
+
+<Configurator story="buttons-toolbar--configurator" />
+
+## Toggle groups
+
+`ToggleGroup` with `type: "multiple"` keeps a list of values; with `type: "single"`, one value or `null` (pressing the
+active item again clears it). Keep the value in your model and take the new one from `onChange`.
+
+<Example height={110} story="buttons-toolbar--toggle-group" caption="Multiple formatting, single alignment" />
+
+## Size, orientation, variant and color
+
+`size` is `xs` to `xl`, `orientation` is `horizontal` or `vertical`, `variant` is `filled` (default) or `light`,
+and `color` and `radius` style the active toggles and the bar.
+
+<Example height={360} story="buttons-toolbar--variants" caption="Filled, light, grape and vertical" />
+
+## Auto contrast
+
+<Example height={150} story="buttons-toolbar--auto-contrast" caption="Lime, with and without autoContrast" />
+
+## Auto width
+
+`autoWidth` lets a toggle size to its text.
+
+<Example height={110} story="buttons-toolbar--auto-width" caption="Icon toggles and text buttons" />
+
+## Disabled state
+
+A disabled toggle, or every toggle of a disabled group, can't be pressed and is skipped by the arrow keys.
+
+<Example height={110} story="buttons-toolbar--disabled" caption="A disabled item and a disabled group" />
+
+## Accessibility
+
+- Toolbar has `role="toolbar"` and an `aria-orientation` matching `orientation`; give it an `ariaLabel`.
+- Toggle group items always have `aria-pressed`. A `Toggle` has it only when `active` is set; without it, it is a
+  plain button (or a link with `href`).
+- Set `ariaLabel` on icon-only toggles.
+
+## Keyboard interactions
+
+The toolbar's toggles share one tab stop; the arrow keys move between them.
+
+| Key                    | Description                                                                     |
+| ---------------------- | ------------------------------------------------------------------------------- |
+| Tab                    | Moves focus into and out of the toolbar                                         |
+| ArrowRight / ArrowLeft | Next or previous toggle (reversed when the text runs right to left), horizontal |
+| ArrowDown / ArrowUp    | Next or previous toggle, vertical                                               |
+| Home / End             | First or last toggle                                                            |
+
+With `loop` (on by default) moving past the last toggle goes back to the first.
+
+## Differences from Mantine
+
+- The parts come from the `children` function rather than `Toolbar.Toggle` and friends, and a toggle group takes its
+  items as data.
+- Toggle groups are controlled only (no `defaultValue`).

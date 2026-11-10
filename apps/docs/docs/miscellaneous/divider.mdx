@@ -1,0 +1,46 @@
+---
+title: Divider
+description: "Horizontal line with optional label or vertical divider."
+status: built
+ticket: su-smii
+files:
+  - components/Divider/Divider.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+Divider is a separator line between content.
+
+<Example height={160} story="miscellaneous-divider--usage" caption="Below a paragraph" />
+
+## Variants
+
+`variant` is `solid` (the default), `dashed` or `dotted`.
+
+<Example height={140} story="miscellaneous-divider--variants" caption="Solid, dashed and dotted" />
+
+## With label
+
+`label` puts text or any content in the line; `labelPosition` is `left`, `center` (the default) or `right`.
+
+<Example height={220} story="miscellaneous-divider--labels" caption="Labels" />
+
+## Sizes
+
+`size` is `xs` (1px, the default) to `xl` (5px), a number of pixels or any CSS length; `color` sets the line colour.
+
+<Example height={160} story="miscellaneous-divider--sizes" caption="xs to xl, and 10px" />
+
+## Vertical orientation
+
+`orientation: "vertical"` stretches the line to the height of its flex row.
+
+<Example height={100} story="miscellaneous-divider--orientation" caption="Vertical dividers" />
+
+## Styles API
+
+Its parts are `root` and `label`. The root has `role="separator"` with `aria-orientation`, and carries
+`data-orientation` and `data-with-label`; the label carries `data-position`.

@@ -1,0 +1,81 @@
+---
+title: Switch
+description: "Capture boolean input from user."
+status: built
+ticket: su-hgrc
+files:
+  - components/Switch/Switch.ts
+  - components/Switch/SwitchGroup.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Switch is built on `@foldkit/ui`'s accessible switch: a `role="switch"` button named by its label, with
+`aria-checked` saying whether it is on. Keep `checked` in your model and update it from `onChange`, which gets the new
+value. `id` is required; it names the label, description and error.
+
+<Configurator story="inputs-switch--configurator" />
+
+## Controlled
+
+Switch is always controlled: `checked` is what it shows and `onChange(checked)` is the message it sends.
+
+## Uncontrolled
+
+Give it a `name` (and `value`, `"on"` by default) and it renders a hidden input, so a submitted form sends the value
+while it is on.
+
+## Read only
+
+`readOnly` keeps the switch as it is and marks it `aria-readonly`; clicks and Space do nothing.
+
+## States
+
+<Example height={200} story="inputs-switch--states" caption="Default, checked, disabled and disabled checked" />
+
+## Inner Labels
+
+`onLabel` and `offLabel` show inside the track, on the side away from the thumb.
+
+<Example story="inputs-switch--inner-labels" caption="ON and OFF labels in every size" />
+
+## Icon labels
+
+<Example story="inputs-switch--icon-labels" caption="A sun when on, a moon when off" />
+
+## Thumb icon
+
+`thumbIcon` replaces the thumb's dot (`withThumbIndicator`, on by default) with any content.
+
+<Example story="inputs-switch--thumb-icon" caption="A cross when off, a check when on" />
+
+## Switch.Group
+
+`SwitchGroup` keeps one list of values for several switches, inside an Input.Wrapper (label, description, error,
+withAsterisk). `children` gets a function that builds a switch wired to the group, so lay them out however you like.
+
+<Example height={160} story="inputs-switch--group" caption="Favorite frameworks, React on" />
+
+## maxSelectedValues
+
+<Example story="inputs-switch--max-selected" caption="At most two" />
+
+## Switch.Group disabled
+
+<Example height={160} story="inputs-switch--group-disabled" caption="A disabled group" />
+
+## Accessibility
+
+The label names the switch (`aria-labelledby`), the description and error describe it (`aria-describedby`), and an
+error sets `aria-invalid`. A switch without a label needs a name: `attributes: { track: { "aria-label": "..." } }`,
+as the inner label examples do. Space toggles a focused switch, and a click on its label toggles it too.
+
+## Differences from Mantine
+
+- The control is a `button` with `role="switch"` from `@foldkit/ui` (part `track`), not a hidden `input`; the thumb's
+  dot is a real element (part `thumbIndicator`) instead of `::before`.
+- `onChange` gets the new state instead of an event; there is no `defaultChecked`.

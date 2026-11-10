@@ -1,0 +1,57 @@
+---
+title: CodeHighlight
+description: "Highlighted code blocks with copy and expand controls, tabs of files and inline code."
+status: built
+ticket: su-7kbt
+files:
+  - code-highlight/CodeHighlight/CodeHighlight.ts
+  - code-highlight/CodeHighlight/CodeHighlightTabs.ts
+  - code-highlight/CodeHighlight/InlineCodeHighlight.ts
+  - code-highlight/CodeHighlight/model.ts
+  - code-highlight/highlighter.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`CodeHighlight` shows `code` (trimmed, or keeping the first line's indentation with `withFirstLineIndentation`) with a
+copy button. `withExpandButton` adds a button that collapses the block to `maxCollapsedHeight` (180px), with a
+"show code" button over the fade; `withLineNumbers`, `withBorder`, `radius`, `background`, `codeColorScheme` and extra
+`controls` change the rest. `CodeHighlightTabs` shows several files (`code` is a list of `{ fileName, code, language,
+icon }`, with `getFileIcon` for the icons), and `InlineCodeHighlight` a short piece of code inside text.
+
+Keep `CodeHighlight.init({ id, expanded, activeTab })` in the Model and route its Messages and Commands through
+`update`; it reports `ExpandedChanged` and `TabChanged`.
+
+<Example
+  height={1100}
+  story="code-highlight-codehighlight--usage"
+  caption="Plain text, highlighted and collapsed, tabs, inline code, and the colour schemes"
+/>
+
+## Highlighting
+
+Highlighting is a function, `Highlighter`, from `{ code, language, colorScheme }` to the highlighted HTML. Pass one to
+`createHighlight({ highlighter })` for every component, or as the `highlighter` prop for one. The default shows plain
+text. `highlightJsHighlighter(hljs)` wraps a highlight.js instance and `shikiHighlighter(shiki, { themes })` a loaded
+shiki highlighter, without either being a dependency of the package:
+
+```ts
+import { createHighlighter } from "shiki"
+import { createHighlight } from "@sth-ui/code-highlight/Highlight.ts"
+import { shikiHighlighter } from "@sth-ui/code-highlight/highlighter.ts"
+
+const shiki = await createHighlighter({ themes: ["github-light", "github-dark"], langs: ["ts", "tsx"] })
+const highlight = createHighlight({ highlighter: shikiHighlighter(shiki) })
+```
+
+## Differences from Mantine
+
+- Mantine's adapters and `CodeHighlightAdapterProvider` become the `Highlighter` function; load shiki before creating
+  the components instead of passing a loader. Mantine's own shiki themes are not bundled: name shiki themes in
+  `themes` (GitHub light and dark by default).
+- The colour scheme given to the highlighter is `codeColorScheme`, or `"light"`; a view cannot read the computed scheme.
+- The controls name themselves (with a title) instead of showing Tooltips.
+- `expanded` and `activeTab` live in the submodel's Model.

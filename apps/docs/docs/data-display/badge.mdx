@@ -1,0 +1,74 @@
+---
+title: Badge
+description: "Display badge, pill or tag."
+status: built
+ticket: su-t4ag
+files:
+  - components/Badge/Badge.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+`variant` is `filled` (the default), `light`, `outline`, `dot`, `transparent`, `white`, `default` or
+`gradient`; `color` takes any palette colour, a shade such as `red.7`, or any CSS colour.
+
+<Configurator story="data-display-badge--configurator" />
+
+<Example story="data-display-badge--variants" caption="Every variant" />
+
+## Gradient
+
+`variant="gradient"` reads `gradient`: `from`, `to` and `deg`.
+
+<Example story="data-display-badge--gradient" caption="Blue to cyan at 90 degrees" />
+
+## Size and radius
+
+`size` is `xs` to `xl` (default `md`, 20px tall) or a CSS length; `radius` defaults to fully round.
+
+<Example story="data-display-badge--sizes" caption="xs to xl" />
+
+<Example
+  story="data-display-badge--colors-and-radius"
+  caption="Palette colour, shade, any CSS colour, radius sm, and size 2rem"
+/>
+
+## Rounded
+
+Set `circle` to remove the horizontal padding and make the badge as wide as it is tall:
+
+<Example story="data-display-badge--rounded" caption="One digit per size, xs to xl" />
+
+## Left and right sections
+
+<Example story="data-display-badge--sections" caption="An icon on either side" />
+
+## Full width
+
+Set `fullWidth` to make the badge span the full width of its parent:
+
+<Example story="data-display-badge--full-width" caption="In a 400px box" />
+
+## autoContrast
+
+With `autoContrast`, a `filled` badge picks black or white text for its colour, so a light colour stays
+readable. It works for palette colours today; shades and custom colours follow with su-j00m.
+
+<Example story="data-display-badge--auto-contrast" caption="Lime, without and with autoContrast" />
+
+## Styles API
+
+Badge's parts are `root`, `section` and `label`; each takes a StyleX style in `styles` and attributes in
+`attributes`. See the Styles API tab for its variables and data attributes.
+
+<Example story="data-display-badge--styles-api" caption="Taller, not uppercase, an italic label and red sections" />
+
+## Polymorphic component
+
+`component` renders the badge as another element, such as a link:
+
+<Example story="data-display-badge--as-link" caption="A badge that is a link" />

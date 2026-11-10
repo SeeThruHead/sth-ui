@@ -1,0 +1,28 @@
+---
+title: BackgroundImage
+description: "Displays image as background."
+status: built
+ticket: su-n5kv
+files:
+  - components/BackgroundImage/BackgroundImage.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+BackgroundImage shows `src` as a background that covers the element and is centred, so any content can sit on top
+of the image. It takes the full width of its parent; `radius` rounds its corners.
+
+<Configurator story="data-display-backgroundimage--configurator" />
+
+## Polymorphic component
+
+`component` changes the root element, for example `"a"` (with an `href` in `attributes.root`) to make the whole
+image a link.
+
+## Styles API
+
+It has one part, `root`.

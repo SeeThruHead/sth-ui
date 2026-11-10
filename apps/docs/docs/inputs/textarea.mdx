@@ -1,0 +1,74 @@
+---
+title: Textarea
+description: "Autosize or regular textarea."
+status: built
+ticket: su-kvox
+files:
+  - components/Input/InputBase.ts
+  - components/Input/Input.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+`Textarea` is a multiline [TextInput](/inputs/text-input): every Input prop (variant, size, radius, sections,
+loading, error, success, disabled) and every wrapper prop (label, description, error, required, withAsterisk,
+inputWrapperOrder) in one component, rendering a `textarea`. Give it an `id`; it links the label, description and
+error to the field.
+
+<Configurator story="inputs-textarea--configurator" />
+
+## Loading state
+
+Set `loading` to show a loader in the right section, or on the left with `loadingPosition: "left"`.
+
+<Example story="inputs-textarea--loading" caption="Loading" />
+
+## Controlled
+
+Keep the value in your model and update it from `onInput` (each keystroke) or `onChange` (on commit), as the
+bottom section example below does.
+
+## Uncontrolled
+
+Without `value`, the textarea keeps its own text; give it a `name` and it is sent with its form.
+
+## Bottom section
+
+`bottomSection` shows content inside the textarea under the text, such as a character count; the textarea makes
+room for it at the bottom.
+
+<Example story="inputs-textarea--bottom-section" caption="A character counter that follows the model" />
+
+## Autosize
+
+`autosize` grows the textarea with its content, from `minRows` up to `maxRows` (no limit without it). It uses the
+browser's own `field-sizing: content`, so nothing is measured in JavaScript.
+
+<Example height={360} story="inputs-textarea--autosize" caption="4 rows and growing; 2 rows growing to 4" />
+
+## Enable resize
+
+`resize` (`none` by default, `vertical`, `horizontal` or `both`) lets the person drag the textarea's size.
+
+<Example story="inputs-textarea--resize" caption="Resizable vertically" />
+
+## Error state
+
+<Example story="inputs-textarea--error" caption="Boolean error and an error message" />
+
+## Success state
+
+<Example story="inputs-textarea--success" caption="Success message" />
+
+## Disabled state
+
+<Example story="inputs-textarea--disabled" caption="Disabled" />
+
+## Differences from Mantine
+
+- Autosize is CSS (`field-sizing: content`) instead of a measuring component; in browsers without it the textarea
+  keeps its `minRows` height and scrolls.

@@ -1,0 +1,103 @@
+---
+title: DataTable
+description: "A table of many rows with sorting, search, column filters, row selection, a column picker and windowed rows."
+status: built
+ticket: su-nswp
+files:
+  - data-table/DataTable/DataTable.ts
+  - data-table/DataTable/model.ts
+  - data-table/DataTable/rows.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Installation
+
+```sh
+bun add @seethruhead/sth-ui
+```
+
+```ts
+import * as DataTable from "@seethruhead/sth-ui/data-table/DataTable/DataTable.ts"
+```
+
+Mantine has no data table of its own; this one is built from sth-ui's [Table](/typography/table), Checkbox,
+TextInput, Popover and ActionIcon, so it takes the same theme.
+
+## Usage
+
+Keep `DataTable.init(config, context)` in your model and route its Messages through
+`DataTable.update(model, message, context)`, mapping the Commands it returns. `context` is
+`{ rows, columns, rowId, searchText }`: the rows you show, the column definitions, how to get a row's id, and the
+text the search box looks in. Render it with `DataTable.dataTable(h, { model, toParentMessage, rows, columns, rowId,
+ariaLabel })`, or build your own with `DataTable.DataTable(components)` to give it defaults and styles.
+
+The model keeps the order of the matching rows, so sorting and filtering happen once per change, not on every scroll.
+When your rows change, call `DataTable.refresh(model, context)` in your own `update` to recompute that order.
+
+<Example height={560} story="data-table-datatable--usage" caption="2,000 games with search, filters and selection" />
+
+## Columns
+
+A column is `{ id, title, value, render, sortable, filter, width, align, hideable }`. `value(row)` gives the text,
+number, boolean, ISO date string or list of strings the column sorts and filters by; `render(row)` draws the cell
+instead of that value (a cover and title, a size in MB). Sorting is natural ("Zelda 2" before "Zelda 10") and keeps
+empty values last in both directions; a list sorts by its first item. Clicking a sortable header cycles ascending,
+descending and unsorted.
+
+`filter` picks the header's filter popover:
+
+- `{ _tag: "Text" }`: the value contains the text, ignoring case and accents.
+- `{ _tag: "Options", options }`: the value, or any item of a list, is one of the checked options.
+- `{ _tag: "NumberRange" }` and `{ _tag: "DateRange" }`: from and to, either one optional.
+- `{ _tag: "Boolean" }`: yes or no.
+
+The search box matches rows whose `searchText(row)` holds every word typed. The column picker lists every column
+whose `hideable` is not `false`.
+
+## Selection
+
+Each row has a checkbox; shift-click selects the range from the last row clicked. The header checkbox selects every row
+that matches the search and filters, not only those on screen. While anything is selected a bar shows the count,
+"Select all N", "Clear selection" and the buttons `bulkActions(selected)` returns. `model.selected` holds the ids, and
+`DataTable.selectedRows(model, rows, rowId)` and `DataTable.visibleRows(model, rows, columns, searchText)` give the
+rows themselves. Clicking a row (not its checkbox) reports `RowActivated`.
+
+## Keyboard
+
+The rows take focus as one stop. Up and Down move the active row, Page Up, Page Down, Home and End jump, Shift with
+Up or Down extends the selection, Space toggles the active row and Enter reports `RowActivated`. The active row is
+scrolled into view.
+
+## Many rows
+
+Rows have a fixed height (`rowHeightPx`, 36 by default, and `coarseRowHeightPx`, 44, on touch screens), and only
+those in view plus `overscan` above and below are rendered; spacer rows keep the scroll height right. The header stays
+put while the rows scroll. Give the table a `height`.
+
+<Example
+  height={320}
+  story="data-table-datatable--plain"
+  caption="Striped, without search, selection or the column picker"
+/>
+
+## Saving settings
+
+`update` reports `SettingsChanged` with `{ sort, hidden }` whenever the sort or the visible columns change, and
+`DataTable.settingsOf(model)` reads them; pass them back as `init({ id, sort, hidden })` to restore a list as it was.
+
+## Toolbar and empty state
+
+`toolbar` puts your own content beside the search box, such as filter chips or a save button, and `emptyState`
+replaces "No rows to show".
+
+<Example height={300} story="data-table-datatable--empty" caption="An empty table with a toolbar button" />
+
+## Testing with scenes
+
+In a `foldkit/scene` test of a view that holds a table, `measured(toParentMessage)` resolves the table's measuring
+Mount and `scrolled(toParentMessage, id)` resolves the scroll that a sort, search or filter asks for, both with your
+own wrapped Message. They come from `@seethruhead/sth-ui/data-table/DataTable/testing.ts`, which apps import only in
+tests. Scenes render the components, so StyleX has to be compiled: run them in the browser (Storybook or browser-mode
+Vitest), not in Node.

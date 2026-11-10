@@ -1,0 +1,31 @@
+---
+title: Dialog
+description: "Display a fixed overlay dialog at any side of the screen."
+status: built
+ticket: su-4yzx
+files:
+  - components/Dialog/Dialog.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+Dialog is a small panel fixed to a corner of the screen, for messages that should not block the page as a
+[Modal](/overlays/modal) does. Keep `Dialog.Model` (from `Dialog.init({ id })`) in your model, open and close it with
+`Dialog.open`, `Dialog.close` or `Dialog.toggle`, and pass its messages through `Dialog.update`; the close button
+(`withCloseButton`) closes it. It pops in from the top right over 200ms.
+
+<Example height={320} story="overlays-dialog--usage" caption="Toggle a newsletter dialog in the bottom left" />
+
+## Change position
+
+`position` takes `top`, `left`, `bottom` and `right` (30px from the bottom right by default); `size` is `xs` to
+`xl` (`md`, 340px, by default) or a number. It renders in a [Portal](/miscellaneous/portal) unless
+`withinPortal: false`, with `zIndex`, `shadow`, `radius`, `withBorder` and `transitionProps` as on Mantine's.
+
+## Accessibility
+
+Dialog does not move focus or trap it, as it does not block the page. Give it an accessible name with
+`attributes: { root: { "aria-label": ... } }` when its content does not explain itself.

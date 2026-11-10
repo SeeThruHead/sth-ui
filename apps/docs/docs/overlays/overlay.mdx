@@ -1,0 +1,31 @@
+---
+title: Overlay
+description: "A tinted layer over its positioned parent, or the whole window with fixed. Modal, Drawer and LoadingOverlay use it as their backdrop."
+status: built
+ticket: su-cibt
+files:
+  - components/Overlay/Overlay.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+<Configurator story="overlays-overlay--configurator" />
+
+## Colour, gradient and blur
+
+<Example story="overlays-overlay--variants" caption="Default, a white tint, a gradient, and a blur" />
+
+`color` (any CSS colour or theme colour) and `backgroundOpacity` (default 0.6) make the tint; `gradient` replaces
+it with a CSS gradient. `blur` blurs what is behind it. `radius` rounds it to match a card, and `zIndex`
+defaults to the theme's modal layer.
+
+## Content
+
+`center` centres its children, for a call to action over a card.
+
+<Example story="overlays-overlay--centered-content" caption="A centred button over a card" />
+
+`fixed` covers the window instead of its parent, and `onClick` takes a Message, which is how a modal closes when
+you click its backdrop.

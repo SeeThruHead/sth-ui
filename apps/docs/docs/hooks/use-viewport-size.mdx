@@ -1,0 +1,21 @@
+---
+title: useViewportSize
+description: "Follow the window's size."
+status: built
+ticket: su-tb8h
+files:
+  - hooks/browser.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`viewportSize` is a Stream of `{ width, height }`, sent at the start and on every `resize` and `orientationchange`.
+
+<Example height={80} story="hooks-useviewportsize--usage" caption="useViewportSize" />
+
+## Differences from Mantine
+
+- It is a Stream for a Subscription rather than a hook.

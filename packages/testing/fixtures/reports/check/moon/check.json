@@ -1,0 +1,34 @@
+{
+  "actions": [
+    {
+      "label": "SyncWorkspace",
+      "status": "passed",
+      "duration": { "secs": 0, "nanos": 1226500 },
+      "node": { "action": "sync-workspace" }
+    },
+    {
+      "label": "RunTask(kernel:test)",
+      "status": "cached-from-remote",
+      "duration": { "secs": 0, "nanos": 22849917 },
+      "node": { "action": "run-task", "params": { "target": "kernel:test" } }
+    },
+    {
+      "label": "RunTask(wish-farm:check)",
+      "status": "passed",
+      "duration": { "secs": 61, "nanos": 500000000 },
+      "node": { "action": "run-task", "params": { "target": "wish-farm:check" } }
+    },
+    {
+      "label": "RunTask(habits:check)",
+      "status": "failed",
+      "duration": { "secs": 12, "nanos": 0 },
+      "node": { "action": "run-task", "params": { "target": "habits:check" } }
+    },
+    {
+      "label": "RunTask(suite:check)",
+      "status": "skipped",
+      "node": { "action": "run-task", "params": { "target": "suite:check" } }
+    }
+  ],
+  "status": "failed"
+}

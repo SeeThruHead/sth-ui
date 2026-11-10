@@ -1,0 +1,22 @@
+---
+title: useTextSelection
+description: "Follow the text the user has selected."
+status: built
+ticket: su-8tww
+files:
+  - hooks/browser.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`textSelection` is a Stream of the selected text, starting with the current selection and sending it on every
+`selectionchange`.
+
+<Example height={110} story="hooks-usetextselection--usage" caption="useTextSelection" />
+
+## Differences from Mantine
+
+- It sends the selected text rather than the live `Selection` object, which cannot be kept in a Model.

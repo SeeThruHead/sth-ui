@@ -1,0 +1,100 @@
+---
+title: DayView
+description: "One day of a schedule: all-day events, timed events laid out side by side, business hours and the current time."
+status: built
+ticket: su-knw2
+files:
+  - schedule/DayView/DayView.ts
+  - schedule/ScheduleEvent/ScheduleEvent.ts
+  - schedule/ScheduleHeader/ScheduleHeader.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`schedule.DayView(h, { date, events })` shows one day. Events are plain data (`id`, `title`, `start`, `end`, `color`,
+`variant`, `display`, `recurrence`) with `YYYY-MM-DD HH:mm:ss` times. Recurring events are expanded for the day, all-day
+and multi-day events sit in the all-day row, and overlapping events share the width in columns.
+
+The view keeps no state of its own: `date` is yours, and `onDateChange` gets the day the previous, next and today
+controls ask for. `onViewChange`, `onTimeSlotClick`, `onAllDaySlotClick` and `onEventClick` turn clicks into your
+Messages. Arrow up and down move between time slots.
+
+<Example
+  height={560}
+  story="schedule-dayview--usage"
+  caption="A working day with a recurring standup, overlapping events and lunch as a background event"
+/>
+
+## All-day events and scrolling
+
+The all-day row shows two events; with more, it shows one and a "+N more" button whose popover lists them all (it
+opens when the view has its `model`). `startScrollTime` scrolls the grid to that time when it first shows.
+`withInteractiveBackgroundEvents` makes background events clickable through `onEventClick`.
+
+## Time range and slots
+
+`startTime` and `endTime` (`00:00:00` to `23:59:59`) bound the day; `intervalMinutes` (15) sizes each slot and
+`slotLabelInterval` (60) how often a label is shown, formatted with `slotLabelFormat` (`HH:mm`). `slotHeight` and
+`allDaySlotHeight` set the row sizes, `withSubHourGridLines` the dotted lines between hours and `withAllDaySlot` the
+all-day row. `maxHeight` makes the grid scroll.
+
+## Business hours, current time and overlap
+
+`highlightBusinessHours` shades the slots outside `businessHours` (`09:00:00` to `17:00:00`), splitting a slot that
+crosses the edge. Give `now` to draw the current time line, with its time in a bubble unless `withCurrentTimeBubble`
+is false. `eventOverlapMode="cascade"` stacks overlapping events instead of placing them in columns.
+
+<Example
+  height={520}
+  story="schedule-dayview--options"
+  caption="Static and cascaded, with two-hour labels and custom event bodies; then business hours from a mid-hour start; then the defaults"
+/>
+
+## Dragging, resizing and selecting
+
+`withEventsDragAndDrop`, `withEventResize` and `withDragSlotSelect` turn on the three pointer interactions. The
+view's state is a submodel: keep `DayView.init({ id })` (from `DayView/model.ts`) in your model, pass it as `model`
+with `toParentMessage` wrapping its Messages, and route those through `DayView.update(model, message, context)`, mapping
+the Commands it returns. The context repeats the day's `date`,
+`events` and time range, plus `eventDragInterval` and `eventResizeInterval` (snapping finer than the grid),
+`preventEventOverlap`, `canDropEvent` and `canResizeEventTo`. `update` reports `EventDropped`, `EventResized`,
+`SlotsSelected` (only when more than one slot is covered), `DropRejected` or `ResizeRejected`; Escape cancels.
+`canDragEvent` and `canResizeEvent` on the view choose which events can be picked up. `withExternalEventDrop` accepts
+items dragged in from elsewhere on the page: `update` reports `ExternalEventDropped` with the item's data by type and
+the slot it landed on, unless `canDropExternalEvent` refuses it.
+
+<Example
+  height={480}
+  story="schedule-dayview--dragging"
+  caption="Drag to move, pull an edge to resize, drag across empty slots to add an event; overlaps are refused"
+/>
+
+## Customizing
+
+`renderEvent` replaces each event's element, receiving the attributes and children it would have had; `renderEventBody`
+replaces only its content. `getTimeSlotProps` adds attributes to each time slot. The Styles API (`styles`,
+`attributes`) reaches the header, event and "+N more" parts as well as the view's own, and `previousControlProps`,
+`nextControlProps`, `todayControlProps` and `viewSelectProps` add attributes to one header control each.
+
+## Header and labels
+
+`withHeader` shows the header, titled with `headerFormat` (`MMMM D, YYYY`, or a function). Arrow keys, Home and End
+move between the view tabs. `withAgenda` adds an Agenda button that swaps the grid for the day's
+[AgendaView](/schedule/agenda-view) (it needs the view's `model`). `labels` overrides any of
+the texts, such as `today`, `allDay` or `timeSlot`. `mode="static"` turns off every click.
+
+## Differences from Mantine
+
+- `now` is a prop rather than read from the clock, so the current time line is deterministic; move it on a timer
+  of your own.
+- Formats use the dayjs tokens Mantine's examples use, implemented here without dayjs.
+- Dragging events uses pointer events instead of the HTML drag and drop API, so it works with touch too. External drops
+  still use the drag and drop API, and report the dragged data as strings by type instead of the `DataTransfer`.
+- Interaction callbacks (`onEventDrop`, `onEventResize`, `onSlotDragEnd`, `onEventPlacementRejected`) are out messages
+  of the interaction submodel, and they carry event ids rather than event objects.
+- Control props, `getTimeSlotProps` and `renderEvent` work with attribute lists instead of React props;
+  `scrollAreaProps` and `moreEventsProps` are the `attributes` of the `dayViewScrollArea` and `moreEventsButton` parts.
+- The "+N more" dropdown has no Styles API part of its own.

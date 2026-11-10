@@ -1,0 +1,28 @@
+---
+title: Anchor
+description: "A link styled with the theme's anchor colour. It takes every Text prop (size, gradient, line clamp, style props) plus the link's own href, target, rel and download."
+status: built
+ticket: su-31xp
+files:
+  - components/Anchor/Anchor.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+<Example story="navigation-anchor--usage" caption="A link that underlines on hover" />
+
+## Underline
+
+`underline` is `hover` (the default), `not-hover`, `always` or `never`.
+
+<Example story="navigation-anchor--underline" caption="The four underline settings" />
+
+## Text props
+
+<Example story="navigation-anchor--text-props" caption="Gradient, size and colour, and a one-line clamp" />
+
+## As a button
+
+`component="button"` renders a button that looks like a link, with `onClick` taking a Message, for actions that
+are not navigation.

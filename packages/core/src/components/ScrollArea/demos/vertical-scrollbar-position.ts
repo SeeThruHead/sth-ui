@@ -1,0 +1,26 @@
+import type { Html, HtmlBuilder } from "foldkit/html"
+import type { Ui } from "../../../Ui.ts"
+import { areaDemo } from "./areas.ts"
+import type { Message, Model } from "./areas.ts"
+import { content } from "./content.ts"
+
+export { Message, Model } from "./areas.ts"
+
+const demo = areaDemo("vertical-scrollbar-position", { left: { type: "always" }, right: { type: "always" } })
+
+export const { init, update, subscriptions } = demo
+
+export const view = (model: Model, h: HtmlBuilder<Message>, ui: Ui): Html =>
+  ui.Group(h, {
+    children: (["left", "right"] as const).map((side) =>
+      ui.ScrollArea(h, {
+        ...demo.area(model, side),
+        w: 300,
+        h: 200,
+        scrollbars: "y",
+        verticalScrollbarPosition: side,
+        offsetScrollbars: true,
+        children: content(h, ui)
+      })
+    )
+  })

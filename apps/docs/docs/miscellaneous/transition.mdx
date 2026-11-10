@@ -1,0 +1,46 @@
+---
+title: Transition
+description: "Animates content in and out: Mantine's 21 named transitions or your own, with separate enter and exit timing. Popover, Modal, Menu and Tooltip animate through it."
+status: built
+ticket: su-ituw
+files:
+  - components/Transition/Transition.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+<Example story="miscellaneous-transition--presets" caption="Every named transition, shown" />
+
+## State lives in your app
+
+Mantine's `mounted` prop starts the animation and a hook times it. Here the timing is `@foldkit/ui`'s Animation
+lifecycle, which waits for a paint, applies the "in" styles, and waits for the CSS transition to finish before
+it reports. Your app holds a `Transition.Model` and changes `mounted` through `update`:
+
+```ts
+const init = () => ({ dropdown: Transition.init({ id: "dropdown", mounted: false }) })
+
+Toggled: () => {
+  const { model: dropdown, commands, outMessages } = Transition.mounted(model.dropdown, !model.dropdown.isShowing)
+  return {
+    model: { ...model, dropdown },
+    commands: Transition.liftCommands(commands, (message) => Message.GotTransition({ message }))
+  }
+}
+
+ui.Transition(h, { model: model.dropdown, transition: "pop-top-left", duration: 150, children: [menu] })
+```
+
+Mantine's `onEnter`, `onEntered`, `onExit` and `onExited` are the out messages `Entering`, `Entered`, `Exiting`
+and `Exited`. Mantine passes the styles to a render function; here Transition wraps its children in one element
+that carries them.
+
+## Timing
+
+`duration` (default 250ms) and `exitDuration` (default `duration`), `timingFunction` (default `ease`),
+`enterDelay` and `exitDelay`. `keepMounted` keeps the content in the page with `display: none` while hidden.
+
+## Custom transitions
+
+`transition` also takes `{ in, out, common, transitionProperty }`, the same shape as Mantine's.

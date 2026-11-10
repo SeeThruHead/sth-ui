@@ -1,0 +1,62 @@
+---
+title: Theme
+sidebar_position: 1
+---
+
+import { Example } from "@site/src/components/Example"
+
+# Theme
+
+Mantine's theme object becomes StyleX variable groups. Each group has Mantine's default values; a theme replaces
+some of them for one part of the page.
+
+| Group                                                               | What it holds                                                                                       |
+| ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `palette`                                                           | Mantine's 14 colours, 10 shades each (`palette.blue6`)                                              |
+| `colors`                                                            | text, body, dimmed, placeholder, error, default, disabled and the rest, light and dark in one value |
+| `accent`                                                            | the colour a component paints with: filled, light, outline and their hovers                         |
+| `space`, `radius`, `fontSize`, `lineHeight`, `fontWeight`, `shadow` | Mantine's `xs` to `xl` scales                                                                       |
+| `font`, `heading`                                                   | font families and the `h1` to `h6` sizes                                                            |
+
+## Make a theme
+
+Write it next to your app's styles and pass it to `ThemeProvider`:
+
+```ts
+import * as stylex from "@stylexjs/stylex"
+import { font, radius } from "@sth-ui/core/theme/tokens.stylex.ts"
+
+export const round = stylex.createTheme(radius, { default: "2rem" })
+export const serif = stylex.createTheme(font, { body: "Georgia, serif" })
+
+ui.ThemeProvider(h, { themes: [round, serif], primaryColor: "grape", children })
+```
+
+<Example story="theming-theme--custom-theme" caption="A custom radius, font and text colour" />
+
+## Primary colour and the color prop
+
+`primaryColor` on `ThemeProvider` and `color` on a component both pick an accent theme. Any palette name works,
+a shade (`violet.2`) or any CSS colour (`#7048e8`).
+
+<Example story="theming-theme--every-accent" caption="Every palette colour as an accent" />
+
+## Light and dark
+
+Every colour is one `light-dark(light, dark)` value. `colorScheme` on `ThemeProvider` is `light`, `dark` or
+`auto` (follow the device).
+
+<Example story="theming-theme--color-schemes" caption="Light, dark and automatic" />
+
+## The page and the parts of it
+
+Your app's `ThemeProvider` themes the whole page: it applies its theme, font and colour scheme to `<html>` too,
+as Mantine applies its variables to `:root`. That is what keeps a Modal or Popover, which a Portal moves to the
+end of `body`, in your theme. To theme only part of a page (a dark panel, a preview of another theme), give that
+inner provider `scope: "element"`.
+
+## Default props
+
+Defaults that are not style live in `createUi`: `createUi({ components: { Button: { defaultProps: { variant:
+"light" } } } })`. Use the Theme picker on any example to see the Grape and Compact themes, which change defaults
+as well as colours.

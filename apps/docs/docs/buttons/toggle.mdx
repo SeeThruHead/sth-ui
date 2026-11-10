@@ -1,0 +1,61 @@
+---
+title: Toggle
+description: "A toggleable button with active/inactive states."
+status: built
+ticket: su-wu5i
+files:
+  - components/Toggle/Toggle.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Toggle is a button that is pressed or not. Give an icon-only toggle an `ariaLabel`.
+
+<Configurator story="buttons-toggle--configurator" />
+
+## Controlled
+
+`active` is the state and `onActiveChange` turns the new state into a message; the model keeps it.
+
+```ts
+ui.Toggle(h, {
+  ariaLabel: "Bold",
+  active: model.bold,
+  onActiveChange: (active) => Message.Toggled({ format: "bold", active }),
+  children: [TextBIcon(h, { weight: "bold", size: "100%" })]
+})
+```
+
+## Variants, sizes and colors
+
+An active toggle uses `variant` (`filled` by default, or `light`, `outline`, `subtle`, `transparent`, `default`,
+`white`) with `color`. `size` is `xs` to `xl` or any size, and `radius` rounds it.
+
+<Example height={220} story="buttons-toggle--variants" caption="Active variants, sizes and states" />
+
+## Auto contrast
+
+<Example height={100} story="buttons-toggle--auto-contrast" caption="Without and with autoContrast" />
+
+## Auto width
+
+`autoWidth` fits the toggle to text:
+
+<Example height={100} story="buttons-toggle--auto-width" caption="Text toggles" />
+
+## Accessibility
+
+Toggle renders a `button` with `aria-pressed` that follows `active`. `disabled` sets `disabled` and `aria-disabled`,
+takes it out of the tab order and ignores clicks.
+
+## Styles API
+
+Its only part is `root`, carrying `data-active`, `data-disabled`, `data-auto-width` and `data-variant`.
+
+## Differences from Mantine
+
+- Toggle is controlled only: there is no `defaultActive`, since the state lives in the model.

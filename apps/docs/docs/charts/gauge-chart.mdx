@@ -1,0 +1,41 @@
+---
+title: GaugeChart
+description: "Gauge chart component to display a value on an arc."
+status: built
+ticket: su-lnd7
+files:
+  - charts/GaugeChart/GaugeChart.ts
+  - charts/GaugeChart/gauge.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+GaugeChart fills an arc from `min` (0) to `value`, out of `max` (100), between `startAngle` (-120) and `endAngle`
+(120) degrees, with the value in the middle. `size` (200) and `thickness` (12) set its size, and the SVG's view box
+is fitted to the arc so a half circle takes half the height. It is a `meter`, named by `ariaLabel`, a string `label`,
+`ariaLabelledBy`, or "Gauge".
+
+<Example height={230} story="charts-gaugechart--usage" caption="72 out of 100" />
+
+## Sections, target, label and caps
+
+- `sections` colours the arc by thresholds instead, each section running from the previous section's value to its
+  own.
+- `target` marks a value with a short needle (`targetColor`, `targetSize`).
+- `label` replaces the value in the middle, and `valueFormatter` formats it (the value is clamped to `min` and
+  `max`).
+- `roundCaps` rounds the arc's ends; with sections, only the outer ends of the first and last.
+- `filledColor` and `trackColor` colour the filled arc and the track.
+
+<Example
+  height={460}
+  story="charts-gaugechart--options"
+  caption="Sections with a target, round caps, a half circle, a label and a formatter, thick round caps, one round section"
+/>
+
+## Differences from Mantine
+
+None in behaviour: it is a port of Mantine's own SVG gauge, with its tests ported to `gauge.test.ts`.

@@ -1,0 +1,29 @@
+---
+title: Code
+description: "Inline and block code."
+status: built
+ticket: su-bdjg
+files:
+  - components/Code/Code.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+Code shows a short piece of code inline, in the monospace font on a light background.
+
+<Example height={90} story="typography-code--usage" caption="Inline code" />
+
+## Block code
+
+`block` renders a `pre` element that keeps line breaks and scrolls when the code is wider than it.
+
+<Example height={200} story="typography-code--block" caption="A code block" />
+
+## Custom color
+
+`color` sets the background: a theme color (`blue.9`) or any CSS color.
+
+<Example height={90} story="typography-code--colors" caption="Dark blue with white text, and the light accent" />

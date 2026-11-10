@@ -1,0 +1,120 @@
+---
+title: Tour
+description: "Guide users through your application with interactive step-by-step tours."
+status: built
+ticket: su-klwb
+files:
+  - components/Tour/Tour.ts
+  - components/Tour/model.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Tour walks the user through parts of the page one step at a time, dimming everything but the current target and
+showing a tooltip next to it. Keep `Tour.Model` (from `Tour.init({ id })`) in your model, send `Tour.Message.Started()`
+(or `StartedAt({ step })`) to begin, and pass its messages through
+`Tour.update(model, message, Tour.tourContext({ steps, ...options }))`. Each step is
+`{ target, title, children }`, where `target` is the id of the element it points at.
+
+<Configurator story="overlays-tour--configurator" />
+
+## Beacon mode
+
+With `mode: "beacon"`, starting the tour shows a pulsing beacon on each target instead of the tooltip. Clicking a
+beacon opens its step; closing the step goes back to the beacons, and `Tour.Message.Ended()` turns the tour off.
+`color` sets the beacons and the Next button.
+
+<Example height={260} story="overlays-tour--beacon" caption="Show the beacons, then click one" />
+
+## Controlled
+
+The model keeps the step. `StartedAt({ step })` opens the tour at a given step, `SetStep({ step })` moves it, and
+the out messages report what happened: `StepChanged`, `StepOpened`, `StepClosed` and `Closed`.
+
+<Example height={260} story="overlays-tour--controlled" caption="Jump straight to step 2" />
+
+## Overlay configuration
+
+`overlayColor` (`rgba(0, 0, 0, 0.5)` by default), `spotlightPadding` (8) and `spotlightRadius` (4) shape the dimmed
+overlay and its cut-out. `withOverlayInteraction` lets clicks reach the target through the cut-out while the rest
+of the overlay keeps blocking them, and `closeOnOverlayClick` closes the tour when the overlay is clicked. Steps can
+override `withOverlay`, `spotlightPadding` and `spotlightRadius`.
+
+<Example height={260} story="overlays-tour--overlay" caption="Navy overlay, wide rounded spotlight, click-through" />
+
+## Steps without target
+
+A step without a `target` is centered on the screen with no spotlight.
+
+<Example height={200} story="overlays-tour--centered" caption="Centered first and last steps" />
+
+## Tooltip position
+
+`position` on a step places the tooltip around its target, `bottom` by default; it flips to the other side when
+there is no room.
+
+<Example height={280} story="overlays-tour--position" caption="Bottom, top, left and right" />
+
+## Custom content
+
+A step's `children` can be anything. To lay out the tooltip yourself, give `renderTooltip`: it receives the built
+parts (`closeButton` and `title`, `null` when there are none, `body`, `navigation`) with the `step` and its `index`,
+and returns the tooltip's content in your order, with anything of your own around them:
+
+<Example height={260} story="overlays-tour--custom-content" caption="An icon above each title" />
+
+## Transitions
+
+The tooltip pops in over 200ms; `transitionProps` (`transition` by name, `duration`, `timingFunction`) changes it.
+Between steps the same tooltip slides to the next target over `stepTransitionDuration` (300ms) instead of appearing
+again.
+
+## Scrolling and portal
+
+A target outside the viewport is scrolled into view, centred and instantly; `scrollIntoViewOptions` (`behavior`,
+`block`) changes how, and `withScrollIntoView: false` turns it off. The tour renders in a portal at the end of the
+body unless `withinPortal: false`.
+
+## Custom labels
+
+`labels` replaces the `skip`, `back`, `next` and `close` button labels, the `stepCounter` text and the `beacon`
+label.
+
+<Example height={260} story="overlays-tour--labels" caption="Spanish labels" />
+
+## Styles API
+
+Tour's named parts are `root`, `overlay`, `spotlight`, `tooltip`, `title`, `body`, `navigation`, `closeButton`,
+`stepCounter`, `beacon`, `beaconPulse` and `navigationButton`. `zIndex` (10000), `maxWidth` (360), `tooltipShadow`
+(`md`), `withCloseButton`, `withScrollIntoView` and the keyboard options are props too.
+
+<Example height={260} story="overlays-tour--states" caption="No overlay, no close button, narrow, grape" />
+
+## Keyboard navigation
+
+In guided mode Arrow Right goes to the next step (closing the tour on the last one) and Arrow Left to the previous
+one, unless focus is inside the target or a form field, or `withKeyboardNavigation: false`. Escape closes the tour
+unless `closeOnEscape: false`.
+
+## Accessibility
+
+The tooltip has `role="dialog"`, labelled by the step title (or the step counter) and described by the step body.
+Focus moves into the tooltip when it opens and is trapped there while the overlay is shown, and returns to the
+element that had it when the tour closes. The step counter is
+announced with `aria-live="polite"`, and beacons are buttons named by `labels.beacon` and the step title, for example
+`Start tour: Settings`.
+
+## Differences from Mantine
+
+- `target` is an element id rather than a CSS selector or a ref, and steps are plain values in `steps`.
+- State lives in your model: `active` is `Started`/`Ended`, and `onStepChange`, `onStepOpen`, `onStepClose` and
+  `onClose` are out messages; per-step `onStepOpen` and `onStepClose` are the same messages with the step index.
+- Custom layouts use `renderTooltip` with the built parts instead of the compound components (`Tour.Root`,
+  `Tour.Overlay`, `Tour.Tooltip` and the rest), so the tour keeps its own state.
+- `scrollToHandler` is `scrollIntoViewOptions`: a function cannot be passed to the scroll handling, so you choose the
+  behaviour and alignment instead.
+- The tooltip animates in but not out: closing the tour removes it at once.

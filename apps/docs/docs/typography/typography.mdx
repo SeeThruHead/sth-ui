@@ -1,0 +1,54 @@
+---
+title: Typography
+description: "Styles provider for html content."
+status: built
+ticket: su-6kic
+files:
+  - components/Typography/Typography.ts
+  - components/Typography/parse.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+Typography styles HTML you don't write yourself, such as rendered markdown or a page from a CMS: headings,
+paragraphs, links, inline and block code, `kbd`, `mark`, lists, blockquotes, rules, tables, details and images all
+get the theme's spacing, fonts and colors. Pass the HTML as a string in `html`. The first element has no top margin
+and the last no bottom margin, so the content sits flush with whatever surrounds it.
+
+<Example height={1500} story="typography-typography--usage" caption="Every element Typography styles" />
+
+## Details
+
+A `details` element in the HTML opens and closes when its summary is clicked, and the summary's triangle turns to
+match. Add `open` to show it opened.
+
+## Safe HTML
+
+`html` is parsed, not inserted: only the elements above (plus `span`, `div`, `figure`, `figcaption`, `cite` and
+`br`) are kept, other elements are replaced by their content, `script` and `style` are dropped with what is inside
+them, and attributes are kept only from a short list (`href`, `src`, `alt`, `title`, sizes, table spans, list
+`start`, `open`, `cite`). Links that run script (`javascript:`) are removed, and `data:` is only kept on images.
+
+<Example
+  height={220}
+  story="typography-typography--sanitizing"
+  caption="Handlers, styles, scripts and script links are gone"
+/>
+
+## Components inside
+
+`children` render before the HTML, unchanged: components keep their own styles.
+
+<Example height={160} story="typography-typography--children" caption="A Title and a Text inside Typography" />
+
+## Differences from Mantine
+
+- Mantine styles whatever its children are with descendant CSS selectors. sth-ui components never own CSS that
+  reaches into other elements, so Typography takes the HTML as a string in `html`, parses it and gives each
+  element its own classes. `children` are not restyled.
+- Elements outside the list above lose their tag but keep their text, and attributes outside the list are dropped,
+  so the HTML is safe to render from untrusted sources. Mantine renders whatever it is given.
+- The summary's triangle of a closed `details` nested inside an open one turns as if it were open.

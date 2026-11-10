@@ -1,0 +1,68 @@
+---
+title: EmptyState
+description: "Display a placeholder for no data, empty results and first-run states."
+status: built
+ticket: su-lxa5
+files:
+  - components/EmptyState/EmptyState.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+EmptyState is a placeholder for "no data" situations: empty search results, empty tables and lists, first-run
+states or error illustrations with a call to action. Give it an `icon`, a `title`, a `description` and `actions`:
+
+<Configurator story="feedback-emptystate--configurator" />
+
+## Compound parts
+
+Mantine's `EmptyState.Indicator`, `.Title`, `.Description` and `.Actions` are the `icon`, `title`, `description`
+and `actions` props here, rendered in that order; anything in `children` follows them in the body.
+
+<Example height={320} story="feedback-emptystate--compound" caption="Two actions and a note after them" />
+
+## Variant
+
+`variant: "filled"` or `"light"` puts the icon in a coloured circle; `color` picks the colour (the primary colour by
+default). Without a variant the icon is dimmed.
+
+<Example height={300} story="feedback-emptystate--variant" caption="Light blue and filled teal" />
+
+## Indicator background
+
+`withIndicatorBackground` puts a neutral circle behind the icon without a variant:
+
+<Example height={340} story="feedback-emptystate--indicator-background" caption="Neutral background" />
+
+## Align and size
+
+`align` is `center` (a centred column, the default), `left` or `right` (the icon beside the content). `size` (`xs` to
+`xl`, `md` by default) sets the icon, the gaps and the title and description font sizes.
+
+<Example height={300} story="feedback-emptystate--align" caption="Left and right" />
+
+<Example height={260} story="feedback-emptystate--sizes" caption="xs to xl" />
+
+## Title heading level
+
+The title is a `div` by default. Set `titleOrder` (1 to 6) to render it as an `h1` to `h6` heading.
+
+## Styles API
+
+Its parts are `root`, `body`, `indicator`, `title`, `description` and `actions`. The root carries `data-align` and,
+with a variant, `data-variant`; the indicator carries `data-with-background` when it has a background.
+
+## Accessibility
+
+- The root has no landmark role.
+- The title is not a heading unless `titleOrder` is set.
+- Give action buttons accessible names.
+
+## Differences from Mantine
+
+- The compound parts are props: `icon`, `title`, `description`, `actions` and `titleOrder` (Mantine's
+  `EmptyState.Title order`).

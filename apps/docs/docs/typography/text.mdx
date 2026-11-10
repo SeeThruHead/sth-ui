@@ -1,0 +1,45 @@
+---
+title: Text
+description: "Display text with theme sizes, a gradient, truncation or a line limit."
+status: built
+ticket: su-t5f3
+files:
+  - components/Text/Text.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+<Example story="typography-text--usage" caption="Sizes, weights, styles, colours, transforms and alignment" />
+
+<Example story="typography-text--sizes" caption="Sizes xs to xl" />
+
+<Configurator story="typography-text--configurator" />
+
+## Weight, colour and the rest
+
+Text is styled with style props: `fw`, `fs`, `td`, `c` (`dimmed`, a palette colour or a shade), `tt`, `ta`. `size`
+also takes a number of pixels.
+
+<Example story="typography-text--weights" caption="Style props on Text" />
+
+## Gradient
+
+`variant="gradient"` paints the text with the theme gradient, or with `gradient={{ from, to, deg }}`.
+
+<Example story="typography-text--gradient" caption="Gradient text" />
+
+## Truncate and line clamp
+
+`truncate` cuts one line with an ellipsis at the end (`true` or `"end"`) or at the start (`"start"`).
+`lineClamp` keeps that many lines.
+
+<Example story="typography-text--truncate-and-clamp" caption="Truncate and clamp at 280px" />
+
+## Inherit, inline and the element
+
+`inherit` takes size, weight and line height from the parent. `span` renders a `span`, `component` any element,
+and `inline` sets the line height to 1. `textWrap` sets `text-wrap` (`balance`, `pretty`...).
+
+<Example story="typography-text--inherit-and-inline" caption="Inherit, inline span and a label" />

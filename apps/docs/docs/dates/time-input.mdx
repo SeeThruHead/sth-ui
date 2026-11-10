@@ -1,0 +1,28 @@
+---
+title: TimeInput
+description: "The browser's time input, styled as an Input, with time limits."
+status: built
+ticket: su-rqhr
+files:
+  - dates/TimeInput/TimeInput.ts
+  - dates/time/time.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+TimeInput is an `<input type="time">` with every Input and InputWrapper prop (label, description, error, sections,
+size, variant). `value` is `"HH:mm"`, or `"HH:mm:ss"` with `withSeconds`, which also sets the input's `step` to one
+second (`step` overrides it). `onChange` gets the typed value. With `minTime` or `maxTime`, leaving the input with a
+time outside them changes it to the nearest limit, as Mantine does on blur.
+
+<Configurator story="dates-timeinput--configurator" />
+
+## Differences from Mantine
+
+- `onChange` gets the value, not the change event.
+- The focus colour Mantine puts on each hour, minute and second field is left out: StyleX cannot style a pseudo-class
+  inside those WebKit pseudo-elements.

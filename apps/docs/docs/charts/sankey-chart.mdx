@@ -1,0 +1,38 @@
+---
+title: SankeyChart
+description: "Flows between nodes, with link widths sized by value."
+status: built
+ticket: su-4e2a
+files:
+  - charts/SankeyChart/SankeyChart.ts
+  - charts/SankeyChart/sankey.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`data` has `nodes` (`{ name, color }`) and `links` (`{ source, target, value }`, by node index). Nodes are laid out
+in columns by recharts' Sankey algorithm (the same positions recharts computes): sources on the left, nodes with no
+outgoing links on the right, each as tall as the larger of its incoming and outgoing totals. Labels show the name and
+value beside each node, on two lines when the node is tall enough. Hovering a node or a link shows its value.
+
+<Example height={320} story="charts-sankeychart--usage" caption="Energy from sources to uses" />
+
+## Colours and sizes
+
+- A node's `color` colours it and its outgoing links; other nodes take `nodeColor`, or cycle through `colors` (blue,
+  cyan, teal and on by default), and their links take `linkColor` (gray) at `linkOpacity` (0.4).
+- `height` (300), `nodeWidth` (10), `nodePadding` (10), `linkCurvature` (0.5) and `iterations` (32) shape the layout.
+- `textColor` colours the labels, `valueFormatter` formats values, and `withTooltip={false}` turns hovering off.
+
+<Example
+  height={500}
+  story="charts-sankeychart--options"
+  caption="Coloured sources, custom palette and wider nodes; one node colour, no tooltip"
+/>
+
+## Differences from Mantine
+
+- `sankeyProps`, `tooltipProps` and `children` are recharts props and are not supported.

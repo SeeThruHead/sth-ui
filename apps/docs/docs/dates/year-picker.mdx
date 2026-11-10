@@ -1,0 +1,25 @@
+---
+title: YearPicker
+description: "A calendar that picks one year, several years or a range of years."
+status: built
+ticket: su-1ho9
+files:
+  - dates/YearPicker/YearPicker.ts
+  - dates/picker/Picker.ts
+  - dates/picker/model.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+YearPicker is the [DatePicker](/dates/date-picker) model one level up: `Picker.init({ id, today, level: "year", type })`
+opens on the years and never goes down to months. `type` is `"default"`, `"multiple"` or `"range"`, and the value holds
+the first day of each picked year. Presets, columns and the Calendar props work as they do on DatePicker.
+
+<Example height={360} story="dates-yearpicker--usage" caption="One year, several years and a range" />
+
+## Differences from Mantine
+
+- It is a submodel, as DatePicker is; the value is an array of `YYYY-MM-DD` strings.

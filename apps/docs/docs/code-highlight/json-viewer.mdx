@@ -1,0 +1,47 @@
+---
+title: JsonViewer
+description: "An interactive tree of JSON data with expand and collapse, types, sizes and copy."
+status: built
+ticket: su-t74d
+files:
+  - code-highlight/JsonViewer/JsonViewer.ts
+  - code-highlight/JsonViewer/model.ts
+  - code-highlight/JsonViewer/jsonValue.ts
+  - code-highlight/JsonViewer/keyboard.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+JsonViewer shows `value` as a tree. Objects and arrays open and close by click, Enter or Space; the arrow keys move
+between rows, ArrowRight opens a row or moves into it, ArrowLeft closes it or moves to its parent, and Ctrl or Cmd with C
+copies the focused row when it has a copy button. Keep `JsonViewer.init({ id, value, defaultExpandDepth })` in the
+Model and route its Messages and Commands through `update(model, message, { allExpanded })`; it reports
+`ExpandedPathsChanged` (Mantine's `onExpandedPathsChange`) and, with `selectable`, `ValueSelected` with the path of a
+clicked value (Mantine's `onValueSelect`). Paths are built with `serializePath`.
+
+<Example
+  height={980}
+  story="code-highlight-jsonviewer--usage"
+  caption="Plain, everything switched on, grouped arrays, and fully expanded with cycles"
+/>
+
+## Options
+
+- `withTypes`, `withSize`, `withQuotes` (on by default), `withKeyQuotes`, `withChevrons` and `withLineNumbers` change
+  what each row shows; `sortKeys` sorts object keys (or takes a comparator).
+- `collapseStringsAfterLength` shortens long strings behind a "show more" button.
+- `groupArraysAfterLength` splits long arrays into ranges; `maxDisplayLength` (100) cuts off longer lists.
+- `withCopy` adds a copy button to each row and `withCopyButton` one for the whole value; `copyLabel` and
+  `copiedLabel` name them.
+- `withControls` adds Expand all and Collapse all; `allExpanded` opens everything and turns toggling off.
+- `highlightItems` marks paths as `added` or `removed`.
+- `radius`, `fontSize`, `indentWidth` and `withBorder` change the look.
+
+## Differences from Mantine
+
+- It is a submodel; the expanded paths live in its Model (`setExpandedPaths` sets them), and `selectable` turns on
+  `ValueSelected` instead of passing `onValueSelect`.
+- The copy buttons name themselves "Copy" and "Copied" (with a title) instead of showing a Tooltip.

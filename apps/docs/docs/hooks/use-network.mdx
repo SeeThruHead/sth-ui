@@ -1,0 +1,24 @@
+---
+title: useNetwork
+description: "Follow the network connection."
+status: built
+ticket: su-k4pu
+files:
+  - hooks/useNetwork/network.ts
+  - hooks/browser.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`network` is a Stream of `{ online, downlink, downlinkMax, effectiveType, rtt, saveData, type }`, sent at the start, on
+`online` and `offline`, and when the Network Information API reports a change. Fields the browser does not provide are
+left out.
+
+<Example height={150} story="hooks-usenetwork--usage" caption="useNetwork" />
+
+## Differences from Mantine
+
+- It is a Stream for a Subscription rather than a hook; the connection fields are checked with a Schema, so a value outside the API's known ones is left out.

@@ -1,0 +1,27 @@
+---
+title: Drawer
+description: "A panel that slides in from an edge of the window: navigation, filters, settings. It is a Modal underneath (Mantine builds both on ModalBase, and so does sth-ui), so it locks scroll, traps focus, closes on Escape or a click on the backdrop, and gives focus back when it closes."
+status: built
+ticket: su-hn03
+files:
+  - components/Drawer/Drawer.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+<Example height={480} story="overlays-drawer--usage" caption="Open it with the button" />
+
+## Position, size and offset
+
+`position` is `left` (default), `right`, `top` or `bottom`, and picks the slide animation to match. `size` is
+`xs` to `xl` (default `md`, 440px), pixels or any CSS length (`30%`), across the panel's short side. `offset`
+keeps it away from the window's edges, and `radius` rounds it (square by default).
+
+<Example height={480} story="overlays-drawer--top" caption="From the top, 200px tall, 8px from the edges, rounded" />
+
+## State lives in your app
+
+Exactly as for [Modal](/overlays/modal): `Drawer.init`, `Drawer.open`, and `Drawer.update` for its messages; the
+out messages are `Opened`, `Closed`, `EnteredTransition` and `ExitedTransition`. Every Modal option except its
+size and position ones applies (`title`, `withCloseButton`, `withOverlay`, `closeOnEscape`, `trapFocus`...).

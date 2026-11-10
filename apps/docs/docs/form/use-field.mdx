@@ -1,0 +1,30 @@
+---
+title: useField
+description: "A single field's value, error and touched state as a Foldkit submodel, with sync or async validation."
+status: built
+ticket: su-87cc
+files:
+  - form/field.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`Field.init({ initialValue })` keeps one value outside a form. Route its Messages through
+`Field.update(model, message, context)` and wire an input with `fieldProps` or `textFieldProps`. `validate` takes the
+value and returns an error, nothing, or an Effect of either; `validateOnChange`, `validateOnBlur` and
+`clearErrorOnChange` (true) choose when it runs. `update` reports `ValueChanged`.
+
+<Example height={160} story="form-useform--field" caption="A username checked asynchronously when the field is left" />
+
+## Status
+
+`model.error`, `model.touched` and `model.validating` hold the field's state; `isDirty(model)` compares the value with
+the initial one. `RequestedValidation`, `SetError`, `Reset` and `ResetTouched` change them.
+
+## Differences from Mantine
+
+- The field is a submodel driven by Messages, with no uncontrolled mode or `key`.
+- Async validation returns an Effect, and a newer validation replaces one still running.

@@ -1,0 +1,24 @@
+---
+title: useIdle
+description: "Detect when the user stops interacting with the page."
+status: built
+ticket: su-x4sf
+files:
+  - hooks/useIdle/idle.ts
+  - hooks/browser.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`idle(timeout, { events })` is a Stream that sends `true` once nothing has happened for `timeout` and `false` when
+the user is active again. The events default to Mantine's: `keydown`, `mousemove`, `touchmove`, `click`, `scroll` and
+`wheel`. Start the Model as idle (Mantine's default `initialState`) or not, as the app needs.
+
+<Example height={80} story="hooks-useidle--usage" caption="Idle after 2 seconds without activity" />
+
+## Differences from Mantine
+
+- It is a Stream for a Subscription rather than a hook; `timeout` takes any Effect duration (`"2 seconds"`, `2000`).

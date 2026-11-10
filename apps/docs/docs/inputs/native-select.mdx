@@ -1,0 +1,47 @@
+---
+title: NativeSelect
+description: "Native select element based on Input."
+status: built
+ticket: su-zk02
+files:
+  - components/NativeSelect/NativeSelect.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+NativeSelect is the browser's `<select>` styled as an [Input](/inputs/input), with a chevron on the right that
+clicks pass through. It takes every Input prop; `size` defaults to `sm`.
+
+<Configurator story="combobox-nativeselect--configurator" />
+
+## Controlled
+
+`value` is the selected option's value and `onChange` turns a choice into a message, as in the example above.
+
+## Adding options
+
+`data` takes strings (the value is also the label), objects with `value`, `label` and `disabled`, or groups with a
+`group` label and their `items`:
+
+<Example height={100} story="combobox-nativeselect--groups" caption="Grouped options" />
+
+Options can also be passed as `children`, which allows dividers between them:
+
+<Example height={100} story="combobox-nativeselect--dividers" caption="Options written by hand" />
+
+## Left and right sections
+
+<Example height={170} story="combobox-nativeselect--sections" caption="Sections replace the chevron on the right" />
+
+## Loading, disabled, error and success states
+
+<Example height={520} story="combobox-nativeselect--states" caption="States and a large size" />
+
+## Styles API
+
+NativeSelect has Input's parts: `wrapper`, `input`, `section`, `root`, `label`, `required`, `description`, `error`.
+The chevron carries `data-combobox-chevron` and, with an error, `data-error`.

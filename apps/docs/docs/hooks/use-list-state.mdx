@@ -1,0 +1,26 @@
+---
+title: useListState
+description: "Functions that edit a list kept in the Model."
+status: built
+ticket: su-0k7j
+files:
+  - hooks/useListState/list.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+Each of Mantine's list handlers is a pure function that takes the list and returns the next one: `append`,
+`prepend`, `insert(list, index, ...items)`, `pop`, `shift`, `apply(list, update)`, `applyWhere(list, condition,
+update)`, `remove(list, ...indices)`, `reorder(list, { from, to })`, `swap(list, { from, to })`, `setItem(list,
+index, item)`, `setItemProp(list, index, prop, value)` and `filter(list, keep)`. Call them in `update` and store the
+result.
+
+<Example height={150} story="hooks-useliststate--usage" caption="Append, prepend, pop, reorder, swap and remove" />
+
+## Differences from Mantine
+
+- These are pure functions over a Model value rather than a hook; `setState` is just storing a new list.
+- `reorder` from an index past the end leaves the list as it is.

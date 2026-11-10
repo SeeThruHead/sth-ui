@@ -1,0 +1,24 @@
+---
+title: useEyeDropper
+description: "Pick a color from anywhere on the screen."
+status: built
+ticket: su-724p
+files:
+  - hooks/browser.ts
+  - hooks/commands.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`eyeDropperSupported()` says whether the browser has the EyeDropper API (and is not Opera, as Mantine checks).
+`openEyeDropper({})` is a Command that opens it and sends `Picked` with the color, or `Failed` when the user cancels or
+the API is missing.
+
+<Example height={120} story="hooks-useeyedropper--usage" caption="useEyeDropper" />
+
+## Differences from Mantine
+
+- `open` is a Command sending `Picked` or `Failed` rather than a promise; `supported` is a function to call when building the Model.

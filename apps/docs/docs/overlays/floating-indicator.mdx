@@ -1,0 +1,31 @@
+---
+title: FloatingIndicator
+description: "Display a floating indicator over a group of elements."
+status: built
+ticket: su-6e66
+files:
+  - components/FloatingIndicator/FloatingIndicator.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+FloatingIndicator highlights the active element in a group, for custom segmented controls, tabs and the like. It sits
+over its target with CSS anchor positioning: give the active element `floatingIndicatorTarget(anchor)` in its styles,
+render `FloatingIndicator` with the same `anchor` inside a parent with `position: relative`, and it moves (over
+`transitionDuration`, 150ms by default) whenever the target changes. `target: false` hides it. It has no look of its
+own: style it with the Styles API.
+
+<Example height={120} story="overlays-floatingindicator--segmented" caption="A custom segmented control" />
+
+## Multiple rows
+
+<Example height={240} story="overlays-floatingindicator--direction" caption="A 3 by 3 direction pad" />
+
+## Differences from Mantine
+
+- Mantine measures the `target` and `parent` elements in JavaScript; here CSS anchor positioning places the indicator,
+  so it follows its target with no measuring, and the target is named by `anchor` rather than passed as an element.
+- The Tabs example needs Tabs to accept a custom indicator, which is not ported yet.

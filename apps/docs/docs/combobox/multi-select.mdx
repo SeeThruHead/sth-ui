@@ -1,0 +1,68 @@
+---
+title: MultiSelect
+description: "Custom searchable multi select."
+status: built
+ticket: su-5yi0
+files:
+  - components/MultiSelect/MultiSelect.ts
+  - components/Combobox/Combobox.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+MultiSelect picks several values from a list and shows them as [pills](/combobox/pill). Keep `MultiSelect.Model`
+(from `MultiSelect.init({ id })`) and the chosen values in your model, and pass its messages through
+`MultiSelect.update(model, message, { values })`; its `Changed` out message carries the new list. Choosing an
+option adds it, choosing it again removes it, and the list stays open while you pick.
+
+<Configurator story="combobox-multiselect--configurator" />
+
+## Controlled
+
+MultiSelect is always controlled: `value` is the list of chosen values.
+
+## Searchable
+
+With `searchable`, typing filters the options; the search clears after each pick unless `clearSearchOnChange: false`
+is passed to `update`. Backspace in an empty search removes the last value.
+
+<Example height={320} story="combobox-multiselect--searchable" caption="Type to search" />
+
+## Nothing found
+
+`nothingFoundMessage` is shown when the search matches nothing; without it the list hides.
+
+## Clearable
+
+`clearable` adds a button beside the chevron that removes every value.
+
+<Example story="combobox-multiselect--clearable" caption="React chosen, with a clear button" />
+
+## Max selected values
+
+`MultiSelect.update(model, message, { values, maxValues: 2 })` stops adding once two are chosen.
+
+## Hide picked options
+
+`hidePickedOptions` leaves the chosen values out of the list.
+
+## Input props
+
+MultiSelect takes every [Combobox](/combobox) prop (`data` with groups and disabled items, `label`, `description`,
+`error`, `size`, `radius`, `variant`, `limit`, `filter`, `maxDropdownHeight`, `withCheckIcon`, `checkIconPosition`,
+`name`) and `leftSection`. In a `filled` input the pills use the contrast variant.
+
+## Accessibility
+
+The input is a `role="combobox"` named by its `label`, controlling a multi-select `role="listbox"`. The pills' remove
+buttons are out of the tab order: Backspace removes the last value from the keyboard.
+
+## Differences from Mantine
+
+- State lives in your model, and `update` takes the current values to work out the new list.
+- `renderOption`, `renderPill`, `onMaxValues`, `openOnFocus`, pill reordering and the rest of the
+  [Combobox](/combobox) gaps are not ported yet.

@@ -1,0 +1,49 @@
+---
+title: TimePicker
+description: "Hours, minutes, seconds and AM/PM fields with an optional dropdown of times or presets."
+status: built
+ticket: su-3s41
+files:
+  - dates/TimePicker/TimePicker.ts
+  - dates/TimePicker/model.ts
+  - dates/TimePicker/focus.ts
+  - dates/time/clock.ts
+  - dates/time/spin.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+TimePicker is an Input holding a spin field for hours and minutes (and seconds with `withSeconds`, and AM/PM with
+`format="12h"`). Typing fills a field and moves on when no other digit could follow; the arrow keys step by
+`hoursStep`, `minutesStep` and `secondsStep`, Home and End jump to the limits, Backspace empties a field and then
+moves back, and ArrowLeft and ArrowRight move between fields. Pasting a time fills every field. The value
+(`"HH:mm"` or `"HH:mm:ss"`, always 24 hour) is reported once every shown field is filled, and as `""` once it stops
+being whole, as Mantine does.
+
+Keep `TimePicker.init({ id, value }, context)` in the Model and route its Messages through
+`TimePicker.update(model, message, context)`, passing the same context (`format`, `withSeconds`, `min`, `max`, the
+steps, `type`, `readOnly`, `disabled`) to the view. `update` reports `Changed`, `Focused` and `Blurred`, and returns
+the Commands that move focus.
+
+<Configurator story="dates-timepicker--configurator" />
+
+## Dropdown, presets and limits
+
+- `withDropdown` shows columns of hours, minutes, seconds and AM/PM while a field has focus; `reverseTimeControlsList`
+  and `maxDropdownContentHeight` change them.
+- `presets`, a list of times or of labelled groups, replaces the columns; `closeDropdownOnPresetSelect` closes it on a
+  pick.
+- `min` and `max` clamp the value when focus leaves the fields, and clamp a paste.
+- `type="duration"` allows any number of hours (`minHoursDigits` wide) and has no dropdown.
+- `clearable` adds a clear button, and `name` writes the value into a hidden input.
+
+## Differences from Mantine
+
+- It is a submodel; the context goes to `init`, `update` and the view.
+- Clicking the label focuses the hours field through the root, since the label points at the input box.
+- A paste outside `min`/`max` shows the clamped time; Mantine shows what was pasted while reporting the clamped one.
+- The dropdown columns scroll to the selected value when they open, not on every change.

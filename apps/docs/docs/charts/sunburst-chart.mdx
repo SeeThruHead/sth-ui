@@ -1,0 +1,40 @@
+---
+title: SunburstChart
+description: "Hierarchical data as rings of arcs."
+status: built
+ticket: su-hrpa
+files:
+  - charts/SunburstChart/SunburstChart.ts
+  - charts/SunburstChart/sunburst.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+`data` is a list of `{ name, value, color, children }` nodes. Each level of the tree is a ring, starting at
+`innerRadius` (50): an arc's angle is its value against the total (a node without a value adds up its children), and
+it takes its own `color` or its parent's. As in recharts, the rings split the radius by the tree's depth plus one, so
+the outer edge is left clear. Hovering an arc shows its value.
+
+<Configurator story="charts-sunburstchart--configurator" />
+
+## Labels, gaps and angles
+
+- `withLabels` names each arc in its middle.
+- `gap` (1) and `strokeColor` draw the lines between arcs.
+- `size` (300) sizes the chart, and `startAngle` (0) and `endAngle` (360) draw part of a circle, counter-clockwise
+  from three o'clock.
+- `valueFormatter` formats the tooltip value; `withTooltip={false}` turns it off.
+
+<Example
+  height={270}
+  story="charts-sunburstchart--options"
+  caption="A full pie with labels and wide gaps; a half sunburst without colours"
+/>
+
+## Differences from Mantine
+
+- `dataKey`, `sunburstChartProps`, `tooltipProps` and `children` are recharts props and are not supported.

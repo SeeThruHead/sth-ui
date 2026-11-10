@@ -1,0 +1,24 @@
+---
+title: useMouse
+description: "Follow the mouse over an element or the page."
+status: built
+ticket: su-iqd7
+files:
+  - hooks/mounts.ts
+  - hooks/browser.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+The `mouse({ resetOnExit })` Mount sends `MouseMoved` with the pointer's position inside the element it is on (never
+below 0), and `{ x: 0, y: 0 }` when it leaves if `resetOnExit`. `mousePosition` (Mantine's `useMousePosition`) is a
+Stream of the pointer's position on the page.
+
+<Example height={220} story="hooks-usemouse--usage" caption="useMouse" />
+
+## Differences from Mantine
+
+- The element version is a Mount and the page version a Stream, rather than hooks.

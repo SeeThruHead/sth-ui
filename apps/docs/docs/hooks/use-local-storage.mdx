@@ -1,0 +1,28 @@
+---
+title: useLocalStorage and useSessionStorage
+description: "Keep a value in local or session storage."
+status: built
+ticket: su-t2n2
+files:
+  - hooks/useLocalStorage/storage.ts
+  - hooks/browser.ts
+  - hooks/commands.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`storedValue(kind, key)` is a Stream of the raw stored string (`kind` is `localStorage` or `sessionStorage`), sent at
+the start, when another tab changes it, and after every write in this tab. `writeStorage({ kind, key, value })` stores
+the value as JSON and `removeStorage({ kind, key })` deletes it; a blocked storage sends `Failed`. `readStored(area,
+key, decode, fallback)` and `readJson(text)` read a stored value back as Mantine does (JSON, else the raw text), checked
+by a Schema decoder.
+
+<Example height={130} story="hooks-uselocalstorage--usage" caption="useLocalStorage and useSessionStorage" />
+
+## Differences from Mantine
+
+- Reading is a Stream and writing a Command, rather than a hook returning a setter; the value is checked with a Schema instead of `deserialize`.
+- `sync` is a choice of whether to subscribe at all.

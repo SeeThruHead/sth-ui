@@ -1,0 +1,168 @@
+---
+title: TreeSelect
+description: "Select with hierarchical tree data."
+status: built
+ticket: su-asvv
+files:
+  - components/TreeSelect/TreeSelect.ts
+  - components/TreeSelect/model.ts
+  - components/MultiSelect/MultiSelect.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+TreeSelect picks values from nested data. Keep `TreeSelect.Model` (from
+`TreeSelect.init({ id, data, value })`) and the value in your model, and pass its messages through
+`TreeSelect.update(model, message, TreeSelect.treeSelectContext({ data, value, ...options }))`. The `Changed` out
+message carries `value` (the first value, or `null`) and `values`. Parents expand with their chevron; picking a leaf
+in the default `single` mode closes the dropdown and shows its label.
+
+<Configurator story="combobox-treeselect--configurator" />
+
+## Data prop
+
+`data` is the same [TreeNodeData](/navigation/tree#data-prop) Tree takes: `value`, `label`, `children`, and
+`nodeProps: { disabled: true }` to disable a node.
+
+## Selection modes
+
+`mode` is `single` (the default), `multiple` or `checkbox`.
+
+### Multiple mode
+
+In `multiple` mode every node, parents included, can be picked on its own, the picks show as pills and the dropdown
+stays open.
+
+<Example height={320} story="combobox-treeselect--multiple-mode" caption="Every node expanded with defaultExpandAll" />
+
+### Checkbox mode
+
+In `checkbox` mode each node has a checkbox. Checking a parent checks all of its children, and a parent with some
+children checked is indeterminate.
+
+<Example height={320} story="combobox-treeselect--checkbox-mode" caption="Checking a parent checks its children" />
+
+## Controlled
+
+TreeSelect is always controlled: `value` is a string or `null` in `single` mode and a list in the other modes, and
+`update` takes it in the context to work out the next value.
+
+## Searchable
+
+With `searchable`, typing filters the tree to the matching nodes and the parents leading to them, expanding those
+parents. `filter(query, node)` replaces the default label match. Opening a searchable select expands the parents of
+the chosen values.
+
+<Example height={320} story="combobox-treeselect--searchable" caption="Type to search the tree" />
+
+## Nothing found
+
+`nothingFoundMessage` is shown when the search matches nothing.
+
+<Example height={320} story="combobox-treeselect--nothing-found" caption="Type something that matches nothing" />
+
+## Clearable
+
+`clearable` adds a button that removes the value.
+
+<Example story="combobox-treeselect--clearable" caption="iPhone chosen, with a clear button" />
+
+## Expand on click
+
+With `expandOnClick` in the context, clicking a parent expands or collapses it instead of choosing it, in `single`
+and `multiple` modes. In `checkbox` mode the click still checks the parent and also expands it.
+
+<Example height={320} story="combobox-treeselect--expand-on-click" caption="Click a parent to expand it" />
+
+## Connecting lines
+
+Connecting lines are on by default; `withLines: false` turns them off.
+
+<Example height={320} story="combobox-treeselect--with-lines" caption="Without connecting lines" />
+
+## Check strictly
+
+`checkStrictly` checks each node on its own, without cascading to its children or parents.
+
+<Example height={320} story="combobox-treeselect--check-strictly" caption="Nodes check independently" />
+
+## Checked strategy
+
+`checkedStrategy` decides which checked nodes are in the value: `child` (the default) keeps only the leaves, `all`
+keeps every checked node with fully checked parents, and `parent` keeps the topmost fully checked node in place of
+its children.
+
+<Example height={420} story="combobox-treeselect--checked-strategy" caption="The three strategies" />
+
+## Max values
+
+`maxValues` in the context stops adding values in `multiple` and `checkbox` modes once that many are chosen.
+
+<Example height={320} story="combobox-treeselect--max-values" caption="Up to three items" />
+
+## renderNode
+
+`renderNode` replaces what each node shows in the dropdown. It gets the `node`, its `level`, `expanded`,
+`hasChildren`, `selected`, `checked` and `indeterminate`, and `expand`, a message that toggles the node. The
+connecting lines are still drawn.
+
+<Example height={320} story="combobox-treeselect--render-node" caption="Folder and file icons" />
+
+`expand` builds your own expand control:
+
+<Example height={320} story="combobox-treeselect--render-node-expand" caption="A caret that expands its node" />
+
+## renderPill
+
+`renderPill` replaces each pill in `multiple` and `checkbox` modes. It gets the `node` (a placeholder with the value
+as its label when the value is not in `data`), the `value`, `onRemove`, `disabled` and `readOnly`.
+
+<Example story="combobox-treeselect--render-pill" caption="Pills with folder and file icons" />
+
+## Scrollable dropdown
+
+The dropdown scrolls past `maxDropdownHeight`, 220px by default.
+
+## Keyboard navigation
+
+Arrow Down and Arrow Up move through the visible nodes. Arrow Right expands a collapsed parent and Arrow Left
+collapses an expanded one or moves to its parent. Enter chooses the active node, Escape closes the dropdown, Space
+opens it in a `multiple` or `checkbox` select that is not searchable, and Backspace in an empty search removes the
+last value.
+
+## Expand state
+
+`defaultExpandAll` or `defaultExpandedValues` in `init` sets which nodes start expanded. Expanding and collapsing
+send the `ExpandedChanged` out message with every expanded value. `chevronAriaLabels` names the chevron, `Expand`
+and `Collapse` by default.
+
+## Input props
+
+TreeSelect takes the [Combobox](/combobox) input props: `label`, `description`, `error`, `size`, `radius`, `variant`,
+`placeholder`, `leftSection`, `maxDisplayedValues` with `maxDisplayedValuesContent` (`+N more` by default), and
+`name`. The out messages also include `Removed`, `Cleared`, `DropdownOpened` and `DropdownClosed`.
+
+## Read only, disabled and error
+
+`readOnly` keeps the dropdown closed, `disabled` greys the input out, and `error` marks it invalid.
+
+<Example height={420} story="combobox-treeselect--states" caption="Read only, disabled, error, overflow and labels" />
+
+## Accessibility
+
+The input is a `role="combobox"` named by its `label`, controlling a `role="listbox"` that is multi-select in the
+`multiple` and `checkbox` modes. Each option carries `aria-level`, `aria-expanded` on parents and `aria-checked`
+(`mixed` when indeterminate) in `checkbox` mode, and the chevron is a button named by `chevronAriaLabels`.
+
+## Differences from Mantine
+
+- State lives in your model, and `update` takes the value and options in its context.
+- The checkbox in each option is drawn by TreeSelect until [Checkbox](/inputs/checkbox) has `Checkbox.Indicator`.
+- `openOnFocus`, `dropdownOpened` and `defaultDropdownOpened`, `hiddenInputValuesDivider`, `scrollAreaProps`,
+  `comboboxProps`, `clearSectionMode`, `chevronColor`, async children and the dropdown position, width, offset,
+  shadow and animation props are not ported yet.
+- Whether `hasChildren` nodes load their children later depends on Tree's async loading, which is not built yet.

@@ -1,0 +1,41 @@
+---
+title: Pill
+description: "Removable and non-removable tags."
+status: built
+ticket: su-t8ny
+files:
+  - components/Pill/Pill.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Pill is a small rounded label, the item MultiSelect and TagsInput show for each value. `size` runs from `xs` to
+`xl` (`sm` by default), `radius` rounds it (fully by default), and `variant="contrast"` gives it a white background
+for filled inputs.
+
+<Configurator story="combobox-pill--configurator" />
+
+## Inside inputs
+
+`withRemoveButton` adds a close button; clicking it sends `onRemove`. `PillGroup` lays pills out in a wrapping row
+spaced by its `size` (or `gap`). Inside an input, render the input as a `div` with `multiline`.
+
+<Example height={180} story="combobox-pill--within-input" caption="Ten removable pills in an input" />
+
+## Disabled
+
+`disabled` greys the pill and hides its remove button.
+
+## Accessibility
+
+The remove button is `aria-hidden` and out of the tab order, as in Mantine: inside an input, Backspace removes the
+last pill instead.
+
+## Differences from Mantine
+
+- PillGroup does not pass its `size` or `disabled` down to its pills; give each pill its own.
+- Dragging pills to reorder them is not ported yet.

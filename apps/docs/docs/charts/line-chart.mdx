@@ -1,0 +1,49 @@
+---
+title: LineChart
+description: "Line chart component with axes, grid, legend and tooltip."
+status: built
+ticket: su-cff8
+files:
+  - charts/LineChart/LineChart.ts
+  - charts/grid/grid.ts
+  - charts/grid/gridHover.ts
+  - charts/shared/geometry.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+`data` is a list of rows, `dataKey` the row field shown on the x axis, and `series` the fields drawn as lines, each
+`{ name, color, label?, strokeDasharray? }`. Give the chart a height with `h`. Hovering the chart shows a tooltip with
+every series' value at the nearest point, a dashed cursor and enlarged dots.
+
+<Configurator story="charts-linechart--configurator" />
+
+## Options
+
+- `withLegend` adds a legend above the chart; hovering a series in it fades the others.
+- `unit` follows each value on the y axis and in the tooltip, and `valueFormatter` formats them.
+- `gridAxis` (`x`: horizontal lines, `y`, `xy` or `none`) and `tickLine` (`y`, `x`, `xy` or `none`) choose the grid
+  lines and tick marks, and `strokeDasharray` the grid's dash pattern.
+- `referenceLines: [{ y, label, color }]` draws horizontal lines across the chart.
+- `xAxisLabel` and `yAxisLabel` name the axes.
+- `textColor` and `gridColor` colour the labels and the grid.
+- `curveType` (default `monotone`), `strokeWidth`, `withDots`, `connectNulls` and `fillOpacity` shape the lines.
+- `withXAxis`, `withYAxis` and `withTooltip` turn those parts off.
+- The x axis drops labels that would overlap, keeping the first and the last.
+
+<Example
+  height={1150}
+  story="charts-linechart--options"
+  caption="Legend, units, grid and reference lines; gaps and formatted values; a crowded axis; no y axis"
+/>
+
+## Differences from Mantine
+
+- It lays itself out in HTML and a stretched SVG instead of recharts, so it needs no measuring and stays responsive;
+  `xAxisProps`, `yAxisProps`, `gridProps`, `lineProps`, `tooltipProps`, `legendProps` and children are not supported.
+- Not ported yet: `orientation: "vertical"`, the gradient line `type`, a right y axis, `withPointLabels`, the brush,
+  reference areas and dots.

@@ -1,0 +1,172 @@
+---
+title: RichTextEditor
+description: "A Tiptap based rich text editor with a toolbar of formatting controls."
+status: building
+ticket: su-3zmn
+files:
+  - tiptap/RichTextEditor/RichTextEditor.ts
+  - tiptap/RichTextEditor/model.ts
+  - tiptap/controls.ts
+  - tiptap/content.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Installation
+
+```sh
+bun add @seethruhead/sth-ui @tiptap/starter-kit
+```
+
+Add the Tiptap extensions your toolbar needs, such as `@tiptap/extension-highlight`, `@tiptap/extension-text-align`,
+`@tiptap/extension-subscript` and `@tiptap/extension-superscript`.
+
+## Tiptap editor
+
+Create the editor once, at module level, with its extensions: `RichTextEditor.create({ extensions })`. It plays the part
+of Mantine's `useEditor` and is passed to the view as `editor`. Keep `RichTextEditor.init({ id, content })` in your
+model and route its Messages through `RichTextEditor.update`, which reports `ChangedContent` with the editor's HTML
+after every change; `RichTextEditor.setContent(model, html)` replaces the content.
+
+## Usage
+
+`tiptap.RichTextEditor(h, { editor, model, toParentMessage, children })` takes a toolbar and the content as children:
+`richTextEditorToolbar({ sticky, stickyOffset, children })`, `richTextEditorControlsGroup(controls)`,
+`richTextEditorControl("Bold")` for each built-in control, and `richTextEditorContent`. Controls show whether their
+mark or node is active at the cursor, and Undo, Redo and the task list and table controls are disabled when they can't
+run.
+
+<Example
+  height={420}
+  story="tiptap-richtexteditor--usage"
+  caption="Formatting, headings, lists, alignment and history"
+/>
+
+## Link
+
+`richTextEditorLinkControl({ icon, disableTooltips, popoverProps })` opens a link editor in a popover: the URL of the
+link under the cursor (empty when there is none), a toggle between opening in a new tab or the same tab, and Save,
+which links the selection or, with an empty URL, removes the link. Enter saves too. `RichTextEditor.init({ id,
+initialExternal })` sets whether a new link opens in a new tab. The Link extension is part of Tiptap's StarterKit.
+
+<Example
+  height={420}
+  story="tiptap-richtexteditor--linking"
+  caption="Link the selection, switch it to the same tab, then remove it"
+/>
+
+## Text color
+
+With Tiptap's `TextStyle` and `Color` extensions, `richTextEditorColorControl(color)` sets one color and shows as active
+while the selection has it, and `richTextEditorControl("UnsetColor")` removes the color.
+`richTextEditorColorPickerControl({ colors, popoverProps, colorPickerProps })` opens a palette of `colors`, with
+buttons to cancel, clear the color or switch to a [ColorPicker](/inputs/color-picker); colors chosen in the picker apply
+as you drag. The picker drags through subscriptions, so lift `RichTextEditor.subscriptions` into your app's.
+
+<Example
+  height={300}
+  story="tiptap-richtexteditor--colors"
+  caption="A palette, a color picker, preset colors and unset"
+/>
+
+## Source code, details and invisible characters
+
+`richTextEditorSourceCodeControl()` switches the content to its HTML source and back; `update` reports the switch as
+`SwitchedSourceCode`, Mantine's `onSourceCodeTextSwitch`. With Tiptap's `Details`, `DetailsSummary` and
+`DetailsContent` extensions, `richTextEditorControl("Details")` wraps the selection in a collapsible section or unwraps
+it. With `InvisibleCharacters`, `richTextEditorControl("InvisibleCharacters")` shows or hides spaces and breaks.
+
+<Example
+  height={260}
+  story="tiptap-richtexteditor--extras"
+  caption="Source code mode, a collapsible section and invisible characters"
+/>
+
+## Tables
+
+With Tiptap's `TableKit`, `richTextEditorTableInsertControl({ maxColumns, maxRows, withHeaderRow })` opens a grid
+(10 × 10 by default) to pick the size of the table to insert, with a header row unless `withHeaderRow` is false. The
+other table controls, from `TableDelete` to `TableSplitCell`, are disabled outside a table.
+
+<Example
+  height={360}
+  story="tiptap-richtexteditor--tables"
+  caption="Insert a table, add a column, toggle the header row, delete it"
+/>
+
+## Images
+
+Add Tiptap's `Image` extension and `ImageUploads.configure({ onImageUpload, onImageUploadError })` to the editor.
+`richTextEditorImageUploadControl({ accept })` opens a file picker (images by default); each picked image is shown at
+once from the file while `onImageUpload` runs, then replaced by the URL it resolves to (a string, or `{ src, alt,
+title }`). A failed upload calls `onImageUploadError`, is outlined in red and removed after three seconds. Without
+`ImageUploads` the control does nothing. Images pasted into the editor, or dropped onto it, upload the same way, at the
+cursor or where they were dropped.
+
+<Example height={420} story="tiptap-richtexteditor--images" caption="Two uploads that succeed and one that fails" />
+
+## Subtle variant, labels and custom controls
+
+`variant="subtle"` draws controls without borders. `labels` replaces any control's label (all of Mantine's label keys
+are supported). `richTextEditorCustomControl({ label, children, active, interactive, disabled, onClick })` is Mantine's
+`RichTextEditor.Control`: a control of your own that sends a Message of yours. With the `Placeholder` extension, an
+empty editor shows its placeholder.
+
+<Example
+  height={220}
+  story="tiptap-richtexteditor--variants"
+  caption="Subtle controls, a renamed label, custom controls and a placeholder"
+/>
+
+## Content
+
+Content is styled without a stylesheet: the editor gives each heading, paragraph, list, quote, code block, rule and
+inline mark its own class, so the HTML it reports stays clean.
+
+<Example height={620} story="tiptap-richtexteditor--content" caption="Every block style, loaded with setContent" />
+
+## Code highlight and typography styles
+
+Code blocks are highlighted when you use Tiptap's `CodeBlockLowlight` (from
+`@tiptap/extension-code-block-lowlight`, with a `lowlight` instance) in place of the starter kit's code block: each
+token gets Mantine's colors for comments, variables, numbers, titles and keywords, in light and dark. A block with
+a `language-*` class uses that language; otherwise lowlight guesses it. Set `withCodeHighlightStyles: false` in
+`RichTextEditor.create` to leave the tokens uncolored.
+
+`withTypographyStyles: false` drops the content styles (headings, paragraphs, lists, quotes, rules, images and inline
+marks) and keeps only what the editor needs: the placeholder, code blocks, tables, details and image upload states.
+
+```ts
+import { CodeBlockLowlight } from "@tiptap/extension-code-block-lowlight"
+import { common, createLowlight } from "lowlight"
+
+const editor = RichTextEditor.create({
+  extensions: [
+    StarterKit.configure({ codeBlock: false }),
+    CodeBlockLowlight.configure({ lowlight: createLowlight(common) })
+  ]
+})
+```
+
+<Example
+  height={760}
+  story="tiptap-richtexteditor--styles"
+  caption="Highlighted code, the same code uncolored, and an editor with no typography styles"
+/>
+
+## Differences from Mantine
+
+- The editor is created once with `RichTextEditor.create` and lives in your model, instead of `useEditor` in a component.
+- Children are built with `richTextEditorToolbar`, `richTextEditorControlsGroup`, `richTextEditorControl` and
+  `richTextEditorContent` rather than JSX subcomponents.
+- `initialExternal` is an option of `RichTextEditor.init` rather than of the Link control, and the external toggle's
+  hint is a `title` rather than a Tooltip.
+- Uploads are set up with an `ImageUploads` extension next to Tiptap's `Image`, instead of Mantine's
+  `getUploadImageExtension(Image, options)`.
+- Content styles come from classes the editor adds to each node, not from a Typography stylesheet, and Tiptap's own
+  injected CSS is turned off. The content element has the `textbox` role. They match the styles
+  [Typography](/typography/) gives the HTML the editor reports.
+- `withTypographyStyles` and `withCodeHighlightStyles` are options of `RichTextEditor.create`, set once when the
+  editor is made, rather than props of the component. Mantine accepts `withCodeHighlightStyles` but never reads it
+  (its token colors always apply); here `false` turns them off.

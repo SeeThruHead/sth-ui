@@ -1,0 +1,26 @@
+{
+  "app": "wish-farm",
+  "task": "check",
+  "suite": "pure",
+  "tests": [
+    {
+      "file": "src/domains/plan/Timeline.test.ts",
+      "test": "Timeline > pays bills first",
+      "state": "passed",
+      "flaky": false
+    },
+    {
+      "file": "src/domains/plan/Timeline.test.ts",
+      "test": "Timeline > holds back for the dip",
+      "state": "passed",
+      "flaky": true
+    },
+    { "file": "src/domains/plan/Forecast.test.ts", "test": "Forecast > waits", "state": "skipped", "flaky": false },
+    {
+      "file": "src/domains/plan/Forecast.test.ts",
+      "test": "Forecast > not quarantined",
+      "state": "skipped",
+      "flaky": false
+    }
+  ]
+}

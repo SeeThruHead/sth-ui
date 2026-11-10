@@ -1,0 +1,44 @@
+---
+title: DatePicker
+description: "A calendar that picks one date, several dates or a range, with optional presets."
+status: built
+ticket: su-8vwc
+files:
+  - dates/DatePicker/DatePicker.ts
+  - dates/picker/Picker.ts
+  - dates/picker/model.ts
+  - dates/picker/selection.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+DatePicker is a [Calendar](/dates/calendar) that selects. Keep `Picker.init({ id, today, type, value })` in the Model,
+route its Messages through `Picker.update(model, message, options)`, and render it with `model` and `toParentMessage`.
+`update` returns a `Changed` out message with the new value (Mantine's `onChange`) and passes the Calendar's out
+messages on.
+
+- `type: "default"` picks one date; with `allowDeselect` (an `update` option) picking it again clears it.
+- `type: "multiple"` toggles dates.
+- `type: "range"` picks a start and an end in two clicks, sorted, and shows the range while the pointer moves.
+  Picking the start again clears it, unless `allowSingleDateInRange` is set.
+
+The value is always an array of `YYYY-MM-DD` strings: one date, the dates, or the start and end.
+
+<Example height={420} story="dates-datepicker--usage" caption="One date, several dates and a range" />
+
+## Presets and columns
+
+`presets` lists buttons beside the calendar that set the value and show its first date. With more than one column,
+dates outside each month are hidden unless `hideOutsideDates` says otherwise. Every Calendar prop passes through, and
+`getDayProps` is merged over the selection state.
+
+<Example height={420} story="dates-datepicker--presets" caption="Two months with range presets and a disabled day" />
+
+## Differences from Mantine
+
+- It is a submodel; `value`, `defaultValue` and `onChange` become `init`'s `value`, `setValue` and the `Changed` out
+  message. Selection options go to `update`.
+- `today` is required by `init` (the date it opens on without a value), since the model cannot read the clock.

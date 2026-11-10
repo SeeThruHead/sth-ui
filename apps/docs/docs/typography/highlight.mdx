@@ -1,0 +1,77 @@
+---
+title: Highlight
+description: "Highlight given part of a string with mark."
+status: built
+ticket: su-ttp0
+files:
+  - components/Highlight/Highlight.ts
+  - components/Highlight/highlighter.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Highlight marks substrings of its text with `<mark>` (the Mark component). Pass the text as `children` and the
+substring or substrings to mark as `highlight`. Matching is case-insensitive and accent-insensitive by default, and
+every occurrence is marked.
+
+<Configurator story="typography-highlight--configurator" />
+
+## Matching behaviour
+
+- Case-insensitive: "hello" matches "Hello" and "HELLO" (`caseInsensitive`, on by default).
+- Accent-insensitive: "cafe" matches "café" and "CAFÉ" (`accentInsensitive`, on by default), and the marked text
+  keeps its accents.
+- Every occurrence is marked.
+- Regular expression characters such as `[`, `(` and `+` are matched literally.
+- Leading and trailing whitespace in a term is ignored, and empty terms are skipped.
+
+## Case-sensitive matching
+
+<Example height={170} story="typography-highlight--case-insensitive" caption="caseInsensitive: false" />
+
+## Accent-sensitive matching
+
+<Example height={170} story="typography-highlight--accent-insensitive" caption="accentInsensitive: false" />
+
+## Highlight multiple substrings
+
+Give an array of terms; longer terms win where they overlap.
+
+<Example height={100} story="typography-highlight--multiple" caption="Two terms" />
+
+## Custom colors per term
+
+Give terms as `{ text, color }` objects; a term without a colour uses `color` (yellow by default).
+
+<Example height={100} story="typography-highlight--colors" caption="Red, yellow and green terms" />
+
+## Whole word matching
+
+`wholeWord` marks only complete words, so "the" does not match "theme" or "there".
+
+<Example height={170} story="typography-highlight--whole-word" caption="With and without wholeWord" />
+
+## Change highlight styles
+
+`highlightStyles` takes StyleX styles applied to every mark.
+
+<Example height={120} story="typography-highlight--highlight-styles" caption="Gradient text" />
+
+## Text props
+
+Highlight is built on Text and takes its props except `c` for the highlight: `color` sets the mark's background.
+`component` changes the element, here a link:
+
+<Example height={100} story="typography-highlight--text-props" caption="A highlighted link" />
+
+## Styles API
+
+It has Text's `root` part; marks are Mark components and carry `data-highlight` with the matched text.
+
+## Differences from Mantine
+
+- `highlightStyles` takes StyleX styles instead of a style object or a theme function.

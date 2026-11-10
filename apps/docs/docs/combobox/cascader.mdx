@@ -1,0 +1,63 @@
+---
+title: Cascader
+description: "Select a path from hierarchical data with cascading columns."
+status: built
+ticket: su-rzxp
+files:
+  - components/Cascader/Cascader.ts
+  - components/Cascader/model.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Cascader picks a path through nested `data` (options with `value`, `label`, `children` and `disabled`), one column per
+level. It takes every [Input](/inputs/input) prop. Hold `Cascader.init({ id })` in your model and pass `update` the
+context from `Cascader.cascaderContext(props)`; it returns `Changed` with the path (or `null`), `Opened`, `Closed` and
+`SearchChanged` out messages.
+
+<Configurator story="combobox-cascader--configurator" />
+
+Arrow keys move within a column (ArrowRight opens the next level, ArrowLeft goes back, swapped with `dir: "rtl"`),
+Enter chooses, and Escape closes and returns focus to the field.
+
+## Change on select, close on select, allow deselect and expand trigger
+
+`changeOnSelect` lets any level be chosen, not only the last. `closeOnSelect: false` keeps the dropdown open after a
+choice. Choosing the current value again clears it unless `allowDeselect: false`. `expandTrigger: "hover"` opens the
+next level on hover.
+
+<Example height={360} story="combobox-cascader--behaviour" caption="Each option on its own field" />
+
+## Display value
+
+The field shows the chosen labels joined by `separator` (`/`); `formatValue` replaces that. `clearable` adds a clear
+button, `columnWidth` sets the column width, `checkIconPosition` and `withCheckIcon` place the check, and
+`renderOption` draws options. `name` adds a hidden input holding the path joined by commas.
+
+<Example height={300} story="combobox-cascader--display" caption="Formatting, separator and columns" />
+
+## Searchable and flat list layout
+
+`searchable` adds a search field; while it has text the dropdown lists matching paths (`filter` decides which), with
+`nothingFoundMessage` when none match. `withColumns: false` always shows that flat list.
+
+<Example height={200} story="combobox-cascader--search" caption="Search and the flat list" />
+
+## Disabled options, disabled and error states
+
+<Example height={300} story="combobox-cascader--states" caption="States" />
+
+## Styles API
+
+Input's parts, plus `dropdown`, `search`, `columnsList`, `column`, `columnScroll`, `columnOption`, `columnOptionLabel`,
+`columnOptionIcon`, `columnOptionCheck`, `columnEmpty` and `flatOption`. Options carry `data-active`, `data-in-path`
+and `data-disabled`.
+
+## Differences from Mantine
+
+- The search field sits at the top of the dropdown rather than in the field.
+- `safeAreaPolygon` and `maxDisplayedLevels` are not ported yet.

@@ -1,0 +1,41 @@
+---
+title: Alert
+description: "Attract user attention with important static message."
+status: built
+ticket: su-dzpi
+files:
+  - components/Alert/Alert.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Alert shows an important message: a `title`, an optional `icon` and the message as `children`. `variant` is `light`
+(default), `filled`, `outline`, `default`, `transparent` or `white`; `color` and `radius` style it, and
+`autoContrast` picks black or white text for a filled alert.
+
+<Configurator story="feedback-alert--configurator" />
+
+## Variants
+
+<Example height={620} story="feedback-alert--variants" caption="Every variant" />
+
+## Close button
+
+`withCloseButton` adds a close button; `onClose` is the message it sends.
+
+<Example height={160} story="feedback-alert--close" caption="A filled alert you can dismiss" />
+
+## Accessibility
+
+- The root has `role="alert"` (change it with `role`).
+- With an `id`, the alert is labelled by its title (`aria-labelledby`) and described by its message
+  (`aria-describedby`).
+- Set `closeButtonLabel` so the close button has a name.
+
+## Differences from Mantine
+
+- Mantine makes its own id for the ARIA links; here pass `id` to get them.

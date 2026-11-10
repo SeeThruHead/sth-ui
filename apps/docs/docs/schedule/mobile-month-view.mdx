@@ -1,0 +1,46 @@
+---
+title: MobileMonthView
+description: "A month for small screens: a compact calendar with a dot per event, and the chosen day's events listed below."
+status: built
+ticket: su-gz4z
+files:
+  - schedule/MobileMonthView/MobileMonthView.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`schedule.MobileMonthView(h, { date, events, selectedDate })` shows the month containing `date` as a compact calendar
+whose days carry up to three event dots, with the events of `selectedDate` (today when left out) listed underneath,
+including multi-day and recurring events. The selection is yours: `onDayClick` reports the day tapped, so keep it in
+your model and pass it back. `onEventClick`, `onWeekNumberClick` and `onYearClick` (the back button with the year)
+report the other taps, and arrow keys move between days.
+
+<Example
+  height={620}
+  story="schedule-mobilemonthview--usage"
+  caption="January on a phone: tap a day to see its events"
+/>
+
+## Options
+
+`withWeekNumbers`, `withWeekDays`, `weekdayFormat` (`dd`), `firstDayOfWeek`, `weekendDays`, `withWeekendDays`,
+`withOutsideDays`, `consistentWeeks` and `highlightToday` work as in the [MonthView](/schedule/month-view).
+`eventsHeaderFormat` (`dddd, MMMM D`) titles the list, `renderHeader` replaces the header (it receives the default
+one), `renderEvent` replaces each listed event, and `getDayProps` and `getWeekNumberProps` add attributes.
+
+<Example
+  height={620}
+  story="schedule-mobilemonthview--options"
+  caption="A static working month, a custom header and rows, and the defaults"
+/>
+
+## Differences from Mantine
+
+- The selected day is controlled only: there is no `defaultSelectedDate`, and `onDayClick` stands in for
+  `onSelectedDateChange`.
+- `now` is a prop rather than read from the clock.
+- `renderHeader` receives the default header as nodes, and `renderEvent`, `getDayProps` and `getWeekNumberProps` work
+  with attribute lists instead of React props.

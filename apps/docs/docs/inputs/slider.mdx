@@ -1,0 +1,101 @@
+---
+title: Slider
+description: "Slider component."
+status: built
+ticket: su-jvtp
+files:
+  - components/Slider/Slider.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Slider is built on `@foldkit/ui`'s accessible slider. Keep `Slider.Model` (from `Slider.init({ id, min, max, step })`)
+and the `value` in your model, pass the slider's messages through `Slider.update`, and set the value from its
+`ChangedValue` out message. Dragging needs the slider's subscription: lift `Slider.subscriptions` into your own with
+`Subscription.lift`, as each example's code shows. `thumbLabel` names the thumb for screen readers.
+
+<Configurator story="inputs-slider--configurator" />
+
+## Controlled
+
+Slider is always controlled: `value` is what it shows, and the out message carries each new value.
+
+## Disabled
+
+<Example height={120} story="inputs-slider--disabled" caption="A disabled slider" />
+
+## Control label
+
+The label above the thumb shows while the slider is hovered, focused or dragged. `label` formats it (a function of
+the value), `label: null` removes it, and `labelAlwaysOn` keeps it on screen.
+
+<Example height={260} story="inputs-slider--label" caption="No label, a formatted label, a label that stays" />
+
+## Min, max and step
+
+`min`, `max` and `step` go to `Slider.init`; the keyboard and pointer snap to the step.
+
+<Example
+  height={180}
+  story="inputs-slider--step"
+  caption="Steps of 0.1 from -10 to 10, then steps of 25 that match the marks"
+/>
+
+## Marks
+
+`marks` are values with an optional `label`; the ones at or below the value are filled.
+
+<Example height={160} story="inputs-slider--marks" caption="Marks without and with labels" />
+
+## Thumb size
+
+<Example height={100} story="inputs-slider--thumb-size" caption="A 14px thumb" />
+
+## Thumb children
+
+`thumbChildren` puts content inside the thumb.
+
+<Example height={100} story="inputs-slider--thumb-children" caption="A heart in a red thumb" />
+
+## Vertical slider
+
+<Example height={280} story="inputs-slider--vertical" caption="orientation vertical with marks" />
+
+## Inverted
+
+`inverted` fills the bar from the value to the maximum instead of from the minimum, and fills the marks above the
+value.
+
+<Example height={120} story="inputs-slider--inverted" caption="inverted at 80" />
+
+## Scale, start point, marks only, domain and change end
+
+`scale` changes the value the label and `aria-valuetext` show (here bytes as powers of two), and `startPointValue` fills
+the bar from that point instead of the minimum. Route messages through `Slider.updateWith(model, message, context)`
+instead of `update` for the rest: the context's `domain` limits the values that can be chosen inside the track's
+`min` and `max`, `precision` rounds them, and `restrictToMarks` with `marks` snaps to the nearest mark when dragging
+and to the next one with the keys. Besides `ChangedValue`, it reports `ChangeEnded` when a drag or a key press ends.
+
+<Example
+  height={460}
+  story="inputs-slider--extras"
+  caption="Scaled, start point, marks only, domain 20 to 80, vertical and inverted"
+/>
+
+## Accessibility
+
+The thumb has `role="slider"` with `aria-valuemin`, `aria-valuemax`, `aria-valuenow` and `aria-orientation`; name it
+with `thumbLabel`, and give `thumbValueText` to read the value out as text (`aria-valuetext`). Arrow keys move one
+step, Page Up and Page Down move further, and Home and End jump to the minimum and maximum.
+
+## Differences from Mantine
+
+- State lives in your model, and dragging needs the slider's subscription lifted into yours.
+- `labelTransitionProps` is not ported yet (see [RangeSlider](/inputs/range-slider) for two thumbs).
+- `domain`, `precision`, `restrictToMarks` and `onChangeEnd` live in `Slider.updateWith`'s context and out messages,
+  since the value is yours.
+- The track's rounded background is a real element (part `rail`) instead of `::before`.

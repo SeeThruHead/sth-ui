@@ -1,0 +1,55 @@
+---
+title: Getting started
+description: "Set up the @sth-ui/charts package."
+sidebar_position: 0
+---
+
+import { Example } from "@site/src/components/Example"
+
+`@sth-ui/charts` holds Mantine's chart components: the same props, the same Styles API names and the same behaviour,
+drawn with SVG and HTML instead of recharts.
+
+## Installation
+
+1. Install sth-ui from npm (`bun add @seethruhead/sth-ui`; the charts are its `charts` folder) and compile it with
+   StyleX like the app's own code. There is no separate stylesheet to import.
+2. Build the charts once, with any per-component defaults, the way `createUi` builds the core components:
+
+```ts
+import { createCharts } from "@sth-ui/charts/Charts.ts"
+
+const charts = createCharts({ components: { BarChart: { defaultProps: { withLegend: true } } } })
+
+const view = (model: Model, h: HtmlBuilder<Message>) =>
+  charts.BarChart(h, { h: 300, data: model.sales, dataKey: "month", series: [{ name: "Laptops", color: "violet.6" }] })
+```
+
+`charts` (also exported from `Charts.ts`) is the same set with no defaults.
+
+## Not based on recharts
+
+Mantine's charts wrap [recharts](https://recharts.github.io/). These are written from scratch, but the layouts follow
+recharts' own algorithms (axis ticks, squarified treemaps, sunburst rings, Sankey node positions), so a chart puts its
+marks where Mantine's would. Props that only pass options through to recharts (`xAxisProps`, `tooltipProps`,
+`composedChartProps` and the like) are not supported; each chart's page lists them.
+
+## Keyboard navigation
+
+Every chart with a tooltip can be reached with the keyboard: its chart area takes focus (with the focus ring), and then
+
+| Key          | Description                                       |
+| ------------ | ------------------------------------------------- |
+| `ArrowRight` | Moves the active point to the next data point     |
+| `ArrowLeft`  | Moves the active point to the previous data point |
+| `Enter`      | Toggles the active point tooltip on and off       |
+
+The tooltip shows for the first point when the chart takes focus and hides when it loses focus.
+
+<Example height={330} story="charts-barchart--usage" caption="Tab to the chart, then use the arrow keys" />
+
+## accessibilityLayer prop
+
+`accessibilityLayer` is `true` by default. Set it to `false` to keep a chart out of the tab order, for example when it
+sits inside another widget that handles the keyboard. It is supported by `AreaChart`, `BarChart`, `LineChart`,
+`CompositeChart`, `CandlestickChart`, `ScatterChart`, `BubbleChart`, `PieChart`, `DonutChart`, `RadarChart`,
+`RadialBarChart` and `FunnelChart`.

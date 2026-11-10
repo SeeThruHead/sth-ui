@@ -1,0 +1,22 @@
+---
+title: useFloatingWindow
+description: "Logic for a draggable window."
+status: built
+ticket: su-dbq0
+files:
+  - hooks/useFloatingWindow/floatingWindow.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+The Model, Messages, `update` and `placementOf` behind [FloatingWindow](/overlays/floating-window): dragging by a handle,
+keeping the window within the viewport or its bounds, and moving it with the keyboard.
+
+<Example height={300} story="overlays-floatingwindow--usage" caption="useFloatingWindow" />
+
+## Differences from Mantine
+
+- It is the component's Foldkit submodel rather than a hook returning a ref and position.

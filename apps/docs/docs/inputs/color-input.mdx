@@ -1,0 +1,121 @@
+---
+title: ColorInput
+description: "Capture color from user."
+status: built
+ticket: su-1km5
+files:
+  - components/ColorInput/ColorInput.ts
+  - components/ColorInput/model.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+ColorInput is a text input with a colour preview on the left, an eye dropper on the right and a ColorPicker in a
+dropdown that opens when the input is focused or clicked. Keep `ColorInput.Model` (from
+`ColorInput.init({ id, value })`) and the value string in your model, pass its messages through
+`ColorInput.update(model, message, ColorInput.colorInputContext(props))` and lift `ColorInput.subscriptions` so
+dragging in the picker follows the pointer. It takes every Input and Input.Wrapper prop: label, description, error,
+sizes, radius, variants, sections and loading.
+
+<Configurator story="inputs-colorinput--configurator" />
+
+## Controlled
+
+The `Changed` out message carries the value as it is typed or picked; `ColorInput.setValue(model, value)` sets it
+from outside.
+
+## Formats
+
+`format` is `hex` (the default), `hexa`, `rgb`, `rgba`, `hsl` or `hsla`. Values picked in the dropdown or with the
+eye dropper come out in that format, and the alpha slider is shown only for `hexa`, `rgba` and `hsla`:
+
+<Example height={300} story="inputs-colorinput--formats" caption="One input per format" />
+
+## Preserve invalid input
+
+On blur the input goes back to the last valid value (or empty). Set `fixOnBlur: false` to keep what was typed:
+
+<Example
+  height={120}
+  story="inputs-colorinput--fix-on-blur"
+  caption="Type something that is not a colour, then leave"
+/>
+
+## onChangeEnd
+
+`ChangeEnded` is sent when a drag in the picker ends, a key moves a slider, a swatch is picked or a valid colour is
+typed, with the value in `format`:
+
+<Example height={420} story="inputs-colorinput--change-end" caption="The bold value changes only when a change ends" />
+
+## Disable free input
+
+`disallowInput` makes the input read only; the colour can still be picked in the dropdown.
+
+<Example height={120} story="inputs-colorinput--disallow-input" caption="Pick only" />
+
+## With swatches
+
+`swatches` lists colours below the picker, seven per row unless `swatchesPerRow` says otherwise:
+
+<Example height={460} story="inputs-colorinput--swatches" caption="Mantine's colors at shade 6" />
+
+To limit the choice to the swatches, turn off the picker, free input and the eye dropper:
+
+<Example height={260} story="inputs-colorinput--swatches-only" caption="Swatches only" />
+
+## Close dropdown on color swatch click
+
+`closeOnColorSwatchClick` closes the dropdown when a swatch is picked:
+
+<Example height={460} story="inputs-colorinput--close-on-swatch" caption="Pick a swatch" />
+
+## Hide dropdown
+
+`withPicker: false` shows no dropdown (unless there are swatches):
+
+<Example height={120} story="inputs-colorinput--without-picker" caption="Without dropdown" />
+
+## Eye dropper
+
+Where the browser has the EyeDropper API, an eye dropper button sits in the right section; it is hidden while the
+input is disabled or read only, and `withEyeDropper: false` removes it. `eyeDropperIcon` replaces its icon.
+
+<Example height={200} story="inputs-colorinput--eye-dropper" caption="Without, and with a custom icon" />
+
+## Left and right sections
+
+`leftSection` replaces the colour preview and `rightSection` the eye dropper; `withPreview: false` drops the
+preview.
+
+<Example height={200} story="inputs-colorinput--sections" caption="Custom sections" />
+
+## Error, success, disabled, read only and loading
+
+<Example height={520} story="inputs-colorinput--states" caption="States" />
+
+## fullWidth
+
+`fullWidth` makes the dropdown as wide as the input and stretches the picker inside it.
+
+## Styles API
+
+Its parts are Input and Input.Wrapper's (`root`, `label`, `required`, `description`, `error`, `success`,
+`wrapper`, `input`, `section`, `bottomSection`), `dropdown`, `colorPreview`, `eyeDropperButton`,
+`eyeDropperIcon`, and ColorPicker's parts for the picker in the dropdown. The dropdown carries
+`data-color-input-dropdown` and the preview `data-color-preview`.
+
+## Accessibility
+
+The input is a labelled textbox; the picker in the dropdown is kept out of the tab order, so keyboard users type
+the value. The eye dropper button is named "Pick a colour from the screen".
+
+## Differences from Mantine
+
+- State lives in your model, and dragging in the picker needs the subscriptions lifted into yours.
+- There is no `popoverProps`; `withinPortal` (on by default) chooses whether the dropdown moves to the body.
+- The dropdown fades in and is placed bottom-start, 5px below the input, like Mantine's.

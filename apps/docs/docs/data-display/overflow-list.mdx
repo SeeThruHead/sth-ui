@@ -1,0 +1,54 @@
+---
+title: OverflowList
+description: "Hide items that do not fit in a container and display them as a single collapsed item."
+status: built
+ticket: su-tjuw
+files:
+  - components/OverflowList/OverflowList.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+OverflowList shows as many `data` items as fit, each drawn by `renderItem`, and puts the rest behind
+`renderOverflow(items)`. It measures itself, so it keeps a small model: hold `OverflowList.init()` in yours, route its
+messages through `toParentMessage` and update it with `OverflowList.update`. Drag the corner to resize:
+
+<Example height={100} story="data-display-overflowlist--usage" caption="Fruit badges" />
+
+## Data type
+
+`data` can hold any type; `renderItem` and `renderOverflow` receive it. `getItemKey` tells the list when items were
+reordered, so it measures again (strings and numbers are compared by value already).
+
+## Max rows
+
+`maxRows` (1 by default) lets the items wrap onto more rows:
+
+<Example height={120} story="data-display-overflowlist--max-rows" caption="Two rows" />
+
+## Max visible items
+
+`maxVisibleItems` caps the items shown even when more fit:
+
+<Example height={100} story="data-display-overflowlist--max-visible-items" caption="At most five" />
+
+## Collapse from
+
+`collapseFrom: "start"` hides the first items instead of the last, with the indicator first:
+
+<Example height={100} story="data-display-overflowlist--collapse-from" caption="Hiding from the start" />
+
+## Example: overflow with hover card
+
+<Example height={100} story="data-display-overflowlist--with-hover-card" caption="Hover the indicator" />
+
+## Styles API
+
+Its only part is `root`; `gap` sets the space between items (`xs` by default).
+
+## Differences from Mantine
+
+- The list keeps its measurements in a model you hold, as every stateful component here does.

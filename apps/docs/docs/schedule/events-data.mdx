@@ -1,0 +1,74 @@
+---
+title: Events data
+description: "The shape of schedule events, and what the views report when events are clicked, moved, resized or dropped."
+status: built
+ticket: su-vz9t
+files:
+  - schedule/events.ts
+  - schedule/DayView/interaction.ts
+  - schedule/placement.ts
+hide_title: true
+---
+
+## Overview
+
+Every view takes `events`: plain data validated by the `ScheduleEvent` Schema in `events.ts`. An event is a one-off
+event, a recurring series, or an override of one occurrence of a series (see [Recurring events](/schedule/recurring-events)).
+
+## ScheduleEvent
+
+| Field                              | Type                           | Meaning                                                                      |
+| ---------------------------------- | ------------------------------ | ---------------------------------------------------------------------------- |
+| `id`                               | `string \| number`             | Unique among the events given to a view; a repeated id keeps its first event |
+| `title`                            | `string`                       | Shown on the event                                                           |
+| `start`, `end`                     | `string`                       | `YYYY-MM-DD HH:mm:ss`; an event ending at midnight ends the day before       |
+| `color`                            | `string`                       | A theme color name or any CSS color                                          |
+| `variant`                          | `"filled" \| "light"`          | `light` when left out                                                        |
+| `display`                          | `"default" \| "background"`    | A background event shades its time instead of being a block                  |
+| `payload`                          | `Record<string, unknown>`      | Your own data, carried through untouched                                     |
+| `resourceId`                       | `string \| number`             | The resource the event belongs to, for the resources views                   |
+| `recurrence`                       | `{ rrule, exdate?, dtstart? }` | Makes the event a recurring series                                           |
+| `recurringEventId`, `recurrenceId` | `string \| number`, `string`   | Make the event an override of one occurrence                                 |
+| `recurringInstance`                | object                         | Set on generated occurrences                                                 |
+
+`ScheduleResource` (`id`, `label`, `color`, `payload`) and `ScheduleResourceGroup` (`label`, `resourceIds`) describe
+resources.
+
+## Clicks
+
+Clicks become your Messages through functions on the view: `onEventClick(event)`, `onTimeSlotClick({ slotStart,
+slotEnd })` (times in `YYYY-MM-DD HH:mm:ss`), `onAllDaySlotClick(date)`, `onDayClick(date)`, `onWeekNumberClick(date)`
+and `onMonthClick(date)` (dates in `YYYY-MM-DD`).
+
+## Interactions
+
+Dragging, resizing, selecting and dropping run through the view's model (`DayView/model.ts`, shared by the day, week
+and month views and by the [Schedule](/schedule)), and its `update` reports out messages:
+
+| Out message            | Fields                                                                           |
+| ---------------------- | -------------------------------------------------------------------------------- |
+| `EventDropped`         | `eventId`, `newStart`, `newEnd`                                                  |
+| `EventResized`         | `eventId`, `newStart`, `newEnd`                                                  |
+| `SlotsSelected`        | `rangeStart`, `rangeEnd` (whole days in the month view: midnight to `23:59:59`)  |
+| `ExternalEventDropped` | `data` (the dropped item's strings by type), `start`                             |
+| `DropRejected`         | `eventId`, `start`, `end`, `conflicts` (ids), `reason` (`overlap` or `rejected`) |
+| `ResizeRejected`       | the same, with `edge` (`start` or `end`)                                         |
+
+## Placement rules
+
+The `context` given to `update` decides what may move where. `preventEventOverlap` refuses a drop or resize that would
+overlap another event (background events and other occurrences of the same series are ignored; give a function
+`(stillEvent, movingEvent) => boolean` to decide per pair). `canDropEvent({ event, start, end })`,
+`canResizeEventTo({ event, start, end, edge })` and `canDropExternalEvent({ data, start })` refuse anything else.
+On the views, `canDragEvent(event)` and `canResizeEvent(event)` choose which events can be picked up at all.
+
+## Date and time value formats
+
+Dates are `YYYY-MM-DD` strings and date-times `YYYY-MM-DD HH:mm:ss` strings, in every prop and every out message.
+
+## Differences from Mantine
+
+- Callbacks that change events are out messages carrying ids, not callbacks carrying event objects; look the event up
+  by id.
+- `onEventDragStart` and `onEventDragEnd` have no counterpart: the drag is in the model while it lasts.
+- Dates are strings only.

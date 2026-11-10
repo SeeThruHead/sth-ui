@@ -1,0 +1,47 @@
+---
+title: ActionIcon
+description: "A square button for an icon: toolbars, card actions, input sections. It takes Button's variants, colours and gradient, so the two match."
+status: built
+ticket: su-6q3m
+files:
+  - components/ActionIcon/ActionIcon.ts
+  - components/ActionIcon/ActionIconGroup.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+<Configurator story="buttons-actionicon--configurator" />
+
+<Example
+  story="buttons-actionicon--variants"
+  caption="filled, light, outline, subtle, transparent, default and white"
+/>
+
+## Name it
+
+An icon has no text, so give every ActionIcon a `label` (its accessible name).
+
+## Size
+
+`size` is `xs` to `xl` (default `md`, 28px), `input-xs` to `input-xl` to line up with inputs (30px to 60px),
+pixels or any CSS length.
+
+<Example story="buttons-actionicon--sizes" caption="xs, xl, input-md, 40px and 3rem" />
+
+## States and colour
+
+`loading` shows a Loader over the icon (`loaderProps` set it), sets `aria-busy` and disables it; `disabled`
+greys it out. `color` takes a theme colour or any CSS colour, `autoContrast` picks dark text on light colours,
+`variant="gradient"` uses `gradient`, and `radius` rounds it.
+
+<Example story="buttons-actionicon--states" caption="Loading, disabled, gradient, auto contrast and a custom colour" />
+
+## Group
+
+Mantine's `ActionIcon.Group` and `ActionIcon.GroupSection` are `ui.ActionIconGroup` with `groupActionIcon(...)`
+and `groupActionIconSection(...)` items, joined like [Button group](/buttons/button#button-group); a section is
+sized to match (`xs` to `xl`, `input-*`).
+
+<Example story="buttons-actionicon--group" caption="A counter, and a vertical group" />

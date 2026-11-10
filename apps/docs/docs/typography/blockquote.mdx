@@ -1,0 +1,26 @@
+---
+title: Blockquote
+description: "Blockquote with optional cite."
+status: built
+ticket: su-59zs
+files:
+  - components/Blockquote/Blockquote.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Blockquote sets off a quote with a coloured border and a faint tint of the same `color` (the primary colour by
+default). `icon` sits in a circle on the top corner (`iconSize`, 48 by default), `cite` names the source under the
+quote, and `radius` rounds the end corners.
+
+<Configurator story="typography-blockquote--configurator" />
+
+## Text wrap
+
+`textWrap` sets how the text wraps; `balance` evens out the line lengths.
+
+<Example height={480} story="typography-blockquote--text-wrap" caption="wrap, then balance" />

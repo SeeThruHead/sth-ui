@@ -1,0 +1,41 @@
+$schema: https://moonrepo.dev/schemas/project.json
+fileGroups:
+  upstream:
+    - /package.json
+    - /packages/lint/package.json
+    - /packages/lint/*.ts
+    - /packages/lint/oxlintrc.json
+    - /packages/core/package.json
+    - /packages/core/src/**/*
+    - /packages/core/.storybook/**/*
+    - /packages/charts/package.json
+    - /packages/charts/src/**/*
+    - /packages/hooks/package.json
+    - /packages/hooks/src/**/*
+    - /packages/dates/package.json
+    - /packages/dates/src/**/*
+    - /packages/code-highlight/package.json
+    - /packages/code-highlight/src/**/*
+    - /packages/form/package.json
+    - /packages/form/src/**/*
+    - /packages/schedule/package.json
+    - /packages/schedule/src/**/*
+    - /packages/data-table/package.json
+    - /packages/data-table/src/**/*
+    - /packages/tiptap/package.json
+    - /packages/tiptap/src/**/*
+tasks:
+  typecheck:
+    command: bun run typecheck
+    inputs: ["**/*", "@group(upstream)"]
+  lint:
+    command: bun run lint
+    inputs: ["**/*", "@group(upstream)"]
+  format:
+    command: bun run format:check
+    inputs: ["**/*", /.oxfmtrc.json]
+  build:
+    command: bun run build
+    inputs: ["docs/**/*", "src/**/*", "tools/**/*", "data/**/*", "*.ts", "@group(upstream)"]
+  check:
+    deps: [typecheck, lint, format, build]

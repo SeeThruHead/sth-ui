@@ -1,0 +1,607 @@
+[
+  {
+    "category": "Layout",
+    "title": "Container",
+    "description": "Center content with padding and max-width"
+  },
+  {
+    "category": "Layout",
+    "title": "Center",
+    "description": "Centers content vertically and horizontally"
+  },
+  {
+    "category": "Layout",
+    "title": "Group",
+    "description": "Compose elements and components in a horizontal flex container"
+  },
+  {
+    "category": "Layout",
+    "title": "Stack",
+    "description": "Compose elements and components in a vertical flex container"
+  },
+  {
+    "category": "Layout",
+    "title": "AspectRatio",
+    "description": "Maintain responsive consistent width/height ratio"
+  },
+  {
+    "category": "Layout",
+    "title": "AppShell",
+    "description": "Responsive shell for your application with header, navbar, aside and footer"
+  },
+  {
+    "category": "Layout",
+    "title": "SimpleGrid",
+    "description": "Responsive grid in which each item takes equal amount of space"
+  },
+  {
+    "category": "Layout",
+    "title": "Grid",
+    "description": "Responsive 12 columns grid system"
+  },
+  {
+    "category": "Layout",
+    "title": "Space",
+    "description": "Add horizontal or vertical spacing from theme"
+  },
+  {
+    "category": "Layout",
+    "title": "Flex",
+    "description": "Compose elements in a flex container"
+  },
+  {
+    "category": "Layout",
+    "title": "Splitter",
+    "description": "Resizable split pane layout"
+  },
+  {
+    "category": "Inputs",
+    "title": "Input",
+    "description": "Base component to create custom inputs"
+  },
+  {
+    "category": "Inputs",
+    "title": "ColorPicker",
+    "description": "Pick colors in hex(a), rgb(a), hsl(a) and hsv(a) formats"
+  },
+  {
+    "category": "Inputs",
+    "title": "AlphaSlider",
+    "description": "Slider component for selecting alpha channel in color pickers (0 – 1)"
+  },
+  {
+    "category": "Inputs",
+    "title": "HueSlider",
+    "description": "Slider component for selecting hue channel in color pickers (0 – 360 degrees)"
+  },
+  {
+    "category": "Inputs",
+    "title": "NativeSelect",
+    "description": "Native select element based on Input"
+  },
+  {
+    "category": "Inputs",
+    "title": "SegmentedControl",
+    "description": "A linear set of two or more segments"
+  },
+  {
+    "category": "Inputs",
+    "title": "Slider",
+    "description": "Slider component"
+  },
+  {
+    "category": "Inputs",
+    "title": "RangeSlider",
+    "description": "RangeSlider component"
+  },
+  {
+    "category": "Inputs",
+    "title": "Switch",
+    "description": "Capture boolean input from user"
+  },
+  {
+    "category": "Inputs",
+    "title": "TextInput",
+    "description": "Capture string input from user"
+  },
+  {
+    "category": "Inputs",
+    "title": "MaskInput",
+    "description": "Input with mask pattern for formatted text entry"
+  },
+  {
+    "category": "Inputs",
+    "title": "Checkbox",
+    "description": "Capture boolean input from user"
+  },
+  {
+    "category": "Inputs",
+    "title": "Radio",
+    "description": "Wrapper for input type radio"
+  },
+  {
+    "category": "Inputs",
+    "title": "Fieldset",
+    "description": "Group related elements in a form"
+  },
+  {
+    "category": "Inputs",
+    "title": "PinInput",
+    "description": "Capture pin code or one time password from the user"
+  },
+  {
+    "category": "Inputs",
+    "title": "Chip",
+    "description": "Pick one or multiple values with inline controls"
+  },
+  {
+    "category": "Inputs",
+    "title": "Rating",
+    "description": "Pick and display rating"
+  },
+  {
+    "category": "Inputs",
+    "title": "Textarea",
+    "description": "Autosize or regular textarea"
+  },
+  {
+    "category": "Inputs",
+    "title": "JsonInput",
+    "description": "Capture json data from user"
+  },
+  {
+    "category": "Inputs",
+    "title": "PasswordInput",
+    "description": "Capture password data from user"
+  },
+  {
+    "category": "Inputs",
+    "title": "FileInput",
+    "description": "Capture files from user"
+  },
+  {
+    "category": "Inputs",
+    "title": "ColorInput",
+    "description": "Capture color from user"
+  },
+  {
+    "category": "Inputs",
+    "title": "NumberInput",
+    "description": "Capture number from user"
+  },
+  {
+    "category": "Inputs",
+    "title": "AngleSlider",
+    "description": "Pick angle value between 0 and 360"
+  },
+  {
+    "category": "Combobox",
+    "title": "Combobox",
+    "description": "Create custom select, autocomplete or multiselect inputs"
+  },
+  {
+    "category": "Combobox",
+    "title": "Pill",
+    "description": "Removable and non-removable tags"
+  },
+  {
+    "category": "Combobox",
+    "title": "PillsInput",
+    "description": "Base component for custom tags inputs and multi selects"
+  },
+  {
+    "category": "Combobox",
+    "title": "Autocomplete",
+    "description": "Autocomplete user input with any list of options"
+  },
+  {
+    "category": "Combobox",
+    "title": "TagsInput",
+    "description": "Capture a list of values from user with free input and suggestions"
+  },
+  {
+    "category": "Combobox",
+    "title": "Select",
+    "description": "Custom searchable select"
+  },
+  {
+    "category": "Combobox",
+    "title": "MultiSelect",
+    "description": "Custom searchable multi select"
+  },
+  {
+    "category": "Combobox",
+    "title": "ComboboxPopover",
+    "description": "Add combobox dropdown to any button element"
+  },
+  {
+    "category": "Combobox",
+    "title": "TreeSelect",
+    "description": "Select with hierarchical tree data"
+  },
+  {
+    "category": "Combobox",
+    "title": "Cascader",
+    "description": "Select a path from hierarchical data with cascading columns"
+  },
+  {
+    "category": "Buttons",
+    "title": "ActionIcon",
+    "description": "Icon button"
+  },
+  {
+    "category": "Buttons",
+    "title": "Button",
+    "description": "Button component to render button or link"
+  },
+  {
+    "category": "Buttons",
+    "title": "CloseButton",
+    "description": "Button with close icon"
+  },
+  {
+    "category": "Buttons",
+    "title": "CopyButton",
+    "description": "Copies given text to clipboard"
+  },
+  {
+    "category": "Buttons",
+    "title": "FileButton",
+    "description": "Open file picker with a button click"
+  },
+  {
+    "category": "Buttons",
+    "title": "Toggle",
+    "description": "A toggleable button with active/inactive states"
+  },
+  {
+    "category": "Buttons",
+    "title": "UnstyledButton",
+    "description": "Unstyled polymorphic button"
+  },
+  {
+    "category": "Navigation",
+    "title": "Anchor",
+    "description": "Display link with theme styles"
+  },
+  {
+    "category": "Navigation",
+    "title": "Tabs",
+    "description": "Switch between different views"
+  },
+  {
+    "category": "Navigation",
+    "title": "Breadcrumbs",
+    "description": "Separates list of react nodes with given separator"
+  },
+  {
+    "category": "Navigation",
+    "title": "Burger",
+    "description": "Open/close navigation button"
+  },
+  {
+    "category": "Navigation",
+    "title": "Pagination",
+    "description": "Display active page and navigate between multiple pages"
+  },
+  {
+    "category": "Navigation",
+    "title": "Stepper",
+    "description": "Display content divided into a steps sequence"
+  },
+  {
+    "category": "Navigation",
+    "title": "NavLink",
+    "description": "Navigation link"
+  },
+  {
+    "category": "Navigation",
+    "title": "TableOfContents",
+    "description": "Renders a list of headings on the page and tracks current heading visible in the viewport"
+  },
+  {
+    "category": "Navigation",
+    "title": "Tree",
+    "description": "Display a Tree structure"
+  },
+  {
+    "category": "Feedback",
+    "title": "Loader",
+    "description": "Indicate loading state"
+  },
+  {
+    "category": "Feedback",
+    "title": "Alert",
+    "description": "Attract user attention with important static message"
+  },
+  {
+    "category": "Feedback",
+    "title": "Notification",
+    "description": "Show dynamic notifications and alerts to user, part of notifications system"
+  },
+  {
+    "category": "Feedback",
+    "title": "Skeleton",
+    "description": "Indicate content loading state"
+  },
+  {
+    "category": "Feedback",
+    "title": "EmptyState",
+    "description": "Display a placeholder for no data, empty results and first-run states"
+  },
+  {
+    "category": "Feedback",
+    "title": "Progress",
+    "description": "Give user feedback for status of the task"
+  },
+  {
+    "category": "Feedback",
+    "title": "RingProgress",
+    "description": "Give user feedback for status of the task with circle diagram"
+  },
+  {
+    "category": "Feedback",
+    "title": "SemiCircleProgress",
+    "description": "Represent progress with semi circle diagram"
+  },
+  {
+    "category": "Overlays",
+    "title": "Popover",
+    "description": "Display popover section relative to given target element"
+  },
+  {
+    "category": "Overlays",
+    "title": "Tooltip",
+    "description": "Renders tooltip at given element on mouse over or other event"
+  },
+  {
+    "category": "Overlays",
+    "title": "Overlay",
+    "description": "Overlays parent element with div element with any color and opacity"
+  },
+  {
+    "category": "Overlays",
+    "title": "Affix",
+    "description": "Renders children inside portal at fixed position"
+  },
+  {
+    "category": "Overlays",
+    "title": "Modal",
+    "description": "An accessible overlay dialog"
+  },
+  {
+    "category": "Overlays",
+    "title": "Drawer",
+    "description": "Display overlay area at any side of the screen"
+  },
+  {
+    "category": "Overlays",
+    "title": "HoverCard",
+    "description": "Display popover section when target element is hovered"
+  },
+  {
+    "category": "Overlays",
+    "title": "Menu",
+    "description": "Combine a list of secondary actions into single interactive area"
+  },
+  {
+    "category": "Overlays",
+    "title": "Menubar",
+    "description": "Desktop application style menubar with a row of menu triggers"
+  },
+  {
+    "category": "Overlays",
+    "title": "LoadingOverlay",
+    "description": "An overlay with centered loader"
+  },
+  {
+    "category": "Overlays",
+    "title": "Dialog",
+    "description": "Display a fixed overlay dialog at any side of the screen"
+  },
+  {
+    "category": "Overlays",
+    "title": "ActionBar",
+    "description": "A fixed-position bottom bar for bulk selection actions"
+  },
+  {
+    "category": "Overlays",
+    "title": "FloatingIndicator",
+    "description": "Display a floating indicator over a group of elements"
+  },
+  {
+    "category": "Overlays",
+    "title": "FloatingWindow",
+    "description": "Draggable floating area"
+  },
+  {
+    "category": "Overlays",
+    "title": "Tour",
+    "description": "Guide users through your application with interactive step-by-step tours"
+  },
+  {
+    "category": "Data display",
+    "title": "BackgroundImage",
+    "description": "Displays image as background"
+  },
+  {
+    "category": "Data display",
+    "title": "ColorSwatch",
+    "description": "Displays color"
+  },
+  {
+    "category": "Data display",
+    "title": "Kbd",
+    "description": "Display keyboard key"
+  },
+  {
+    "category": "Data display",
+    "title": "Badge",
+    "description": "Display badge, pill or tag"
+  },
+  {
+    "category": "Data display",
+    "title": "Avatar",
+    "description": "Display user profile image, initials or fallback icon"
+  },
+  {
+    "category": "Data display",
+    "title": "Accordion",
+    "description": "Divide content into collapsible sections"
+  },
+  {
+    "category": "Data display",
+    "title": "Indicator",
+    "description": "Display element at the corner of another element"
+  },
+  {
+    "category": "Data display",
+    "title": "Card",
+    "description": "Card with sections"
+  },
+  {
+    "category": "Data display",
+    "title": "Image",
+    "description": "Image with optional fallback"
+  },
+  {
+    "category": "Data display",
+    "title": "ThemeIcon",
+    "description": "Render icon inside element with theme colors"
+  },
+  {
+    "category": "Data display",
+    "title": "Timeline",
+    "description": "Display list of events in chronological order"
+  },
+  {
+    "category": "Data display",
+    "title": "Spoiler",
+    "description": "Hide long sections of content under a spoiler"
+  },
+  {
+    "category": "Data display",
+    "title": "NumberFormatter",
+    "description": "Format number with thousands/decimal separators and suffix/prefix"
+  },
+  {
+    "category": "Data display",
+    "title": "RollingNumber",
+    "description": "Animate value changes with rolling digits"
+  },
+  {
+    "category": "Data display",
+    "title": "OverflowList",
+    "description": "Hide items that do not fit in a container and display them as a single collapsed item"
+  },
+  {
+    "category": "Data display",
+    "title": "DataList",
+    "description": "Display label-value pairs as a description list"
+  },
+  {
+    "category": "Typography",
+    "title": "Blockquote",
+    "description": "Blockquote with optional cite"
+  },
+  {
+    "category": "Typography",
+    "title": "Code",
+    "description": "Inline and block code"
+  },
+  {
+    "category": "Typography",
+    "title": "Highlight",
+    "description": "Highlight given part of a string with mark"
+  },
+  {
+    "category": "Typography",
+    "title": "Mark",
+    "description": "Highlight part of the text"
+  },
+  {
+    "category": "Typography",
+    "title": "Table",
+    "description": "Render table with theme styles"
+  },
+  {
+    "category": "Typography",
+    "title": "Text",
+    "description": "Display text"
+  },
+  {
+    "category": "Typography",
+    "title": "Title",
+    "description": "h1-h6 heading"
+  },
+  {
+    "category": "Typography",
+    "title": "Typography",
+    "description": "Styles provider for html content"
+  },
+  {
+    "category": "Typography",
+    "title": "List",
+    "description": "Display ordered or unordered list"
+  },
+  {
+    "category": "Miscellaneous",
+    "title": "Toolbar",
+    "description": "Accessible toolbar with toggle groups and roving tabindex keyboard navigation"
+  },
+  {
+    "category": "Miscellaneous",
+    "title": "Collapse",
+    "description": "Animate presence with slide down/up transition"
+  },
+  {
+    "category": "Miscellaneous",
+    "title": "FocusTrap",
+    "description": "Trap focus at child node"
+  },
+  {
+    "category": "Miscellaneous",
+    "title": "Marquee",
+    "description": "Create continuous scrolling animation for content"
+  },
+  {
+    "category": "Miscellaneous",
+    "title": "Paper",
+    "description": "Renders white or dark background depending on color scheme"
+  },
+  {
+    "category": "Miscellaneous",
+    "title": "Portal",
+    "description": "Renders component outside of parent element tree"
+  },
+  {
+    "category": "Miscellaneous",
+    "title": "ScrollArea",
+    "description": "Area with custom scrollbars"
+  },
+  {
+    "category": "Miscellaneous",
+    "title": "Scroller",
+    "description": "Horizontal scroll container with navigation controls"
+  },
+  {
+    "category": "Miscellaneous",
+    "title": "Transition",
+    "description": "Animate presence of component with pre-made animations"
+  },
+  {
+    "category": "Miscellaneous",
+    "title": "VisuallyHidden",
+    "description": "Hide element visually but keep it accessible for screen readers"
+  },
+  {
+    "category": "Miscellaneous",
+    "title": "Divider",
+    "description": "Horizontal line with optional label or vertical divider"
+  },
+  {
+    "category": "Miscellaneous",
+    "title": "Box",
+    "description": "Base component for all Mantine components"
+  }
+]

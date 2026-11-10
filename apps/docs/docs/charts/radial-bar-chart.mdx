@@ -1,0 +1,39 @@
+---
+title: RadialBarChart
+description: "Radial bar chart component."
+status: built
+ticket: su-1478
+files:
+  - charts/RadialBarChart/RadialBarChart.ts
+  - charts/RadialBarChart/radial.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+`data` is a list of rows with a `name`, a `color` and the field named by `dataKey`. Each row gets a ring, the first
+innermost, filled clockwise from twelve o'clock by its value against the axis's rounded top, over a gray background
+ring. Hovering a ring shows its value; `withLegend` adds a legend below that fades the other rings on hover.
+
+<Configurator story="charts-radialbarchart--configurator" />
+
+## Angles, labels and bars
+
+`startAngle` (90) and `endAngle` (-270) set the arc, `barSize` (20) each ring's width (narrower when there is no room),
+`withLabels` writes each value at the start of its ring, `withBackground: false` hides the background rings, and
+`emptyBackgroundColor` colours them.
+
+<Example
+  height={300}
+  story="charts-radialbarchart--options"
+  caption="A half circle with labels and thin bars; no background or tooltip"
+/>
+
+## Differences from Mantine
+
+- It draws its own SVG rather than recharts, in a 300 by 300 square scaled to fit; `radialBarProps`,
+  `radialBarChartProps`, `tooltipProps`, `legendProps` and children are not supported, and the tooltip uses the shared
+  chart tooltip.

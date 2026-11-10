@@ -1,0 +1,18 @@
+{
+  "model": "The component's state, from its `init`; keep it in your model",
+  "toParentMessage": "Wraps the component's messages in your own message type",
+  "onClick": "Message sent when it is clicked",
+  "onChange": "Builds the message sent when the value changes",
+  "href": "Renders a link to this address",
+  "target": "Where the link opens",
+  "label": "Accessible name, when there is no visible text",
+  "ariaLabel": "Accessible name, for screen readers",
+  "type": "The button's `type` attribute",
+  "component": "The element to render",
+  "order": "The order of the parts inside, by name",
+  "renderRoot": "Renders the root element yourself, given its attributes and children",
+  "children": "Content",
+  "items": "The entries, as data",
+  "value": "The current value",
+  "id": "The element's `id`"
+}

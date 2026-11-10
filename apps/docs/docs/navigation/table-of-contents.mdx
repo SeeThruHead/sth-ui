@@ -1,0 +1,69 @@
+---
+title: TableOfContents
+description: "Renders a list of headings on the page and tracks current heading visible in the viewport."
+status: built
+ticket: su-rpst
+files:
+  - components/TableOfContents/TableOfContents.ts
+  - components/TableOfContents/model.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+TableOfContents lists the headings of the page and marks the one closest to the top as it scrolls. Keep
+`TableOfContents.Model` (from `TableOfContents.init({ id })`) in your model and pass its messages through
+`TableOfContents.update(model, message, scrollSpyOptions)`. `variant` (`filled`, `light` or `none`), `color`, `size`
+and `radius` style the active control.
+
+<Configurator story="navigation-tableofcontents--configurator" />
+
+## Scroll spy options
+
+`scrollSpyOptions` takes the `selector` of the headings (every `h1` to `h6` by default), the `scrollHost` to watch
+(a selector; the window by default) and an `offset` from the top. The depth of a heading is the number in its tag
+and its text is the control's label.
+
+## Pass props to controls
+
+`getControlProps` receives each heading (`data`), its `index` and whether it is `active`, and returns the control's
+`children`, an `href` (which makes the control a link) or an `onClick` message. Send
+`TableOfContents.Message.ScrolledTo({ index })` to scroll a heading into view, as these demos do.
+
+## Initial data
+
+The headings are read when the component mounts. `initialData` (headings with `id`, `value` and `depth`) is shown
+until then.
+
+## Depth offset
+
+Controls are indented by their depth minus `minDepthToOffset` (1 by default) times `depthOffset` (`0.8em` by default):
+
+<Example height={300} story="navigation-tableofcontents--depth-offset" caption="40px per level from depth 0" />
+
+## Auto contrast
+
+<Example height={300} story="navigation-tableofcontents--auto-contrast" caption="Yellow 4 with dark text" />
+
+## Reinitialize
+
+When the headings change, send `TableOfContents.Message.Reinitialized()` to read them again:
+
+<Example
+  height={320}
+  story="navigation-tableofcontents--states"
+  caption="Light variant, links, and a section added later"
+/>
+
+## Styles API
+
+Its parts are `root` and `control`. Controls carry `data-active` and `data-variant`.
+
+## Differences from Mantine
+
+- `getDepth` and `getValue` are not options: the depth comes from the tag and the value from the text.
+- `scrollHost` is a selector, and a control scrolls by sending `ScrolledTo` instead of calling `getNode()`.
+- `reinitializeRef` is the `Reinitialized` message.

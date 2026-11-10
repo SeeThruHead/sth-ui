@@ -1,0 +1,33 @@
+---
+title: FocusTrap
+description: "Keeps keyboard focus inside its content while active: focus moves in when it activates, and Tab and Shift+Tab wrap around instead of leaving. Modal and Drawer use it."
+status: built
+ticket: su-p0yk
+files:
+  - components/FocusTrap/FocusTrap.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+<Example story="miscellaneous-focustrap--usage" caption="Activate the trap, then Tab stays inside the three inputs" />
+
+<Example story="miscellaneous-focustrap--traps-focus" caption="Active from the start: the first field gets focus" />
+
+## What gets focus first
+
+The element marked `data-autofocus` (`ui.FocusTrapInitialFocus` is an invisible one, for a dialog that should
+not focus a field), else the first element you can Tab to, else the first focusable one, else the trap itself
+if it is focusable.
+
+## Tab order
+
+Mantine's rules: disabled, hidden (`hidden`, `aria-hidden`, `type="hidden"`, or inside `display: none`) and
+`tabindex="-1"` elements are skipped; positive `tabindex` comes first; a radio group is one stop (its checked
+radio); links need an `href`; `contenteditable` and media with controls count. Inputs with their own stops
+(date, time, audio, video) keep them, and focus is brought back only if it leaves the trap.
+
+## Differences from Mantine
+
+Mantine passes the trap to its single child as a ref. Foldkit has no refs, so FocusTrap wraps its children in
+one element. Nested traps work: the innermost one holding focus handles Tab.

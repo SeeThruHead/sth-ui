@@ -1,0 +1,14 @@
+{
+  "app": "habits",
+  "task": "check",
+  "suite": "server",
+  "tests": [
+    {
+      "file": "src/features/log/log.test.ts",
+      "test": "log > records a check-in",
+      "state": "failed",
+      "flaky": false,
+      "error": "expected 1 to be 2"
+    }
+  ]
+}

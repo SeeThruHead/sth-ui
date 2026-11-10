@@ -1,0 +1,26 @@
+---
+title: useScrollIntoView
+description: "Scroll smoothly to an element."
+status: built
+ticket: su-kkgz
+files:
+  - hooks/useScrollIntoView/scrollMath.ts
+  - hooks/commands.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`scrollIntoViewOf(target, { parent, axis, alignment, duration, offset, cancelable })` is a Command that scrolls the
+page, or the `parent` element, until the `target` (both CSS selectors) is at the `start`, `end` or `center`, eased with
+easeInOutQuad over `duration` (1250ms) and at once when the user prefers reduced motion. It sends `ScrollFinished`, or
+`ScrollCancelled` when a wheel or touch move stops it (`cancelable`, on by default) or the target is missing.
+
+<Example height={330} story="hooks-usescrollintoview--usage" caption="useScrollIntoView" />
+
+## Differences from Mantine
+
+- It is a Command taking selectors rather than a hook with refs; `onScrollFinish` and `onScrollCancel` are the two Messages, and `scrolling` is the Model's own flag.
+- `easing` and `isList` are not options.

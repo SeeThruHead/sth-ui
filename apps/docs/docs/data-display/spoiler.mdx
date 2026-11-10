@@ -1,0 +1,44 @@
+---
+title: Spoiler
+description: "Hide long sections of content under a spoiler."
+status: built
+ticket: su-4jx2
+files:
+  - components/Spoiler/Spoiler.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+Spoiler cuts its content off at `maxHeight` (100px by default) and shows a `showLabel` control to reveal the rest;
+when the content is shorter than `maxHeight`, there is no control. Keep `Spoiler.Model` (from
+`Spoiler.init({ id })`) in your model and pass its messages through `Spoiler.update`: it measures the content and
+remembers whether it is open.
+
+<Example height={300} story="datadisplay-spoiler--usage" caption="Cut off at 120px, with Show more" />
+
+## Control expanded state
+
+`Spoiler.init({ id, expanded: true })` starts it open. `hideLabel: null` removes the control once it is open, so the
+content stays revealed.
+
+## Subscribe to expanded state changes
+
+`Spoiler.update` returns an `ExpandedChanged` out message each time the control is pressed.
+
+## Transition duration
+
+`transitionDuration` (200ms by default) is how long the height animates; 0 opens and closes it at once.
+
+<Example height={300} story="datadisplay-spoiler--transitions" caption="No transition" />
+
+## Accessibility
+
+The control is a button with `aria-expanded`, pointing at the content's `role="region"` by `aria-controls`.
+`showAriaLabel` and `hideAriaLabel` name it when the visible label is not enough.
+
+## Differences from Mantine
+
+- State lives in your model; there is no `controlRef` (focus the control by its id if you need to).

@@ -1,0 +1,68 @@
+---
+title: Combobox
+description: "Create custom select, autocomplete or multiselect inputs."
+status: built
+ticket: su-plhn
+files:
+  - components/Combobox/Combobox.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+Combobox is an input with a list of options to pick from or search, built on `@foldkit/ui`'s combobox (which handles
+the keyboard, focus, the active option and the floating list). Keep `Combobox.Model` (from
+`Combobox.init({ id })`) and the chosen `value` in your model, pass its messages through `Combobox.update`, and take
+the new value from its `Selected` out message. Select, Autocomplete and MultiSelect are built on it.
+
+<Example height={320} story="inputs-combobox--usage" caption="Pick a grocery" />
+
+## Data
+
+`data` is a list of strings, or of `{ value, label, disabled, group }` items. `value` is the chosen item's value;
+the input shows its label. To start with a value, give `init` its label as `inputValue`.
+
+## Search
+
+Typing filters the options (case-insensitive, on the label); `filter` replaces the rule and `limit` caps how many
+are shown. When nothing matches, `nothingFoundMessage` is shown instead; without one the list hides.
+
+<Example height={320} story="inputs-combobox--searchable" caption="Type to search 29 groceries" />
+
+## Options groups
+
+Items with a `group` are listed under that group's label.
+
+<Example height={320} story="inputs-combobox--groups" caption="Fruits and vegetables" />
+
+## Scrollable list
+
+`maxDropdownHeight` limits the list's height; the rest scrolls.
+
+<Example height={320} story="inputs-combobox--scroll" caption="At most 200px tall" />
+
+## Input props
+
+Combobox takes Input's `size`, `radius`, `variant`, `label`, `description`, `error`, `required`, `disabled` and
+`readOnly`, plus `withCheckIcon` (a check next to the chosen option) and `withChevron` (the toggle button).
+
+## Accessibility
+
+The input is a `role="combobox"` named by its `label` (or `ariaLabel`), controlling a `role="listbox"` of
+`role="option"` items with `aria-activedescendant` following the arrow keys.
+
+## Differences from Mantine
+
+- Mantine's Combobox is a set of parts (`Combobox.Target`, `Combobox.Dropdown`, `Combobox.Option`) driven by a
+  `useCombobox` store, for building your own select. Here it is one component with the store in your model; the
+  options are rendered from `data`.
+- As in Mantine, opening the list (by focus, click or arrow key) makes the chosen option active, the option the keys
+  reach is blue (`data-combobox-selected`), and an option under the pointer is only tinted gray, though Enter still
+  picks the option under the pointer. Opening with the chevron button starts with no active option.
+- `hiddenDropdown` hides the list while keeping the field's keyboard handling.
+- The list fits the space left in the viewport and scrolls natively, rather than in a ScrollArea.
+- `Combobox.Search`, `Combobox.Header` and `Combobox.Footer` belong to dropdowns opened from another target, which is
+  [ComboboxPopover](/combobox/combobox-popover): its `searchable`, `header` and `footer`. Combobox's own field is the
+  search box. Mantine has no built-in virtualization either.

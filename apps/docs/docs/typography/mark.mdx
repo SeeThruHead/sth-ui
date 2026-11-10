@@ -1,0 +1,29 @@
+---
+title: Mark
+description: "Highlight part of the text."
+status: built
+ticket: su-mfx1
+files:
+  - components/Mark/Mark.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Mark renders a `<mark>` element with black text on a highlight colour, yellow by default.
+
+<Configurator story="typography-mark--configurator" />
+
+## Color
+
+`color` takes a theme colour name, a shade like `red.4`, or any CSS colour. A theme colour name uses its shade 2 in
+the light scheme and shade 5 in the dark scheme; a shade or a CSS colour is used in both.
+
+<Example height={150} story="typography-mark--colors" caption="Theme colour, exact shade and CSS colour" />
+
+## Styles API
+
+It has one part, `root`.

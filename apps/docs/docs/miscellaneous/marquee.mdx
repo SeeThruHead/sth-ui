@@ -1,0 +1,53 @@
+---
+title: Marquee
+description: "Create continuous scrolling animation for content."
+status: built
+ticket: su-4x8j
+files:
+  - components/Marquee/Marquee.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Marquee scrolls its children in an endless loop. It repeats them `repeat` times (4 by default) and slides the row
+by one copy every `duration` milliseconds (100000 by default), with `gap` between items.
+
+<Configurator story="datadisplay-marquee--configurator" />
+
+## Pause on hover
+
+`pauseOnHover` stops the animation while the pointer is over it.
+
+<Example height={120} story="datadisplay-marquee--pause-on-hover" caption="Hover to pause" />
+
+## Vertical orientation
+
+`orientation="vertical"` scrolls upwards; give it a height.
+
+<Example height={360} story="datadisplay-marquee--vertical" caption="A 300px tall column" />
+
+## Multiple rows
+
+`reverse` runs the animation the other way, for rows that move against each other.
+
+<Example height={160} story="datadisplay-marquee--multiple-rows" caption="Two rows in opposite directions" />
+
+## Fade edges
+
+The edges fade into the background by default; `fadeEdgeSize` (5%) and `fadeEdgeColor` change the fade, and
+`fadeEdges: false` removes it.
+
+<Example height={360} story="datadisplay-marquee--fade-edges" caption="Default, larger, coloured and no fade" />
+
+## Accessibility
+
+Only the first copy of the children is read by screen readers; the repeats are `aria-hidden`.
+
+## Differences from Mantine
+
+- The demos scroll library badges where Mantine's scroll its logo.
+- The repeated copies are `aria-hidden`, so screen readers do not read the content four times.

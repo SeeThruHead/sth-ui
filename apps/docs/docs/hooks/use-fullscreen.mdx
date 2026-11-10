@@ -1,0 +1,26 @@
+---
+title: useFullscreen
+description: "Enter and leave fullscreen."
+status: built
+ticket: su-jnc4
+files:
+  - hooks/browser.ts
+  - hooks/commands.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`fullscreen` is a Stream of whether something on the page is fullscreen, starting with the current state and sending it
+on every `fullscreenchange` and `fullscreenerror`. `toggleFullscreen({ selector })` is a Command that makes the first
+element matching the selector fullscreen (`"html"` for the whole page), or leaves fullscreen when something already
+is; it sends `Failed` with the browser's error when the request is refused.
+
+<Example height={120} story="hooks-usefullscreen--usage" caption="useFullscreen" />
+
+## Differences from Mantine
+
+- Mantine's `useFullscreen` and `useFullscreenElement` become one Stream and one Command, chosen by selector.
+- Only the standard API is used; the `webkit`, `moz` and `ms` fallbacks are for browsers this library does not target.

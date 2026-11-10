@@ -1,0 +1,26 @@
+---
+title: UnstyledButton
+description: 'A button with no styles of its own, to build custom buttons on. It keeps what a button needs: type="button", a focus ring for the keyboard, disabled, and a pointer cursor.'
+status: built
+ticket: su-1a8p
+files:
+  - components/UnstyledButton/UnstyledButton.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+<Example story="buttons-unstyledbutton--usage" caption="A button without styles" />
+
+<Example story="buttons-unstyledbutton--style-props" caption="Styled only by its style props" />
+
+## Any element
+
+`component` renders it as `a` (with `href`), `div` or `span`. A `div` or `span` gets `role="button"` and a tab
+stop so it still works from the keyboard; `disabled` on them sets `aria-disabled` and removes the tab stop.
+`label` gives it an accessible name when its content is only an icon.
+
+## Styles API
+
+One part, `root`. Like every component it takes style props (`p`, `bd`, `bdrs`...), `mod` for data attributes,
+`styles`, `attributes` and `unstyled`.

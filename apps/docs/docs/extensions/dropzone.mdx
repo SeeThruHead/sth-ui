@@ -1,0 +1,75 @@
+---
+title: Dropzone
+description: "A drop target for files that checks their type, size and count, and opens the file dialog on click."
+status: built
+ticket: su-8tel
+files:
+  - components/Dropzone/Dropzone.ts
+  - components/Dropzone/model.ts
+  - components/Dropzone/validate.ts
+  - components/Dropzone/mimeTypes.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+Put `Dropzone.init({ id })` in the Model, route its Messages and Commands through
+`Dropzone.update(model, message, context)`, and render `ui.Dropzone(h, { ...context, model, toParentMessage, children })`.
+The `context` holds the rules files must pass (`accept`, `multiple`, `maxSize`, `minSize`, `maxFiles`, `validator`) and
+`disabled` and `loading`; pass the same one to both. `update` reports `Dropped` with the accepted files, `Rejected` with
+each rejected file and its errors, and `DroppedAny` with both.
+
+Dropping files, clicking the zone, or pressing Enter or Space on it all lead to the same checks. While files are
+dragged over it, the zone shows whether they would be accepted: `ui.DropzoneAccept`, `ui.DropzoneReject` and
+`ui.DropzoneIdle` show their children only in that state.
+
+<Example
+  height={260}
+  story="extensions-dropzone--usage"
+  caption="An image dropzone with accept, reject and idle icons"
+/>
+
+## Accept and limits
+
+`accept` takes MIME types (`image/*` matches every image), file extensions, or a map from MIME type to extensions;
+`IMAGE_MIME_TYPE`, `PDF_MIME_TYPE`, `MS_WORD_MIME_TYPE`, `MS_EXCEL_MIME_TYPE`, `MS_POWERPOINT_MIME_TYPE`,
+`EXE_MIME_TYPE` and `MIME_TYPES` cover the usual ones. Rejected files carry react-dropzone's error codes:
+`file-invalid-type`, `file-too-large`, `file-too-small`, `too-many-files`, and whatever `validator` returns. When
+`multiple` is false or more than `maxFiles` files arrive, all of them are rejected as too many.
+
+## Options
+
+`activateOnClick`, `activateOnKeyboard` and `activateOnDrag` (all true) choose what opens or fills the zone; the
+`openDialog()` Message opens the file dialog from anywhere, like Mantine's `openRef`. `loading` covers the zone with a
+LoadingOverlay (`loaderProps`). `dragEventsBubbling`, `enablePointerEvents`, `variant` (`light` or `filled`),
+`acceptColor`, `rejectColor` (`red`) and `radius` work as in Mantine. `FileDialogOpened` and `FileDialogCancelled`
+report the dialog.
+
+<Example
+  height={220}
+  story="extensions-dropzone--options"
+  caption="A PDF dropzone with loading, disabled, a validator and a button that opens the dialog"
+/>
+
+## Full screen
+
+`ui.DropzoneFullScreen` covers the window while files are dragged anywhere over the page, and takes the same props.
+`active` (true) turns it on, and `zIndex` and `withinPortal` place it.
+
+<Example height={160} story="extensions-dropzone--full-screen" caption="A full screen dropzone you can turn off" />
+
+## Styles API
+
+Dropzone has `root` and `inner`; DropzoneFullScreen adds `fullScreen`. The root carries `data-accept`, `data-reject`,
+`data-idle`, `data-loading`, `data-disabled` and `data-activate-on-click`.
+
+## Differences from Mantine
+
+- Files are checked in `update` and reported as out messages; there is no `onDrop` callback.
+- The zone has `role="button"` with its content as the accessible name, so it can be found and operated by keyboard.
+- `name`, `inputProps`, `useFsAccessApi`, `getFilesFromEvent` and `autoFocus` are not supported: files come from the
+  drop event or the browser's file dialog.
+- While dragging, `validator` is not run (it checks the dropped File), and only the type, count and `multiple` decide
+  accept or reject.

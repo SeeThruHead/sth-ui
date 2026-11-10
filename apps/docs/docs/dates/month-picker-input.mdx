@@ -1,0 +1,29 @@
+---
+title: MonthPickerInput
+description: "An input that opens a MonthPicker in a popover."
+status: built
+ticket: su-0g2b
+files:
+  - dates/MonthPickerInput/MonthPickerInput.ts
+  - dates/picker/PickerInput.ts
+  - dates/picker/inputModel.ts
+  - dates/picker/format.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+MonthPickerInput is a button-like input that opens a [MonthPicker](/dates/month-picker) in a Popover. Keep
+`PickerInput.init({ id, today, level: "month", type, value })` in the Model, route its Messages through
+`PickerInput.update(model, message, options)` and its Commands back to the runtime, and render it with `model` and
+`toParentMessage`. `update` reports `Changed` with the new value, and `Opened` and `Closed`. The value is shown as
+`MMMM YYYY` by default; label, description, error, sections and the other Input props work as on TextInput.
+
+<Example height={300} story="dates-monthpickerinput--usage" caption="One month, a range, and a disabled input" />
+
+## Differences from Mantine
+
+- It is a submodel (`init`, `update`, out messages) rather than a controlled or uncontrolled component.
+- `dropdownType="modal"` is not supported; the dropdown is always a Popover.

@@ -1,0 +1,24 @@
+---
+title: Kbd
+description: "Display keyboard key."
+status: built
+ticket: su-4hid
+files:
+  - components/Kbd/Kbd.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Kbd shows a keyboard key, in a `<kbd>` element.
+
+<Configurator story="datadisplay-kbd--configurator" />
+
+## Size
+
+`size` runs from `xs` to `xl` (`sm` by default), or a number of pixels for the font size.
+
+<Example story="datadisplay-kbd--sizes" caption="Every size, and 24px" />

@@ -1,0 +1,62 @@
+---
+title: PinInput
+description: "Capture pin code or one time password from the user."
+status: built
+ticket: su-se5t
+files:
+  - components/PinInput/PinInput.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+PinInput is a row of single character fields. Keep `PinInput.Model` (from `PinInput.init({ id })`) and the `value`
+in your model, pass its messages through `PinInput.update`, and take the new value from its `Changed` out message,
+which also says whether every field is filled (`complete`, Mantine's `onComplete`). Focus moves to the next field
+as you type, Backspace clears and steps back, the arrow keys move between fields, and a pasted code fills them all.
+
+<Configurator story="inputs-pininput--configurator" />
+
+## Controlled
+
+PinInput is always controlled: `value` is what it shows.
+
+## Uncontrolled
+
+Give it a `name` and it renders a hidden input with the whole code, so a submitted form sends it.
+
+## Regex type
+
+`type` is `alphanumeric` (default), `number`, or a regular expression each character must match; anything else is
+refused before it reaches the field.
+
+<Example story="inputs-pininput--regexp" caption="Only 0 to 3" />
+
+## One time code
+
+The fields carry `autocomplete="one-time-code"`, so phones offer a code from a text message; `oneTimeCode: false`
+turns it off.
+
+## Success state
+
+<Example story="inputs-pininput--success" caption="A verified code" />
+
+## States
+
+`mask` hides the characters, `error` and `disabled` work as on Input, and `length`, `size`, `radius`, `gap` and
+`placeholder` shape the fields.
+
+<Example height={280} story="inputs-pininput--states" caption="Masked, error, disabled, and six large fields" />
+
+## Accessibility
+
+The fields form a `role="group"` named by `ariaLabel` (default "PinInput"), and each field is named by it too. Use a
+label that says what the code is, such as "Security code".
+
+## Differences from Mantine
+
+- State lives in your model; focus moves with a command from `PinInput.update`.
+- `inputType`, `inputMode` overrides and `getInputProps` are not ported yet.

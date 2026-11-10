@@ -1,0 +1,27 @@
+---
+title: useHeadroom and useScrollDirection
+description: "Hide a header while scrolling down and show it scrolling up."
+status: built
+ticket: su-2o85
+files:
+  - hooks/useHeadroom/headroom.ts
+  - hooks/browser.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`headroom({ fixedAt, scrollDistance })` is a Stream of `{ pinned, scrollProgress, events }` from the window scroll:
+`scrollProgress` goes from 1 (shown) to 0 (hidden) over `scrollDistance` (100px) while scrolling down past `fixedAt`
+(0), and back while scrolling up, measured from where the direction last changed, as Mantine's is; `pinned` is
+`scrollProgress > 0`, and `events` carries `pin`, `release` and `fix` where Mantine calls `onPin`, `onRelease` and
+`onFix`. `headroomStep` is the pure step behind it. `scrollDirection` is a Stream of `up` or `down`, ignoring scrolls
+for 300ms after a resize, as Mantine's `useScrollDirection` does.
+
+<Example height={120} story="hooks-useheadroom--usage" caption="useHeadroom and useScrollDirection" />
+
+## Differences from Mantine
+
+- They are Streams for a Subscription; the callbacks arrive as `events` with each change.

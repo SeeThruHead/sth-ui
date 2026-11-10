@@ -1,0 +1,90 @@
+---
+title: Pagination
+description: "Display active page and navigate between multiple pages."
+status: built
+ticket: su-85jg
+files:
+  - components/Pagination/Pagination.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Pagination shows the pages around the active one, with previous and next controls. Keep the active page in your
+model: pass it as `value`, and `onChange` gives the page to move to (always between the first and last page).
+
+<Configurator story="navigation-pagination--configurator" />
+
+## Example with chunked content
+
+<Example height={260} story="navigation-pagination--with-content" caption="Five rows a page" />
+
+## Siblings
+
+`siblings` is how many pages show on each side of the active one (1 by default).
+
+<Example height={330} story="navigation-pagination--siblings" caption="1, 2 and 3 siblings" />
+
+## Boundaries
+
+`boundaries` is how many pages show at each end (1 by default).
+
+<Example height={330} story="navigation-pagination--boundaries" caption="1, 2 and 3 boundaries" />
+
+## Responsive layout
+
+With `layout="responsive"`, the pages give way to a "Page 1 of 20" label when the pagination is 400px wide or
+narrower. `formatLabel` changes the label's text.
+
+<Example height={140} story="navigation-pagination--responsive" caption="640px wide, and 300px wide" />
+
+## Hide pages controls
+
+`withPages={false}` leaves only the previous and next controls, for showing your own summary beside them.
+
+<Example height={100} story="navigation-pagination--with-pages" caption="Rows shown, out of 145" />
+
+## Controls as links
+
+`getItemProps` and `getControlProps` give each page and control an `href` (and optionally a `label` or `children`),
+which renders it as a link.
+
+<Example height={100} story="navigation-pagination--links" caption="Each control links to #page-N" />
+
+## Change icons
+
+`nextIcon`, `previousIcon`, `firstIcon`, `lastIcon` and `dotsIcon` replace the default icons; `withEdges` adds the
+first and last page controls.
+
+<Example height={100} story="navigation-pagination--icons" caption="Arrow icons" />
+
+## Controls size
+
+`size` is `xs` to `xl`, or `input-xs` to `input-xl` to match the height of an input of that size.
+
+<Example height={150} story="navigation-pagination--size" caption="sm, and input-sm beside a button and an input" />
+
+## Start value
+
+`startValue` is the first page; `total` stays the last page.
+
+<Example height={120} story="navigation-pagination--start-value" caption="Pages 5 to 15" />
+
+## autoContrast
+
+<Example height={230} story="navigation-pagination--auto-contrast" caption="lime.4, with and without autoContrast" />
+
+## Accessibility
+
+The active page has `aria-current="page"`. The first, previous, next and last controls are labelled "First page",
+"Previous page", "Next page" and "Last page"; `getControlProps` can give them other labels.
+
+## Differences from Mantine
+
+- Pagination is always controlled (`value` and `onChange`); there is no `defaultValue`.
+- The compound parts (`Pagination.Root`, `Pagination.Items`, ...) are not ported: the props above cover the same
+  layouts.
+- The edge controls have accessible names by default.

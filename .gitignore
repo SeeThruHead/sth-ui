@@ -1,0 +1,17 @@
+node_modules/
+.data*
+.env*
+*.db
+*.db-*
+coverage/
+dist/
+/packages/*/lib/
+/.publish/
+dagger/sdk/
+.moon/cache/
+image.txt
+test-results/
+.ci-reports/
+playwright-report/
+.DS_Store
+.tickets/

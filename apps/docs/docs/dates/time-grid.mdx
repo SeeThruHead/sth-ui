@@ -1,0 +1,28 @@
+---
+title: TimeGrid
+description: "A grid of time buttons to pick one from."
+status: built
+ticket: su-0uv9
+files:
+  - dates/TimeGrid/TimeGrid.ts
+  - dates/time/grid.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+TimeGrid shows `data` (times as `"HH:mm"` or `"HH:mm:ss"`) as buttons in `cols` columns (3 by default) with
+`spacing` between them, formatted like [TimeValue](/dates/time-value). Clicking one calls `onChange` with it, or with
+`null` when `allowDeselect` is set and it was already picked. `minTime`, `maxTime`, `disableTime` (a list, or a
+function) and `disabled` disable buttons; `getControlProps` adds attributes to each; `size` and `radius` change the
+look.
+
+<Configurator story="dates-timegrid--configurator" />
+
+## Differences from Mantine
+
+- The value is kept by the parent: there is no uncontrolled `defaultValue`.
+- `simpleGridProps` is `cols` and `spacing`.

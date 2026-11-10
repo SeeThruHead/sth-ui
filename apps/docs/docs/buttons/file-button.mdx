@@ -1,0 +1,41 @@
+---
+title: FileButton
+description: "Open file picker with a button click."
+status: built
+ticket: su-tuzl
+files:
+  - components/FileButton/FileButton.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+FileButton opens the file picker from any button. Its `children` is a function that receives the message that opens
+the picker; give it to your button's `onClick`. Keep `FileButton.Model` (from `FileButton.init({ id })`) in your model
+and pass its messages through `FileButton.update`; the `Changed` out message carries the picked files. `accept`
+limits the file types.
+
+<Example height={140} story="buttons-filebutton--usage" caption="Pick an image" />
+
+## Multiple files
+
+`multiple` lets more than one file be picked:
+
+<Example height={200} story="buttons-filebutton--multiple" caption="Several images" />
+
+## Reset file
+
+Send `FileButton.Message.Cleared()` to empty the input, so the same file can be picked again (Mantine's `resetRef`).
+
+<Example height={140} story="buttons-filebutton--reset" caption="Pick, then reset" />
+
+## Input props
+
+`name`, `form`, `capture` and `disabled` are set on the hidden file input, and `inputAttributes` adds any other
+attribute to it.
+
+## Differences from Mantine
+
+- `Changed` always carries an array of files, empty when the input is reset.

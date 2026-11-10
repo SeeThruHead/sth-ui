@@ -1,0 +1,46 @@
+---
+title: DonutChart
+description: "Donut chart component."
+status: built
+ticket: su-932y
+files:
+  - charts/DonutChart/DonutChart.ts
+  - charts/pie/pie.ts
+  - charts/pie/pieView.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+`data` is a list of `{ name, value, color }`, one per segment, where `color` is a theme colour (`indigo.6`) or any
+CSS colour. Hovering a segment shows a tooltip with every segment's value.
+
+<Configurator story="charts-donutchart--configurator" />
+
+## Labels, size and angles
+
+- `withLabels` writes each segment's value (`labelsType: "percent"` or `"name"` for those), with a line to the
+  segment unless `withLabelsLine: false`.
+- `chartLabel` writes a label in the middle.
+- `size` (160) is the chart's diameter and `thickness` (20) the ring's width.
+- `paddingAngle` leaves a gap between segments.
+- `startAngle` and `endAngle` (0 and 360, counter-clockwise from three o'clock) draw part of a ring.
+- `strokeColor` and `strokeWidth` set the segments' outline; `labelColor` sets the labels' colour.
+- `withLegend` adds a legend below; hovering one of its items fades the other segments.
+- `tooltipDataSource: "segment"` shows only the hovered segment in the tooltip, and `valueFormatter` formats the
+  values in labels and tooltips.
+
+<Example
+  height={1100}
+  story="charts-donutchart--options"
+  caption="Labels, percent labels, chart label, padding angle, thickness, half donut, stroke, legend"
+/>
+
+## Differences from Mantine
+
+- It draws its own SVG rather than recharts, so `pieProps`, `pieChartProps`, `tooltipProps`, `legendProps`, `cellProps`
+  and children are not supported. The tooltip follows the pointer 10px below and to the right, without recharts'
+  flip at the chart's edge.

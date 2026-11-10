@@ -1,0 +1,66 @@
+---
+title: Autocomplete
+description: "Autocomplete user input with any list of options."
+status: built
+ticket: su-s83t
+files:
+  - components/Autocomplete/Autocomplete.ts
+  - components/Combobox/Combobox.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Not a searchable select
+
+Autocomplete is a text input with suggestions: what you type is the value, whether or not it is one of the options.
+For a value that must be one of them, use [Select](/combobox/select) with `searchable`.
+
+## Usage
+
+Keep `Autocomplete.Model` (from `Autocomplete.init({ id })`) and the `value` string in your model, pass its messages
+through `Autocomplete.update`, and take the new text from its `Changed` out message, sent on every keystroke and when
+an option is picked.
+
+<Configurator story="combobox-autocomplete--configurator" />
+
+## Controlled
+
+Autocomplete is always controlled: `value` is the input's text. To start with text in it, give `init` a `value`.
+
+## Nothing found message
+
+Without `nothingFoundMessage` the list hides when nothing matches; with it, the message is shown instead.
+
+## Limit
+
+`limit` caps how many matching options are shown, which keeps a large list fast.
+
+<Example height={320} story="combobox-autocomplete--limit" caption="100 000 options, five at a time" />
+
+## Group options
+
+<Example height={320} story="combobox-autocomplete--groups" caption="Frontend and backend" />
+
+## Clearable
+
+`clearable` shows a button that empties the input while it has text.
+
+<Example story="combobox-autocomplete--clearable" caption="React, with a clear button" />
+
+## Input props
+
+Autocomplete takes every [Combobox](/combobox) prop except the check icon and the chevron: `label`, `description`,
+`error`, `size`, `radius`, `variant`, `disabled`, `readOnly`, `filter` and `maxDropdownHeight`.
+
+## Accessibility
+
+The input is a `role="combobox"` named by its `label`, controlling a `role="listbox"` of the matching options.
+
+## Differences from Mantine
+
+- State lives in your model; `Changed` carries the text instead of `onChange(value)`.
+- `data` groups are written per item (`{ value, label, group }`) instead of `{ group, items }`.
+- `autoSelectOnBlur`, `selectFirstOptionOnChange`, `renderOption`, `loading` and the rest of the
+  [Combobox](/combobox) gaps are not ported yet.

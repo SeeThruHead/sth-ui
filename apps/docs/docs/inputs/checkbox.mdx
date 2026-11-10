@@ -1,0 +1,126 @@
+---
+title: Checkbox
+description: "Capture boolean input from user."
+status: built
+ticket: su-fhzy
+files:
+  - components/Checkbox/Checkbox.ts
+  - components/Checkbox/CheckboxGroup.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Checkbox is built on `@foldkit/ui`'s accessible checkbox: a `role="checkbox"` button named by its label, with
+`aria-checked` saying whether it is checked. Keep `checked` in your model and update it from `onChange`, which gets
+the new value. `id` is required; it names the label, description and error.
+
+<Configurator story="inputs-checkbox--configurator" />
+
+## Controlled state
+
+Checkbox is always controlled: `checked` is what it shows and `onChange(checked)` is the message it sends.
+
+## Read only
+
+`readOnly` keeps the checkbox as it is and marks it `aria-readonly`; clicks and Space do nothing.
+
+## Checkbox with uncontrolled forms
+
+Give it a `name` (and `value`, `"on"` by default) and it renders a hidden input, so a submitted form sends the value
+while it is checked.
+
+## States
+
+<Example height={320} story="inputs-checkbox--states" caption="Default, indeterminate, checked, outline and disabled" />
+
+## Light variant
+
+<Example height={200} story="inputs-checkbox--light-variant" caption="Light checkboxes in theme and CSS colors" />
+
+## Error state
+
+`error` turns the border red and shows a message under the label; `withErrorStyles: false` keeps the message without
+the red border.
+
+<Example height={200} story="inputs-checkbox--error" caption="Boolean error, an error message, no error styles" />
+
+## Change icons
+
+`icon` is a function of the builder and whether the checkbox is indeterminate.
+
+<Example story="inputs-checkbox--icon" caption="Biohazard and radioactive icons" />
+
+## Change icon color
+
+`iconColor` sets the check's color; `color` takes any theme color with a shade, such as `lime.4`.
+
+<Example story="inputs-checkbox--icon-color" caption="Lime checkbox with a dark check" />
+
+## Indeterminate state
+
+`indeterminate` shows a dash and sets `aria-checked="mixed"`, for a checkbox that stands for a partly checked list.
+
+<Example height={200} story="inputs-checkbox--indeterminate" caption="Check one notification and the parent is mixed" />
+
+## Label with link
+
+<Example story="inputs-checkbox--anchor" caption="An Anchor inside the label" />
+
+## Checkbox.Group
+
+`CheckboxGroup` keeps one list of checked values for several checkboxes, inside an Input.Wrapper (label,
+description, error, withAsterisk). `children` gets a `checkbox(value, props)` function that builds a checkbox
+wired to the group; lay them out however you like.
+
+<Example height={160} story="inputs-checkbox--group" caption="Favorite frameworks, React checked" />
+
+## Checkbox.Group disabled
+
+<Example height={160} story="inputs-checkbox--group-disabled" caption="A disabled group" />
+
+## maxSelectedValues
+
+Once `maxSelectedValues` are checked, the unchecked ones are disabled until one is unchecked.
+
+<Example story="inputs-checkbox--max-selected" caption="At most two" />
+
+## Checkbox.Indicator
+
+`ui.CheckboxIndicator` looks like a checkbox but is only a picture of one: no input, no label, no handlers. It takes
+`checked`, `indeterminate`, `disabled`, `size`, `radius`, `color`, `iconColor`, `variant` and `autoContrast`. Use it
+inside custom controls.
+
+<Example height={100} story="inputs-checkbox--indicator" caption="States, variants and sizes" />
+
+## Checkbox.Card
+
+`ui.CheckboxCard` is a button with `role="checkbox"` that toggles `checked` through `onChange`; `withBorder` (on) and
+`radius` style it. Its `children` can be a function of the card's state (`checked` and `indeterminate`), which is how
+an indicator inside follows the card:
+
+<Example height={140} story="inputs-checkbox--card" caption="A card with an indicator" />
+
+## Checkbox.Card group
+
+Cards hold their own `value`; keep the chosen values in your model:
+
+<Example height={330} story="inputs-checkbox--card-group" caption="Pick packages" />
+
+<Example height={180} story="inputs-checkbox--card-states" caption="Indeterminate without a border, and disabled" />
+
+## Accessibility
+
+The label names the checkbox (`aria-labelledby`), the description and error describe it (`aria-describedby`), and an
+error sets `aria-invalid`. A group has `role="group"` named by its label. Space toggles a focused checkbox, and a
+click on its label toggles it too.
+
+## Differences from Mantine
+
+- The control is a `button` with `role="checkbox"` from `@foldkit/ui`, not a native `input`; part `input` styles it.
+- `onChange` gets the new checked state instead of an event; there is no `defaultChecked`.
+- A group's children are built by a function instead of reading a React context.
+- `Checkbox.Indicator` and `Checkbox.Card` are not ported yet.

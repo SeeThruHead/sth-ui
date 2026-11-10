@@ -1,0 +1,22 @@
+---
+title: useReducedMotion
+description: "Follow the reduced motion preference."
+status: built
+ticket: su-p5i6
+files:
+  - hooks/browser.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`reducedMotion` is a Stream of whether `(prefers-reduced-motion: reduce)` matches, starting with the current answer.
+Return it from a Subscription.
+
+<Example height={80} story="hooks-usereducedmotion--usage" caption="useReducedMotion" />
+
+## Differences from Mantine
+
+- It is a Stream for a Subscription rather than a hook; the Model's own initial value replaces `initialValue`.

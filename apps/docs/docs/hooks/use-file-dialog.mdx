@@ -1,0 +1,23 @@
+---
+title: useFileDialog
+description: "Open the file picker."
+status: built
+ticket: su-zkvm
+files:
+  - hooks/commands.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`fileDialog({ multiple, accept, capture, directory })` is a Command that opens the browser's file picker and sends
+`FilesPicked` with the chosen files, or `Cancelled` when it is closed. `multiple` is on and `accept` is `*` by default,
+as in Mantine.
+
+<Example height={110} story="hooks-usefiledialog--usage" caption="useFileDialog" />
+
+## Differences from Mantine
+
+- It is a Command rather than a hook; the files go into the Model when `FilesPicked` arrives, so `reset` and `initialFiles` are the Model's own.

@@ -1,0 +1,43 @@
+---
+title: useWindowEvent and useEventListener
+description: "Listen to window events, or to events on one element."
+status: built
+ticket: su-flld
+files:
+  - hooks/useWindowEvent/windowEvent.ts
+  - hooks/useWindowEvent/eventListener.ts
+  - hooks/browser.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`windowEvent(type, options)` (from `@sth-ui/hooks/browser.ts`) is a Stream of the window's events of that type; return
+it from a Subscription and map each event to a Message. `eventsOf(target, type, options)` does the same for any
+`EventTarget`. For one element, put the `eventListener(type, { capture })` Mount on it and map its `Heard` message.
+
+```ts
+const subscriptions = Subscription.make<Model, Message>()((entry) => ({
+  keys: entry(
+    {},
+    {
+      modelToDependencies: () => ({}),
+      dependenciesToStream: () =>
+        windowEvent<KeyboardEvent>("keydown").pipe(Stream.map((event) => Message.Pressed({ key: event.key })))
+    }
+  )
+}))
+```
+
+<Example
+  height={130}
+  story="hooks-usewindowevent--usage"
+  caption="A window keydown listener and a click listener on a button"
+/>
+
+## Differences from Mantine
+
+- They are a Stream and a Mount rather than hooks; the listener is a Message.
+- `eventListener` reports the event's type only, since a Message carries data, not the DOM event.

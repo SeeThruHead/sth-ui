@@ -1,0 +1,24 @@
+---
+title: useQueue
+description: "Show a limited number of items and keep the rest waiting."
+status: built
+ticket: su-3xs1
+files:
+  - hooks/useQueue/queue.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`makeQueue(limit, initialValues)` splits items into `state` (the first `limit`, shown) and `queue` (the rest,
+waiting). `addToQueue(current, limit, ...items)` appends items, `updateQueue(current, limit, update)` replaces all
+items with `update`'s result, and `cleanQueue(current)` drops the waiting ones. After every change the first `limit`
+items are shown, so removing a shown item lets the next waiting one in, as with notifications.
+
+<Example height={150} story="hooks-usequeue--usage" caption="Two items shown at a time" />
+
+## Differences from Mantine
+
+- These are pure functions over a Model value rather than a hook; `limit` is passed to each change.

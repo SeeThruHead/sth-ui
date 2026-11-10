@@ -1,0 +1,33 @@
+---
+title: ScatterChart
+description: "Scatter chart component."
+status: built
+ticket: su-4sgj
+files:
+  - charts/ScatterChart/ScatterChart.ts
+  - charts/grid/gridView.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`data` is a list of series, each `{ name, color, data }`, where `data` holds the points as rows. `dataKey: { x, y }`
+names the row fields for the two axes; both axes start at 0 and round up as recharts does. The axes, grid, legend
+and axis labels work as in [LineChart](/charts/line-chart). Hovering a point shows its values.
+
+<Example height={380} story="charts-scatterchart--usage" caption="Age against BMI" />
+
+## Units, labels and formatting
+
+`unit: { x, y }` follows the values on each axis and in the tooltip, `labels: { x, y }` names them in the tooltip,
+and `valueFormatter` formats both axes, or each with `{ x, y }`. A point's `name` field becomes its tooltip's title.
+
+<Example height={330} story="charts-scatterchart--options" caption="Two groups with a legend, units and labels" />
+
+## Differences from Mantine
+
+- It lays itself out in HTML over the shared grid frame rather than recharts; `scatterProps`, `scatterChartProps`,
+  the axis props and children are not supported.
+- Not ported yet: point labels, a right y axis and reference areas.

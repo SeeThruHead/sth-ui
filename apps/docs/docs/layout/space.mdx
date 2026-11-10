@@ -1,0 +1,21 @@
+---
+title: Space
+description: "Empty space of a theme size or pixels: h between things in a column, w between things in a row."
+status: built
+ticket: su-4og1
+files:
+  - components/Space/Space.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+<Configurator story="layout-space--configurator" />
+
+## In a row that runs out of room
+
+`w` also sets the minimum width (and `h` the minimum height), so the space keeps its size when a flex row is
+too narrow. Give `miw` or `mih` to let it shrink to that.
+
+<Example story="layout-space--in-a-cramped-row" caption="32px kept between long labels; the last space may shrink" />

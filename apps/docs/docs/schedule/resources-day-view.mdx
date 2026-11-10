@@ -1,0 +1,53 @@
+---
+title: ResourcesDayView
+description: "One day as a timeline per resource, such as rooms or people: bookings run left to right and can move between resources."
+status: built
+ticket: su-02xa
+files:
+  - schedule/ResourcesDayView/ResourcesDayView.ts
+  - schedule/resourcesLayout.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`schedule.ResourcesDayView(h, { date, resources, events })` shows a row per resource with the day running from left to
+right. An event belongs to the resource named by its `resourceId`; overlapping events stack into lanes, and when more
+than `maxEventsPerTimeSlot` (2) overlap the rest go behind a "+N more" button. All-day events sit in a strip at the
+top of their row and background events shade their time.
+
+`groups` gathers resources under a label in a first column (`renderGroupLabel`, `groupLabelWidth`); resources outside
+every group follow. `renderResourceLabel` replaces a resource's name. `onTimeSlotClick` receives the resource with the
+slot's start and end.
+
+<Example
+  height={520}
+  story="schedule-resourcesdayview--usage"
+  caption="Four rooms on two floors: drag a booking to another room or time, resize it, or drag across empty slots"
+/>
+
+## Interactions
+
+Pass the view's `model` (from `DayView/model.ts`) with `toParentMessage` to drag, resize, select and drop, as in the
+[DayView](/schedule/day-view). Every out message carries the `resourceId` the pointer ended on, so `EventDropped` tells
+you when a booking moved to another resource, and `preventEventOverlap` checks only the events of that resource. Arrow
+keys move along a row and between resources.
+
+## Time range and size
+
+`startTime`, `endTime`, `intervalMinutes` (60), `slotLabelFormat`, `highlightBusinessHours`, `businessHours`, `now`
+and `startScrollTime` (which scrolls sideways) work as in the day view. `slotWidth` (80px), `rowHeight` (64px),
+`minEventSize` and `maxHeight` size the grid.
+
+<Example
+  height={620}
+  story="schedule-resourcesdayview--options"
+  caption="A static grid with custom labels and up to three lanes; then two rooms with custom event rows"
+/>
+
+## Differences from Mantine
+
+- The current time is drawn as a line in each row, without a time bubble.
+- `now` is a prop rather than read from the clock, and the control props and `renderEvent` work with attribute lists.

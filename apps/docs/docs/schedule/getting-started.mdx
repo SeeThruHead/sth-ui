@@ -1,0 +1,45 @@
+---
+title: Getting started
+description: "Install sth-ui and put a week of events on screen."
+status: built
+ticket: su-7v53
+files:
+  - schedule/Schedule.ts
+hide_title: true
+sidebar_position: 0
+---
+
+## Installation
+
+```sh
+bun add @seethruhead/sth-ui
+```
+
+`@sth-ui/schedule` ports Mantine's schedule package to Foldkit: the [DayView](/schedule/day-view),
+[WeekView](/schedule/week-view), [MonthView](/schedule/month-view), [YearView](/schedule/year-view),
+[MobileMonthView](/schedule/mobile-month-view) and [AgendaView](/schedule/agenda-view), the
+[Schedule](/schedule) that switches between them, and the resources views for rooms or people. Its components take the
+same theme as `@sth-ui/core`.
+
+## Usage
+
+```ts
+import { schedule } from "@sth-ui/schedule/Schedule.ts"
+
+const view = (model: Model, h: HtmlBuilder<Message>) =>
+  schedule.WeekView(h, {
+    date: model.date,
+    events: model.events,
+    onDateChange: (date) => Message.ChangedDate({ date })
+  })
+```
+
+Events are plain data with `YYYY-MM-DD HH:mm:ss` times, described in [Events data](/schedule/events-data); recurring
+events are covered in [Recurring events](/schedule/recurring-events). `createSchedule({ components })` makes a copy of
+`schedule` with defaults and styles for each component, as `createUi` does for the core components.
+
+## Differences from Mantine
+
+- The views keep no hidden state: dates are your Model's, and dragging, resizing and popovers live in a small view
+  model you keep and update, so every change arrives as a Message.
+- There is no `DatesProvider`: give `locale`, `firstDayOfWeek` and `weekendDays` to the views that use them.

@@ -1,0 +1,79 @@
+---
+title: useForm
+description: "Form state as a Foldkit submodel: values, errors, touched and dirty fields, validation with rules or an Effect Schema, lists and submit."
+status: built
+ticket: su-87cc
+files:
+  - form/form.ts
+  - form/validate.ts
+  - form/validators.ts
+  - form/inputs.ts
+  - form/paths.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`@sth-ui/form` ports `@mantine/form`. Put `Form.init({ name, initialValues })` in the Model, route its Messages and
+Commands through `Form.update(model, message, context)`, and wire inputs with `textInputProps`, `numberInputProps`,
+`checkboxProps`, `radioProps` or `valueProps(form, path, read, send)`, which give an sth-ui input its value, change
+Message, focus and blur Messages and error. The `context` holds the validation and when it runs; pass the same one to
+every `update`.
+
+Submit with the `submit()` Message: `update` reports `SubmitSucceeded` with the values (passed through
+`transformValues`) or `SubmitFailed` with the errors. Every change also reports `ValuesChanged` with the new and
+previous values, which is how you watch fields.
+
+<Example
+  height={420}
+  story="form-useform--usage"
+  caption="A sign-up form validated with rules, on blur and on submit"
+/>
+
+## Values and paths
+
+Fields are addressed by dot paths (`user.email`, `employees.0.name`). `setFieldValue(path, value)`, `setValues(partial)`,
+`Initialized` (sets values and initial values once), `SetInitialValues`, `Reset` and `ResetField` change values;
+`getValues(form)` and `getValue(form, path)` read them. Paths that could reach `__proto__`, `constructor` or `prototype`
+are ignored.
+
+## Validation
+
+`validate` is a record of rules shaped like the values, with list item rules applied to every item and `formRootRule`
+for a rule on a list or object as a whole; or a function from values to errors; or `schemaResolver(schema)` for an
+Effect Schema (or `standardResolver` for any Standard Schema), whose issues become errors at their paths. A rule returns
+an error message, `true` for an error without a message, or nothing, and may return an Effect to validate
+asynchronously; `isValidating(form, path)` tells you while it runs, and stale results are dropped.
+
+`validateInputOnChange` and `validateInputOnBlur` take `true` or a list of paths (use `formIndex` for list items);
+`validateDebounce` waits that many milliseconds after typing. `clearInputErrorOnChange` (true) clears a field's error
+when it changes. `validate()`, `validateFieldMessage(path)`, `SetErrors`, `SetFieldError`, `ClearedErrors` and
+`ClearedFieldError` validate or set errors yourself; `isValid(form, context, path?)` checks without changing anything.
+
+The validators are Mantine's: `isNotEmpty`, `isEmail`, `matches`, `isInRange`, `hasLength`, `matchesField`,
+`isJSONString`, `isNotEmptyHTML`, `isOneOf` and `isUrl`.
+
+## Lists
+
+`insertListItem(path, item, index?)`, `removeListItem(path, index)`, `reorderListItem(path, { from, to })` and
+`replaceListItem(path, index, item)` change a list and move its errors, touched and dirty state with it.
+
+<Example height={300} story="form-useform--lists" caption="A team of employees checked with an Effect Schema" />
+
+## Status
+
+`isDirty(form, path?)` compares values with the initial ones unless `SetDirty` set them; `isTouched(form, path?)`
+reports focused or changed fields (`touchTrigger: "focus"` counts only focus). `ResetDirty`, `ResetTouched`, `SetTouched`
+and `SetSubmitting` change them.
+
+## Differences from Mantine
+
+- The form is a submodel driven by Messages, not a hook; there is no uncontrolled mode, no `key` and no `FormProvider`
+  (pass the model down instead).
+- Values are kept as plain data and typed when they leave the form: decode them with your Schema on
+  `SubmitSucceeded`.
+- Async rules return an Effect instead of a Promise; Zod and Yup resolvers are replaced by `schemaResolver` and
+  `standardResolver`.
+- `enhanceGetInputProps`, `cascadeUpdates` and the `watch` subscription are not ported; `ValuesChanged` covers watching.

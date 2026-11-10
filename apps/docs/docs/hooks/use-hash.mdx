@@ -1,0 +1,25 @@
+---
+title: useHash
+description: "Read and set the URL hash."
+status: built
+ticket: su-9lvx
+files:
+  - hooks/useHash/hash.ts
+  - hooks/browser.ts
+  - hooks/commands.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`hash` is a Stream of `window.location.hash`, starting with the current one and sending each `hashchange`.
+`setHash({ hash })` is a Command that sets it, adding the `#` when it is missing.
+
+<Example height={100} story="hooks-usehash--usage" caption="useHash" />
+
+## Differences from Mantine
+
+- Reading and setting are a Stream and a Command; the Model holds the value, so `getInitialValueInEffect` has no meaning here.
+- `setHash` replaces the history entry rather than adding one.

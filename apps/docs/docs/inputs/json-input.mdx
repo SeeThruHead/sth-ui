@@ -1,0 +1,66 @@
+---
+title: JsonInput
+description: "Capture json data from user."
+status: built
+ticket: su-k144
+files:
+  - components/JsonInput/JsonInput.ts
+  - components/JsonInput/model.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+JsonInput is a monospace [Textarea](/inputs/textarea) that checks its value is JSON when it loses focus. Keep
+`JsonInput.Model` (from `JsonInput.init({ value })`) and the value in your model, and pass its messages through
+`JsonInput.update(model, message, JsonInput.jsonInputContext({ value, ...options }))`; the `Changed` out message
+carries the new value. An invalid value shows `validationError` (or a plain error state without it) until the field
+is focused again. With `formatOnBlur`, valid JSON is reformatted when the field loses focus.
+
+<Configurator story="inputs-jsoninput--configurator" />
+
+## Loading state
+
+`loading` shows a loader in the field.
+
+<Example height={200} story="inputs-jsoninput--loading" caption="Loading" />
+
+## Controlled
+
+JsonInput is always controlled: `value` is the text, and `update` reads it from the context.
+
+## Custom serialization
+
+`deserialize` parses the text (it must throw on invalid input) and `serialize` writes it back when formatting, called
+with the value, `null` and `indentSpaces` (2 by default). Use them for formats beyond plain JSON.
+
+<Example height={260} story="inputs-jsoninput--custom-serialization" caption="Single quotes in, sorted JSON out" />
+
+## Input props
+
+JsonInput takes every [Textarea](/inputs/textarea) prop: `label`, `description`, `error`, `autosize`, `minRows`,
+`maxRows`, `leftSection`, `size`, `radius`, `variant` and the rest. An `error` shows while the JSON is valid;
+an invalid value replaces it with `validationError`.
+
+## Success state
+
+<Example height={160} story="inputs-jsoninput--success" caption="success with a message" />
+
+## Disabled state
+
+<Example height={160} story="inputs-jsoninput--disabled" caption="Disabled with a value" />
+
+## Styles API
+
+JsonInput has the [Input](/inputs/input) parts; its field carries `data-monospace` and uses the theme's monospace
+font two pixels smaller than the input's font size.
+
+<Example height={420} story="inputs-jsoninput--states" caption="Four-space indent, read only, invalid and with error" />
+
+## Differences from Mantine
+
+- State lives in your model, and `update` takes the value and options in its context.
+- `readOnly` turns off formatting on blur, as in Mantine; it goes in the context as well as on the field.

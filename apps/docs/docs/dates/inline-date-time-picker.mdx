@@ -1,0 +1,38 @@
+---
+title: InlineDateTimePicker
+description: "A DatePicker with a TimePicker below it, for one date and time or a range."
+status: built
+ticket: su-j77w
+files:
+  - dates/InlineDateTimePicker/InlineDateTimePicker.ts
+  - dates/InlineDateTimePicker/model.ts
+  - dates/time/datetime.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+InlineDateTimePicker is a [DatePicker](/dates/date-picker) with a [TimePicker](/dates/time-picker) and a submit button
+below it while the month is shown. Values are `"YYYY-MM-DD HH:mm:ss"` strings. Picking a day puts it at the time in
+the TimePicker (or `defaultTimeValue`), clamped to `minDate` and `maxDate`, and moves focus to the hours; changing the
+time changes the picked day's time. On the days of `minDate` and `maxDate` the TimePicker is limited to their times.
+Enter in the time fields or the submit button reports `Submitted`.
+
+`type: "range"` shows the range above a start and an end TimePicker. Keep
+`InlineDateTimePicker.init({ id, today, type, value }, context)` in the Model and route its Messages and Commands
+through `update(model, message, context)`; it reports `Changed` and `Submitted`.
+
+<Example
+  height={520}
+  story="dates-inlinedatetimepicker--usage"
+  caption="One date and time within limits, and a 12 hour range with seconds"
+/>
+
+## Differences from Mantine
+
+- It is a submodel; the context (limits, `withSeconds`, `defaultTimeValue`, the TimePicker's `format`) goes to `init`,
+  `update` and the view.
+- `submitButtonProps` is `submitLabel`; `timePickerProps` and `endTimePickerProps` take the TimePicker's view props.
+- `valueFormat` takes dayjs tokens (date tokens and `HH`, `mm`, `ss`), not a function.

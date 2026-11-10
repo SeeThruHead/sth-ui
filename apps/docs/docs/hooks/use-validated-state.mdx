@@ -1,0 +1,30 @@
+---
+title: useValidatedState
+description: "A value with its validity and the last value that passed."
+status: built
+ticket: su-218d
+files:
+  - hooks/useValidatedState/validated.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`validated(initial, validate, initialValid?)` makes `{ value, lastValidValue, valid }` to keep in the Model, and
+`changeValidated(state, value, validate)` gives the next one: `value` is always the latest, `valid` says whether it
+passed, and `lastValidValue` holds the most recent value that did (`Option.none()` until one has). `initialValid`
+overrides the first validity, as Mantine's `initialValidationState` does.
+
+<Example
+  height={180}
+  story="hooks-usevalidatedstate--usage"
+  caption="An email field that remembers its last valid email"
+/>
+
+## Differences from Mantine
+
+- These are pure functions over a Model value rather than a hook; the Message that carries the change calls
+  `changeValidated` in `update`.
+- `lastValidValue` is an `Option` instead of `undefined`.

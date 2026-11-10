@@ -1,0 +1,56 @@
+---
+title: Calendar
+description: "Month, year and decade views with paging, levels and keyboard navigation."
+status: built
+ticket: su-xgh1
+files:
+  - dates/Calendar/Calendar.ts
+  - dates/Calendar/model.ts
+  - dates/Calendar/keys.ts
+  - dates/Calendar/levels.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+Calendar shows a month of days. The header pages to the previous or next month, and its label goes up a level: to the
+months of the year, then the years of the decade; choosing a year or a month comes back down. Calendar is a Foldkit
+submodel: keep `Calendar.init({ id, date })` in the Model, route its Messages through `Calendar.update`, and render it
+with `model` and `toParentMessage`. `update` returns out messages (`DateChanged`, `LevelChanged`, `MonthSelected`,
+`YearSelected`) for Mantine's `onDateChange`, `onLevelChange`, `onMonthSelect` and `onYearSelect`.
+
+Calendar does not select dates itself: give it `getDayProps` and `onDayClick` (or use
+DatePicker).
+
+<Example height={360} story="dates-calendar--usage" caption="A calendar with today highlighted and a picked day" />
+
+## Columns, limits, levels and labels
+
+- `numberOfColumns` shows several months (or years, or decades) side by side, and `columnsToScroll` pages by fewer.
+- `minDate` and `maxDate` disable days, months and years outside them and the header controls that would leave them.
+- `minLevel` and `maxLevel` bound the levels; pass the same context to `Calendar.update`.
+- `monthLabelFormat`, `yearLabelFormat`, `decadeLabelFormat`, `monthsListFormat` and `yearsListFormat` take dayjs
+  tokens, and `ariaLabels`, `nextLabel` and `previousLabel` name the controls.
+- `static` draws a calendar that cannot be used; `fullWidth`, `size`, `headerControlsOrder`, `nextIcon` and
+  `previousIcon` change its look. Everything [Month](/dates/getting-started) takes (`firstDayOfWeek`, `weekendDays`,
+  `excludeDate`, `renderDay`, `withWeekNumbers`, `hideOutsideDates`, `today` and the rest) passes through.
+
+<Example
+  height={760}
+  story="dates-calendar--options"
+  caption="Two months with limits and labels; years from the decade view; static calendars"
+/>
+
+## Keyboard
+
+The arrow keys move between days (or months, or years) across all the columns, skipping disabled and outside ones, as
+Mantine's do. With `enableKeyboardNavigation` (on by default), Ctrl or Cmd with ArrowUp and ArrowDown pages by a year,
+adding Shift pages by a decade, and Y goes up to the year level.
+
+## Differences from Mantine
+
+- It is a submodel (`init`, `update`, Messages and out messages) rather than a controlled or uncontrolled component; `date` and `level` live in its Model.
+- `today` is a prop, since a view cannot read the clock.
+- `withNativeLevelSelect` is not supported.

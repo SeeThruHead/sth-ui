@@ -1,0 +1,11 @@
+.wrapper {
+  position: sticky;
+  top: calc(var(--docs-header-height) + 24px);
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--docs-bright);
+}

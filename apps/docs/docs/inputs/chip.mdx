@@ -1,0 +1,66 @@
+---
+title: Chip
+description: "Pick one or multiple values with inline controls."
+status: built
+ticket: su-1sdk
+files:
+  - components/Chip/Chip.ts
+  - components/Chip/ChipGroup.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+Chip is a button with `role="checkbox"` (or `"radio"` with `type: "radio"`) and `aria-checked`. Keep `checked` in
+your model and update it from `onChange`. `variant` is `filled` (default), `outline` or `light`; `color`, `size`
+and `radius` work as on Button.
+
+<Configurator story="inputs-chip--configurator" />
+
+## Controlled
+
+Chip is always controlled: `checked` is what it shows and `onChange(checked)` is the message it sends.
+
+## Read only
+
+`readOnly` keeps the chip as it is and marks it `aria-readonly`.
+
+## Change checked icon
+
+`icon` replaces the check shown while checked; `icon: false` shows none.
+
+<Example story="inputs-chip--icon" caption="A red chip with a cross" />
+
+## States
+
+<Example height={180} story="inputs-chip--states" caption="Outline, light and filled: default, checked, disabled" />
+
+## Chip.Group
+
+`ChipGroup` keeps the chosen value for several chips: one `value` (or `null`) by default, a list with
+`multiple: true`. `children` gets a `chip(value, props)` function that builds chips wired to the group; single
+groups make radio chips, multiple groups checkbox chips.
+
+<Example height={140} story="inputs-chip--group" caption="One at a time, then several at a time" />
+
+## Deselect radio chip
+
+A radio chip can't be unchosen by clicking it. To allow it, give each chip an `onClick` message: it is sent instead
+of the group's `onChange`, so your update can clear the value when the chosen chip is clicked again.
+
+<Example story="inputs-chip--deselect" caption="Click the chosen chip to clear it" />
+
+## Accessibility
+
+A chip is a button, so Tab reaches it and Space or Enter toggles it; `role` and `aria-checked` tell assistive
+technology whether it is a checkbox or a radio and whether it is checked. Disabled chips are `disabled` buttons.
+
+## Differences from Mantine
+
+- The chip is a `button` (part `label`) instead of a hidden input and a `label`.
+- `onChange` gets the new state; there is no `defaultChecked`. A chip's `onClick` replaces its change message rather
+  than firing next to it.
+- Chip.Group renders a `display: contents` element and builds its chips with a function instead of a React context.

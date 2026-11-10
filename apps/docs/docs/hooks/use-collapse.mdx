@@ -1,0 +1,24 @@
+---
+title: useCollapse
+description: "Animate an element open and closed."
+status: built
+ticket: su-f3ab
+files:
+  - hooks/useCollapse/collapse.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`collapseStyle({ expanded, transitionDuration, transitionTimingFunction, orientation })` is the style for the
+outer element and `collapseInnerStyle` for the inner one: the outer element is a grid whose track animates between
+`0fr` and `1fr`, so the content opens to its own height without measuring it. It is how
+[Collapse](/miscellaneous/collapse) animates.
+
+<Example height={150} story="hooks-usecollapse--usage" caption="useCollapse" />
+
+## Differences from Mantine
+
+- It is pure styles rather than a hook measuring the element's height in JavaScript; `onTransitionEnd` is Collapse's.

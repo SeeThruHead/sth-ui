@@ -1,0 +1,75 @@
+---
+title: Spotlight
+description: "A command center: search actions in a modal opened by a keyboard shortcut, and choose one with the keyboard or the mouse."
+status: built
+ticket: su-lrtj
+files:
+  - components/Spotlight/Spotlight.ts
+  - components/Spotlight/model.ts
+  - components/Spotlight/filter.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+Put `Spotlight.init({ id })` in the Model, route its Messages and Commands through
+`Spotlight.update(model, message, context)`, and render `ui.Spotlight(h, { ...context, model, toParentMessage })`. The
+`context` holds `actions` and the options that decide what choosing one does (`filter`, `limit`, `clearQueryOnClose`,
+`closeOnActionTrigger`); pass the same one to both. `update` reports `ActionTriggered` with the action's `id`, along
+with `SpotlightOpened`, `SpotlightClosed` and `QueryChanged`.
+
+Ctrl + K (⌘ + K on a Mac) opens it, as do the `open()` and `toggle()` Messages. Type to filter, move with the up and
+down arrows (they wrap around), and press Enter to choose; Escape or a click outside closes it.
+
+<Example
+  height={120}
+  story="extensions-spotlight--usage"
+  caption="A spotlight with icons, highlighted matches and a nothing found message"
+/>
+
+## Actions
+
+Each action has an `id` and a `label`, `description`, `leftSection` and `rightSection`; `dimmedSections` (true) dims
+the sections, and `highlightQuery` marks the query in each label (`highlightColor` per action). The default filter
+matches labels first, then descriptions and `keywords`.
+
+## Groups, limit and scrolling
+
+Put actions in `{ group, actions }` to show them under a label. `limit` caps how many actions show; `scrollable` with
+`maxHeight` (400) scrolls the list inside a fixed height. `footer` adds content under the list.
+
+<Example
+  height={120}
+  story="extensions-spotlight--groups"
+  caption="Grouped actions with a limit, scrolling, a footer and two shortcuts"
+/>
+
+## Shortcuts and options
+
+`shortcut` takes one shortcut or a list (`"mod + K"` by default), or `null` for none; shortcuts are ignored while
+typing in `tagsToIgnore` (inputs, text areas and selects) unless `triggerOnContentEditable`. `disabled` renders nothing.
+`closeOnActionTrigger` (true), or an action's `closeSpotlightOnTrigger`, keeps it open after a choice;
+`clearQueryOnClose` (true) empties the search once it closes. `filter` replaces the default filter.
+
+<Example
+  height={120}
+  story="extensions-spotlight--options"
+  caption="Switches for disabled and a custom shortcut, with a custom filter"
+/>
+
+## Styles API
+
+Parts: `search`, `actionsList`, `action`, `actionBody`, `actionLabel`, `actionDescription`, `actionSection`,
+`actionsGroup`, `empty` and `footer`. The modal takes Modal's options (`size` 600, `yOffset` 80, `zIndex` 9999, a
+blurred overlay and the `pop` transition by default).
+
+## Differences from Mantine
+
+- Spotlight opens and closes through Messages handled by `update`, not a global store; each action reports its `id`
+  instead of running its own `onClick`.
+- The compound components (`Spotlight.Root`, `Spotlight.Search` and the rest) are not ported: `Spotlight` takes
+  `searchProps`, `nothingFound` and `footer` instead.
+- The list scrolls natively instead of in a ScrollArea, and `forceOpened` is not supported.
+- Groups carry `role="group"` and their label as the accessible name, as well as the visible label.

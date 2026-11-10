@@ -1,0 +1,31 @@
+---
+title: MiniCalendar
+description: "A compact strip of days with previous and next controls."
+status: built
+ticket: su-7mu9
+files:
+  - dates/MiniCalendar/MiniCalendar.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+MiniCalendar shows `numberOfDays` days (7 by default) from `date`, each with its month (`monthLabelFormat`, `"MMM"` by
+default) and day number. The controls page by `numberOfDays` through `onDateChange`, picking a day calls `onChange`,
+and `value` marks the selected day. Days outside `minDate` and `maxDate` are disabled, and so is a control that
+would page past them. `getDayProps` overrides a day's `disabled` and `selected` state and adds attributes.
+
+<Example
+  height={300}
+  story="dates-minicalendar--usage"
+  caption="A week within May, five French days with a holiday, and custom icons"
+/>
+
+## Differences from Mantine
+
+- `date` is required and kept by the parent: there is no uncontrolled `defaultDate`, and `onDateChange` gets the date
+  to show next (Mantine's `onNext` and `onPrevious` are that message).
+- A function `monthLabelFormat` is `formatMonthLabel`; `nextControlProps` and `previousControlProps` are
+  `nextLabel`, `previousLabel`, `nextIcon` and `previousIcon`.

@@ -1,0 +1,42 @@
+---
+title: WaffleChart
+description: "Waffle chart: a grid of cells filled by each segment's share."
+status: built
+ticket: su-8fiy
+files:
+  - charts/WaffleChart/WaffleChart.ts
+  - charts/WaffleChart/waffle.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+`data` is a list of `{ name, value, color }` segments. Each fills its share of a `rows` by `columns` grid (10 by 10),
+rounded so the counts add up (largest remainder); negative and non-finite values count as zero. A legend sits below,
+and hovering one of its items fades the other segments. The grid is an image named by a summary of the data.
+
+<Configurator story="charts-wafflechart--configurator" />
+
+## Total, direction, size and tooltip
+
+- `total` leaves cells empty for the part of a larger whole the data does not cover.
+- `fillDirection` fills `left-to-right` (default), `right-to-left`, `top-to-bottom` or `bottom-to-top`.
+- `size` sets the grid's width, gaps included (the gap shrinks when it alone would be too wide); otherwise cells are
+  20px.
+- `gap`, `cellRadius` and `emptyColor` style the cells.
+- `legendPosition` puts the legend `top`, `bottom`, `left` or `right`, and `withLegend: false` hides it.
+- `withTooltip` shows the segment's name, or `getTooltipLabel({ ...segment, count })`, above the pointer.
+- `ariaLabel` names the whole chart as a group.
+
+<Example
+  height={500}
+  story="charts-wafflechart--options"
+  caption="A total with round cells and a tooltip; bottom to top; right to left without a legend; empty data"
+/>
+
+## Differences from Mantine
+
+- `getTooltipLabel` returns a string.

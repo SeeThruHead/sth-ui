@@ -1,0 +1,73 @@
+---
+title: Lightbox
+description: "A full-screen gallery for images, videos and custom slides, with thumbnails, zoom, fullscreen, download and keyboard control."
+status: built
+ticket: su-k6rp
+files:
+  - components/Lightbox/Lightbox.ts
+  - components/Lightbox/model.ts
+  - components/Lightbox/zoom.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+Put `Lightbox.init({ id, withThumbnails })` in the Model, route its Messages and Commands through
+`Lightbox.update(model, message, context)`, and render `ui.Lightbox(h, { ...context, model, toParentMessage, slides })`.
+The `context` holds `slideCount` and the options that change what keys and gestures do (`loop`, `withZoom`,
+`withThumbnails`, `withFullscreen`, `zoomMaxScale`, `closeOnSwipeDown`, `withKeyboardEvents`, `withSlideTransition`);
+pass the same one to both. `open(index)` and `close()` build the Messages that open and close it; `update` reports
+`LightboxOpened`, `LightboxClosed` and `IndexChanged`.
+
+<Example
+  height={180}
+  story="extensions-lightbox--usage"
+  caption="Three pictures that open a lightbox with thumbnails, zoom and fullscreen"
+/>
+
+## Slides
+
+Each slide is an image (`src`, `alt`, `srcSet`, `sizes`, `loading`), a video (`type: "video"`, `src`, `label`, `poster`,
+`autoPlay`, `tracks`) or a custom slide (`type: "custom"`, `render(active)`). Any of them can have a `caption`, a
+`thumbSrc` or a `renderThumb(active)`. Videos only play while their slide is the current one.
+
+<Example
+  height={120}
+  story="extensions-lightbox--options"
+  caption="An image, a video and a custom slide, looping, with a custom toolbar item"
+/>
+
+## Keyboard and gestures
+
+Escape closes it; the left and right arrows move between slides, or pan a zoomed image (as do up and down); F toggles
+fullscreen, T the thumbnails and Z the zoom. Keys typed into a field, or pressed on a control inside a custom slide,
+are left alone. Clicking an image zooms it (`withZoom`), the wheel zooms around the pointer up to `zoomMaxScale` (3),
+dragging pans it, and a downward swipe closes the lightbox unless an image is zoomed.
+
+## Toolbar
+
+The toolbar shows the thumbnails toggle, a counter, fullscreen, download (`withDownload`, not for custom slides) and
+close. `toolbarItems(defaults)` returns the items to show, so you can add, remove or reorder them. `labels` changes any
+of the texts Mantine lets you change.
+
+## Options
+
+`withNavigation` (true) shows the previous and next buttons, `closeOnClickOutside` closes on a click beside the slide,
+`returnFocus` (true) puts focus back where it was on close, and `withinPortal` (true), `zIndex` (400) and
+`transitionDuration` (200) place and time it.
+
+## Styles API
+
+Parts: `root`, `overlay`, `content`, `toolbar`, `toolbarGroup`, `toolbarButton`, `counter`, `slides`, `slide`,
+`slideImage`, `slideVideo`, `navigation`, `navigationButton`, `caption`, `thumbnails`, `thumbnail` and `thumbnailImage`.
+
+## Differences from Mantine
+
+- The lightbox opens through Messages handled by `update`, not a provider and store; its slides scroll on this
+  library's Carousel instead of embla, so embla options and breakpoints are not taken.
+- Toolbar items take a Message as `onClick`, and `toolbarItems` receives the default items rather than a payload of
+  actions.
+- Pinch zoom on touch screens and right-to-left arrow keys are not ported; touch zooms by tapping as a click does.
+- The compound components (`Lightbox.Root`, `Lightbox.Toolbar` and the rest) are not ported.

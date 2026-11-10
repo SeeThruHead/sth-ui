@@ -1,0 +1,36 @@
+---
+title: BarsList
+description: "A list of labelled bars, each as wide as its share of the largest value."
+status: built
+ticket: su-zw7z
+files:
+  - charts/BarsList/BarsList.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`data` is a list of `{ name, value }` bars. Each bar holds its name, is as wide as its value against the largest, and
+has its value beside it, formatted by `valueFormatter`. `barsLabel` and `valueLabel` head the two columns.
+
+<Example height={260} story="charts-barslist--usage" caption="Weekly downloads by library" />
+
+## Colours, sizes and custom bars
+
+- `barColor` (or an item's `color`) colours the bars in the `light` variant by default, or `filled` (`variant`, per
+  item too); `autoContrast` picks a readable text colour on filled bars.
+- `barTextColor` (or an item's `textColor`) sets the text colour.
+- `barHeight` (32), `barGap` (5) and `minBarSize` (0) size the bars.
+- `renderBar(item, defaultBar)` wraps or replaces each bar.
+
+<Example
+  height={360}
+  story="charts-barslist--options"
+  caption="Filled and custom colours; a grape list with wrapped bars; an empty value"
+/>
+
+## Differences from Mantine
+
+- `getBarProps` is not supported; use the Styles API or `renderBar`.

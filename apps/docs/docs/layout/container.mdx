@@ -1,0 +1,28 @@
+---
+title: Container
+description: "Centres content with side padding and a maximum width."
+status: built
+ticket: su-z33u
+files:
+  - components/Container/Container.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+<Example story="layout-container--usage" caption="Default, xs, and 480px without padding" />
+
+## Size and fluid
+
+`size` is `xs` (540px) to `xl` (1320px), a number of pixels or any CSS width. `fluid` takes the parent's full
+width and ignores `size`.
+
+<Example story="layout-container--sizes-and-fluid" caption="xs, 400, 30rem and fluid" />
+
+## Grid strategy
+
+`strategy="grid"` uses a three-column grid: content sits in the middle column, and `breakout([...], { row })` makes a row (style the full row with `row`)
+that spans the full width while its own content still lines up with the container. In the default `block`
+strategy a breakout is ordinary content.
+
+<Example story="layout-container--grid-with-breakout" caption="A 500px grid container with a breakout row" />

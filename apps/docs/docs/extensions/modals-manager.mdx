@@ -1,0 +1,43 @@
+---
+title: ModalsManager
+description: "Centralized modals: content, confirm and context modals opened by Messages, with multi-step updates."
+status: built
+ticket: su-44ki
+files:
+  - components/ModalsManager/ModalsManager.ts
+  - components/ModalsManager/model.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+ModalsManager keeps a stack of modals and shows the newest. Put `ModalsManager.init({ id })` in the Model, route its
+Messages and Commands through `update`, and render `ui.ModalsManager(h, { model, toParentMessage, contents, modals })`
+once. Open modals by sending the Messages these helpers build, from anywhere in the app:
+
+- `openModal(key, { settings })` shows `contents[key]`.
+- `openConfirmModal({ settings, confirm: { body, confirmLabel, cancelLabel, closeOnConfirm, closeOnCancel } })` shows
+  Cancel and Confirm buttons (`labels`, `confirmProps` and `cancelProps` set them for every confirm modal) and reports
+  `ModalConfirmed` or `ModalCancelled`.
+- `openContextModal(name, { innerProps })` shows `modals[name]`, which gets the modal's `id`, `innerProps` and a `close`
+  Message; `updateModal(id, { settings, innerProps })` changes a modal in place, for multi-step flows.
+- `closeModal(id)` and `closeAllModals()` close them; `update` reports `ModalOpened` and `ModalClosed`.
+
+`settings` take the title and the Modal options (`size`, `centered`, `fullScreen`, `withCloseButton`,
+`closeOnClickOutside`, `closeOnEscape`); `modalProps` sets defaults for every modal.
+
+<Example
+  height={160}
+  story="extensions-modalsmanager--usage"
+  caption="Buttons that open a content, a confirm, a context and a plain confirm modal"
+/>
+
+## Differences from Mantine
+
+- Modals open through Messages handled by the manager's `update`, not global functions and a provider; ids are given
+  or numbered by the manager, not random.
+- Modal content is named: `contents` and `modals` map keys to views, and the Model keeps only data (settings, labels,
+  `innerProps`), since a Model cannot hold views. `onConfirm`, `onCancel` and `onClose` are the out messages.
+- `confirmProps` and `cancelProps` are set on the manager rather than per modal.

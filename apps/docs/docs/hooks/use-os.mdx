@@ -1,0 +1,32 @@
+---
+title: useOs
+description: "Detect the user's operating system."
+status: built
+ticket: su-qsv6
+files:
+  - hooks/useOs/os.ts
+  - hooks/useOs/osCommand.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`detectOs({})` is a Command that reads the browser's user agent and sends `DetectedOs` with one of `undetermined`,
+`macos`, `ios`, `windows`, `android`, `linux` or `chromeos`. Run it from `init` and keep the answer in the Model.
+`osOf(userAgent, touch)` is the pure function behind it, with Mantine's rules: an iPhone, iPad or iPod is `ios`, and so
+is a Mac with a touch screen (an iPad asking for the desktop site).
+
+```ts
+import * as Command from "foldkit/command"
+import { detectOs } from "@sth-ui/hooks/useOs/osCommand.ts"
+
+const init = () => ({ model: { os: "undetermined" }, commands: [Command.mapMessage(detectOs({}), Message.GotOs)] })
+```
+
+<Example height={80} story="hooks-useos--usage" caption="The operating system of this browser" />
+
+## Differences from Mantine
+
+- It is a Command rather than a hook, so the Model holds the value; `getValueInEffect` has no meaning here.

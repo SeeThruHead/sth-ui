@@ -1,0 +1,25 @@
+---
+title: useSplitter
+description: "Resize logic for panes separated by handles."
+status: built
+ticket: su-fpz1
+files:
+  - hooks/useSplitter/splitter.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`applyConstraints(sizes, panels, handle, delta, redistribute)` moves a handle within each pane's `min` and `max`,
+collapsing collapsible panes dragged under their threshold and taking space from the nearest panes or all of them
+(`redistribute`). `resizeFrom`, `collapse`, `expand`, `toggleCollapse`, `reset` and `keyboard` give the next sizes for a
+drag, a collapse, a double click and the arrow, Home and End keys, keeping each size in the unit it was given in
+(number, `%`, `px`, `rem`). [Splitter](/layout/splitter) is built on them and adds the dragging.
+
+<Example height={260} story="layout-splitter--usage" caption="useSplitter" />
+
+## Differences from Mantine
+
+- The sizing is pure functions over the sizes in the Model; dragging is Splitter's Subscription rather than a hook's handlers.

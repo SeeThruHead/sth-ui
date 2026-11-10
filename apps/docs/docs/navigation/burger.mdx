@@ -1,0 +1,39 @@
+---
+title: Burger
+description: "Open/close navigation button."
+status: built
+ticket: su-twxw
+files:
+  - components/Burger/Burger.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+`Burger` is an open/close menu button. Pass `opened` and `onClick` to control it: when `opened` is set it
+shows a cross, otherwise the three lines.
+
+<Configurator story="navigation-burger--configurator" />
+
+<Example story="navigation-burger--opened" caption="Opened" />
+
+`size` is `xs` to `xl` (default `md`, 24px lines), pixels or a CSS length; `color` is a palette colour, a shade
+or any CSS colour (black in light and white in dark by default); `transitionDuration` (default 300ms) and
+`transitionTimingFunction` (default `ease`) set the animation, which stops for people who ask for reduced
+motion.
+
+<Example story="navigation-burger--sizes" caption="xs to xl, 30 pixels and 2rem" />
+
+## Change line size
+
+`lineSize` sets the lines' thickness, which follows `size` by default:
+
+<Example story="navigation-burger--line-size" caption="2px, 6px in blue, and red.7 with no transition" />
+
+## Accessibility
+
+Burger has no text, so give it a `label` (its accessible name), as Mantine's examples pass `aria-label`.
+It also sets `aria-expanded` from `opened`, so screen readers announce whether the navigation is open.

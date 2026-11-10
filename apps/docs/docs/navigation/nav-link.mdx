@@ -1,0 +1,48 @@
+---
+title: NavLink
+description: "Navigation link."
+status: built
+ticket: su-3f3b
+files:
+  - components/NavLink/NavLink.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+`NavLink` is a link for a sidebar or menu: a `label`, an optional `description`, and `leftSection` and
+`rightSection` for icons, badges or anything else. `disabled` dims it and stops it
+responding to clicks.
+
+<Configurator story="navigation-navlink--configurator" />
+
+## Active
+
+Set `active` to mark the current page. `variant` picks how: `light` (default), `filled` or `subtle`; `color`
+takes a palette colour, a shade or any CSS colour. With `autoContrast`, a `filled` link picks black or white
+text to suit its colour.
+
+<Example story="navigation-navlink--active" caption="Light and filled, Dashboard active" />
+
+## Nested NavLinks
+
+Put `NavLink`s in another `NavLink`'s `children` to nest them. The parent becomes a button that opens and
+closes them (`opened` and `onChange`, controlled from your model), with `aria-expanded`, and `aria-controls`
+when it has an `id`. `childrenOffset` sets the indent (a theme spacing or any CSS value, default `lg`). The
+chevron turns when it opens unless `disableRightSectionRotation` is set, and `keepMounted: false` leaves the
+children out of the page while closed.
+
+<Example story="navigation-navlink--nested" caption="The second parent opened, indented 28px" />
+
+## Polymorphic component
+
+A leaf `NavLink` is an `a` (give it `href`); `component: "button"` makes it a button for actions that aren't
+pages. `noWrap` cuts long labels and descriptions off with an ellipsis.
+
+<Example
+  story="navigation-navlink--options"
+  caption="noWrap, a button, lime with autoContrast, the nested options and an icon-only link"
+/>

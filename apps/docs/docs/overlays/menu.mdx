@@ -1,0 +1,139 @@
+---
+title: Menu
+description: "Combine a list of secondary actions into single interactive area."
+status: built
+ticket: su-ugdq
+files:
+  - components/Menu/Menu.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+Menu is built on `@foldkit/ui`'s accessible menu, so its state lives in your model: keep `Menu.Model` (from
+`Menu.init({ id })`) and pass its messages through `Menu.update`, whose `outMessage` is `Selected` with the chosen
+item's `value`. `items` are Mantine's `Menu.Item`s: a `value`, a `label`, `leftSection` and `rightSection`, a
+`color` and `disabled`. Items that share a `group` are shown together, with that group's entry in `labels` as its
+`Menu.Label` and a `Menu.Divider` between groups.
+
+<Example height={440} story="overlays-menu--usage" caption="Click Toggle menu and choose an item" />
+
+## Controlled
+
+`Menu.open(model)` and `Menu.close(model)` open and close it from your own messages, and `Menu.selectItem(model,
+value, index)` chooses an item, as Mantine's `opened` and `onChange`.
+
+## Hover trigger
+
+`trigger="hover"` opens the menu while the pointer is over the target or the dropdown, and `"click-hover"` also opens
+and closes it on click. `openDelay` (0) and `closeDelay` (100) set how long the pointer must stay or leave, in
+milliseconds.
+
+<Example
+  height={420}
+  story="overlays-menu--hover"
+  caption="Hover to open after 100ms; it closes 400ms after the pointer leaves"
+/>
+
+## Context menu
+
+Give `contextMenu: { children, disabled, longPressDelay }` instead of `target` to open the menu with a right-click
+anywhere on `children`, at the pointer, in place of the browser's own menu. On a touch screen, pressing and holding
+for `longPressDelay` milliseconds (500 by default) opens it at the finger; lifting or moving the finger sooner
+cancels it. `disabled` leaves the browser's menu alone.
+
+<Example height={460} story="overlays-menu--context-menu" caption="Right-click either box" />
+
+## Checkbox and radio items
+
+Give an item `kind: "checkbox"` or `kind: "radio"` and `checked`, and it becomes a `menuitemcheckbox` or
+`menuitemradio` with `aria-checked`, and a check or a dot in front of its label while checked (`checkIcon` replaces
+both). Choosing one sends `Selected` as usual; your update flips `checked`. These items keep the menu open, unless
+the item sets `closeMenuOnClick: true`.
+
+`closeOnItemClick: false` keeps the menu open for plain items too. Because the menu's update decides whether to
+close, pass the same `items` and `closeOnItemClick` to it: `Menu.update(model, message, { items, closeOnItemClick })`.
+
+`alignItemsLabels` lines labels up: `with-indicators` (the default) leaves room for the indicator on checkbox and
+radio items, `all` on every item, and `none` shows it only on checked items.
+
+<Example height={300} story="overlays-menu--selectable-items" caption="Open View, Sort and Density" />
+
+## Submenus
+
+Give an item `kind: "submenu"` and pass `submenus: { [value]: { model, toParentMessage, items, labels, width } }`:
+the item gets a chevron, `aria-haspopup="menu"` and `aria-expanded`, and its submenu opens to the right when the
+pointer rests on the item, when it is clicked, or with Arrow Right or Enter while it is active. Arrow Left or Escape
+closes the submenu and returns to the item. Each submenu is a menu with its own model in yours, as in Mantine's
+`Menu.Sub`; pass the parent's `items` to `Menu.update` so it stays open while focus is in a submenu. Close the
+parent when a submenu item is chosen, and reset the submenus when the parent closes.
+
+<Example height={360} story="overlays-menu--submenus" caption="Open File, then Share or Export" />
+
+## Search
+
+`search: { value, onChange, placeholder }` puts a search field at the top of the dropdown, as Mantine's
+`Menu.Search`. It takes focus when the menu opens; typing goes into the field, while Arrow Up and Down, Home, End,
+Enter and Escape still move through and choose the items. Filter `items` by the value yourself. Pass
+`search: true` to `Menu.update` too, so moving focus into the field doesn't close the menu; Tab still closes it.
+Clear the value when the menu closes if you want Mantine's `clearSearchOnClose`.
+
+<Example height={420} story="overlays-menu--search" caption="Open it and type" />
+
+## Disabled items
+
+A `disabled` item stays in the list but can't be chosen, by pointer or keyboard; arrow keys skip it. Groups without
+a label still get a divider between them.
+
+<Example height={400} story="overlays-menu--disabled-items" caption="Gallery and Search are disabled" />
+
+## Dropdown position
+
+`position` (default `bottom`), `offset` (default 8), `width` (a number, any CSS width, or `target` for the
+target's width), `radius`, `shadow`, `zIndex` (300) and `withinPortal` (true) work as on
+[Popover](/overlays/popover), whose look the dropdown shares.
+
+<Example height={240} story="overlays-menu--position" caption="right-start, 16px away, 14rem wide" />
+
+## Arrow
+
+`withArrow` adds an arrow pointing at the target, styled like [Popover](/overlays/popover)'s: `arrowSize` (7),
+`arrowOffset` (5, from the dropdown's edge when the position ends in `-start` or `-end`), `arrowRadius` (0) and
+`arrowPosition` (`side`, or `center` for the middle of the dropdown).
+
+<Example height={320} story="overlays-menu--arrow" caption="Open it: bottom-start, a 10px arrow 12px from the edge" />
+
+## Custom component as target
+
+`target` gets `renderRoot` and passes it to the component that opens the menu, Mantine's `renderRoot`: the
+component hands its own attributes and content to the menu's button instead of rendering its root element, so it
+looks like itself and the menu keeps the button's keyboard and ARIA behaviour. Button takes `renderRoot`; give the
+target Button no `onClick`, as the menu's button handles clicks.
+
+## Accessibility
+
+Menu follows the WAI-ARIA menu button pattern: the dropdown has `role="menu"` and `aria-labelledby` pointing at the
+target, the target has `aria-haspopup="menu"`, `aria-expanded` and, while open, `aria-controls`; each item has `role="menuitem"` (`menuitemcheckbox` or `menuitemradio`, with `aria-checked`, for checkbox and radio items), a labelled group has `role="group"` named by its label, and dividers have `role="separator"`.
+
+- Enter, Space or Arrow Down on the target opens the menu on the first item, Arrow Up on the last.
+- Arrow keys move between items, Home and End jump to the first and last, and typing a letter jumps to the next item
+  whose `searchText` (default its `value`) starts with it.
+- Enter or Space chooses the active item; Escape or a click outside closes the menu and returns focus to the
+  target, and Tab closes it as focus moves on.
+
+## Differences from Mantine
+
+- State lives in your model (`Menu.Model`), and the chosen item arrives as an out message instead of each item's
+  `onClick`.
+- Items are data (`items`, `labels`) instead of `Menu.Item`, `Menu.Label` and `Menu.Divider` children; a divider sits
+  between each pair of groups.
+- `arrowPosition: "center"` centres the arrow on the dropdown, not on the target.
+- `Menu.ContextMenu` is the `contextMenu` prop.
+- Checkbox and radio items are items with `kind` and `checked` instead of `Menu.CheckboxItem`, `Menu.RadioItem` and
+  their groups: your model holds what is checked. `closeOnItemClick` and the items are also passed to
+  `Menu.update`, which decides whether the menu closes.
+- `Menu.Search` is the `search` prop; your update filters the items and clears the value on close.
+- `Menu.Sub` is an item with `kind: "submenu"` and an entry in `submenus`; each submenu's model lives in yours, and
+  your update closes the parent when a submenu item is chosen.

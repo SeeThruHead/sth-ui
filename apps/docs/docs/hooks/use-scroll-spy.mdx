@@ -1,0 +1,23 @@
+---
+title: useScrollSpy
+description: "Track which heading is in view."
+status: built
+ticket: su-igec
+files:
+  - hooks/useScrollSpy/scrollSpy.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+The `scrollSpy({ selector, offset, scrollHost })` Mount reads the headings matching `selector` (`h1` to `h6`) and sends
+`Scanned` with their text, ids and depths, then `Scrolled` with the index of the heading in view as the page (or the
+`scrollHost` element) scrolls. It is what [TableOfContents](/navigation/table-of-contents) is built on.
+
+<Example height={300} story="hooks-usescrollspy--usage" caption="useScrollSpy" />
+
+## Differences from Mantine
+
+- It is a Mount sending Messages rather than a hook; `getDepth` and `getValue` are fixed to the heading level and its text.

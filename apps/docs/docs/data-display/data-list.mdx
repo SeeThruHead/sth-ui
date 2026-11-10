@@ -1,0 +1,36 @@
+---
+title: DataList
+description: "Display label-value pairs as a description list."
+status: built
+ticket: su-csw0
+files:
+  - components/DataList/DataList.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+import { Configurator } from "@site/src/components/Configurator"
+
+## Usage
+
+DataList shows label and value pairs as a description list (`dl`, `dt`, `dd`). Pass the pairs as `items`.
+`size` sets the text size (`sm` by default), `gap` the space between rows, and `labelWidth` the labels' width
+(120px by default).
+
+<Configurator story="datadisplay-datalist--configurator" />
+
+## With divider
+
+`withDivider` draws a line between rows.
+
+<Example height={170} story="datadisplay-datalist--divider" caption="Rows with dividers" />
+
+## Vertical orientation
+
+`orientation="vertical"` puts each value under its label.
+
+<Example height={230} story="datadisplay-datalist--vertical" caption="Labels above values" />
+
+## Differences from Mantine
+
+- The rows are given as `items` data instead of `DataList.Item`, `ItemLabel` and `ItemValue` children.

@@ -1,0 +1,43 @@
+---
+title: ResourcesMonthView
+description: "A month per resource: a row of day cells for each resource, with bookings as bars across the days they cover."
+status: built
+ticket: su-691n
+files:
+  - schedule/ResourcesMonthView/ResourcesMonthView.ts
+  - schedule/monthLayout.ts
+hide_title: true
+---
+
+import { Example } from "@site/src/components/Example"
+
+## Usage
+
+`schedule.ResourcesMonthView(h, { date, resources, events })` shows the month containing `date` with a row per
+resource and a cell per day. Bookings run as bars across their days, stacked in rows; when a day holds more than
+`maxEventsPerTimeSlot` (2) the rest go behind a "+N more" button. `groups`, `renderGroupLabel`, `renderResourceLabel`,
+`dayWidth` (80px), `rowHeight` (64px), `weekdayFormat` (`ddd`), `withWeekendDays`, `weekendDays` and `highlightToday`
+shape the grid, and `startScrollDate` scrolls to a day when the view first shows. `onDayClick` receives the resource
+and the date of the cell clicked.
+
+With the view's `model`, bookings can be dragged to another day or resource (keeping their time of day), stretched by
+whole days from either end, and days selected by dragging across a resource's cells, which reports midnight on the
+first day to `23:59:59` on the last. Arrow keys move between days and resources.
+
+<Example
+  height={520}
+  story="schedule-resourcesmonthview--usage"
+  caption="January for four rooms: drag a booking to another day or room, stretch it, or select days"
+/>
+
+<Example
+  height={700}
+  story="schedule-resourcesmonthview--options"
+  caption="A static working month with one row per day, custom rows, and the defaults"
+/>
+
+## Differences from Mantine
+
+- The header shows the month as a title (`headerFormat`, `MMMM YYYY`) rather than month and year selects.
+- `onDayClick` receives the resource with the date, since a cell belongs to one resource.
+- `now` is a prop rather than read from the clock, and the control props and `renderEvent` work with attribute lists.
