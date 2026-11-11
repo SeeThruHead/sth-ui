@@ -8,6 +8,7 @@ import type { FormContext } from "../form.ts"
 import { checkboxProps, textInputProps } from "../inputs.ts"
 import { getPath } from "../paths.ts"
 import { schemaResolver } from "../validate.ts"
+import { toJson } from "@sth-ui/core/json.ts"
 
 const Employee = Schema.Struct({
   name: Schema.String.check(Schema.isNonEmpty({ message: "Name is required" })),
@@ -45,7 +46,7 @@ export const update = (
 ): { readonly model: Model; readonly commands: ReadonlyArray<Command.Command<Message>> } => {
   const result = Form.update(model.form, message.message, context)
   const saved = result.outMessages.flatMap((out) => {
-    if (out._tag === "SubmitSucceeded") return [`Saved ${JSON.stringify(out.values)}`]
+    if (out._tag === "SubmitSucceeded") return [`Saved ${toJson(out.values)}`]
 
     return out._tag === "SubmitFailed" ? [Object.values(out.errors).join(", ")] : []
   })

@@ -3,6 +3,7 @@ import { Effect, Layer, Redacted, Ref } from "effect"
 import { HttpClient, HttpClientError, HttpClientResponse } from "effect/http"
 import type { HttpClientRequest } from "effect/http"
 import { CiMetrics, historyQuery } from "./CiMetrics.ts"
+import { toJson } from "../json.ts"
 
 const endpoints = {
   ingest: "https://otlp.test/v1/logs",
@@ -24,7 +25,7 @@ const answering = Effect.fnUntraced(function* (status: number, payload: unknown)
         auth: request.headers["authorization"] ?? "",
         body: request.body._tag === "Uint8Array" ? new TextDecoder().decode(request.body.body) : ""
       }
-    ]).pipe(Effect.as(HttpClientResponse.fromWeb(request, new Response(JSON.stringify(payload), { status }))))
+    ]).pipe(Effect.as(HttpClientResponse.fromWeb(request, new Response(toJson(payload), { status }))))
   )
   const layer = CiMetrics.layer(endpoints).pipe(Layer.provide(Layer.succeed(HttpClient.HttpClient, client)))
   return { seen, layer }

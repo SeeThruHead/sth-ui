@@ -1,6 +1,7 @@
 import { isQuarantined, quarantinedIn, type QuarantineList } from "../Quarantine.ts"
 import type { TestRecord, TestReport } from "../TestReport.ts"
 import type { TaskRun } from "./Moon.ts"
+import { toJson } from "../json.ts"
 
 export type Kind = "task" | "test_failure" | "flake" | "quarantined"
 
@@ -87,7 +88,7 @@ const located = (prior: Prior): Located => ({
   test: prior.test
 })
 
-const key = (prior: Prior): string => JSON.stringify(located(prior))
+const key = (prior: Prior): string => toJson(located(prior))
 
 const rerunFlakes = (tasks: ReadonlyArray<TaskRun>, prior: ReadonlyArray<Prior>): ReadonlyArray<Event> => {
   const proven = new Set(

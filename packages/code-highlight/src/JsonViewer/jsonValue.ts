@@ -1,4 +1,5 @@
 import { Predicate } from "effect"
+import { toJson, toPrettyJson } from "@sth-ui/core/json.ts"
 
 export const pathSeparator = "\u0000"
 
@@ -111,7 +112,7 @@ const splitsSurrogatePair = (value: string, at: number) => {
   return isLowSurrogate(value.charCodeAt(at))
 }
 
-const quote = (text: string) => JSON.stringify(text)
+const quote = (text: string) => toJson(text)
 
 export const formatValue = (
   value: unknown,
@@ -139,4 +140,11 @@ const plain = (value: unknown, ancestors: ReadonlyArray<object>): unknown => {
   return Object.fromEntries(Object.entries(resolved).map(([key, item]) => [key, plain(item, inside)]))
 }
 
-export const safeStringify = (value: unknown): string => JSON.stringify(plain(value, []), null, 2) ?? String(value)
+const unserializable = (value: unknown): boolean =>
+  Predicate.isUndefined(value) || Predicate.isFunction(value) || Predicate.isSymbol(value)
+
+export const safeStringify = (value: unknown): string => {
+  const shown = plain(value, [])
+
+  return unserializable(shown) ? String(value) : toPrettyJson(shown)
+}

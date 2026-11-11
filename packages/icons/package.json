@@ -7,9 +7,9 @@
     "./*": "./src/*"
   },
   "scripts": {
-    "typecheck": "tsc -p tsconfig.json",
+    "typecheck": "effect-tsgo tsrs -p tsconfig.json",
     "build": "tsc -p tsconfig.build.json",
-    "lint": "oxlint --type-aware --deny-warnings -c ../lint/oxlintrc.json src tools",
+    "lint": "effect-tsgo --tsrs-lint oxlint --type-aware --deny-warnings -c ../lint/oxlintrc.json src tools",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
     "test": "bun --bun vitest run",
@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@effect/platform-bun": "4.1.2",
-    "@effect/tsgo": "0.64.1",
+    "@effect/tsgo": "0.67.7",
     "@effect/vitest": "4.1.2",
     "@phosphor-icons/core": "2.1.1",
     "@sth-ui/lint": "workspace:*",
@@ -29,8 +29,7 @@
     "@vitest/coverage-istanbul": "5.0.5",
     "effect": "4.1.2",
     "oxfmt": "0.73.0",
-    "oxlint": "1.88.0",
-    "oxlint-tsgolint": "7.0.2004",
+    "oxlint": "1.91.0",
     "typescript": "7.0.2",
     "vitest": "5.0.5"
   }

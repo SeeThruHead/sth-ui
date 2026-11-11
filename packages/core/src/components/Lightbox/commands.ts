@@ -1,4 +1,6 @@
 import { Effect, Option, Schema } from "effect"
+import { FetchHttpClient, HttpClient } from "effect/http"
+import type { HttpClientResponse } from "effect/http"
 import * as Command from "foldkit/command"
 import { defineMessageUnion } from "foldkit/message"
 
@@ -79,12 +81,15 @@ const saveBlob = (url: URL, blob: Blob) => {
   window.setTimeout(() => URL.revokeObjectURL(href), 1000)
 }
 
+const blobOf = (response: HttpClientResponse.HttpClientResponse) =>
+  Effect.map(response.arrayBuffer, (buffer) => new Blob([buffer], { type: response.headers["content-type"] ?? "" }))
+
 const fetched = (src: string, url: URL) =>
-  Effect.tryPromise({ try: () => fetch(src), catch: refused }).pipe(
-    Effect.filterOrFail((response) => response.ok, refused),
-    Effect.flatMap((response) => Effect.tryPromise({ try: () => response.blob(), catch: refused })),
+  Effect.flatMap(HttpClient.HttpClient, (client) => HttpClient.filterStatusOk(client).get(src)).pipe(
+    Effect.flatMap(blobOf),
     Effect.map((blob) => saveBlob(url, blob)),
-    Effect.catch(() => Effect.sync(() => openInTab(src)))
+    Effect.catch(() => Effect.sync(() => openInTab(src))),
+    Effect.provide(FetchHttpClient.layer)
   )
 
 export const Download = Command.define("LightboxDownload", {

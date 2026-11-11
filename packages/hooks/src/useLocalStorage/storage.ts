@@ -1,4 +1,5 @@
 import { Option } from "effect"
+import { fromJsonOption } from "@sth-ui/core/json.ts"
 
 export type StorageArea = {
   readonly getItem: (key: string) => string | null
@@ -6,13 +7,8 @@ export type StorageArea = {
   readonly removeItem: (key: string) => void
 }
 
-export const readJson = (text: string): unknown => {
-  try {
-    return text === "" ? text : JSON.parse(text)
-  } catch {
-    return text
-  }
-}
+export const readJson = (text: string): unknown =>
+  text === "" ? text : Option.getOrElse(fromJsonOption(text), () => text)
 
 export const readStored = <A>(
   area: StorageArea,

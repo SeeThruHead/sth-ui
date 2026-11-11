@@ -10,6 +10,7 @@ import { bandPoints, numberAt, seriesPoints, stackedBands, yFraction } from "../
 import type { Band, ChartSeries } from "../grid/grid.ts"
 import { colorOf, gridView } from "../grid/gridView.ts"
 import type { GridInput, GridOptions, GridPart } from "../grid/gridView.ts"
+import { toJson } from "@sth-ui/core/json.ts"
 
 export type { ChartRow, ChartSeries } from "../grid/grid.ts"
 
@@ -56,7 +57,7 @@ export const AreaChart =
     const curve = props.curveType ?? "monotone"
     const count = props.data.length
     const bands = stackedBands(props.data, props.series, type === "percent")
-    const id = `area-${props.id ?? hashOf(JSON.stringify([props.series, count, type]))}`
+    const id = `area-${props.id ?? hashOf(toJson([props.series, count, type]))}`
     const gradient = props.withGradient ?? type === "default"
     const opacity = String(props.fillOpacity ?? 0.2)
     const layers = Arr.zip(props.series, bands)

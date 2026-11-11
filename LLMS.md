@@ -72,7 +72,8 @@ there before assuming a Mantine prop exists.
    "html element constructors must be called inside a runtime-driven render": put `foldkit`, `foldkit/html`,
    `foldkit/command`, `foldkit/message`, `foldkit/mount`, `foldkit/schema`, `foldkit/submodel`,
    `foldkit/subscription` and every `@foldkit/ui/*` module the components you use import (`popover`, `checkbox`,
-   `menu`, `anchor`, `animation`, ...) in `optimizeDeps.include`, and `foldkit/scene` too if Storybook or a browser
+   `menu`, `anchor`, `animation`, ...) in `optimizeDeps.include`, with `effect` and `effect/http` (Lightbox's
+   download uses Effect's HTTP client), and `foldkit/scene` too if Storybook or a browser
    test runs scenes. Vite's console names a module it had to optimise late; add it to the list.
 4. Import at least one stylesheet of the app's own. A production build appends StyleX's CSS to it; without one
    every component renders unstyled.

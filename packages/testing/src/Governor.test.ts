@@ -18,6 +18,7 @@ import { admit, governorFolder, machineOf, realClock, record, release } from "./
 import { hostProbe, macFreePercent } from "./Host.ts"
 import type { Admission, Clock, Probe } from "./Governor.ts"
 import { governed, governedBy } from "./Suites.ts"
+import { fromJson, toJson } from "./json.ts"
 
 const gib = 1024 * 1024 * 1024
 
@@ -46,7 +47,7 @@ const clockFrom = (start: number, onPause: () => void = () => undefined): Clock 
 }
 
 const grant = (dir: string, owner: number, workers: number) =>
-  writeFileSync(join(dir, `${owner}.grant`), JSON.stringify({ pid: owner, kind: "node", workers, mb: workers * 450 }))
+  writeFileSync(join(dir, `${owner}.grant`), toJson({ pid: owner, kind: "node", workers, mb: workers * 450 }))
 
 describe("reading the machine", () => {
   it("uses the container's cgroup limits and pressure when there are some", () => {
@@ -104,7 +105,7 @@ describe("admitting test runs across processes", () => {
     const admission = await admit(4, "node", { CI_GOVERNOR_DIR: dir }, probe(), clockFrom(1000))
 
     expect([admission.workers, admission.timeoutScale, admission.waitedMs, admission.reasons]).toEqual([4, 1, 0, []])
-    expect(JSON.parse(readFileSync(join(dir, `${pid}.grant`), "utf8"))).toMatchObject({ pid, workers: 4 })
+    expect(fromJson(readFileSync(join(dir, `${pid}.grant`), "utf8"))).toMatchObject({ pid, workers: 4 })
     rmSync(dir, { recursive: true })
   })
 
@@ -122,7 +123,7 @@ describe("admitting test runs across processes", () => {
   it("drops grants of runs that died and anything that isn't a grant", async () => {
     const dir = folder()
     grant(dir, 2_147_483_000, 8)
-    writeFileSync(join(dir, "9.grant"), JSON.stringify({ hello: "there" }))
+    writeFileSync(join(dir, "9.grant"), toJson({ hello: "there" }))
     writeFileSync(join(dir, "10.grant"), "5")
     mkdirSync(join(dir, "11.grant"))
     writeFileSync(join(dir, "note.txt"), "ignored")
@@ -220,7 +221,7 @@ describe("recording an admission", () => {
     record(admission, "budget.test.server", {})
     record(admission, "nothing.outside.ci")
 
-    expect(JSON.parse(readFileSync(join(dir, "governor", "budget.test.server.json"), "utf8"))).toMatchObject({
+    expect(fromJson(readFileSync(join(dir, "governor", "budget.test.server.json"), "utf8"))).toMatchObject({
       workers: 2
     })
     release(join(dir, "governor", "budget.test.server.json"))

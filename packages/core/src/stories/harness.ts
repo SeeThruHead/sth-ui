@@ -12,6 +12,7 @@ import { valuesOf } from "./controls.ts"
 import type { Configurator, Control, Values } from "./controls.ts"
 import { themes } from "./themes.ts"
 import type { StoryTheme } from "./themes.ts"
+import { toJson } from "../json.ts"
 
 const Model = Schema.Struct({
   values: Schema.Record(Schema.String, Schema.String),
@@ -127,7 +128,7 @@ export const app =
                 [h.Role("alert")],
                 [
                   `Story crashed: ${crashed.error.message}`,
-                  h.pre([], [`${JSON.stringify(Option.getOrNull(crashed.message))}\n${String(crashed.error.cause)}`])
+                  h.pre([], [`${toJson(Option.getOrNull(crashed.message))}\n${String(crashed.error.cause)}`])
                 ]
               )
           },

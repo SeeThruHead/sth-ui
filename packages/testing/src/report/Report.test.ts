@@ -1,9 +1,10 @@
 import { BunServices } from "@effect/platform-bun"
 import { assert, describe, it } from "@effect/vitest"
-import { Effect, Layer, Ref } from "effect"
+import { Effect, Layer, Ref, Schema } from "effect"
 import { CiMetrics, CiMetricsError } from "./CiMetrics.ts"
 import type { Prior } from "./Events.ts"
 import { report } from "./Report.ts"
+import { toJson } from "../json.ts"
 
 const fixtures = new URL("../../fixtures", import.meta.url).pathname
 const quarantine = `${fixtures}/quarantine.json`
@@ -44,20 +45,31 @@ const metrics = Effect.gen(function* () {
   return { asked, sent, layer: Layer.merge(layer, BunServices.layer) }
 })
 
-type Attribute = {
-  readonly key: string
-  readonly value: { readonly stringValue?: string; readonly doubleValue?: number }
-}
+const Attribute = Schema.Struct({
+  key: Schema.String,
+  value: Schema.Struct({
+    stringValue: Schema.optionalKey(Schema.String),
+    doubleValue: Schema.optionalKey(Schema.Finite)
+  })
+})
+
+const Payload = Schema.Struct({
+  resourceLogs: Schema.Array(
+    Schema.Struct({
+      scopeLogs: Schema.Array(
+        Schema.Struct({ logRecords: Schema.Array(Schema.Struct({ attributes: Schema.Array(Attribute) })) })
+      )
+    })
+  )
+})
 
 const recordsOf = (payload: unknown): ReadonlyArray<Readonly<Record<string, string | number | undefined>>> =>
-  JSON.parse(JSON.stringify(payload)).resourceLogs[0].scopeLogs[0].logRecords.map(
-    (record: { attributes: ReadonlyArray<Attribute> }) =>
-      Object.fromEntries(
-        record.attributes.map((attribute) => [
-          attribute.key,
-          attribute.value.stringValue ?? attribute.value.doubleValue
-        ])
-      )
+  (
+    Schema.decodeSync(Schema.fromJsonString(Payload))(toJson(payload)).resourceLogs[0]?.scopeLogs[0]?.logRecords ?? []
+  ).map((record) =>
+    Object.fromEntries(
+      record.attributes.map((attribute) => [attribute.key, attribute.value.stringValue ?? attribute.value.doubleValue])
+    )
   )
 
 describe("report", () => {

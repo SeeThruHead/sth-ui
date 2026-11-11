@@ -1,4 +1,5 @@
 import { Option, Predicate } from "effect"
+import { fromJsonOption } from "@sth-ui/core/json.ts"
 
 export type FormError = string | true
 
@@ -45,7 +46,7 @@ export const isInRange =
     return range.max !== undefined && value > range.max ? errorOf(error) : null
   }
 
-const parses = (value: string) => Option.isSome(Option.liftThrowable(JSON.parse)(value))
+const parses = (value: string) => Option.isSome(fromJsonOption(value))
 
 export const isJSONString =
   (error?: FormError): SyncRule =>

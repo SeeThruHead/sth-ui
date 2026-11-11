@@ -7,6 +7,7 @@ import { mapDefined, setDefinedVars, setStyle, stylesApi, withDefaults } from ".
 import type { ComponentConfig, StylesApiProps } from "../../styles/StylesApi.ts"
 import type { BoxElement } from "../Box/Box.ts"
 import { backgroundImageVars } from "./BackgroundImage.stylex.ts"
+import { toJson } from "../../json.ts"
 
 export type BackgroundImagePart = "root"
 
@@ -44,7 +45,7 @@ export const BackgroundImage =
         "root",
         styles.root,
         setDefinedVars([backgroundImageVars.radius, mapDefined(props.radius, radiusValue)]),
-        setStyle(["backgroundImage", `url(${JSON.stringify(props.src)})`])
+        setStyle(["backgroundImage", `url(${toJson(props.src)})`])
       ),
       props.children ?? []
     )

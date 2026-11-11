@@ -1,6 +1,8 @@
 import { BunRuntime, BunServices } from "@effect/platform-bun"
 import { Effect, FileSystem, Path, Schema } from "effect"
 
+const quoted = Schema.encodeSync(Schema.fromJsonString(Schema.String))
+
 const prettyJson = Schema.fromJsonString(Schema.Unknown, { space: 2 })
 
 const Component = Schema.Struct({ category: Schema.String, title: Schema.String, description: Schema.String })
@@ -40,7 +42,7 @@ const stub = (component: typeof Component.Type, ticket: typeof Ticket.Type | und
   [
     "---",
     `title: ${component.title}`,
-    `description: ${JSON.stringify(`${component.description}.`)}`,
+    `description: ${quoted(`${component.description}.`)}`,
     `status: ${statusOf(ticket)}`,
     `ticket: ${ticket?.id ?? "none"}`,
     "hide_title: true",

@@ -7,6 +7,7 @@ import * as Form from "../form.ts"
 import type { FormContext } from "../form.ts"
 import { checkboxProps, numberInputProps, textInputProps } from "../inputs.ts"
 import { hasLength, isEmail, isInRange, isNotEmpty } from "../validators.ts"
+import { toJson } from "@sth-ui/core/json.ts"
 
 export const Model = Schema.Struct({ form: Form.Model, result: Schema.String })
 export type Model = typeof Model.Type
@@ -35,7 +36,7 @@ export const update = (
 ): { readonly model: Model; readonly commands: ReadonlyArray<Command.Command<Message>> } => {
   const result = Form.update(model.form, message.message, context)
   const outcome = result.outMessages.flatMap((out) => {
-    if (out._tag === "SubmitSucceeded") return [`Submitted ${JSON.stringify(out.values)}`]
+    if (out._tag === "SubmitSucceeded") return [`Submitted ${toJson(out.values)}`]
 
     return out._tag === "SubmitFailed" ? [`${Object.keys(out.errors).length} fields need attention`] : []
   })

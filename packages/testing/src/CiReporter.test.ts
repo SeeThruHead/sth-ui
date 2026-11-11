@@ -4,6 +4,8 @@ import { join } from "node:path"
 import { describe, expect, it } from "vitest"
 import { createVitest } from "vitest/node"
 import { ciReporter } from "./CiReporter.ts"
+import { Schema } from "effect"
+import { TestReport } from "./TestReport.ts"
 
 describe("ciReporter", () => {
   it("writes every test's outcome, flaky passes and files that failed to load", async () => {
@@ -19,7 +21,7 @@ describe("ciReporter", () => {
     })
     await vitest.start()
     await vitest.close()
-    const report = JSON.parse(readFileSync(path, "utf8"))
+    const report = Schema.decodeSync(Schema.fromJsonString(TestReport))(readFileSync(path, "utf8"))
     expect(report.app).toBe("app")
     expect(report.task).toBe("test")
     expect(report.suite).toBe("pure")

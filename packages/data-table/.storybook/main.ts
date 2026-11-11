@@ -14,6 +14,7 @@ const config: StorybookConfig = {
       include: [
         ...(vite.optimizeDeps?.include ?? []),
         "effect",
+        "effect/http",
         "foldkit",
         "foldkit/html",
         "foldkit/runtime",

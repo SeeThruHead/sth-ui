@@ -52,7 +52,6 @@ const installed = (source: Directory): Container =>
     .withExec(["sh", "-c", "apt-get update -qq && apt-get install -y -qq --no-install-recommends git ca-certificates"])
     .withExec(["git", "config", "--global", "--add", "safe.directory", "/repo"])
     .withExec(["bun", "install", "--frozen-lockfile", "--ignore-scripts"])
-    .withExec(["bun", "run", "patch"])
 
 @object()
 export class SthUiCi {

@@ -1,3 +1,5 @@
+import { toJson } from "../json.ts"
+
 export const present = <Found>(found: Found | null | undefined): Found => {
   if (found === null || found === undefined) throw new Error("Expected the element on the page, but it is not there")
 
@@ -9,7 +11,7 @@ export const pictureTimeout = { timeout: 5000 }
 export const pictureState = (image: Element): string => {
   const source = image.getAttribute("src")
 
-  return JSON.stringify({
+  return toJson({
     src: source,
     dataSrc: image.getAttribute("data-src"),
     complete: image instanceof HTMLImageElement && image.complete,

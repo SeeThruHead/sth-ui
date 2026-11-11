@@ -8,6 +8,7 @@ import { areaPath, linePath, niceDomain, segments, trendColor } from "../shared/
 import type { CurveType, Point, TrendColors } from "../shared/geometry.ts"
 import { hashOf } from "../shared/ids.ts"
 import { sparklineVars } from "./Sparkline.stylex.ts"
+import { toJson } from "@sth-ui/core/json.ts"
 
 export type { CurveType, TrendColors } from "../shared/geometry.ts"
 
@@ -55,7 +56,7 @@ export const Sparkline =
     const pointsOf = (run: ReadonlyArray<{ readonly index: number; readonly value: number }>): ReadonlyArray<Point> =>
       run.map((entry) => ({ x: (entry.index * 100) / last, y: yOf(entry.value) }))
     const runs = segments(props.data, props.connectNulls !== false).map(pointsOf)
-    const gradientId = `sparkline-${props.id ?? hashOf(JSON.stringify([props.data, props.color, props.trendColors]))}`
+    const gradientId = `sparkline-${props.id ?? hashOf(toJson([props.data, props.color, props.trendColors]))}`
     const opacity = String(props.fillOpacity ?? 0.6)
     const color = String(sparklineVars.color)
     const stop = (offset: string, stopOpacity: string) =>

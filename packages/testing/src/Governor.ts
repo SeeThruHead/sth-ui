@@ -16,6 +16,8 @@ import {
 import type { Grant, Kind, Machine, Profile } from "./Capacity.ts"
 import { hostProbe, readOrNothing } from "./Host.ts"
 import type { Probe } from "./Host.ts"
+import { Option } from "effect"
+import { fromJsonOption, toJson } from "./json.ts"
 
 export type { Probe } from "./Host.ts"
 
@@ -86,7 +88,7 @@ const isGrant = (value: unknown): value is Grant => {
 }
 
 const grantOf = (text: string): Grant | undefined => {
-  const parsed: unknown = JSON.parse(text)
+  const parsed = Option.getOrUndefined(fromJsonOption(text))
 
   return isGrant(parsed) ? parsed : undefined
 }
@@ -137,7 +139,7 @@ const attempt = (
     const decision = decide(want, kind, machine, grantsIn(folder), profile)
     if (decision._tag === "Wait") return decision
     const grant: Grant = { pid, kind, workers: decision.workers, mb: decision.mb }
-    writeFileSync(join(folder, `${pid}.grant`), JSON.stringify(grant))
+    writeFileSync(join(folder, `${pid}.grant`), toJson(grant))
     process.once("exit", release.bind(undefined, join(folder, `${pid}.grant`)))
 
     return { _tag: "Admit", workers: decision.workers }
@@ -211,5 +213,5 @@ export const record = (admission: Admission, name: string, environment: Environm
   const folder = environment["CI_REPORTS"]
   if (folder === undefined) return
   mkdirSync(join(folder, "governor"), { recursive: true })
-  writeFileSync(join(folder, "governor", `${name}.json`), JSON.stringify(admission))
+  writeFileSync(join(folder, "governor", `${name}.json`), toJson(admission))
 }

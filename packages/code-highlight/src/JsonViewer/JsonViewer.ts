@@ -27,6 +27,7 @@ import { focusMove, numberLines } from "./keyboard.ts"
 import { allTarget, Message } from "./model.ts"
 import type { Model } from "./model.ts"
 import { styles, typeTones, valueTones } from "./styles.ts"
+import { toJson } from "@sth-ui/core/json.ts"
 
 export type JsonViewerPart =
   | "root"
@@ -190,7 +191,7 @@ const nodeKey = <M>(settings: Settings<M>, key: string | undefined) =>
     : [
         settings.h.span(
           [...settings.getStyles("key", styles.key), settings.h.DataAttribute("key", "")],
-          [settings.withKeyQuotes ? JSON.stringify(key) : key, ": "]
+          [settings.withKeyQuotes ? toJson(key) : key, ": "]
         )
       ]
 

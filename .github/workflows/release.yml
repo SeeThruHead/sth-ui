@@ -49,7 +49,7 @@ jobs:
           fi
       - name: Install
         if: steps.existing.outputs.published != 'true'
-        run: bun install --frozen-lockfile --ignore-scripts && bun run patch
+        run: bun install --frozen-lockfile --ignore-scripts
       - name: Publish the release to npm as latest
         if: steps.existing.outputs.published != 'true'
         working-directory: packages/release

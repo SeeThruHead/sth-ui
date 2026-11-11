@@ -2,6 +2,7 @@ import { mkdirSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 import { describe, expect, it, vi } from "vitest"
 import { coverageWarnings, shortfalls, toStderr, warningLines } from "./CoverageBar.ts"
+import { toJson } from "./json.ts"
 
 const full = { pct: 100 }
 
@@ -36,7 +37,7 @@ describe("coverage below the bar", () => {
 
   it("reads the summary once coverage is reported, and stays quiet without one", () => {
     mkdirSync(folder, { recursive: true })
-    writeFileSync(join(folder, "coverage-summary.json"), JSON.stringify(summary))
+    writeFileSync(join(folder, "coverage-summary.json"), toJson(summary))
     const written = vi.fn<(text: string) => void>()
     coverageWarnings("core", folder, { CI: "true" }, written).onFinishedReportCoverage()
     expect(written).toHaveBeenCalledWith(expect.stringContaining("::warning file="))

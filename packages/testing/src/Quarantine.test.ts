@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { decodeQuarantine, isQuarantined, quarantinedIn, skipPattern } from "./Quarantine.ts"
+import { toJson } from "./json.ts"
 
 const entry = (app: string, test: string) => ({
   app,
@@ -11,7 +12,7 @@ const entry = (app: string, test: string) => ({
 
 describe("quarantine", () => {
   it("reads the checked-in list", () => {
-    expect(decodeQuarantine(JSON.stringify([entry("habits", "a > b")]))).toEqual([entry("habits", "a > b")])
+    expect(decodeQuarantine(toJson([entry("habits", "a > b")]))).toEqual([entry("habits", "a > b")])
     expect(() => decodeQuarantine('[{"app":"habits"}]')).toThrow()
   })
 

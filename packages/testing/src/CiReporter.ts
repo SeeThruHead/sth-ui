@@ -3,6 +3,7 @@ import { dirname } from "node:path"
 import { Option } from "effect"
 import type { Reporter, TestCase, TestModule } from "vitest/node"
 import { firstLine, type TestRecord, type TestReport } from "./TestReport.ts"
+import { toJson } from "./json.ts"
 
 type Errors = ReadonlyArray<{ readonly message: string }>
 
@@ -36,6 +37,6 @@ export const ciReporter = (path: string, about: Omit<TestReport, "tests">): Repo
   onTestRunEnd: (modules) => {
     const report: TestReport = { ...about, tests: recordsOf(modules) }
     mkdirSync(dirname(path), { recursive: true })
-    writeFileSync(path, JSON.stringify(report))
+    writeFileSync(path, toJson(report))
   }
 })
