@@ -121,6 +121,28 @@ export const Clicking: StoryObj = {
   }
 }
 
+export const IgnoringInputWhileClosing: StoryObj = {
+  render: modalStory({ title: "Authentication", transitionProps: { duration: 1000 } }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const opener = await canvas.findByRole("button", { name: "Open modal" })
+    await userEvent.click(opener)
+    const content = await dialog()
+    await waitFor(() => expect(canvas.getByRole("status", { name: "Events" })).toHaveTextContent("EnteredTransition"), {
+      timeout: 3000
+    })
+    const email = within(content).getByRole("textbox", { name: "Email" })
+    await userEvent.keyboard("{Escape}")
+    await waitFor(() => expect(canvas.getByRole("status", { name: "Events" })).toHaveTextContent("Closed"))
+    await expect(content.isConnected).toBe(true)
+    await userEvent.click(email)
+    await userEvent.keyboard("typed while closing")
+    await expect(email).toHaveValue("")
+    await waitFor(() => expect(within(document.body).queryByRole("dialog")).toBeNull(), { timeout: 3000 })
+    await expect(document.activeElement).toBe(opener)
+  }
+}
+
 export const Centered: StoryObj = {
   render: demoApp(CenteredDemo),
   play: async () => {

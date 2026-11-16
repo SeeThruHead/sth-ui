@@ -286,6 +286,7 @@ export const modalFrame = (config: ModalBaseConfig) => {
       ),
       ...Transition.transitionAttributes(h, model),
       ...whenTrue(hidden, () => h.DataAttribute("hidden", "")),
+      ...whenTrue(!model.isShowing, () => h.Attribute("inert", "")),
       h.Role("dialog"),
       h.AriaModal(true),
       h.Tabindex(-1),
