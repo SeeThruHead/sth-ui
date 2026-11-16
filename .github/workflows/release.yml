@@ -52,4 +52,6 @@ jobs:
       - name: Publish the release to npm as latest
         if: steps.existing.outputs.published != 'true'
         working-directory: packages/release
+        env:
+          NPM_CONFIG_LOGLEVEL: verbose
         run: bun run publish:release --tag "$GITHUB_REF_NAME"
